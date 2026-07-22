@@ -4,9 +4,10 @@
 
 - Date: 2026-07-22
 - Current phase: Phase 1 — deterministic runtime
-- Phase state: local full Gate passed; commit and remote CI pending
+- Phase state: local full Gate passed; publication and remote CI pending
 - Branch: `codex/phase-01-deterministic-runtime`
 - Baseline: Phase 0 squash commit `4a18436` on `main`
+- Current implementation commit: `0471c25`
 - Phase 0 delivery: PR #1 merged after all required GitHub checks passed
 - Next phase: Phase 2 — terrain core
 
