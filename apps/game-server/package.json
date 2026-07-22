@@ -15,11 +15,11 @@
     "db:migrate": "prisma migrate deploy",
     "db:seed": "tsx prisma/seed.ts",
     "dev": "tsx watch src/main.ts",
-    "lint": "eslint src test prisma",
+    "lint": "prisma generate && eslint src test prisma",
     "start": "node dist/main.js",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "test:integration": "vitest run test/http.integration.test.ts test/prisma.integration.test.ts",
+    "test:integration": "pnpm --filter @skymenders/game-server... run build && vitest run test/http.integration.test.ts test/prisma.integration.test.ts",
     "typecheck": "prisma generate && tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
