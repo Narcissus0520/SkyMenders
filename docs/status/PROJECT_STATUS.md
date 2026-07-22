@@ -3,21 +3,22 @@
 ## Snapshot
 
 - Date: 2026-07-22
-- Current phase: Phase 4 — AI, enemies, elites, and bosses
-- Phase state: local full Gate passed; publication and remote CI pending
-- Branch: `codex/phase-04-ai-enemies-bosses`
-- Baseline: Phase 3 squash commit `60bbc54` on `main`
-- Phase 0 delivery: PR #1 merged after all required GitHub checks passed
-- Phase 1 delivery: PR #2 merged after all required GitHub checks passed
-- Phase 2 delivery: PR #3 merged after all required GitHub checks passed
-- Phase 3 delivery: PR #4 merged after all required GitHub checks passed
-- Next phase: Phase 5 — Cocos client and WeChat presentation shell
+- Current phase: Phase 5 - Cocos client and WeChat presentation shell
+- Phase state: local full repository gate passed; publication, remote CI, and external device evidence pending
+- Branch: `codex/phase-05-game-client`
+- Baseline: Phase 4 squash commit `8b379497372ce5ed6712761c10513cc11d62a1d7` on `main`
+- Phase 0 delivery: PR #1 merged after all required checks passed
+- Phase 1 delivery: PR #2 merged after all required checks passed
+- Phase 2 delivery: PR #3 merged after all required checks passed
+- Phase 3 delivery: PR #4 merged after all required checks passed
+- Phase 4 delivery: PR #5 merged after all required checks passed
+- Next phase: Phase 6 - complete PvE expedition and authored content
 
 ## Version matrix
 
 | Dimension           | Version |
 | ------------------- | ------- |
-| clientVersion       | 0.0.0   |
+| clientVersion       | 0.1.0   |
 | serverVersion       | 0.0.0   |
 | rulesVersion        | 0.4.0   |
 | contentVersion      | 0.0.0   |
@@ -26,47 +27,37 @@
 | protocolVersion     | 0.2.0   |
 | aiSchemaVersion     | 0.1.0   |
 
-## Phase 4 implementation
+## Phase 5 implementation
 
-- Added `@skymenders/ai-core` with bounded deterministic authority state, independent `ai` and `aim_error` RNG streams, behavior-tree macro goals, nine-dimension utility scoring, stable tie-breaking, complete enemy-phase execution, and serializable debug views.
-- AI generates a bounded set of movement, fallback, module, and wait candidates; dry-runs every candidate through `reduceBattleCommand`; scores only legal results; applies seeded aim error; and revalidates the final command through the same reducer.
-- Split player and enemy energy into independent canonical pools. Module costs, wait gains, regeneration, validation, and content affordability select the acting team.
-- Added normal, hard, and expert profiles that vary search breadth, target breadth, objective/hazard awareness, and deterministic aim error without modifying actor HP or module damage.
-- Added all eight required enemy prototype definitions with valid battle loadouts, routes, behavior flags, role preferences, and distinct tested mechanics.
-- Added six elite affixes and eight named whitelist templates. Affixes change utility and preferred legal modules without hidden HP/damage multipliers.
-- Added four bosses with three deterministic stages each, two counter signals per stage, two complete solution routes, replay-safe command deduplication, and legal post-completion waiting.
-- Boss counter progress accepts only runtime-valid effects from an accepted, checkpointed player module command; it cannot be advanced from UI state or an unconfirmed action.
-- Added catalog validation to the root content gate, ADR 0005, AI authority architecture, an AI golden decision, a 48-seed phase property suite, boss route tests, difficulty/fairness tests, debug-view tests, and an eight-actor performance benchmark.
+- Added a pinned Cocos Creator 3.8.8 2D landscape project and bootstrap scene. The initial shell is built from localization keys and uses large, high-contrast controls.
+- Added mock and WeChat platform adapters for safe area, login-code exchange, storage, connectivity, lifecycle, vibration, and preferred frame rate. The client models no WeChat nickname/avatar or server credential.
+- Added `BattleSession` as the only client authority gateway. Player and AI commands pass through the shared protocol and reducer; presentation subscribes to validated events and has no battle-state mutation API.
+- Added explicit-confirm integer aiming, precise adjustment, partial trajectory policy, gesture priority, camera arbitration, manual-inspection suppression, and reduced-shake behavior.
+- Added settings, immediate local persistence, color-vision presets, high contrast, text scaling, reduced flash/motion/shake, handedness, sensitivities, audio buses, vibration, and 30/60 FPS preference.
+- Added redundant color/outline/pattern/icon/text semantics, minimum touch target sizing, bounded audio/effect/presentation pools, procedural robot feedback states, async/offline/error screen state, and frame telemetry.
+- Added a static Cocos project/credential gate and an actual Creator CLI wrapper that injects the AppID only into a temporary config, validates landscape output, and cleans up.
+- Added ADR 0006, client architecture, WeChat validation instructions, a device matrix, Phase 5 report, tests, coverage budgets, and a presentation benchmark.
 
 ## Verification
 
-The final pre-commit repository Gate passed on Node.js 24.14.0 and pnpm 10.31.0:
+Component evidence on Node.js 24.14.0 and pnpm 10.31.0:
 
-- Frozen install, format, workspace/infrastructure policy, content/catalog validation, asset audit, secret scan, ESLint, strict TypeScript, and build: passed.
-- Full repository tests: 246 passed.
-- AI tests: 50 passed; coverage 89.78% statements / 83.60% branches / 97.24% functions / 91.50% lines.
-- Battle tests: 79 passed; coverage 96.58% statements / 90.77% branches / 98.08% functions / 98.19% lines.
-- Terrain tests: 28 passed; coverage 98.25% statements / 94.96% branches / 100% functions / 98.93% lines.
-- Deterministic runtime tests: 35 passed; coverage 99.09% statements / 95.00% branches / 100% functions / 99.06% lines.
-- Protocol tests: 27 passed.
-- Golden battle final hash: `548962a665215902`; all 13 command checkpoints are pinned.
-- Golden AI decision hash: `13f36ad335ed11bf`; selected command, utility trace, error streams, and next authority state are pinned.
-- Determinism policy, golden suites, 128 seeded whole rounds, and 48 seeded AI phases: passed.
-- AI performance: eight actors, 19 legal decisions, 289.72 ms median / 309.43 ms p95 against the 1,500 ms full-phase budget.
-- Terrain performance: 2,200 collapse cells, 2,519 inspected cells, 14.03 ms median / 17.12 ms p95 against the 100 ms budget.
-- Official npm high-severity audit: no known vulnerabilities.
-- CycloneDX 1.6 SBOM: generated with 225 components.
+- Full repository tests: 278 passed.
+- Client tests: 19 passed; coverage 95.11% statements / 83.82% branches / 92.30% functions / 96.48% lines.
+- Cocos build-tool tests: 12 passed; coverage 96.85% statements / 85.95% branches / 100% functions / 97.38% lines.
+- Strict TypeScript and ESLint: passed for both new packages.
+- Static Cocos check: passed for the pinned project, landscape package, local feature subpackage, start scene, component linkage, empty committed AppID, and client credential scan.
+- Presentation benchmark: 10,000 validated events in 31.98 ms, with the queue bounded to 256 and synthetic 30 FPS telemetry in budget.
+- Format, workspace/infrastructure policy, content/catalog validation, asset provenance, secret scanning, strict TypeScript, lint, build, coverage, determinism, all performance gates, dependency audit, and CycloneDX SBOM: passed.
+- Real build invocation: correctly exited with blocker code 2 because `COCOS_CREATOR_PATH` is unavailable.
 
-Commit, GitHub CI, PR, and normal squash merge remain required before Phase 4 is complete.
-
-Docker remains unavailable on this workstation. Phase 0 Build CI validated the Compose model and started, healthchecked, and stopped PostgreSQL, Redis, and MinIO. Phase 4 adds no container-dependent behavior.
+GitHub checks must pass before merge. A real Cocos build, WeChat Developer Tools run, and physical-device 30 FPS evidence remain external acceptance items and are not claimed by the synthetic benchmark.
 
 ## Known limits
 
-- Cocos rendering, aiming/input, camera arbitration, touch feedback, audio, accessibility presentation, WeChat lifecycle adaptation, and device performance are Phase 5 work.
-- Route generation, encounter composition, complete expedition content, balance simulation, rewards, events, workshops, unlocks, and tutorials are Phase 6 work.
-- AI weights and catalog definitions are deterministic rule defaults, not final authored encounter balance.
-- AI debug data is serializable but has no Cocos visualization layer yet.
-- Database saves, account integration, replay-verification workers, daily challenges, and leaderboards are later phases.
-- No release-quality artwork/audio, final public name, Cocos application, server, worker, or React application is claimed complete.
-- External platform, legal, publishing, production infrastructure, asset, and real-device inputs remain tracked in `EXTERNAL_BLOCKERS.md`.
+- `EXT-001`, `EXT-006`, and `DEV-002` prevent real WeChat build/device evidence on this workstation.
+- The bootstrap UI and procedural visuals are development presentation, not approved release art or the complete Phase 6 product flow.
+- Four-region route generation, encounters, rewards, events, workshop, unlocks, achievements, compendium, and six tutorials remain Phase 6.
+- Account/cloud saves, recovery, restart/migrations, daily verification, leaderboard, content/admin applications, and production operations remain later phases.
+- Docker is unavailable locally; the unchanged Compose model continues to be exercised by Build CI.
+- No release-quality artwork/audio, final public name, production backend, or release claim is complete.

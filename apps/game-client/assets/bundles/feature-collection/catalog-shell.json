@@ -1,0 +1,6 @@
+{
+  "schemaVersion": "0.1.0",
+  "screenId": "collection",
+  "titleKey": "menu.collection",
+  "sections": ["robots", "modules", "enemies", "bosses", "archives"]
+}

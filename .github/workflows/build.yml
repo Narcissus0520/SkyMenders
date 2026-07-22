@@ -27,3 +27,4 @@ jobs:
       - if: always()
         run: docker compose down --volumes
       - run: pnpm build
+      - run: pnpm cocos:check

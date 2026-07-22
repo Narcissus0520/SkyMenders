@@ -7,6 +7,7 @@ import {
   PHASE_2_PRODUCT_VERSIONS,
   PHASE_3_PRODUCT_VERSIONS,
   PHASE_4_PRODUCT_VERSIONS,
+  PHASE_5_PRODUCT_VERSIONS,
   RELEASE_CHANNELS,
   isProductVersions,
 } from "../src/index.js";
@@ -62,7 +63,15 @@ describe("product version contract", () => {
       ...PHASE_3_PRODUCT_VERSIONS,
       rulesVersion: "0.4.0",
     });
-    expect(CURRENT_PRODUCT_VERSIONS).toBe(PHASE_4_PRODUCT_VERSIONS);
+    expect(isProductVersions(PHASE_4_PRODUCT_VERSIONS)).toBe(true);
+  });
+
+  it("increments only the client for the Phase 5 presentation model", () => {
+    expect(PHASE_5_PRODUCT_VERSIONS).toEqual({
+      ...PHASE_4_PRODUCT_VERSIONS,
+      clientVersion: "0.1.0",
+    });
+    expect(CURRENT_PRODUCT_VERSIONS).toBe(PHASE_5_PRODUCT_VERSIONS);
     expect(isProductVersions(CURRENT_PRODUCT_VERSIONS)).toBe(true);
   });
 

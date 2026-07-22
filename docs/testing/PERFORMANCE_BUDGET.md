@@ -33,3 +33,15 @@ Development baseline on 2026-07-22:
 - legal decisions: 19
 
 This is an authority throughput gate, not a render-frame budget. Phase 5 presentation schedules enemy thinking and animations independently of the deterministic result, while Phase 8 worker load tests will set concurrency and replay-verification service budgets.
+
+## Phase 5 presentation benchmark
+
+The checked-in client benchmark parses and maps 10,000 validated battle events into a presentation queue capped at 256 entries while recording a synthetic 30 FPS frame stream. CI fails if the event pass exceeds 1,000 ms or the synthetic telemetry leaves its frame budget.
+
+Development baseline on 2026-07-22:
+
+- 10,000 events: 31.98 ms
+- final presentation queue: 256 entries
+- synthetic target: 30 FPS in budget
+
+This isolates event and telemetry overhead. It is not a render, GPU, thermal, memory, WeChat runtime, or real-device FPS claim. The latter remains blocked by `EXT-006` and must be recorded in `DEVICE_MATRIX.md`.
