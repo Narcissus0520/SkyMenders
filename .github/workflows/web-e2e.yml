@@ -1,0 +1,35 @@
+name: Web E2E
+
+on:
+  pull_request:
+    paths:
+      - "apps/admin-console/**"
+      - "apps/content-gateway/**"
+      - "apps/content-studio/**"
+      - "packages/content-schema/**"
+  push:
+    branches: [main]
+    paths:
+      - "apps/admin-console/**"
+      - "apps/content-gateway/**"
+      - "apps/content-studio/**"
+      - "packages/content-schema/**"
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.31.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:e2e

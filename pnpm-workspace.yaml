@@ -1,0 +1,18 @@
+packages:
+  - apps/*
+  - packages/*
+  - tools/*
+
+catalog:
+  "@eslint/js": ^9.0.0
+  "@types/node": ^24.0.0
+  "@vitest/coverage-v8": 4.1.10
+  eslint: ^9.0.0
+  globals: ^16.0.0
+  prettier: ^3.0.0
+  tsx: ^4.0.0
+  typescript: ^5.0.0
+  typescript-eslint: ^8.0.0
+  vitest: 4.1.10
+  yaml: ^2.0.0
+  zod: ^4.0.0
