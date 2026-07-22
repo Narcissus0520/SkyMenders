@@ -33,6 +33,7 @@ pnpm typecheck
 pnpm test
 pnpm test:coverage
 pnpm test:determinism
+pnpm test:performance
 pnpm content:validate
 pnpm assets:audit
 pnpm security:secrets
@@ -54,4 +55,4 @@ Service integration, Web E2E, and Cocos gates are added with the phases that int
 
 ## Current status
 
-Phase 0 governance and infrastructure are merged. Phase 1 implements the fixed-point, isolated RNG, strict protocol, canonical state, snapshot, logical hash, and golden replay foundation. Run `pnpm test:determinism` to execute the authority policy and checked-in golden replay. See `docs/status/PROJECT_STATUS.md` for current evidence.
+Phase 0 governance/infrastructure and Phase 1 deterministic runtime are merged. Phase 2 implements the chunked logical terrain grid, four material rules, damage/repair, local support analysis, deterministic collapse, map validation, operation replay checkpoints, property tests, and a bounded large-collapse benchmark. Run `pnpm test:determinism` and `pnpm test:performance` for authority evidence. See `docs/status/PROJECT_STATUS.md` for the exact phase and publication state.

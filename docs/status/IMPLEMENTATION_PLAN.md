@@ -5,8 +5,8 @@ This plan follows the mandatory phase order in `AGENTS.md`. A phase is complete 
 | Phase | Scope                                                                   | State                         | Exit evidence                                              |
 | ----- | ----------------------------------------------------------------------- | ----------------------------- | ---------------------------------------------------------- |
 | 0     | Governance, monorepo, CI, Compose, docs, legal/asset policy             | Complete; PR #1 merged        | Local Gate and all required GitHub checks passed           |
-| 1     | Fixed math, RNG streams, commands/events, snapshots, hashes, replay     | Local Gate passed; CI pending | Repeatable replays and isolated RNG streams                |
-| 2     | Chunk terrain, materials, damage/repair, support, collapse, validation  | Planned                       | Replayable collapse, property tests, benchmark             |
+| 1     | Fixed math, RNG streams, commands/events, snapshots, hashes, replay     | Complete; PR #2 merged        | Repeatable replays and isolated RNG streams                |
+| 2     | Chunk terrain, materials, damage/repair, support, collapse, validation  | Local Gate passed; CI pending | Replayable collapse, property tests, benchmark             |
 | 3     | Turn rules, movement, energy, durability, objectives, 18 modules        | Planned                       | Complete module behavior and combination tests             |
 | 4     | Behavior trees, utility AI, 8 enemies, elites, 4 bosses                 | Planned                       | Legal commands and multi-strategy boss tests               |
 | 5     | Cocos client, WeChat adapter, input, camera, UI, audio, accessibility   | Planned                       | Device workflow, 30 FPS baseline, non-color cues           |
@@ -29,16 +29,19 @@ This plan follows the mandatory phase order in `AGENTS.md`. A phase is complete 
 
 Phase 0 met these conditions and was squash-merged through PR #1 as `4a18436`.
 
-## Current Phase 1 acceptance
+Phase 1 met these conditions and was squash-merged through PR #2 as `dec0fd6`.
 
-- All authoritative values use checked fixed-point integer operations; trigonometry is lookup-based.
-- RNG state is explicit, derived streams are isolated, and bounded draws are unbiased.
-- Command, event, replay, and snapshot inputs are runtime-validated and strictly bounded.
-- Canonical serialization and logical hashing are stable across insertion histories and UTF-8 text.
-- Golden replay execution produces identical checkpoints and final state over repeated runs.
-- Tampered checkpoints, final hashes, event sequences, snapshots, versions, invalid state, and invalid protocol input fail closed.
-- Architecture, compatibility versions, test evidence, and known limits are documented before publication.
+## Current Phase 2 acceptance
+
+- The authority grid uses bounded flat integer storage and fixed 32 by 32 chunks.
+- Damage, repair, four material behaviors, dirty seams, anchors, support capacity, and collapse are deterministic and immutable.
+- Runtime support recomputation is scoped to dirty connected components; full analysis is explicit and never a per-frame path.
+- Map validation rejects invalid spawns, unsupported objectives, missing capabilities, inaccessible areas, detached anchors, unsafe camera bounds, and first-settlement failure.
+- Terrain operation logs emit a state hash after every operation.
+- Seeded property tests and a 2,200-cell golden collapse repeat identically.
+- The large-collapse benchmark remains below the 100 ms p95 authority budget.
+- Architecture, ADR, compatibility version, test evidence, and known limits are documented before publication.
 
 ## Compatibility discipline
 
-Rules, content, save, replay, protocol, client, and server versions remain independent. Phase 1 establishes `rulesVersion`, `replaySchemaVersion`, and `protocolVersion` at `0.1.0`; all other dimensions remain `0.0.0`. Later incompatible changes must increment only affected dimensions and include migrations or compatibility evidence.
+Rules, content, save, replay, protocol, client, and server versions remain independent. Phase 1 established `rulesVersion`, `replaySchemaVersion`, and `protocolVersion` at `0.1.0`. Phase 2 advances only `rulesVersion` to `0.2.0`; all other dimensions remain unchanged. Later incompatible changes must increment only affected dimensions and include migrations or compatibility evidence.
