@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "contentVersion": "0.1.0",
+  "enemies": [
+    {
+      "id": "enemy_scout",
+      "nameKey": "enemy.enemy_scout.name",
+      "roleKey": "enemy.enemy_scout.role",
+      "regionIntroduced": 1,
+      "encounterTags": ["mark", "mobile"]
+    },
+    {
+      "id": "enemy_guard",
+      "nameKey": "enemy.enemy_guard.name",
+      "roleKey": "enemy.enemy_guard.role",
+      "regionIntroduced": 1,
+      "encounterTags": ["shield", "protect"]
+    },
+    {
+      "id": "enemy_artillery",
+      "nameKey": "enemy.enemy_artillery.name",
+      "roleKey": "enemy.enemy_artillery.role",
+      "regionIntroduced": 1,
+      "encounterTags": ["trajectory", "pressure"]
+    },
+    {
+      "id": "enemy_driller",
+      "nameKey": "enemy.enemy_driller.name",
+      "roleKey": "enemy.enemy_driller.role",
+      "regionIntroduced": 2,
+      "encounterTags": ["breach", "support"]
+    },
+    {
+      "id": "enemy_magnet",
+      "nameKey": "enemy.enemy_magnet.name",
+      "roleKey": "enemy.enemy_magnet.role",
+      "regionIntroduced": 2,
+      "encounterTags": ["magnetic", "control"]
+    },
+    {
+      "id": "enemy_repairer",
+      "nameKey": "enemy.enemy_repairer.name",
+      "roleKey": "enemy.enemy_repairer.role",
+      "regionIntroduced": 2,
+      "encounterTags": ["repair", "support"]
+    },
+    {
+      "id": "enemy_wind",
+      "nameKey": "enemy.enemy_wind.name",
+      "roleKey": "enemy.enemy_wind.role",
+      "regionIntroduced": 3,
+      "encounterTags": ["wind", "trajectory"]
+    },
+    {
+      "id": "enemy_carrier",
+      "nameKey": "enemy.enemy_carrier.name",
+      "roleKey": "enemy.enemy_carrier.role",
+      "regionIntroduced": 3,
+      "encounterTags": ["objective", "mobile"]
+    }
+  ]
+}

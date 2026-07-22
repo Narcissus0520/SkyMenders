@@ -1,0 +1,472 @@
+{
+  "schemaVersion": "1.0.0",
+  "contentVersion": "0.1.0",
+  "route": {
+    "actualNodesPerRegion": 3,
+    "candidateNodesPerRegion": [4, 6],
+    "rewardChoices": 3,
+    "maximumNodeRestarts": 1,
+    "defaultEnergyMaximum": 12,
+    "defaultEnergyRegeneration": 6,
+    "targetDurationMinutes": [35, 45],
+    "nodeDurationMinutes": {
+      "battle": 4,
+      "engineering": 4,
+      "elite": 5,
+      "event": 2,
+      "workshop": 2,
+      "supply": 2,
+      "boss": 5
+    }
+  },
+  "rewardPool": [
+    {
+      "id": "reward_module_bridge",
+      "kind": "module",
+      "moduleId": "main_fold_bridge",
+      "routeId": null,
+      "nameKey": "reward.reward_module_bridge.name",
+      "tags": ["build", "support"],
+      "rarity": "common"
+    },
+    {
+      "id": "reward_module_drill",
+      "kind": "module",
+      "moduleId": "main_drill_bee",
+      "routeId": null,
+      "nameKey": "reward.reward_module_drill.name",
+      "tags": ["attack", "breach"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_module_magnet",
+      "kind": "module",
+      "moduleId": "main_magnetic_anchor",
+      "routeId": null,
+      "nameKey": "reward.reward_module_magnet.name",
+      "tags": ["control", "objective"],
+      "rarity": "common"
+    },
+    {
+      "id": "reward_module_gravity",
+      "kind": "module",
+      "moduleId": "main_gravity_pin",
+      "routeId": null,
+      "nameKey": "reward.reward_module_gravity.name",
+      "tags": ["control", "rescue"],
+      "rarity": "rare"
+    },
+    {
+      "id": "reward_module_bubble",
+      "kind": "module",
+      "moduleId": "main_bubble_capsule",
+      "routeId": null,
+      "nameKey": "reward.reward_module_bubble.name",
+      "tags": ["rescue", "control"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_module_wind",
+      "kind": "module",
+      "moduleId": "main_wind_generator",
+      "routeId": null,
+      "nameKey": "reward.reward_module_wind.name",
+      "tags": ["wind", "control"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_module_support",
+      "kind": "module",
+      "moduleId": "main_support_frame",
+      "routeId": null,
+      "nameKey": "reward.reward_module_support.name",
+      "tags": ["support", "repair"],
+      "rarity": "common"
+    },
+    {
+      "id": "reward_module_rail",
+      "kind": "module",
+      "moduleId": "main_energy_rail",
+      "routeId": null,
+      "nameKey": "reward.reward_module_rail.name",
+      "tags": ["trajectory", "energy"],
+      "rarity": "rare"
+    },
+    {
+      "id": "reward_aux_repair",
+      "kind": "module",
+      "moduleId": "aux_repair_spray",
+      "routeId": null,
+      "nameKey": "reward.reward_aux_repair.name",
+      "tags": ["repair"],
+      "rarity": "common"
+    },
+    {
+      "id": "reward_aux_reflector",
+      "kind": "module",
+      "moduleId": "aux_reflector",
+      "routeId": null,
+      "nameKey": "reward.reward_aux_reflector.name",
+      "tags": ["trajectory", "defense"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_aux_ejector",
+      "kind": "module",
+      "moduleId": "aux_ejector",
+      "routeId": null,
+      "nameKey": "reward.reward_aux_ejector.name",
+      "tags": ["movement", "rescue"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_aux_stabilizer",
+      "kind": "module",
+      "moduleId": "aux_stabilizer",
+      "routeId": null,
+      "nameKey": "reward.reward_aux_stabilizer.name",
+      "tags": ["defense"],
+      "rarity": "common"
+    },
+    {
+      "id": "reward_aux_route_scanner",
+      "kind": "module",
+      "moduleId": "aux_route_scanner",
+      "routeId": null,
+      "nameKey": "reward.reward_aux_route_scanner.name",
+      "tags": ["intel"],
+      "rarity": "common"
+    },
+    {
+      "id": "reward_aux_recycler",
+      "kind": "module",
+      "moduleId": "aux_energy_recycler",
+      "routeId": null,
+      "nameKey": "reward.reward_aux_recycler.name",
+      "tags": ["energy", "support"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_aux_grapple",
+      "kind": "module",
+      "moduleId": "aux_grapple",
+      "routeId": null,
+      "nameKey": "reward.reward_aux_grapple.name",
+      "tags": ["movement"],
+      "rarity": "common"
+    },
+    {
+      "id": "reward_aux_foam",
+      "kind": "module",
+      "moduleId": "aux_terrain_foam",
+      "routeId": null,
+      "nameKey": "reward.reward_aux_foam.name",
+      "tags": ["build", "repair"],
+      "rarity": "common"
+    },
+    {
+      "id": "reward_aux_jammer",
+      "kind": "module",
+      "moduleId": "aux_jammer",
+      "routeId": null,
+      "nameKey": "reward.reward_aux_jammer.name",
+      "tags": ["control"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_aux_structure_scanner",
+      "kind": "module",
+      "moduleId": "aux_structure_scanner",
+      "routeId": null,
+      "nameKey": "reward.reward_aux_structure_scanner.name",
+      "tags": ["intel", "support"],
+      "rarity": "common"
+    },
+    {
+      "id": "reward_upgrade_bridge",
+      "kind": "upgrade",
+      "moduleId": "main_fold_bridge",
+      "routeId": "fold_bridge_reinforced",
+      "nameKey": "reward.reward_upgrade_bridge.name",
+      "tags": ["build"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_upgrade_drill",
+      "kind": "upgrade",
+      "moduleId": "main_drill_bee",
+      "routeId": "drill_bee_precision",
+      "nameKey": "reward.reward_upgrade_drill.name",
+      "tags": ["attack", "breach"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_upgrade_magnet",
+      "kind": "upgrade",
+      "moduleId": "main_magnetic_anchor",
+      "routeId": "magnetic_anchor_precision",
+      "nameKey": "reward.reward_upgrade_magnet.name",
+      "tags": ["control"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_upgrade_gravity",
+      "kind": "upgrade",
+      "moduleId": "main_gravity_pin",
+      "routeId": "gravity_pin_rescue",
+      "nameKey": "reward.reward_upgrade_gravity.name",
+      "tags": ["rescue"],
+      "rarity": "rare"
+    },
+    {
+      "id": "reward_upgrade_bubble",
+      "kind": "upgrade",
+      "moduleId": "main_bubble_capsule",
+      "routeId": "bubble_capsule_rebound",
+      "nameKey": "reward.reward_upgrade_bubble.name",
+      "tags": ["control"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_upgrade_wind",
+      "kind": "upgrade",
+      "moduleId": "main_wind_generator",
+      "routeId": "wind_generator_turbine",
+      "nameKey": "reward.reward_upgrade_wind.name",
+      "tags": ["energy", "wind"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_upgrade_support",
+      "kind": "upgrade",
+      "moduleId": "main_support_frame",
+      "routeId": "support_frame_fortified",
+      "nameKey": "reward.reward_upgrade_support.name",
+      "tags": ["support"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_upgrade_rail",
+      "kind": "upgrade",
+      "moduleId": "main_energy_rail",
+      "routeId": "energy_rail_switchback",
+      "nameKey": "reward.reward_upgrade_rail.name",
+      "tags": ["trajectory"],
+      "rarity": "rare"
+    },
+    {
+      "id": "reward_upgrade_repair",
+      "kind": "upgrade",
+      "moduleId": "aux_repair_spray",
+      "routeId": "repair_spray_terrain_specialist",
+      "nameKey": "reward.reward_upgrade_repair.name",
+      "tags": ["repair"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_upgrade_reflector",
+      "kind": "upgrade",
+      "moduleId": "aux_reflector",
+      "routeId": "reflector_prismatic",
+      "nameKey": "reward.reward_upgrade_reflector.name",
+      "tags": ["trajectory"],
+      "rarity": "rare"
+    },
+    {
+      "id": "reward_upgrade_ejector",
+      "kind": "upgrade",
+      "moduleId": "aux_ejector",
+      "routeId": "ejector_tandem",
+      "nameKey": "reward.reward_upgrade_ejector.name",
+      "tags": ["rescue"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_upgrade_stabilizer",
+      "kind": "upgrade",
+      "moduleId": "aux_stabilizer",
+      "routeId": "stabilizer_counterforce",
+      "nameKey": "reward.reward_upgrade_stabilizer.name",
+      "tags": ["defense"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_upgrade_route_scanner",
+      "kind": "upgrade",
+      "moduleId": "aux_route_scanner",
+      "routeId": "route_scanner_deep_intel",
+      "nameKey": "reward.reward_upgrade_route_scanner.name",
+      "tags": ["intel"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_upgrade_recycler",
+      "kind": "upgrade",
+      "moduleId": "aux_energy_recycler",
+      "routeId": "energy_recycler_team_loop",
+      "nameKey": "reward.reward_upgrade_recycler.name",
+      "tags": ["energy"],
+      "rarity": "rare"
+    },
+    {
+      "id": "reward_upgrade_grapple",
+      "kind": "upgrade",
+      "moduleId": "aux_grapple",
+      "routeId": "grapple_rescue_line",
+      "nameKey": "reward.reward_upgrade_grapple.name",
+      "tags": ["movement", "rescue"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_upgrade_foam",
+      "kind": "upgrade",
+      "moduleId": "aux_terrain_foam",
+      "routeId": "terrain_foam_reinforced",
+      "nameKey": "reward.reward_upgrade_foam.name",
+      "tags": ["build"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_upgrade_jammer",
+      "kind": "upgrade",
+      "moduleId": "aux_jammer",
+      "routeId": "jammer_silence",
+      "nameKey": "reward.reward_upgrade_jammer.name",
+      "tags": ["control"],
+      "rarity": "rare"
+    },
+    {
+      "id": "reward_upgrade_structure_scanner",
+      "kind": "upgrade",
+      "moduleId": "aux_structure_scanner",
+      "routeId": "structure_scanner_salvage",
+      "nameKey": "reward.reward_upgrade_structure_scanner.name",
+      "tags": ["intel", "support"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_mod_light_frame",
+      "kind": "temporary_mod",
+      "moduleId": null,
+      "routeId": null,
+      "nameKey": "reward.reward_mod_light_frame.name",
+      "tags": ["movement"],
+      "rarity": "common",
+      "temporaryEffect": { "kind": "movement_efficiency_permille", "amount": 150 }
+    },
+    {
+      "id": "reward_mod_reserve_cell",
+      "kind": "temporary_mod",
+      "moduleId": null,
+      "routeId": null,
+      "nameKey": "reward.reward_mod_reserve_cell.name",
+      "tags": ["energy"],
+      "rarity": "common",
+      "temporaryEffect": { "kind": "energy_maximum_bonus", "amount": 2 }
+    },
+    {
+      "id": "reward_mod_soft_landing",
+      "kind": "temporary_mod",
+      "moduleId": null,
+      "routeId": null,
+      "nameKey": "reward.reward_mod_soft_landing.name",
+      "tags": ["defense"],
+      "rarity": "uncommon",
+      "temporaryEffect": { "kind": "fall_damage_reduction_permille", "amount": 250 }
+    },
+    {
+      "id": "reward_mod_salvage_loop",
+      "kind": "temporary_mod",
+      "moduleId": null,
+      "routeId": null,
+      "nameKey": "reward.reward_mod_salvage_loop.name",
+      "tags": ["repair"],
+      "rarity": "uncommon",
+      "temporaryEffect": { "kind": "repair_efficiency_permille", "amount": 200 }
+    },
+    {
+      "id": "reward_consumable_patch",
+      "kind": "consumable",
+      "moduleId": null,
+      "routeId": null,
+      "nameKey": "reward.reward_consumable_patch.name",
+      "tags": ["repair"],
+      "rarity": "common"
+    },
+    {
+      "id": "reward_consumable_beacon",
+      "kind": "consumable",
+      "moduleId": null,
+      "routeId": null,
+      "nameKey": "reward.reward_consumable_beacon.name",
+      "tags": ["rescue"],
+      "rarity": "common"
+    },
+    {
+      "id": "reward_consumable_cell",
+      "kind": "consumable",
+      "moduleId": null,
+      "routeId": null,
+      "nameKey": "reward.reward_consumable_cell.name",
+      "tags": ["energy"],
+      "rarity": "common"
+    },
+    {
+      "id": "reward_intel_map",
+      "kind": "intel",
+      "moduleId": null,
+      "routeId": null,
+      "nameKey": "reward.reward_intel_map.name",
+      "tags": ["intel"],
+      "rarity": "common"
+    },
+    {
+      "id": "reward_intel_objective",
+      "kind": "intel",
+      "moduleId": null,
+      "routeId": null,
+      "nameKey": "reward.reward_intel_objective.name",
+      "tags": ["intel", "objective"],
+      "rarity": "uncommon"
+    },
+    {
+      "id": "reward_intel_workshop",
+      "kind": "intel",
+      "moduleId": null,
+      "routeId": null,
+      "nameKey": "reward.reward_intel_workshop.name",
+      "tags": ["intel", "repair"],
+      "rarity": "uncommon"
+    }
+  ],
+  "workshopServices": [
+    {
+      "id": "workshop_field_repair",
+      "nameKey": "workshop.workshop_field_repair.name",
+      "cost": 3,
+      "kind": "repair_hp",
+      "amount": 25
+    },
+    {
+      "id": "workshop_structural_alignment",
+      "nameKey": "workshop.workshop_structural_alignment.name",
+      "cost": 4,
+      "kind": "repair_structure",
+      "amount": 30
+    },
+    {
+      "id": "workshop_install_module",
+      "nameKey": "workshop.workshop_install_module.name",
+      "cost": 5,
+      "kind": "install_module",
+      "amount": 1
+    },
+    {
+      "id": "workshop_route_calibration",
+      "nameKey": "workshop.workshop_route_calibration.name",
+      "cost": 6,
+      "kind": "upgrade_module",
+      "amount": 1
+    }
+  ]
+}

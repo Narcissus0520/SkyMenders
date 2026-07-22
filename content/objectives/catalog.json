@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0.0",
+  "contentVersion": "0.1.0",
+  "objectives": [
+    {
+      "id": "primary_repair_tower",
+      "role": "primary",
+      "trigger": "repair_energy_tower",
+      "nameKey": "objective.primary_repair_tower.name",
+      "descriptionKey": "objective.primary_repair_tower.description",
+      "required": 3,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "repair",
+      "rewardResearch": 4
+    },
+    {
+      "id": "primary_deliver_core",
+      "role": "primary",
+      "trigger": "deliver_energy_core",
+      "nameKey": "objective.primary_deliver_core.name",
+      "descriptionKey": "objective.primary_deliver_core.description",
+      "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "carry",
+      "rewardResearch": 5
+    },
+    {
+      "id": "primary_rescue_units",
+      "role": "primary",
+      "trigger": "rescue_unit",
+      "nameKey": "objective.primary_rescue_units.name",
+      "descriptionKey": "objective.primary_rescue_units.description",
+      "required": 2,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "rescue",
+      "rewardResearch": 5
+    },
+    {
+      "id": "primary_hold_position",
+      "role": "primary",
+      "trigger": "hold_round",
+      "nameKey": "objective.primary_hold_position.name",
+      "descriptionKey": "objective.primary_hold_position.description",
+      "required": 4,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": null,
+      "rewardResearch": 4
+    },
+    {
+      "id": "primary_defeat_guard",
+      "role": "primary",
+      "trigger": "defeat_guard",
+      "nameKey": "objective.primary_defeat_guard.name",
+      "descriptionKey": "objective.primary_defeat_guard.description",
+      "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": null,
+      "rewardResearch": 4
+    },
+    {
+      "id": "primary_preserve_island",
+      "role": "primary",
+      "trigger": "preserve_island",
+      "nameKey": "objective.primary_preserve_island.name",
+      "descriptionKey": "objective.primary_preserve_island.description",
+      "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "support",
+      "rewardResearch": 6
+    },
+    {
+      "id": "primary_close_pollution",
+      "role": "primary",
+      "trigger": "close_pollution_node",
+      "nameKey": "objective.primary_close_pollution.name",
+      "descriptionKey": "objective.primary_close_pollution.description",
+      "required": 3,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "repair",
+      "rewardResearch": 5
+    },
+    {
+      "id": "secondary_no_shutdown",
+      "role": "secondary",
+      "trigger": "no_robot_disabled",
+      "nameKey": "objective.secondary_no_shutdown.name",
+      "descriptionKey": "objective.secondary_no_shutdown.description",
+      "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": null,
+      "rewardResearch": 2
+    },
+    {
+      "id": "secondary_terrain_70",
+      "role": "secondary",
+      "trigger": "terrain_integrity",
+      "nameKey": "objective.secondary_terrain_70.name",
+      "descriptionKey": "objective.secondary_terrain_70.description",
+      "required": 700,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "support",
+      "rewardResearch": 2
+    },
+    {
+      "id": "secondary_round_limit",
+      "role": "secondary",
+      "trigger": "round_limit",
+      "nameKey": "objective.secondary_round_limit.name",
+      "descriptionKey": "objective.secondary_round_limit.description",
+      "required": 6,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": null,
+      "rewardResearch": 2
+    },
+    {
+      "id": "secondary_no_breach",
+      "role": "secondary",
+      "trigger": "module_category_avoided",
+      "nameKey": "objective.secondary_no_breach.name",
+      "descriptionKey": "objective.secondary_no_breach.description",
+      "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": null,
+      "rewardResearch": 2
+    },
+    {
+      "id": "secondary_extra_rescue",
+      "role": "secondary",
+      "trigger": "extra_rescue",
+      "nameKey": "objective.secondary_extra_rescue.name",
+      "descriptionKey": "objective.secondary_extra_rescue.description",
+      "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "rescue",
+      "rewardResearch": 3
+    },
+    {
+      "id": "secondary_clear_pollution",
+      "role": "secondary",
+      "trigger": "pollution_cleared",
+      "nameKey": "objective.secondary_clear_pollution.name",
+      "descriptionKey": "objective.secondary_clear_pollution.description",
+      "required": 2,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "repair",
+      "rewardResearch": 3
+    },
+    {
+      "id": "hidden_magnetic_collision",
+      "role": "hidden",
+      "trigger": "magnetic_collision",
+      "nameKey": "objective.hidden_magnetic_collision.name",
+      "descriptionKey": "objective.hidden_magnetic_collision.description",
+      "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "magnetic",
+      "rewardResearch": 4
+    },
+    {
+      "id": "hidden_peaceful_rescue",
+      "role": "hidden",
+      "trigger": "rescue_without_attack",
+      "nameKey": "objective.hidden_peaceful_rescue.name",
+      "descriptionKey": "objective.hidden_peaceful_rescue.description",
+      "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "rescue",
+      "rewardResearch": 4
+    },
+    {
+      "id": "hidden_pipeline",
+      "role": "hidden",
+      "trigger": "hidden_pipeline_repaired",
+      "nameKey": "objective.hidden_pipeline.name",
+      "descriptionKey": "objective.hidden_pipeline.description",
+      "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "repair",
+      "rewardResearch": 4
+    },
+    {
+      "id": "hidden_double_reflection",
+      "role": "hidden",
+      "trigger": "reflected_hit",
+      "nameKey": "objective.hidden_double_reflection.name",
+      "descriptionKey": "objective.hidden_double_reflection.description",
+      "required": 2,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "reflect",
+      "rewardResearch": 5
+    },
+    {
+      "id": "hidden_preserve_relic",
+      "role": "hidden",
+      "trigger": "relic_preserved",
+      "nameKey": "objective.hidden_preserve_relic.name",
+      "descriptionKey": "objective.hidden_preserve_relic.description",
+      "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "support",
+      "rewardResearch": 5
+    }
+  ]
+}

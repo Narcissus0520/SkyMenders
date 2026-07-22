@@ -1,0 +1,526 @@
+{
+  "schemaVersion": "1.0.0",
+  "contentVersion": "0.1.0",
+  "initialRobotIds": ["robot_rivet", "robot_anchor", "robot_gale"],
+  "initialModuleIds": [
+    "main_fold_bridge",
+    "main_magnetic_anchor",
+    "main_support_frame",
+    "aux_repair_spray",
+    "aux_stabilizer",
+    "aux_structure_scanner"
+  ],
+  "initialRegionIds": ["region_cloudbreak"],
+  "unlocks": [
+    {
+      "id": "unlock_robot_prism",
+      "kind": "robot",
+      "targetId": "robot_prism",
+      "researchCost": 18,
+      "prerequisites": []
+    },
+    {
+      "id": "unlock_robot_forge",
+      "kind": "robot",
+      "targetId": "robot_forge",
+      "researchCost": 24,
+      "prerequisites": ["robot_prism"]
+    },
+    {
+      "id": "unlock_robot_echo",
+      "kind": "robot",
+      "targetId": "robot_echo",
+      "researchCost": 30,
+      "prerequisites": ["robot_forge"]
+    },
+    {
+      "id": "unlock_main_drill_bee",
+      "kind": "module",
+      "targetId": "main_drill_bee",
+      "researchCost": 12,
+      "prerequisites": []
+    },
+    {
+      "id": "unlock_main_gravity_pin",
+      "kind": "module",
+      "targetId": "main_gravity_pin",
+      "researchCost": 22,
+      "prerequisites": ["main_magnetic_anchor"]
+    },
+    {
+      "id": "unlock_main_bubble_capsule",
+      "kind": "module",
+      "targetId": "main_bubble_capsule",
+      "researchCost": 14,
+      "prerequisites": []
+    },
+    {
+      "id": "unlock_main_wind_generator",
+      "kind": "module",
+      "targetId": "main_wind_generator",
+      "researchCost": 16,
+      "prerequisites": []
+    },
+    {
+      "id": "unlock_main_energy_rail",
+      "kind": "module",
+      "targetId": "main_energy_rail",
+      "researchCost": 26,
+      "prerequisites": ["robot_prism"]
+    },
+    {
+      "id": "unlock_aux_reflector",
+      "kind": "module",
+      "targetId": "aux_reflector",
+      "researchCost": 8,
+      "prerequisites": []
+    },
+    {
+      "id": "unlock_aux_ejector",
+      "kind": "module",
+      "targetId": "aux_ejector",
+      "researchCost": 10,
+      "prerequisites": []
+    },
+    {
+      "id": "unlock_aux_route_scanner",
+      "kind": "module",
+      "targetId": "aux_route_scanner",
+      "researchCost": 9,
+      "prerequisites": []
+    },
+    {
+      "id": "unlock_aux_energy_recycler",
+      "kind": "module",
+      "targetId": "aux_energy_recycler",
+      "researchCost": 15,
+      "prerequisites": []
+    },
+    {
+      "id": "unlock_aux_grapple",
+      "kind": "module",
+      "targetId": "aux_grapple",
+      "researchCost": 7,
+      "prerequisites": []
+    },
+    {
+      "id": "unlock_aux_terrain_foam",
+      "kind": "module",
+      "targetId": "aux_terrain_foam",
+      "researchCost": 11,
+      "prerequisites": []
+    },
+    {
+      "id": "unlock_aux_jammer",
+      "kind": "module",
+      "targetId": "aux_jammer",
+      "researchCost": 13,
+      "prerequisites": []
+    },
+    {
+      "id": "unlock_hard_difficulty",
+      "kind": "difficulty",
+      "targetId": "difficulty_hard",
+      "researchCost": 20,
+      "prerequisites": ["region_cloudbreak"]
+    },
+    {
+      "id": "unlock_expert_difficulty",
+      "kind": "difficulty",
+      "targetId": "difficulty_expert",
+      "researchCost": 45,
+      "prerequisites": ["difficulty_hard", "region_corefall"]
+    },
+    {
+      "id": "unlock_region_polar",
+      "kind": "region",
+      "targetId": "region_polar_foundry",
+      "researchCost": 0,
+      "prerequisites": ["region_cloudbreak"]
+    },
+    {
+      "id": "unlock_region_verdant",
+      "kind": "region",
+      "targetId": "region_verdant_updraft",
+      "researchCost": 0,
+      "prerequisites": ["region_polar_foundry"]
+    },
+    {
+      "id": "unlock_region_corefall",
+      "kind": "region",
+      "targetId": "region_corefall",
+      "researchCost": 0,
+      "prerequisites": ["region_verdant_updraft"]
+    }
+  ],
+  "achievements": [
+    {
+      "id": "achievement_first_repair",
+      "nameKey": "achievement.achievement_first_repair.name",
+      "descriptionKey": "achievement.achievement_first_repair.description",
+      "metric": "repairs",
+      "threshold": 1
+    },
+    {
+      "id": "achievement_master_repair",
+      "nameKey": "achievement.achievement_master_repair.name",
+      "descriptionKey": "achievement.achievement_master_repair.description",
+      "metric": "repairs",
+      "threshold": 100
+    },
+    {
+      "id": "achievement_first_bridge",
+      "nameKey": "achievement.achievement_first_bridge.name",
+      "descriptionKey": "achievement.achievement_first_bridge.description",
+      "metric": "bridges",
+      "threshold": 1
+    },
+    {
+      "id": "achievement_bridge_network",
+      "nameKey": "achievement.achievement_bridge_network.name",
+      "descriptionKey": "achievement.achievement_bridge_network.description",
+      "metric": "bridges",
+      "threshold": 50
+    },
+    {
+      "id": "achievement_rescuer",
+      "nameKey": "achievement.achievement_rescuer.name",
+      "descriptionKey": "achievement.achievement_rescuer.description",
+      "metric": "rescues",
+      "threshold": 10
+    },
+    {
+      "id": "achievement_no_shutdown",
+      "nameKey": "achievement.achievement_no_shutdown.name",
+      "descriptionKey": "achievement.achievement_no_shutdown.description",
+      "metric": "flawless_nodes",
+      "threshold": 10
+    },
+    {
+      "id": "achievement_hidden_engineer",
+      "nameKey": "achievement.achievement_hidden_engineer.name",
+      "descriptionKey": "achievement.achievement_hidden_engineer.description",
+      "metric": "hidden_objectives",
+      "threshold": 8
+    },
+    {
+      "id": "achievement_route_scout",
+      "nameKey": "achievement.achievement_route_scout.name",
+      "descriptionKey": "achievement.achievement_route_scout.description",
+      "metric": "routes_revealed",
+      "threshold": 20
+    },
+    {
+      "id": "achievement_workshop_regular",
+      "nameKey": "achievement.achievement_workshop_regular.name",
+      "descriptionKey": "achievement.achievement_workshop_regular.description",
+      "metric": "workshop_services",
+      "threshold": 12
+    },
+    {
+      "id": "achievement_reflection",
+      "nameKey": "achievement.achievement_reflection.name",
+      "descriptionKey": "achievement.achievement_reflection.description",
+      "metric": "reflected_hits",
+      "threshold": 20
+    },
+    {
+      "id": "achievement_magnetic_ballet",
+      "nameKey": "achievement.achievement_magnetic_ballet.name",
+      "descriptionKey": "achievement.achievement_magnetic_ballet.description",
+      "metric": "magnetic_collisions",
+      "threshold": 12
+    },
+    {
+      "id": "achievement_region_one",
+      "nameKey": "achievement.achievement_region_one.name",
+      "descriptionKey": "achievement.achievement_region_one.description",
+      "metric": "regions_completed",
+      "threshold": 1
+    },
+    {
+      "id": "achievement_full_expedition",
+      "nameKey": "achievement.achievement_full_expedition.name",
+      "descriptionKey": "achievement.achievement_full_expedition.description",
+      "metric": "expeditions_completed",
+      "threshold": 1
+    },
+    {
+      "id": "achievement_veteran",
+      "nameKey": "achievement.achievement_veteran.name",
+      "descriptionKey": "achievement.achievement_veteran.description",
+      "metric": "expeditions_completed",
+      "threshold": 20
+    },
+    {
+      "id": "achievement_module_scholar",
+      "nameKey": "achievement.achievement_module_scholar.name",
+      "descriptionKey": "achievement.achievement_module_scholar.description",
+      "metric": "routes_used",
+      "threshold": 18
+    },
+    {
+      "id": "achievement_event_listener",
+      "nameKey": "achievement.achievement_event_listener.name",
+      "descriptionKey": "achievement.achievement_event_listener.description",
+      "metric": "events_completed",
+      "threshold": 12
+    },
+    {
+      "id": "achievement_terrain_keeper",
+      "nameKey": "achievement.achievement_terrain_keeper.name",
+      "descriptionKey": "achievement.achievement_terrain_keeper.description",
+      "metric": "high_integrity_nodes",
+      "threshold": 15
+    },
+    {
+      "id": "achievement_all_robots",
+      "nameKey": "achievement.achievement_all_robots.name",
+      "descriptionKey": "achievement.achievement_all_robots.description",
+      "metric": "robots_unlocked",
+      "threshold": 6
+    }
+  ],
+  "compendiumEntries": [
+    {
+      "id": "compendium_robot_rivet",
+      "category": "robot",
+      "nameKey": "robot.robot_rivet.name",
+      "bodyKey": "compendium.robot_rivet.body"
+    },
+    {
+      "id": "compendium_robot_anchor",
+      "category": "robot",
+      "nameKey": "robot.robot_anchor.name",
+      "bodyKey": "compendium.robot_anchor.body"
+    },
+    {
+      "id": "compendium_robot_gale",
+      "category": "robot",
+      "nameKey": "robot.robot_gale.name",
+      "bodyKey": "compendium.robot_gale.body"
+    },
+    {
+      "id": "compendium_robot_prism",
+      "category": "robot",
+      "nameKey": "robot.robot_prism.name",
+      "bodyKey": "compendium.robot_prism.body"
+    },
+    {
+      "id": "compendium_robot_forge",
+      "category": "robot",
+      "nameKey": "robot.robot_forge.name",
+      "bodyKey": "compendium.robot_forge.body"
+    },
+    {
+      "id": "compendium_robot_echo",
+      "category": "robot",
+      "nameKey": "robot.robot_echo.name",
+      "bodyKey": "compendium.robot_echo.body"
+    },
+    {
+      "id": "compendium_main_fold_bridge",
+      "category": "module",
+      "nameKey": "module.main_fold_bridge.name",
+      "bodyKey": "module.main_fold_bridge.description"
+    },
+    {
+      "id": "compendium_main_drill_bee",
+      "category": "module",
+      "nameKey": "module.main_drill_bee.name",
+      "bodyKey": "module.main_drill_bee.description"
+    },
+    {
+      "id": "compendium_main_magnetic_anchor",
+      "category": "module",
+      "nameKey": "module.main_magnetic_anchor.name",
+      "bodyKey": "module.main_magnetic_anchor.description"
+    },
+    {
+      "id": "compendium_main_gravity_pin",
+      "category": "module",
+      "nameKey": "module.main_gravity_pin.name",
+      "bodyKey": "module.main_gravity_pin.description"
+    },
+    {
+      "id": "compendium_main_bubble_capsule",
+      "category": "module",
+      "nameKey": "module.main_bubble_capsule.name",
+      "bodyKey": "module.main_bubble_capsule.description"
+    },
+    {
+      "id": "compendium_main_wind_generator",
+      "category": "module",
+      "nameKey": "module.main_wind_generator.name",
+      "bodyKey": "module.main_wind_generator.description"
+    },
+    {
+      "id": "compendium_main_support_frame",
+      "category": "module",
+      "nameKey": "module.main_support_frame.name",
+      "bodyKey": "module.main_support_frame.description"
+    },
+    {
+      "id": "compendium_main_energy_rail",
+      "category": "module",
+      "nameKey": "module.main_energy_rail.name",
+      "bodyKey": "module.main_energy_rail.description"
+    },
+    {
+      "id": "compendium_aux_repair_spray",
+      "category": "module",
+      "nameKey": "module.aux_repair_spray.name",
+      "bodyKey": "module.aux_repair_spray.description"
+    },
+    {
+      "id": "compendium_aux_reflector",
+      "category": "module",
+      "nameKey": "module.aux_reflector.name",
+      "bodyKey": "module.aux_reflector.description"
+    },
+    {
+      "id": "compendium_aux_ejector",
+      "category": "module",
+      "nameKey": "module.aux_ejector.name",
+      "bodyKey": "module.aux_ejector.description"
+    },
+    {
+      "id": "compendium_aux_stabilizer",
+      "category": "module",
+      "nameKey": "module.aux_stabilizer.name",
+      "bodyKey": "module.aux_stabilizer.description"
+    },
+    {
+      "id": "compendium_aux_route_scanner",
+      "category": "module",
+      "nameKey": "module.aux_route_scanner.name",
+      "bodyKey": "module.aux_route_scanner.description"
+    },
+    {
+      "id": "compendium_aux_energy_recycler",
+      "category": "module",
+      "nameKey": "module.aux_energy_recycler.name",
+      "bodyKey": "module.aux_energy_recycler.description"
+    },
+    {
+      "id": "compendium_aux_grapple",
+      "category": "module",
+      "nameKey": "module.aux_grapple.name",
+      "bodyKey": "module.aux_grapple.description"
+    },
+    {
+      "id": "compendium_aux_terrain_foam",
+      "category": "module",
+      "nameKey": "module.aux_terrain_foam.name",
+      "bodyKey": "module.aux_terrain_foam.description"
+    },
+    {
+      "id": "compendium_aux_jammer",
+      "category": "module",
+      "nameKey": "module.aux_jammer.name",
+      "bodyKey": "module.aux_jammer.description"
+    },
+    {
+      "id": "compendium_aux_structure_scanner",
+      "category": "module",
+      "nameKey": "module.aux_structure_scanner.name",
+      "bodyKey": "module.aux_structure_scanner.description"
+    },
+    {
+      "id": "compendium_enemy_scout",
+      "category": "enemy",
+      "nameKey": "enemy.enemy_scout.name",
+      "bodyKey": "enemy.enemy_scout.role"
+    },
+    {
+      "id": "compendium_enemy_guard",
+      "category": "enemy",
+      "nameKey": "enemy.enemy_guard.name",
+      "bodyKey": "enemy.enemy_guard.role"
+    },
+    {
+      "id": "compendium_enemy_artillery",
+      "category": "enemy",
+      "nameKey": "enemy.enemy_artillery.name",
+      "bodyKey": "enemy.enemy_artillery.role"
+    },
+    {
+      "id": "compendium_enemy_driller",
+      "category": "enemy",
+      "nameKey": "enemy.enemy_driller.name",
+      "bodyKey": "enemy.enemy_driller.role"
+    },
+    {
+      "id": "compendium_enemy_magnet",
+      "category": "enemy",
+      "nameKey": "enemy.enemy_magnet.name",
+      "bodyKey": "enemy.enemy_magnet.role"
+    },
+    {
+      "id": "compendium_enemy_repairer",
+      "category": "enemy",
+      "nameKey": "enemy.enemy_repairer.name",
+      "bodyKey": "enemy.enemy_repairer.role"
+    },
+    {
+      "id": "compendium_enemy_wind",
+      "category": "enemy",
+      "nameKey": "enemy.enemy_wind.name",
+      "bodyKey": "enemy.enemy_wind.role"
+    },
+    {
+      "id": "compendium_enemy_carrier",
+      "category": "enemy",
+      "nameKey": "enemy.enemy_carrier.name",
+      "bodyKey": "enemy.enemy_carrier.role"
+    },
+    {
+      "id": "compendium_boss_rift_drill",
+      "category": "boss",
+      "nameKey": "boss.boss_rift_drill.name",
+      "bodyKey": "compendium.boss_rift_drill.body"
+    },
+    {
+      "id": "compendium_boss_magnetic_tower",
+      "category": "boss",
+      "nameKey": "boss.boss_polar_magnetic_tower.name",
+      "bodyKey": "compendium.boss_magnetic_tower.body"
+    },
+    {
+      "id": "compendium_boss_inverted_controller",
+      "category": "boss",
+      "nameKey": "boss.boss_inverted_controller.name",
+      "bodyKey": "compendium.boss_inverted_controller.body"
+    },
+    {
+      "id": "compendium_boss_island_mainframe",
+      "category": "boss",
+      "nameKey": "boss.boss_unbound_island_mainframe.name",
+      "bodyKey": "compendium.boss_island_mainframe.body"
+    },
+    {
+      "id": "compendium_region_cloudbreak",
+      "category": "region",
+      "nameKey": "region.region_cloudbreak.name",
+      "bodyKey": "region.region_cloudbreak.environment"
+    },
+    {
+      "id": "compendium_region_polar",
+      "category": "region",
+      "nameKey": "region.region_polar_foundry.name",
+      "bodyKey": "region.region_polar_foundry.environment"
+    },
+    {
+      "id": "compendium_region_verdant",
+      "category": "region",
+      "nameKey": "region.region_verdant_updraft.name",
+      "bodyKey": "region.region_verdant_updraft.environment"
+    },
+    {
+      "id": "compendium_region_corefall",
+      "category": "region",
+      "nameKey": "region.region_corefall.name",
+      "bodyKey": "region.region_corefall.environment"
+    }
+  ]
+}

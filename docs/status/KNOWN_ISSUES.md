@@ -1,6 +1,6 @@
 # Known Issues
 
-Last reviewed for Phase 5 on 2026-07-22. No open P0 or P1 issue remains.
+Last reviewed for Phase 6 on 2026-07-22. No open P0 or P1 issue remains.
 
 ## Open
 

@@ -1,7 +1,20 @@
 {
   "schemaVersion": "1.0.0",
-  "contentVersion": "0.0.0",
+  "contentVersion": "0.1.0",
   "defaultLocale": "zh-CN",
   "locales": ["zh-CN"],
-  "contentRoots": []
+  "contentRoots": [
+    "bosses",
+    "enemies",
+    "events",
+    "localization",
+    "maps",
+    "modules",
+    "objectives",
+    "progression",
+    "regions",
+    "robots",
+    "routes",
+    "tutorials"
+  ]
 }

@@ -8,6 +8,7 @@ import {
   PHASE_3_PRODUCT_VERSIONS,
   PHASE_4_PRODUCT_VERSIONS,
   PHASE_5_PRODUCT_VERSIONS,
+  PHASE_6_PRODUCT_VERSIONS,
   RELEASE_CHANNELS,
   isProductVersions,
 } from "../src/index.js";
@@ -71,7 +72,16 @@ describe("product version contract", () => {
       ...PHASE_4_PRODUCT_VERSIONS,
       clientVersion: "0.1.0",
     });
-    expect(CURRENT_PRODUCT_VERSIONS).toBe(PHASE_5_PRODUCT_VERSIONS);
+  });
+
+  it("versions the authored PvE rules, content pack, and client flow independently", () => {
+    expect(PHASE_6_PRODUCT_VERSIONS).toEqual({
+      ...PHASE_5_PRODUCT_VERSIONS,
+      clientVersion: "0.2.0",
+      contentVersion: "0.1.0",
+      rulesVersion: "0.5.0",
+    });
+    expect(CURRENT_PRODUCT_VERSIONS).toBe(PHASE_6_PRODUCT_VERSIONS);
     expect(isProductVersions(CURRENT_PRODUCT_VERSIONS)).toBe(true);
   });
 

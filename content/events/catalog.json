@@ -1,0 +1,245 @@
+{
+  "schemaVersion": "1.0.0",
+  "contentVersion": "0.1.0",
+  "events": [
+    {
+      "id": "event_drifting_toolbox",
+      "titleKey": "event.event_drifting_toolbox.title",
+      "bodyKey": "event.event_drifting_toolbox.body",
+      "regionIds": ["region_cloudbreak", "region_polar_foundry"],
+      "choices": [
+        {
+          "id": "secure_tools",
+          "labelKey": "event.choice.secure_tools",
+          "effects": [{ "kind": "grant_consumable", "amount": 2 }]
+        },
+        {
+          "id": "catalog_parts",
+          "labelKey": "event.choice.catalog_parts",
+          "effects": [{ "kind": "research", "amount": 3 }]
+        }
+      ]
+    },
+    {
+      "id": "event_frayed_bridge",
+      "titleKey": "event.event_frayed_bridge.title",
+      "bodyKey": "event.event_frayed_bridge.body",
+      "regionIds": ["region_cloudbreak", "region_verdant_updraft"],
+      "choices": [
+        {
+          "id": "repair_crossing",
+          "labelKey": "event.choice.repair_crossing",
+          "effects": [{ "kind": "repair_structure", "amount": 8 }]
+        },
+        {
+          "id": "salvage_span",
+          "labelKey": "event.choice.salvage_span",
+          "effects": [{ "kind": "energy_supply", "amount": 2 }]
+        }
+      ]
+    },
+    {
+      "id": "event_sleeping_relay",
+      "titleKey": "event.event_sleeping_relay.title",
+      "bodyKey": "event.event_sleeping_relay.body",
+      "regionIds": ["region_cloudbreak"],
+      "choices": [
+        {
+          "id": "restart_relay",
+          "labelKey": "event.choice.restart_relay",
+          "effects": [
+            { "kind": "reveal_route", "amount": 1 },
+            { "kind": "research", "amount": 1 }
+          ]
+        },
+        {
+          "id": "leave_marker",
+          "labelKey": "event.choice.leave_marker",
+          "effects": [{ "kind": "repair_hp", "amount": 8 }]
+        }
+      ]
+    },
+    {
+      "id": "event_magnetic_orchard",
+      "titleKey": "event.event_magnetic_orchard.title",
+      "bodyKey": "event.event_magnetic_orchard.body",
+      "regionIds": ["region_polar_foundry"],
+      "choices": [
+        {
+          "id": "align_branches",
+          "labelKey": "event.choice.align_branches",
+          "effects": [{ "kind": "research", "amount": 4 }]
+        },
+        {
+          "id": "collect_filings",
+          "labelKey": "event.choice.collect_filings",
+          "effects": [{ "kind": "grant_consumable", "amount": 2 }]
+        }
+      ]
+    },
+    {
+      "id": "event_overloaded_crystal",
+      "titleKey": "event.event_overloaded_crystal.title",
+      "bodyKey": "event.event_overloaded_crystal.body",
+      "regionIds": ["region_polar_foundry", "region_corefall"],
+      "choices": [
+        {
+          "id": "bleed_charge",
+          "labelKey": "event.choice.bleed_charge",
+          "effects": [{ "kind": "energy_supply", "amount": 3 }]
+        },
+        {
+          "id": "study_resonance",
+          "labelKey": "event.choice.study_resonance",
+          "effects": [
+            { "kind": "research", "amount": 5 },
+            { "kind": "repair_hp", "amount": -4 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_shift_bell",
+      "titleKey": "event.event_shift_bell.title",
+      "bodyKey": "event.event_shift_bell.body",
+      "regionIds": ["region_polar_foundry"],
+      "choices": [
+        {
+          "id": "answer_bell",
+          "labelKey": "event.choice.answer_bell",
+          "effects": [{ "kind": "repair_hp", "amount": 10 }]
+        },
+        {
+          "id": "inspect_clock",
+          "labelKey": "event.choice.inspect_clock",
+          "effects": [{ "kind": "research", "amount": 3 }]
+        }
+      ]
+    },
+    {
+      "id": "event_cloud_moss_nursery",
+      "titleKey": "event.event_cloud_moss_nursery.title",
+      "bodyKey": "event.event_cloud_moss_nursery.body",
+      "regionIds": ["region_verdant_updraft"],
+      "choices": [
+        {
+          "id": "reinforce_nursery",
+          "labelKey": "event.choice.reinforce_nursery",
+          "effects": [{ "kind": "repair_structure", "amount": 12 }]
+        },
+        {
+          "id": "take_cuttings",
+          "labelKey": "event.choice.take_cuttings",
+          "effects": [{ "kind": "grant_consumable", "amount": 3 }]
+        }
+      ]
+    },
+    {
+      "id": "event_lost_courier",
+      "titleKey": "event.event_lost_courier.title",
+      "bodyKey": "event.event_lost_courier.body",
+      "regionIds": ["region_verdant_updraft", "region_corefall"],
+      "choices": [
+        {
+          "id": "escort_courier",
+          "labelKey": "event.choice.escort_courier",
+          "effects": [
+            { "kind": "research", "amount": 4 },
+            { "kind": "reveal_route", "amount": 1 }
+          ]
+        },
+        {
+          "id": "share_supplies",
+          "labelKey": "event.choice.share_supplies",
+          "effects": [
+            { "kind": "energy_supply", "amount": -1 },
+            { "kind": "repair_hp", "amount": 12 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_reverse_rain",
+      "titleKey": "event.event_reverse_rain.title",
+      "bodyKey": "event.event_reverse_rain.body",
+      "regionIds": ["region_verdant_updraft"],
+      "choices": [
+        {
+          "id": "anchor_team",
+          "labelKey": "event.choice.anchor_team",
+          "effects": [{ "kind": "repair_structure", "amount": 6 }]
+        },
+        {
+          "id": "ride_current",
+          "labelKey": "event.choice.ride_current",
+          "effects": [{ "kind": "reveal_route", "amount": 2 }]
+        }
+      ]
+    },
+    {
+      "id": "event_archive_echo",
+      "titleKey": "event.event_archive_echo.title",
+      "bodyKey": "event.event_archive_echo.body",
+      "regionIds": ["region_corefall"],
+      "choices": [
+        {
+          "id": "restore_record",
+          "labelKey": "event.choice.restore_record",
+          "effects": [{ "kind": "research", "amount": 6 }]
+        },
+        {
+          "id": "strip_power_cell",
+          "labelKey": "event.choice.strip_power_cell",
+          "effects": [{ "kind": "energy_supply", "amount": 4 }]
+        }
+      ]
+    },
+    {
+      "id": "event_mainframe_fragment",
+      "titleKey": "event.event_mainframe_fragment.title",
+      "bodyKey": "event.event_mainframe_fragment.body",
+      "regionIds": ["region_corefall"],
+      "choices": [
+        {
+          "id": "quarantine_fragment",
+          "labelKey": "event.choice.quarantine_fragment",
+          "effects": [{ "kind": "repair_structure", "amount": 10 }]
+        },
+        {
+          "id": "decode_fragment",
+          "labelKey": "event.choice.decode_fragment",
+          "effects": [
+            { "kind": "research", "amount": 7 },
+            { "kind": "repair_structure", "amount": -5 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_rescue_beacon",
+      "titleKey": "event.event_rescue_beacon.title",
+      "bodyKey": "event.event_rescue_beacon.body",
+      "regionIds": [
+        "region_cloudbreak",
+        "region_polar_foundry",
+        "region_verdant_updraft",
+        "region_corefall"
+      ],
+      "choices": [
+        {
+          "id": "answer_beacon",
+          "labelKey": "event.choice.answer_beacon",
+          "effects": [{ "kind": "repair_hp", "amount": 15 }]
+        },
+        {
+          "id": "relay_beacon",
+          "labelKey": "event.choice.relay_beacon",
+          "effects": [
+            { "kind": "research", "amount": 2 },
+            { "kind": "reveal_route", "amount": 1 }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,13 +1,13 @@
 # Release Readiness
 
-Current conclusion: **not ready for release**. Phases 0-4 are merged and the Phase 5 client engineering scope is locally implemented, but the physical WeChat device gate, complete PvE content, backend, tools, approved assets, and release operations are not complete.
+Current conclusion: **not ready for release**. Phases 0-5 are merged and the Phase 6 complete PvE engineering scope is locally implemented, but the physical WeChat device gate, backend, content/admin tools, approved assets, and release operations are not complete.
 
 | Gate                                         | State              | Evidence / next action                                                                |
 | -------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------- |
-| Engineering build and CI                     | In progress        | Phases 0-4 merged; Phase 5 full gate/PR/CI pending                                    |
+| Engineering build and CI                     | In progress        | Phases 0-5 merged; Phase 6 local gate passed, PR/CI pending                           |
 | Deterministic battle/replay                  | In progress        | Runtime through AI/boss authority exists; server replay verification remains Phase 8  |
 | Cocos/WeChat client                          | In progress        | Automated shell and build wrapper exist; EXT-001/006 block real build/device evidence |
-| Complete PvE V1 content                      | Not started        | Phase 6                                                                               |
+| Complete PvE V1 content                      | In progress        | Phase 6 pack/runtime and local gate complete; PR/CI/merge pending                     |
 | Cloud save and privacy deletion              | Not started        | Phase 7                                                                               |
 | Verified daily leaderboard                   | Not started        | Phase 8                                                                               |
 | Content/admin tooling                        | Not started        | Phase 9                                                                               |

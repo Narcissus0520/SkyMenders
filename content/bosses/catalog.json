@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0.0",
+  "contentVersion": "0.1.0",
+  "bosses": [
+    {
+      "id": "boss_rift_drill",
+      "nameKey": "boss.boss_rift_drill.name",
+      "regionIndex": 1,
+      "mapId": "map_boss_rift_drill",
+      "stageKeys": [
+        "boss.stage.external_drills.name",
+        "boss.stage.failing_span.name",
+        "boss.stage.exposed_core.name"
+      ],
+      "solutionTags": ["rebuild_route", "redirect_route"]
+    },
+    {
+      "id": "boss_polar_magnetic_tower",
+      "nameKey": "boss.boss_polar_magnetic_tower.name",
+      "regionIndex": 2,
+      "mapId": "map_boss_magnetic_tower",
+      "stageKeys": [
+        "boss.stage.repulsion_grid.name",
+        "boss.stage.core_transit.name",
+        "boss.stage.tower_core.name"
+      ],
+      "solutionTags": ["anchor_route", "rescue_route"]
+    },
+    {
+      "id": "boss_inverted_controller",
+      "nameKey": "boss.boss_inverted_controller.name",
+      "regionIndex": 3,
+      "mapId": "map_boss_inverted_controller",
+      "stageKeys": [
+        "boss.stage.gravity_flip.name",
+        "boss.stage.stabilizer_cycle.name",
+        "boss.stage.inverted_weakpoint.name"
+      ],
+      "solutionTags": ["gravity_route", "support_route"]
+    },
+    {
+      "id": "boss_unbound_island_mainframe",
+      "nameKey": "boss.boss_unbound_island_mainframe.name",
+      "regionIndex": 4,
+      "mapId": "map_boss_island_mainframe",
+      "stageKeys": [
+        "boss.stage.spawn_loop.name",
+        "boss.stage.energy_crisis.name",
+        "boss.stage.mainframe_core.name"
+      ],
+      "solutionTags": ["shutdown_route", "repair_route"]
+    }
+  ]
+}
