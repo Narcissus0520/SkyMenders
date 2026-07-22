@@ -1,6 +1,6 @@
 {
-  "name": "@skymenders/protocol",
-  "version": "0.2.0",
+  "name": "@skymenders/battle-core",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "exports": {
@@ -14,10 +14,13 @@
     "lint": "eslint src test",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
+    "test:determinism": "vitest run test/golden-battle.test.ts test/property.test.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "zod": "catalog:"
+    "@skymenders/deterministic-runtime": "workspace:*",
+    "@skymenders/protocol": "workspace:*",
+    "@skymenders/terrain-core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "catalog:",

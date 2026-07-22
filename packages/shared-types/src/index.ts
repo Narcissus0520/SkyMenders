@@ -32,10 +32,18 @@ export const PHASE_1_PRODUCT_VERSIONS: ProductVersions = Object.freeze({
   serverVersion: "0.0.0",
 });
 
-export const CURRENT_PRODUCT_VERSIONS: ProductVersions = Object.freeze({
+export const PHASE_2_PRODUCT_VERSIONS: ProductVersions = Object.freeze({
   ...PHASE_1_PRODUCT_VERSIONS,
   rulesVersion: "0.2.0",
 });
+
+export const PHASE_3_PRODUCT_VERSIONS: ProductVersions = Object.freeze({
+  ...PHASE_2_PRODUCT_VERSIONS,
+  protocolVersion: "0.2.0",
+  rulesVersion: "0.3.0",
+});
+
+export const CURRENT_PRODUCT_VERSIONS: ProductVersions = PHASE_3_PRODUCT_VERSIONS;
 
 const VERSION_PATTERN = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/;
 

@@ -1,5 +1,7 @@
 # External Blockers
 
+Last reviewed for Phase 3 on 2026-07-22. Phase 3 introduced no new external dependency.
+
 These inputs cannot be fabricated or bypassed. Interfaces, local substitutes, validation, and integration documentation will be implemented in the relevant phase, but the external capability will not be reported as complete until verified.
 
 | ID      | Owner                           | Required input                                                                                   | Completion evidence                                                                                   | Blocking phase   |

@@ -1,6 +1,6 @@
 # Deterministic Battle Architecture
 
-Status: implemented foundation in Phase 1; terrain and battle rules are added in Phases 2–4.
+Status: deterministic runtime, terrain authority, and whole-round battle rules are implemented through Phase 3.
 
 ## Authority boundary
 
@@ -28,7 +28,7 @@ The replay context supplies the root seed and independent rules, content, and re
 - Sine and cosine use a checked-in quarter-wave integer lookup table with deterministic linear interpolation. Runtime platform trigonometry is not authoritative.
 - Power is expressed in integer permille.
 
-Phase 2 must define world bounds so even worst-case terrain and projectile intermediates remain within the JavaScript safe-integer range.
+Terrain and battle state now use bounded logical grids, bounded collections, and safe-integer coordinates and parameters. Invalid runtime input fails closed before authority mutation.
 
 ## Random streams
 
@@ -42,12 +42,12 @@ Stream derivation is stable and adding draws to one stream cannot advance anothe
 
 ## Commands and events
 
-Protocol version `0.1.0` defines strict discriminated unions for:
+Protocol version `0.2.0` defines strict discriminated unions for:
 
-- Commands: `move`, `use_module`, `wait`, and `interact`.
-- Events: `command_accepted`, `actor_moved`, `module_resolved`, `turn_waited`, `interaction_completed`, and `state_checkpoint`.
+- Commands: `move`, `use_module`, `wait`, `interact`, authority-only `advance_phase`, and zero-energy `use_basic_action`.
+- Events: `command_accepted`, `actor_moved`, `module_resolved`, `turn_waited`, `interaction_completed`, `battle_phase_changed`, `battle_effect_applied`, and `state_checkpoint`.
 
-Identifiers are restricted, unknown fields are rejected, coordinates must be safe integers, and all indices are non-negative safe integers. These are foundation contracts; later phase-specific variants must remain runtime-validated and increment `protocolVersion` when compatibility changes.
+Identifiers are restricted, unknown fields are rejected, coordinate pairs must be complete safe integers, and all indices are non-negative safe integers. A module `targetId` is accepted only with coordinates and battle authority verifies that the active entity occupies them. Later incompatible variants must remain runtime-validated and increment `protocolVersion`.
 
 ## Canonical state and hashes
 
@@ -64,7 +64,7 @@ A replay carries independently versioned rules, content, and replay schema ident
 - checkpoint count, index, or hash mismatch;
 - final hash mismatch.
 
-The checked-in `runtime-ledger-v1` fixture exercises every Phase 1 command and event family. CI executes it repeatedly and also runs the repository determinism policy scan.
+The checked-in `runtime-ledger-v1` fixture exercises the Phase 1 foundation contract. Phase 3 adds a 13-command golden battle round with final hash `52314be76f79b183` and 128 seeded whole-round property cases. CI executes both suites repeatedly and runs the repository determinism policy scan.
 
 ## Forbidden authority inputs
 

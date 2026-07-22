@@ -37,10 +37,25 @@ export const useModuleCommandSchema = z
     originY: safeIntegerSchema,
     angleMilliDegrees: z.number().int().min(0).max(359_999),
     powerPermille: z.number().int().min(0).max(1_000),
+    targetId: identifierSchema.optional(),
     targetX: safeIntegerSchema.optional(),
     targetY: safeIntegerSchema.optional(),
   })
-  .strict();
+  .strict()
+  .superRefine((command, context) => {
+    if ((command.targetX === undefined) !== (command.targetY === undefined)) {
+      context.addIssue({
+        code: "custom",
+        message: "targetX and targetY must be provided together",
+      });
+    }
+    if (command.targetId !== undefined && command.targetX === undefined) {
+      context.addIssue({
+        code: "custom",
+        message: "targetId requires authoritative target coordinates",
+      });
+    }
+  });
 
 export const waitCommandSchema = z
   .object({
@@ -57,11 +72,46 @@ export const interactCommandSchema = z
   })
   .strict();
 
+export const advancePhaseCommandSchema = z
+  .object({
+    ...commandBase,
+    kind: z.literal("advance_phase"),
+    expectedPhase: z.enum([
+      "player_planning",
+      "player_action",
+      "enemy_action",
+      "environment_settlement",
+      "battle_complete",
+    ]),
+  })
+  .strict();
+
+export const useBasicActionCommandSchema = z
+  .object({
+    ...commandBase,
+    kind: z.literal("use_basic_action"),
+    action: z.enum(["push", "repair"]),
+    targetId: identifierSchema,
+    targetX: safeIntegerSchema.optional(),
+    targetY: safeIntegerSchema.optional(),
+  })
+  .strict()
+  .superRefine((command, context) => {
+    if ((command.targetX === undefined) !== (command.targetY === undefined)) {
+      context.addIssue({
+        code: "custom",
+        message: "targetX and targetY must be provided together",
+      });
+    }
+  });
+
 export const battleCommandSchema = z.discriminatedUnion("kind", [
   moveCommandSchema,
   useModuleCommandSchema,
   waitCommandSchema,
   interactCommandSchema,
+  advancePhaseCommandSchema,
+  useBasicActionCommandSchema,
 ]);
 
 export type BattleCommand = z.infer<typeof battleCommandSchema>;
@@ -69,6 +119,8 @@ export type MoveCommand = z.infer<typeof moveCommandSchema>;
 export type UseModuleCommand = z.infer<typeof useModuleCommandSchema>;
 export type WaitCommand = z.infer<typeof waitCommandSchema>;
 export type InteractCommand = z.infer<typeof interactCommandSchema>;
+export type AdvancePhaseCommand = z.infer<typeof advancePhaseCommandSchema>;
+export type UseBasicActionCommand = z.infer<typeof useBasicActionCommandSchema>;
 
 export function parseBattleCommand(input: unknown): BattleCommand {
   return battleCommandSchema.parse(input);
