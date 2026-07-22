@@ -1,10 +1,10 @@
 # Battle Rules Architecture
 
-Status: Phase 3 authority implementation complete locally.
+Status: Phase 4 AI integration complete locally.
 
 ## State and authority
 
-`@skymenders/battle-core` is an engine-independent immutable reducer. A state includes compatibility versions, the battle/turn/phase envelope, shared energy, actors, objectives, world objects, persistent and temporary field effects, temporary terrain/support ownership, intelligence, statistics, terrain, and outcome. Runtime validation bounds all collections and numeric values and rejects inconsistent HP, disabled, recovery-beacon, fault, cooldown, loadout, objective, target, and energy state.
+`@skymenders/battle-core` is an engine-independent immutable reducer. A state includes compatibility versions, the battle/turn/phase envelope, separate player and enemy team energy pools, actors, objectives, world objects, persistent and temporary field effects, temporary terrain/support ownership, intelligence, statistics, terrain, and outcome. Runtime validation bounds all collections and numeric values and rejects inconsistent HP, disabled, recovery-beacon, fault, cooldown, loadout, objective, target, and energy state.
 
 Exactly three player robots are required. Neutral or enemy actors may also exist within the global actor bound. Cocos and later server code may render or transport state, but only battle-core commands may change authority state.
 
@@ -26,7 +26,8 @@ Only the authority identity `system` may issue `advance_phase`. Player and enemy
 - A main module may be used once and ends that robot's action.
 - Auxiliary modules declare whether they end an action and are capped at two uses per actor per round.
 - Wait ends an action and grants bounded energy only while both team energy and the per-round wait allowance have room.
-- Default shared energy is 12 maximum, 6 regeneration, and carry-over between rounds.
+- Player and enemy teams have independent energy pools. Each defaults to 12 maximum, 6 regeneration, and carry-over between rounds.
+- Module costs, wait gains, and settlement regeneration affect only the acting team. An enemy cannot consume or replenish the player's energy.
 - Movement, critical interaction, basic push, and basic repair are zero-energy fallbacks.
 - Commands use integer logical coordinates. Authority validates phase, turn, actor, origin, range, occupancy, support, energy, cooldown, and target identity before mutation.
 
@@ -53,10 +54,16 @@ Module-required objectives use a stable `targetId`. The command must also carry 
 
 ## Projectile fields
 
-The deterministic field helper orders effects by stable ID and applies gravity, wind, energy rail, reflector, rebound bubble, and conductive bridge rules using integers. One-shot fields are consumed in state, reflection statistics are deterministic, and jammer target-score modifiers are available to Phase 4 AI. Full projectile stepping and client trajectory presentation remain bound to the same fixed-point/runtime rules and will be integrated with later battle/client phases.
+The deterministic field helper orders effects by stable ID and applies gravity, wind, energy rail, reflector, rebound bubble, and conductive bridge rules using integers. One-shot fields are consumed in state, reflection statistics are deterministic, and jammer target-score modifiers feed the AI utility evaluator. Full projectile stepping and client trajectory presentation remain bound to the same fixed-point/runtime rules and will be integrated with later battle/client phases.
+
+## AI command boundary
+
+`@skymenders/ai-core` reads only confirmed battle state. It builds bounded candidate commands, dry-runs each candidate through `reduceBattleCommand`, scores only accepted results, applies seeded aiming error, validates the final command again, and then executes it through the same reducer used by players. The planner has no direct HP, position, terrain, objective, energy, or outcome mutation path. Bosses use the same route; a completed boss issues a legal wait instead of bypassing phase completion.
+
+AI authority state is stored separately from battle state so its `ai` and `aim_error` RNG streams, decision index, controller bindings, boss stages, counter progress, and replay protection are explicit. A battle resume or verification record that includes AI must preserve both states.
 
 ## Determinism and limits
 
-Every accepted command produces strict protocol events and a canonical checkpoint. Environment settlement also resolves unsupported actors and task objects, applies configured fall damage, and fails objectives whose target leaves the battle. The golden mixed-action round, 128 seeded whole-round property cases, module route/combination tests, and coverage gates detect drift. There is no use of frame time, platform physics, locale sorting, global randomness, or mutable singleton state.
+Every accepted command produces strict protocol events and a canonical checkpoint. Environment settlement also resolves unsupported actors and task objects, applies configured fall damage, and fails objectives whose target leaves the battle. The golden mixed-action round, AI decision golden, 128 seeded battle cases, 48 seeded AI phases, module route/combination tests, and coverage gates detect drift. There is no use of frame time, platform physics, locale sorting, global randomness, or mutable singleton state.
 
-Rules are `0.3.0`, protocol is `0.2.0`, and replay schema remains `0.1.0`.
+Rules are `0.4.0`, protocol is `0.2.0`, and replay schema remains `0.1.0`.

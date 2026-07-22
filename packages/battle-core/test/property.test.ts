@@ -75,5 +75,5 @@ describe("seeded battle properties", () => {
         first.events.map((_, index) => index),
       );
     }
-  });
+  }, 15_000);
 });

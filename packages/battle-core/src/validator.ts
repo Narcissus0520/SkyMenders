@@ -1,5 +1,5 @@
 import { getModuleDefinition } from "./module-registry.js";
-import { createBattleState, effectiveModuleEnergyCost } from "./state.js";
+import { actorTeamEnergy, createBattleState, effectiveModuleEnergyCost } from "./state.js";
 import type {
   BattleValidationIssue,
   BattleValidationReport,
@@ -48,8 +48,9 @@ export function validateBattleDefinition(
       const requiredModuleId = objective.requiredModuleId;
       const equipped = state.actors.filter(
         (actor) =>
-          actor.mainModuleId === requiredModuleId ||
-          actor.auxiliaryModuleIds.includes(requiredModuleId),
+          actor.team === "player" &&
+          (actor.mainModuleId === requiredModuleId ||
+            actor.auxiliaryModuleIds.includes(requiredModuleId)),
       );
       if (equipped.length === 0) {
         issues.push({
@@ -59,7 +60,9 @@ export function validateBattleDefinition(
         });
       } else if (
         equipped.every(
-          (actor) => effectiveModuleEnergyCost(actor, requiredModuleId) > state.energy.maximum,
+          (actor) =>
+            effectiveModuleEnergyCost(actor, requiredModuleId) >
+            actorTeamEnergy(state, actor.team).maximum,
         )
       ) {
         issues.push({
@@ -72,7 +75,7 @@ export function validateBattleDefinition(
   }
   for (const [actorIndex, actor] of state.actors.entries()) {
     for (const moduleId of [actor.mainModuleId, ...actor.auxiliaryModuleIds]) {
-      if (getModuleDefinition(moduleId).energyCost > state.energy.maximum) {
+      if (getModuleDefinition(moduleId).energyCost > actorTeamEnergy(state, actor.team).maximum) {
         issues.push({
           code: "MODULE_ENERGY_UNUSABLE",
           path: `actors[${actorIndex}]`,

@@ -26,3 +26,14 @@ Core deterministic packages must reach at least 95% statement and 90% branch cov
 - Content validation proves zero-energy push/repair fallbacks and rejects unequipped or theoretically unaffordable required modules.
 - The golden round freezes every command checkpoint and final hash. A seeded property suite repeats 128 generated whole rounds and checks equality, event sequence, state validity, three-player composition, and energy bounds.
 - `battle-core`, `terrain-core`, and `deterministic-runtime` independently enforce at least 95% statement and 90% branch coverage.
+
+## Phase 4 AI and boss evidence
+
+- Catalog tests freeze exactly eight enemy prototypes, six elite affixes, eight whitelisted elite templates, three difficulty profiles, and four three-stage bosses with complete i18n and loadout contracts.
+- Planner tests prove that generated and selected actions pass the shared battle reducer, rejected candidates cannot be selected, enemy phases terminate within a bounded attempt count, and player and enemy energy remain isolated.
+- Role tests exercise scout, guard, artillery, driller, magnet, repairer, wind, and carrier mechanics. Every elite whitelist entry is instantiated and changes decision weighting without multiplying HP or damage.
+- Difficulty tests prove that search breadth, objective/hazard awareness, and seeded aim error vary while actor HP, module damage rules, and the legal command path stay unchanged.
+- Boss tests complete all four bosses through both declared solution routes, reject duplicated/uncheckpointed/malformed counter evidence, advance deterministic stages, and keep completed bosses phase-legal through wait commands.
+- The AI golden decision freezes command, trace, next RNG state, and canonical hash. A 48-seed property suite repeats complete enemy phases and validates both battle and AI authority states.
+- Serializable debug-view tests cover behavior traces, candidate utility vectors, rejection reasons, selection markers, and text rendering without exposing a mutation path.
+- `ai-core` enforces at least 85% statement and 80% branch coverage; battle, terrain, and deterministic runtime retain their stricter 95%/90% gates.

@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { executeBattleCommands } from "../src/index.js";
 import { battleFixture, commandBase, moduleCommand } from "./fixtures.js";
 
-describe("battle rule 0.3 golden replay", () => {
+describe("battle rule 0.4 golden replay", () => {
   it("pins a complete mixed-action round to stable checkpoint and final hashes", () => {
     const initial = battleFixture();
     const commands = [
@@ -52,20 +52,20 @@ describe("battle rule 0.3 golden replay", () => {
     const second = executeBattleCommands(initial, commands);
     expect(second).toEqual(first);
     expect(first.checkpoints.map((checkpoint) => checkpoint.stateHash)).toEqual([
-      "8203836d08abf271",
-      "141a0603210dc03f",
-      "f1edbe617412aa5d",
-      "27a25c0e5aa68322",
-      "eeff24e990e7717d",
-      "a94bc787d1bdc5fb",
-      "be2d4e443c9f0e40",
-      "6e88eba16cd1a415",
-      "6870446bb3e6edff",
-      "9ddbe94df26ddcd9",
-      "265bfeb8638d255c",
-      "298ffc7d26cc0d79",
-      "52314be76f79b183",
+      "83b1e4c48d263828",
+      "a41e4bd2709a612e",
+      "4ed1b5d290519b2e",
+      "b8a2f551b273e065",
+      "6c23c1c494e513f8",
+      "ddb0e97e542642a2",
+      "b8338bc68f8150d2",
+      "f88515c7bccb2de3",
+      "2f1a3d8d2ff8bde1",
+      "d78ac59bd54dc92f",
+      "979f30915ada70e5",
+      "b454a8f995a53e7d",
+      "548962a665215902",
     ]);
-    expect(hashCanonical(first.finalState)).toBe("52314be76f79b183");
+    expect(hashCanonical(first.finalState)).toBe("548962a665215902");
   });
 });

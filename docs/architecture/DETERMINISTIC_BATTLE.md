@@ -1,6 +1,6 @@
 # Deterministic Battle Architecture
 
-Status: deterministic runtime, terrain authority, and whole-round battle rules are implemented through Phase 3.
+Status: deterministic runtime, terrain authority, whole-round battle rules, and AI authority are implemented through Phase 4.
 
 ## Authority boundary
 
@@ -64,7 +64,15 @@ A replay carries independently versioned rules, content, and replay schema ident
 - checkpoint count, index, or hash mismatch;
 - final hash mismatch.
 
-The checked-in `runtime-ledger-v1` fixture exercises the Phase 1 foundation contract. Phase 3 adds a 13-command golden battle round with final hash `52314be76f79b183` and 128 seeded whole-round property cases. CI executes both suites repeatedly and runs the repository determinism policy scan.
+The checked-in `runtime-ledger-v1` fixture exercises the Phase 1 foundation contract. The current 13-command golden battle round has final hash `548962a665215902`; the intentional change from Phase 3 reflects separate player/enemy energy authority. The AI golden decision hash is `13f36ad335ed11bf`. Tests also repeat 128 seeded whole battle rounds and 48 seeded AI phases. CI executes the golden/property suites repeatedly and runs the repository determinism policy scan.
+
+## AI and boss authority
+
+AI uses independent derived RNG streams: `ai` chooses among score-equivalent legal decisions and `aim_error` supplies difficulty-bounded angle and power error. Both functional RNG states and the monotonic decision index are returned in `AiAuthorityState`; candidate enumeration never consumes hidden global randomness. Stable IDs and explicit numeric tie-breaking make candidate order deterministic.
+
+Behavior trees select a macro goal. A nine-dimension utility model then scores task benefit, expected damage, terrain benefit, self-safety, control, energy cost, friendly-fire risk, fall risk, and next-round exposure. Every candidate is first reduced against a cloned battle state. Rejected commands are retained only as bounded debug evidence and cannot be selected.
+
+Boss stage progress derives from runtime-validated effects emitted by accepted, checkpointed player module commands. Each command ID can contribute once. Boss runtime state records the stage, progress, completion, accepted command IDs, and stage history, so restoring only the visual stage is insufficient. The four bosses each expose two validated counter signals per stage and two complete solution routes.
 
 ## Forbidden authority inputs
 

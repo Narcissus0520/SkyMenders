@@ -16,10 +16,12 @@ import { applyObjectiveSignal } from "./objectives.js";
 import { advanceBattlePhase } from "./phases.js";
 import {
   assertBattleState,
+  actorTeamEnergy,
   effectiveMoveDistance,
   findBattleActor,
   manhattanDistance,
   replaceBattleActor,
+  replaceActorTeamEnergy,
 } from "./state.js";
 import { BATTLE_MAX_COMMANDS } from "./types.js";
 import type {
@@ -168,30 +170,30 @@ function waitActor(
   _command: WaitCommand,
 ): BattleTransition {
   if (actor.actionEnded) throw new Error("actor action has already ended");
+  const teamEnergy = actorTeamEnergy(state, actor.team);
   const remainingWaitGrant = Math.max(
     0,
-    state.energy.maximumWaitEnergyPerRound - state.energy.waitEnergyGrantedThisRound,
+    teamEnergy.maximumWaitEnergyPerRound - teamEnergy.waitEnergyGrantedThisRound,
   );
   const gain = Math.min(
-    state.energy.waitGain,
+    teamEnergy.waitGain,
     remainingWaitGrant,
-    state.energy.maximum - state.energy.current,
+    teamEnergy.maximum - teamEnergy.current,
   );
+  const withActor = replaceBattleActor(state, { ...actor, actionEnded: true });
   return {
-    state: {
-      ...replaceBattleActor(state, { ...actor, actionEnded: true }),
-      energy: {
-        ...state.energy,
-        current: state.energy.current + gain,
-        waitEnergyGrantedThisRound: state.energy.waitEnergyGrantedThisRound + gain,
-      },
-    },
+    state: replaceActorTeamEnergy(withActor, actor.team, {
+      ...teamEnergy,
+      current: teamEnergy.current + gain,
+      waitEnergyGrantedThisRound: teamEnergy.waitEnergyGrantedThisRound + gain,
+    }),
     effects:
       gain === 0
         ? []
         : [
             ruleEffect("energy_changed", actor.id, null, null, null, gain, 0, {
               reason: "wait",
+              team: actor.team,
             }),
           ],
   };

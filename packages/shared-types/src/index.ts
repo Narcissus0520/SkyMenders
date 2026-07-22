@@ -43,7 +43,12 @@ export const PHASE_3_PRODUCT_VERSIONS: ProductVersions = Object.freeze({
   rulesVersion: "0.3.0",
 });
 
-export const CURRENT_PRODUCT_VERSIONS: ProductVersions = PHASE_3_PRODUCT_VERSIONS;
+export const PHASE_4_PRODUCT_VERSIONS: ProductVersions = Object.freeze({
+  ...PHASE_3_PRODUCT_VERSIONS,
+  rulesVersion: "0.4.0",
+});
+
+export const CURRENT_PRODUCT_VERSIONS: ProductVersions = PHASE_4_PRODUCT_VERSIONS;
 
 const VERSION_PATTERN = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/;
 

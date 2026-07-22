@@ -1,0 +1,88 @@
+export { DEFAULT_ENEMY_BEHAVIOR_TREE, evaluateBehaviorTree } from "./behavior-tree.js";
+export {
+  AI_DIFFICULTY_PROFILES,
+  BOSS_DEFINITIONS,
+  ELITE_AFFIX_DEFINITIONS,
+  ELITE_TEMPLATE_DEFINITIONS,
+  ENEMY_DEFINITIONS,
+  createBossActor,
+  createEnemyActor,
+  eliteAffixes,
+  getBossDefinition,
+  getEliteTemplate,
+  getEnemyDefinition,
+  mergedUtilityWeights,
+} from "./catalog.js";
+export {
+  applyBossCounterCommand,
+  applyBossCounterSignal,
+  bossCounterSignalForCommand,
+} from "./boss.js";
+export { createAiDebugView, renderAiDebugText } from "./debug.js";
+export { executeAiEnemyPhase, planAiAction } from "./planner.js";
+export {
+  assertAiAuthorityState,
+  createAiAuthorityState,
+  findAiController,
+  findBossRuntime,
+  replaceBossRuntime,
+} from "./state.js";
+export { scoreAiCandidate } from "./utility.js";
+export type { AiScoringContext } from "./utility.js";
+export { assertAiBattleBindings, validateAiCatalog } from "./validator.js";
+export {
+  AI_DIFFICULTIES,
+  AI_GOALS,
+  AI_MAX_BOSSES,
+  AI_MAX_BOSS_COUNTERS,
+  AI_MAX_CANDIDATES,
+  AI_MAX_CONTROLLERS,
+  AI_MAX_DECISIONS,
+  AI_RULES_VERSION,
+  AI_SCHEMA_VERSION,
+  AI_UTILITY_DIMENSIONS,
+  BOSS_COUNTER_SIGNALS,
+  BOSS_IDS,
+  ELITE_AFFIX_IDS,
+  ELITE_TEMPLATE_IDS,
+  ENEMY_PROTOTYPE_IDS,
+} from "./types.js";
+export type {
+  AiAuthorityState,
+  AiBehaviorContext,
+  AiBehaviorEvaluation,
+  AiBehaviorFlag,
+  AiCandidateEvaluation,
+  AiCandidateSeed,
+  AiCatalogIssue,
+  AiCatalogReport,
+  AiControllerState,
+  AiDebugMarker,
+  AiDebugView,
+  AiDecision,
+  AiDecisionTrace,
+  AiDifficulty,
+  AiDifficultyProfile,
+  AiEnemyPhaseExecution,
+  AiGoal,
+  AiUtilityDimension,
+  AiUtilityVector,
+  AiUtilityWeights,
+  BehaviorConditionId,
+  BehaviorTraceEntry,
+  BehaviorTreeNode,
+  BossCounterEvent,
+  BossCounterResult,
+  BossCounterSignal,
+  BossDefinition,
+  BossId,
+  BossRuntimeState,
+  BossStageDefinition,
+  CreateAiAuthorityDefinition,
+  EliteAffixDefinition,
+  EliteAffixId,
+  EliteTemplateDefinition,
+  EliteTemplateId,
+  EnemyDefinition,
+  EnemyPrototypeId,
+} from "./types.js";

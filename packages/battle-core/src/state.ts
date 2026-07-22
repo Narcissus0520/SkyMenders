@@ -16,7 +16,9 @@ import {
   BATTLE_SCHEMA_VERSION,
 } from "./types.js";
 import type {
+  ActorTeam,
   BattleActor,
+  BattleEnergyState,
   BattleObjective,
   BattleRuleConfig,
   BattleState,
@@ -59,14 +61,8 @@ export function createBattleState(definition: CreateBattleDefinition): BattleSta
     phase: "player_planning",
     nextEventSequence: 0,
     config,
-    energy: {
-      current: definition.initialEnergy ?? config.maximumEnergy,
-      maximum: config.maximumEnergy,
-      regenerationPerRound: config.regenerationPerRound,
-      waitGain: config.waitGain,
-      waitEnergyGrantedThisRound: 0,
-      maximumWaitEnergyPerRound: config.maximumWaitEnergyPerRound,
-    },
+    energy: createEnergyState(definition.initialEnergy ?? config.maximumEnergy, config),
+    enemyEnergy: createEnergyState(definition.initialEnemyEnergy ?? config.maximumEnergy, config),
     actors: definition.actors.map(normalizeActor).sort(compareById),
     objectives: definition.objectives.map(normalizeObjective).sort(compareById),
     worldObjects: [...(definition.worldObjects ?? [])].sort(compareById),
@@ -110,7 +106,8 @@ export function assertBattleState(state: BattleState): void {
   assertNonNegativeInteger(state.nextEventSequence, "event sequence");
   assertTerrainState(state.terrain);
   normalizeBattleRuleConfig(state.config);
-  assertEnergy(state);
+  assertEnergy(state.energy, state.config, "player energy");
+  assertEnergy(state.enemyEnergy, state.config, "enemy energy");
   if (state.actors.length === 0 || state.actors.length > BATTLE_MAX_ACTORS) {
     throw new RangeError(`battle must contain between 1 and ${BATTLE_MAX_ACTORS} actors`);
   }
@@ -247,6 +244,22 @@ export function replaceBattleActor(state: BattleState, actor: BattleActor): Batt
   };
 }
 
+export function actorTeamEnergy(state: BattleState, team: ActorTeam): BattleEnergyState {
+  if (team === "player") return state.energy;
+  if (team === "enemy") return state.enemyEnergy;
+  throw new Error("neutral actors do not own a battle energy pool");
+}
+
+export function replaceActorTeamEnergy(
+  state: BattleState,
+  team: ActorTeam,
+  energy: BattleEnergyState,
+): BattleState {
+  if (team === "player") return { ...state, energy };
+  if (team === "enemy") return { ...state, enemyEnergy: energy };
+  throw new Error("neutral actors do not own a battle energy pool");
+}
+
 export function selectedRoute(actor: BattleActor, moduleId: ModuleId): ModuleUpgradeRouteId | null {
   return actor.selectedRoutes.find((selection) => selection.moduleId === moduleId)?.routeId ?? null;
 }
@@ -325,8 +338,18 @@ function normalizeObjective(objective: BattleObjective): BattleObjective {
   };
 }
 
-function assertEnergy(state: BattleState): void {
-  const energy = state.energy;
+function createEnergyState(current: number, config: BattleRuleConfig): BattleEnergyState {
+  return {
+    current,
+    maximum: config.maximumEnergy,
+    regenerationPerRound: config.regenerationPerRound,
+    waitGain: config.waitGain,
+    waitEnergyGrantedThisRound: 0,
+    maximumWaitEnergyPerRound: config.maximumWaitEnergyPerRound,
+  };
+}
+
+function assertEnergy(energy: BattleEnergyState, config: BattleRuleConfig, label: string): void {
   for (const value of [
     energy.current,
     energy.maximum,
@@ -335,7 +358,7 @@ function assertEnergy(state: BattleState): void {
     energy.waitEnergyGrantedThisRound,
     energy.maximumWaitEnergyPerRound,
   ]) {
-    assertNonNegativeInteger(value, "battle energy");
+    assertNonNegativeInteger(value, label);
   }
   if (
     energy.maximum <= 0 ||
@@ -346,10 +369,10 @@ function assertEnergy(state: BattleState): void {
     throw new RangeError("battle energy is outside configured bounds");
   }
   if (
-    energy.maximum !== state.config.maximumEnergy ||
-    energy.regenerationPerRound !== state.config.regenerationPerRound ||
-    energy.waitGain !== state.config.waitGain ||
-    energy.maximumWaitEnergyPerRound !== state.config.maximumWaitEnergyPerRound
+    energy.maximum !== config.maximumEnergy ||
+    energy.regenerationPerRound !== config.regenerationPerRound ||
+    energy.waitGain !== config.waitGain ||
+    energy.maximumWaitEnergyPerRound !== config.maximumWaitEnergyPerRound
   ) {
     throw new Error("battle energy does not match rule configuration");
   }

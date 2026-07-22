@@ -4,7 +4,7 @@ import type { GridPoint, TerrainState } from "@skymenders/terrain-core";
 import type { ModuleId, ModuleUpgradeRouteId } from "./module-registry.js";
 
 export const BATTLE_SCHEMA_VERSION = "0.1.0";
-export const BATTLE_RULES_VERSION = "0.3.0";
+export const BATTLE_RULES_VERSION = "0.4.0";
 export const BATTLE_MAX_ACTORS = 64;
 export const BATTLE_MAX_OBJECTIVES = 3;
 export const BATTLE_MAX_EFFECTS = 256;
@@ -185,6 +185,7 @@ export interface BattleState {
   readonly nextEventSequence: number;
   readonly config: BattleRuleConfig;
   readonly energy: BattleEnergyState;
+  readonly enemyEnergy: BattleEnergyState;
   readonly actors: readonly BattleActor[];
   readonly objectives: readonly BattleObjective[];
   readonly worldObjects: readonly BattleWorldObject[];
@@ -221,6 +222,7 @@ export interface CreateBattleDefinition {
   readonly objectives: readonly BattleObjective[];
   readonly worldObjects?: readonly BattleWorldObject[];
   readonly initialEnergy?: number;
+  readonly initialEnemyEnergy?: number;
   readonly config?: Partial<BattleRuleConfig>;
 }
 
