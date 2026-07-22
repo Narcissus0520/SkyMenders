@@ -2,21 +2,21 @@
 
 This plan follows the mandatory phase order in `AGENTS.md`. A phase is complete only after its code, tests, documentation, local gates, required CI checks, PR, and permitted merge are complete.
 
-| Phase | Scope                                                                   | State              | Exit evidence                                              |
-| ----- | ----------------------------------------------------------------------- | ------------------ | ---------------------------------------------------------- |
-| 0     | Governance, monorepo, CI, Compose, docs, legal/asset policy             | In progress        | Install, lint, typecheck, tests, build, validators, CI     |
-| 1     | Fixed math, RNG streams, commands/events, snapshots, hashes, replay     | Planned            | Repeatable replays and isolated RNG streams                |
-| 2     | Chunk terrain, materials, damage/repair, support, collapse, validation  | Planned            | Replayable collapse, property tests, benchmark             |
-| 3     | Turn rules, movement, energy, durability, objectives, 18 modules        | Planned            | Complete module behavior and combination tests             |
-| 4     | Behavior trees, utility AI, 8 enemies, elites, 4 bosses                 | Planned            | Legal commands and multi-strategy boss tests               |
-| 5     | Cocos client, WeChat adapter, input, camera, UI, audio, accessibility   | Planned            | Device workflow, 30 FPS baseline, non-color cues           |
-| 6     | Four-region expedition, rewards, workshop, events, unlocks, 6 tutorials | Planned            | Full-length expedition and content minimums                |
-| 7     | Auth adapter, accounts, local/cloud saves, recovery, restart, migration | Planned            | Weak-network recovery and deletion flow                    |
-| 8     | Daily challenge, attempts, replay worker, anonymous leaderboard         | Planned            | Tamper rejection and server-date enforcement               |
-| 9     | Content Studio, gateway, Admin Console, publication and audit           | Planned            | UI-authored valid content and traceable admin writes       |
-| 10    | Approved assets, performance, package budget, operations, legal prep    | Planned            | No placeholders/unlicensed assets or P0/P1 issues          |
-| 11    | V1 release candidate, regression, freeze, recovery drills               | Planned            | Full V1 Definition of Done, except explicit external gates |
-| 12+   | Server-authoritative real-time PvP                                      | Blocked by V1 gate | PvP gates without breaking V1 replay compatibility         |
+| Phase | Scope                                                                   | State                         | Exit evidence                                              |
+| ----- | ----------------------------------------------------------------------- | ----------------------------- | ---------------------------------------------------------- |
+| 0     | Governance, monorepo, CI, Compose, docs, legal/asset policy             | Local Gate passed; CI pending | Install, lint, typecheck, tests, build, validators, CI     |
+| 1     | Fixed math, RNG streams, commands/events, snapshots, hashes, replay     | Planned                       | Repeatable replays and isolated RNG streams                |
+| 2     | Chunk terrain, materials, damage/repair, support, collapse, validation  | Planned                       | Replayable collapse, property tests, benchmark             |
+| 3     | Turn rules, movement, energy, durability, objectives, 18 modules        | Planned                       | Complete module behavior and combination tests             |
+| 4     | Behavior trees, utility AI, 8 enemies, elites, 4 bosses                 | Planned                       | Legal commands and multi-strategy boss tests               |
+| 5     | Cocos client, WeChat adapter, input, camera, UI, audio, accessibility   | Planned                       | Device workflow, 30 FPS baseline, non-color cues           |
+| 6     | Four-region expedition, rewards, workshop, events, unlocks, 6 tutorials | Planned                       | Full-length expedition and content minimums                |
+| 7     | Auth adapter, accounts, local/cloud saves, recovery, restart, migration | Planned                       | Weak-network recovery and deletion flow                    |
+| 8     | Daily challenge, attempts, replay worker, anonymous leaderboard         | Planned                       | Tamper rejection and server-date enforcement               |
+| 9     | Content Studio, gateway, Admin Console, publication and audit           | Planned                       | UI-authored valid content and traceable admin writes       |
+| 10    | Approved assets, performance, package budget, operations, legal prep    | Planned                       | No placeholders/unlicensed assets or P0/P1 issues          |
+| 11    | V1 release candidate, regression, freeze, recovery drills               | Planned                       | Full V1 Definition of Done, except explicit external gates |
+| 12+   | Server-authoritative real-time PvP                                      | Blocked by V1 gate            | PvP gates without breaking V1 replay compatibility         |
 
 ## Current Phase 0 acceptance
 
