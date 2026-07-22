@@ -4,6 +4,8 @@ import {
   CURRENT_PRODUCT_VERSIONS,
   INITIAL_PRODUCT_VERSIONS,
   PHASE_1_PRODUCT_VERSIONS,
+  PHASE_2_PRODUCT_VERSIONS,
+  PHASE_3_PRODUCT_VERSIONS,
   RELEASE_CHANNELS,
   isProductVersions,
 } from "../src/index.js";
@@ -38,10 +40,20 @@ describe("product version contract", () => {
   });
 
   it("increments only rules for the Phase 2 terrain model", () => {
-    expect(CURRENT_PRODUCT_VERSIONS).toEqual({
+    expect(PHASE_2_PRODUCT_VERSIONS).toEqual({
       ...PHASE_1_PRODUCT_VERSIONS,
       rulesVersion: "0.2.0",
     });
+    expect(isProductVersions(PHASE_2_PRODUCT_VERSIONS)).toBe(true);
+  });
+
+  it("increments rules and protocol for the Phase 3 battle model", () => {
+    expect(PHASE_3_PRODUCT_VERSIONS).toEqual({
+      ...PHASE_2_PRODUCT_VERSIONS,
+      protocolVersion: "0.2.0",
+      rulesVersion: "0.3.0",
+    });
+    expect(CURRENT_PRODUCT_VERSIONS).toBe(PHASE_3_PRODUCT_VERSIONS);
     expect(isProductVersions(CURRENT_PRODUCT_VERSIONS)).toBe(true);
   });
 

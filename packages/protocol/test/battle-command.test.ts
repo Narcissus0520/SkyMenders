@@ -15,11 +15,22 @@ describe("battle command protocol", () => {
       originY: 1_000,
       angleMilliDegrees: 45_000,
       powerPermille: 750,
+      targetId: "object:1",
       targetX: 2_000,
       targetY: 3_000,
     },
     { ...base, kind: "wait" },
     { ...base, kind: "interact", targetId: "objective:1" },
+    { ...base, kind: "advance_phase", actorId: "system", expectedPhase: "player_planning" },
+    { ...base, kind: "use_basic_action", action: "repair", targetId: "robot:1" },
+    {
+      ...base,
+      kind: "use_basic_action",
+      action: "push",
+      targetId: "object:1",
+      targetX: 2,
+      targetY: 3,
+    },
   ])("parses $kind commands", (command) => {
     expect(parseBattleCommand(command)).toEqual(command);
   });
@@ -37,6 +48,24 @@ describe("battle command protocol", () => {
     },
     { ...base, kind: "wait", injected: true },
     { ...base, kind: "unknown" },
+    { ...base, kind: "advance_phase", expectedPhase: "invalid" },
+    {
+      ...base,
+      kind: "use_basic_action",
+      action: "push",
+      targetId: "object:1",
+      targetX: 2,
+    },
+    {
+      ...base,
+      kind: "use_module",
+      moduleId: "main_magnetic_anchor",
+      originX: 0,
+      originY: 0,
+      angleMilliDegrees: 0,
+      powerPermille: 500,
+      targetId: "object:1",
+    },
   ])("rejects malformed commands", (command) => {
     expect(battleCommandSchema.safeParse(command).success).toBe(false);
   });

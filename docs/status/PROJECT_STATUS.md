@@ -3,13 +3,14 @@
 ## Snapshot
 
 - Date: 2026-07-22
-- Current phase: Phase 2 — terrain core
+- Current phase: Phase 3 — battle rules and modules
 - Phase state: local full Gate passed; publication and remote CI pending
-- Branch: `codex/phase-02-terrain-core`
-- Baseline: Phase 1 squash commit `dec0fd6` on `main`
+- Branch: `codex/phase-03-battle-rules-modules`
+- Baseline: Phase 2 squash commit `ef3160a` on `main`
 - Phase 0 delivery: PR #1 merged after all required GitHub checks passed
 - Phase 1 delivery: PR #2 merged after all required GitHub checks passed
-- Next phase: Phase 3 — battle rules and modules
+- Phase 2 delivery: PR #3 merged after all required GitHub checks passed
+- Next phase: Phase 4 — AI, enemies, elites, and bosses
 
 ## Version matrix
 
@@ -17,47 +18,50 @@
 | ------------------- | ------- |
 | clientVersion       | 0.0.0   |
 | serverVersion       | 0.0.0   |
-| rulesVersion        | 0.2.0   |
+| rulesVersion        | 0.3.0   |
 | contentVersion      | 0.0.0   |
 | saveSchemaVersion   | 0.0.0   |
 | replaySchemaVersion | 0.1.0   |
-| protocolVersion     | 0.1.0   |
+| protocolVersion     | 0.2.0   |
 
-## Phase 2 implementation
+## Phase 3 implementation
 
-- Added `@skymenders/terrain-core` with a bounded flat logical grid, 32 by 32 chunks, immutable state transitions, and strict runtime invariants.
-- Added the four required material rule definitions with hardness, repair, support, projectile, collapse, magnetic, energy-release, and accessibility-pattern behavior.
-- Implemented deterministic radius damage, compatible repair and energy cost, dirty-chunk seam tracking, fixed anchors, constructed supports, material-weighted support propagation, and local unstable-component detection.
-- Implemented deterministic rigid-block collapse with stable ordering, settlement/loss outcomes, material-weighted impact energy, dirty destinations, and canonical event records.
-- Added terrain operation logs and per-operation state-hash checkpoints for replay and drift detection.
-- Added load-time map validation for spawn/objective/capability/navigation/AI/anchor/camera/first-settlement constraints.
-- Added seeded property tests and a 192 by 96 large-collapse golden/benchmark scenario.
-- Added ADR 0003 and expanded terrain architecture, test strategy, performance budget, and phase evidence.
+- Added `@skymenders/battle-core` with bounded immutable state, explicit four-phase whole-round authority, exactly three player robots, team action completion, movement, wait, critical interaction, and zero-energy push/repair.
+- Implemented configurable shared energy, carry-over, bounded wait gain, regeneration, cooldowns, main/auxiliary action rules, runtime command validation, strict events, and a canonical checkpoint after every command.
+- Implemented HP plus structural damage, source-specific minor/major faults capped at two with mechanics for all four fault kinds, bubble/stabilizer mitigation, unsupported-entity fall settlement, deterministic disable beacons and safe task-object drops, primary-target loss and full-team defeat, and configurable post-node recovery.
+- Implemented primary/secondary/hidden objective progression and outcomes. Module-required objectives bind stable entity IDs to authority coordinates; critical interactions remain free.
+- Added all eight main and ten auxiliary modules with complete base mechanics and exactly two mutually exclusive mechanical routes each.
+- Connected temporary bridge, foam, and constructed support lifecycles to terrain-core; environment settlement expires effects before support/collapse, cooldown, energy, and objective processing.
+- Added deterministic projectile-field transformations and jammer score modifiers for later AI integration.
+- Added content validation for missing fallbacks, ambiguous objectives, unequipped requirements, required-module energy deadlocks, and globally unusable loadouts.
+- Added ADR 0004, battle architecture, golden replay, 128-seed property testing, route/combination tests, and fail-closed boundary suites.
 
 ## Verification
 
 The final pre-commit repository Gate passed on Node.js 24.14.0 and pnpm 10.31.0:
 
-- Frozen install, format, ESLint, strict TypeScript, build, workspace/infrastructure policy, content validation, asset audit, and secret scan: passed.
-- Full repository tests: 104 passed; terrain unit/property/golden tests: 27 passed.
-- Terrain coverage: 98.19% statements / 94.86% branches / 100% functions / 98.90% lines.
-- Golden damage checkpoint: `3c35bec410593720`.
-- Golden final terrain state: `bb473002eac7e50e`.
-- Golden collapse events: `5ee339be9f95cdca`.
-- Large collapse: 2,200 cells; local support inspection: 2,519 cells across nine chunks.
-- Latest performance sample after three warmups and fifteen measured runs: 11.17 ms median / 15.67 ms p95 against a 100 ms budget.
+- Frozen install, format, workspace/infrastructure policy, content validation, asset audit, secret scan, ESLint, strict TypeScript, and build: passed.
+- Full repository tests: 192 passed.
+- Battle tests: 76 passed, including all module routes, authority boundaries, content validation, environment fall settlement, golden replay, and property cases.
+- Battle coverage: 96.52% statements / 90.67% branches / 98.04% functions / 98.16% lines.
+- Terrain tests: 28 passed; coverage 98.25% statements / 94.96% branches / 100% functions / 98.93% lines.
+- Deterministic runtime tests: 35 passed; coverage 99.09% statements / 95.00% branches / 100% functions / 99.06% lines.
+- Protocol tests: 27 passed.
+- Golden battle final hash: `52314be76f79b183`; all 13 command checkpoints are pinned.
+- Determinism policy and all golden/property suites: passed.
+- Terrain performance: 2,200 collapse cells, 2,519 inspected cells, 12.74 ms median / 17.33 ms p95 against the 100 ms budget.
 - Official npm high-severity audit: no known vulnerabilities.
 - CycloneDX 1.6 SBOM: generated with 225 components.
 
-Commit, GitHub CI, PR, and normal squash merge remain required before Phase 2 is complete.
+Commit, GitHub CI, PR, and normal squash merge remain required before Phase 3 is complete.
 
-Docker remains unavailable on this workstation. Phase 0 Build CI validated the Compose model and started, healthchecked, and stopped PostgreSQL, Redis, and MinIO. Phase 2 adds no container-dependent behavior.
+Docker remains unavailable on this workstation. Phase 0 Build CI validated the Compose model and started, healthchecked, and stopped PostgreSQL, Redis, and MinIO. Phase 3 adds no container-dependent behavior.
 
 ## Known limits
 
-- Collapse authority currently uses rigid vertical blocks. Visual tumbling may not alter authoritative destinations, impacts, or hashes.
-- Terrain contour generation, rendering, input feedback, accessibility textures, and device performance are Phase 5 client work.
-- The material registry defines rules and presentation keys; it does not claim release-quality artwork.
-- Map validation provides deterministic structural and navigation checks, not the later template generator, content batch simulator, or complete objective/module solvability proof.
+- AI planning, eight enemy behavior profiles, elite combinations, and four multi-stage bosses are Phase 4 work; current enemy fixtures only exercise the shared command authority.
+- Full projectile stepping, aiming preview, rendering, input feedback, accessibility presentation, and device performance are Phase 5 client work.
+- Route generation, content batch simulation, expedition rewards, authored mission content, and tutorial content are Phase 6 work.
+- Module names and route keys are internal/i18n contracts; they do not claim release-quality art, audio, or final public naming.
 - No Cocos, server, worker, React application, or release-quality artwork/audio is claimed complete.
 - External platform, legal, publishing, and production infrastructure inputs remain blocked as listed in `EXTERNAL_BLOCKERS.md`.

@@ -303,6 +303,40 @@ export function clearTerrainDirtyChunks(state: TerrainState): TerrainState {
   return state.dirtyChunks.length === 0 ? state : { ...state, dirtyChunks: [] };
 }
 
+export function addTerrainSupportRoot(state: TerrainState, root: TerrainSupportRoot): TerrainState {
+  assertTerrainState(state);
+  assertPointInBounds(state, root.x, root.y, "support root");
+  if (state.supportRoots.some((candidate) => candidate.id === root.id)) {
+    throw new Error(`support root id already exists: ${root.id}`);
+  }
+  if (state.materials[terrainIndex(state.width, root.x, root.y)] === 0) {
+    throw new Error("support root must attach to occupied terrain");
+  }
+  const next: TerrainState = {
+    ...state,
+    supportRoots: [...state.supportRoots, root].sort(compareSupportRoots),
+    dirtyChunks: terrainDirtyChunksForCells(state, [root]),
+    revision: state.revision + 1,
+  };
+  assertTerrainState(next);
+  return next;
+}
+
+export function removeTerrainSupportRoot(state: TerrainState, rootId: string): TerrainState {
+  assertTerrainState(state);
+  const root = state.supportRoots.find((candidate) => candidate.id === rootId);
+  if (root === undefined) return state;
+  if (root.kind !== "support_structure") {
+    throw new Error(`fixed support root cannot be removed: ${rootId}`);
+  }
+  return {
+    ...state,
+    supportRoots: state.supportRoots.filter((candidate) => candidate.id !== rootId),
+    dirtyChunks: terrainDirtyChunksForCells(state, [root]),
+    revision: state.revision + 1,
+  };
+}
+
 export function terrainDirtyChunksForCells(
   state: TerrainState,
   points: readonly GridPoint[],

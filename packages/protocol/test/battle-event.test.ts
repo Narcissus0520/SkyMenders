@@ -34,6 +34,41 @@ describe("battle event protocol", () => {
       targetId: "objective:1",
     },
     { ...base, kind: "state_checkpoint", commandIndex: 0, stateHash: "0123456789abcdef" },
+    {
+      ...base,
+      kind: "battle_phase_changed",
+      commandId: "cmd:1",
+      fromPhase: "player_planning",
+      toPhase: "player_action",
+    },
+    {
+      ...base,
+      kind: "battle_effect_applied",
+      commandId: "cmd:1",
+      effectId: "effect:1",
+      effectKind: "energy_changed",
+      sourceId: "robot:1",
+      targetId: "robot:2",
+      targetX: 1,
+      targetY: 2,
+      magnitude: -2,
+      duration: 0,
+      detailHash: "0123456789abcdef",
+    },
+    {
+      ...base,
+      kind: "battle_effect_applied",
+      commandId: "cmd:fall",
+      effectId: "effect:fall",
+      effectKind: "actor_moved",
+      sourceId: "environment",
+      targetId: "robot:1",
+      targetX: 1,
+      targetY: 2,
+      magnitude: 3,
+      duration: 0,
+      detailHash: "0123456789abcdef",
+    },
   ])("parses $kind events", (event) => {
     expect(parseBattleEvent(event)).toEqual(event);
   });
@@ -46,6 +81,23 @@ describe("battle event protocol", () => {
         commandIndex: 0,
         stateHash: "bad",
         internalState: {},
+      }).success,
+    ).toBe(false);
+  });
+
+  it("rejects incomplete effect coordinates", () => {
+    expect(
+      battleEventSchema.safeParse({
+        ...base,
+        kind: "battle_effect_applied",
+        commandId: "cmd:1",
+        effectId: "effect:1",
+        effectKind: "energy_changed",
+        sourceId: "robot:1",
+        targetX: 1,
+        magnitude: 1,
+        duration: 0,
+        detailHash: "0123456789abcdef",
       }).success,
     ).toBe(false);
   });

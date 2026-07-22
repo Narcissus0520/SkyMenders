@@ -2,6 +2,7 @@ export { resolveTerrainCollapse } from "./collapse.js";
 export {
   applyTerrainDamage,
   applyTerrainRepair,
+  addTerrainSupportRoot,
   assertTerrainState,
   chunkKey,
   clearTerrainDirtyChunks,
@@ -9,6 +10,7 @@ export {
   createTerrainState,
   getTerrainCell,
   isTerrainPointInBounds,
+  removeTerrainSupportRoot,
   terrainDirtyChunksForCells,
   terrainIndex,
   terrainPoint,

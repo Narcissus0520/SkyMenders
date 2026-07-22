@@ -16,6 +16,14 @@ const eventBase = {
   turnIndex: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),
 } as const;
 
+const battlePhaseSchema = z.enum([
+  "player_planning",
+  "player_action",
+  "enemy_action",
+  "environment_settlement",
+  "battle_complete",
+]);
+
 export const commandAcceptedEventSchema = z
   .object({
     ...eventBase,
@@ -77,6 +85,60 @@ export const stateCheckpointEventSchema = z
   })
   .strict();
 
+export const battlePhaseChangedEventSchema = z
+  .object({
+    ...eventBase,
+    kind: z.literal("battle_phase_changed"),
+    commandId: identifierSchema,
+    fromPhase: battlePhaseSchema,
+    toPhase: battlePhaseSchema,
+  })
+  .strict();
+
+export const battleEffectAppliedEventSchema = z
+  .object({
+    ...eventBase,
+    kind: z.literal("battle_effect_applied"),
+    commandId: identifierSchema,
+    effectId: identifierSchema,
+    effectKind: z.enum([
+      "energy_changed",
+      "actor_moved",
+      "actor_repaired",
+      "actor_damaged",
+      "structural_damage_changed",
+      "fault_changed",
+      "actor_disabled",
+      "objective_progressed",
+      "objective_completed",
+      "terrain_damaged",
+      "terrain_repaired",
+      "terrain_collapsed",
+      "field_created",
+      "field_expired",
+      "support_created",
+      "support_expired",
+      "world_object_moved",
+      "intel_revealed",
+    ]),
+    sourceId: identifierSchema,
+    targetId: identifierSchema.optional(),
+    targetX: safeIntegerSchema.optional(),
+    targetY: safeIntegerSchema.optional(),
+    magnitude: safeIntegerSchema,
+    duration: z.number().int().min(0).max(10_000),
+    detailHash: z.string().regex(/^[0-9a-f]{16}$/),
+  })
+  .strict()
+  .superRefine((event, context) => {
+    if ((event.targetX === undefined) !== (event.targetY === undefined)) {
+      context.addIssue({
+        code: "custom",
+        message: "targetX and targetY must be provided together",
+      });
+    }
+  });
+
 export const battleEventSchema = z.discriminatedUnion("kind", [
   commandAcceptedEventSchema,
   actorMovedEventSchema,
@@ -84,6 +146,8 @@ export const battleEventSchema = z.discriminatedUnion("kind", [
   turnWaitedEventSchema,
   interactionCompletedEventSchema,
   stateCheckpointEventSchema,
+  battlePhaseChangedEventSchema,
+  battleEffectAppliedEventSchema,
 ]);
 
 export type BattleEvent = z.infer<typeof battleEventSchema>;

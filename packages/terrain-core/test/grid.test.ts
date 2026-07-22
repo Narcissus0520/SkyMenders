@@ -2,12 +2,14 @@ import { describe, expect, it } from "vitest";
 
 import {
   TERRAIN_MAX_CELLS,
+  addTerrainSupportRoot,
   applyTerrainDamage,
   applyTerrainRepair,
   assertTerrainState,
   clearTerrainDirtyChunks,
   createTerrainState,
   getTerrainCell,
+  removeTerrainSupportRoot,
 } from "../src/index.js";
 
 describe("chunked terrain grid", () => {
@@ -155,6 +157,55 @@ describe("chunked terrain grid", () => {
       ],
     });
     expect(sorted.supportRoots.map((root) => root.id)).toEqual(["a", "z"]);
+  });
+
+  it("adds and removes temporary support structures without mutating fixed anchors", () => {
+    const state = clearTerrainDirtyChunks(
+      createTerrainState({
+        width: 4,
+        height: 2,
+        fills: [{ x: 0, y: 0, width: 4, height: 1, materialId: "terrain_alloy_frame" }],
+        supportRoots: [{ id: "anchor:fixed", kind: "fixed_anchor", x: 0, y: 0, capacity: 100 }],
+      }),
+    );
+    const added = addTerrainSupportRoot(state, {
+      id: "support:temporary",
+      kind: "support_structure",
+      x: 3,
+      y: 0,
+      capacity: 50,
+    });
+    expect(added.supportRoots.map((root) => root.id)).toEqual([
+      "anchor:fixed",
+      "support:temporary",
+    ]);
+    expect(added.revision).toBe(state.revision + 1);
+    expect(added.dirtyChunks).toEqual([{ x: 0, y: 0 }]);
+    expect(removeTerrainSupportRoot(added, "support:missing")).toBe(added);
+    const removed = removeTerrainSupportRoot(added, "support:temporary");
+    expect(removed.supportRoots).toEqual(state.supportRoots);
+    expect(removed.revision).toBe(added.revision + 1);
+    expect(() => {
+      addTerrainSupportRoot(added, {
+        id: "support:temporary",
+        kind: "support_structure",
+        x: 2,
+        y: 0,
+        capacity: 50,
+      });
+    }).toThrow("already exists");
+    expect(() => {
+      addTerrainSupportRoot(state, {
+        id: "support:empty",
+        kind: "support_structure",
+        x: 1,
+        y: 1,
+        capacity: 50,
+      });
+    }).toThrow("occupied terrain");
+    expect(() => {
+      removeTerrainSupportRoot(state, "anchor:fixed");
+    }).toThrow("fixed support root");
   });
 
   it("applies hardness, destruction effects, and seam-local dirty chunks", () => {
