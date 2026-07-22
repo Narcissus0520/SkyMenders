@@ -10,7 +10,7 @@ The public product name is not final. “SkyMenders”, “Project Skyforge”, 
 - pnpm 10
 - Git and GitHub CLI
 - Docker Desktop or a compatible Docker Engine with Compose v2
-- Cocos Creator 3.8 LTS when Phase 5 client work begins
+- Cocos Creator 3.8.8 for the client build
 
 ## First setup
 
@@ -40,9 +40,10 @@ pnpm security:secrets
 pnpm security:audit
 pnpm security:sbom
 pnpm build
+pnpm cocos:check
 ```
 
-Service integration, Web E2E, and Cocos gates are added with the phases that introduce those applications. Docker services bind to loopback by default. The optional observability profile starts with `docker compose --profile observability up -d`.
+For an authorized local WeChat build, set untracked `COCOS_CREATOR_PATH` and `WECHAT_MINIGAME_APP_ID`, then run `pnpm cocos:build:wechat`. Service integration and Web E2E gates are added with their applications. Docker services bind to loopback by default. The optional observability profile starts with `docker compose --profile observability up -d`.
 
 ## Repository boundaries
 
@@ -55,4 +56,4 @@ Service integration, Web E2E, and Cocos gates are added with the phases that int
 
 ## Current status
 
-Phases 0-3 are merged. Phase 4 adds deterministic behavior-tree and utility AI, eight enemy prototypes, whitelisted elite variants, three non-scalar difficulty profiles, and four multi-stage bosses. AI and bosses can change authority only by issuing commands accepted by the shared battle reducer. Run `pnpm test:determinism` and `pnpm test:performance` for authority evidence. See `docs/status/PROJECT_STATUS.md` for the exact phase and publication state.
+Phases 0-4 are merged. Phase 5 adds the Cocos/WeChat presentation shell, platform adapters, command-only battle session, explicit-confirm aiming, camera arbitration, accessibility/settings/audio systems, static project validation, and a real editor CLI wrapper. Real WeChat/device evidence remains explicitly external. Run `pnpm cocos:check`, `pnpm test:determinism`, and `pnpm test:performance` for current automated evidence. See `docs/status/PROJECT_STATUS.md` for exact status.

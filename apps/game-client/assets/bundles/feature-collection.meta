@@ -1,0 +1,13 @@
+{
+  "ver": "1.2.0",
+  "importer": "directory",
+  "imported": true,
+  "uuid": "e6c93a77-459f-4bbb-bb96-5d6ed87070e5",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "isBundle": true,
+    "bundleName": "feature-collection",
+    "bundleConfigID": "auto_featureCollection"
+  }
+}

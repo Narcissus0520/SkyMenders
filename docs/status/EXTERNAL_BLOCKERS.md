@@ -1,6 +1,6 @@
 # External Blockers
 
-Last reviewed for Phase 4 on 2026-07-22. Phase 4 introduced no new external dependency.
+Last reviewed for Phase 5 on 2026-07-22. The WeChat credential and real-device requirements are now active and remain unsatisfied.
 
 These inputs cannot be fabricated or bypassed. Interfaces, local substitutes, validation, and integration documentation will be implemented in the relevant phase, but the external capability will not be reported as complete until verified.
 

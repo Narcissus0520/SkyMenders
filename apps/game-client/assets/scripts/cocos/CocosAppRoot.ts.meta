@@ -1,0 +1,12 @@
+{
+  "ver": "4.0.23",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "60b8baf1-7a2c-4b11-8f03-9c82e8b1d405",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "moduleId": "project:///assets/scripts/cocos/CocosAppRoot.ts",
+    "simulateGlobals": []
+  }
+}

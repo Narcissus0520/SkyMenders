@@ -1,0 +1,35 @@
+{
+  "name": "@skymenders/game-client",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Cocos Creator 3.8.8 WeChat Mini Game client for SkyMenders",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint assets/scripts test benchmark",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:performance": "tsx benchmark/client-benchmark.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@skymenders/ai-core": "workspace:*",
+    "@skymenders/battle-core": "workspace:*",
+    "@skymenders/protocol": "workspace:*",
+    "@skymenders/terrain-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "eslint": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

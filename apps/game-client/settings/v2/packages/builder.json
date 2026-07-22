@@ -1,0 +1,39 @@
+{
+  "projectSetting": {},
+  "textureCompressConfig": {
+    "userPreset": {},
+    "genMipmaps": false
+  },
+  "hasSetSplash": true,
+  "__version__": "1.3.9",
+  "bundleConfig": {
+    "custom": {
+      "auto_featureCollection": {
+        "displayName": "feature-collection",
+        "configs": {
+          "native": {
+            "preferredOptions": {
+              "compressionType": "merge_dep",
+              "isRemote": false
+            }
+          },
+          "miniGame": {
+            "configMode": "overwrite",
+            "overwriteSettings": {
+              "wechatgame": {
+                "compressionType": "subpackage",
+                "isRemote": false
+              }
+            }
+          },
+          "web": {
+            "preferredOptions": {
+              "compressionType": "merge_dep",
+              "isRemote": false
+            }
+          }
+        }
+      }
+    }
+  }
+}

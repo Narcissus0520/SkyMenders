@@ -1,0 +1,31 @@
+name: Cocos WeChat Device Build
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-wechat:
+    runs-on: [self-hosted, Windows, cocos-3.8.8]
+    env:
+      COCOS_CREATOR_PATH: ${{ vars.COCOS_CREATOR_PATH }}
+      WECHAT_MINIGAME_APP_ID: ${{ secrets.WECHAT_MINIGAME_APP_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.31.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm cocos:check
+      - run: pnpm cocos:build:wechat
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wechatgame
+          path: apps/game-client/build/wechatgame
+          if-no-files-found: error

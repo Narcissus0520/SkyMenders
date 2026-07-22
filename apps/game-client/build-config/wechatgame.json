@@ -1,0 +1,26 @@
+{
+  "buildPath": "project://build",
+  "debug": false,
+  "mainBundleCompressionType": "merge_all_json",
+  "mainBundleIsRemote": false,
+  "md5Cache": true,
+  "name": "SkyMenders",
+  "outputName": "wechatgame",
+  "packages": {
+    "wechatgame": {
+      "appid": "",
+      "orientation": "landscape",
+      "separateEngine": false
+    }
+  },
+  "platform": "wechatgame",
+  "replaceSplashScreen": false,
+  "scenes": [
+    {
+      "url": "db://assets/scenes/Bootstrap.scene",
+      "uuid": "2460c535-0ecb-4ff5-987d-3586f6c03d12"
+    }
+  ],
+  "startScene": "2460c535-0ecb-4ff5-987d-3586f6c03d12",
+  "taskName": "wechatgame"
+}

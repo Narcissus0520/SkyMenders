@@ -12,6 +12,8 @@
   "scripts": {
     "assets:audit": "pnpm --filter @skymenders/asset-auditor run audit",
     "build": "turbo run build",
+    "cocos:build:wechat": "pnpm --filter @skymenders/cocos-build run build:wechat",
+    "cocos:check": "pnpm --filter @skymenders/cocos-build run check",
     "content:validate": "pnpm --filter @skymenders/content-validator run validate && pnpm --filter @skymenders/ai-core run validate:catalog",
     "dev": "turbo run dev --parallel",
     "format": "prettier --write .",
