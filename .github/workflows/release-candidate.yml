@@ -1,0 +1,35 @@
+name: Release Candidate
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*-rc.*"]
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.31.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Require explicit release-candidate readiness
+        run: "grep -Fq 'Current conclusion: **ready for release candidate**' docs/status/RELEASE_READINESS.md"
+      - run: pnpm workspace:check
+      - run: pnpm format:check
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test:coverage
+      - run: pnpm test:determinism
+      - run: pnpm content:validate
+      - run: pnpm assets:audit
+      - run: pnpm security:secrets
+      - run: pnpm build

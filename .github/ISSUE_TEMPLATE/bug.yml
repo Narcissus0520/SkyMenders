@@ -1,0 +1,33 @@
+name: Bug report
+description: Report a reproducible product or engineering defect without personal data or secrets.
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: Do not include platform identifiers, credentials, tokens, private infrastructure, or user personal information.
+  - type: input
+    id: version
+    attributes:
+      label: Version and commit
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Deterministic reproduction
+      description: Include rule/content versions, seed, and sanitized command or replay identifiers when relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true

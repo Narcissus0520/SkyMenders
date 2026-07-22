@@ -1,0 +1,43 @@
+{
+  "name": "skymenders",
+  "version": "0.0.0",
+  "private": true,
+  "description": "SkyMenders deterministic engineering tactics game monorepo",
+  "license": "UNLICENSED",
+  "packageManager": "pnpm@10.31.0",
+  "engines": {
+    "node": ">=24.0.0 <25",
+    "pnpm": ">=10.0.0 <11"
+  },
+  "scripts": {
+    "assets:audit": "pnpm --filter @skymenders/asset-auditor run audit",
+    "build": "turbo run build",
+    "content:validate": "pnpm --filter @skymenders/content-validator run validate",
+    "dev": "turbo run dev --parallel",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "infra:down": "docker compose down",
+    "infra:up": "docker compose up -d --wait",
+    "infra:validate": "pnpm --filter @skymenders/project-guard run infra:validate",
+    "lint": "turbo run lint",
+    "security:audit": "pnpm --config.registry=https://registry.npmjs.org/ audit --audit-level high",
+    "security:sbom": "pnpm --filter @skymenders/project-guard run sbom:generate",
+    "security:secrets": "pnpm --filter @skymenders/project-guard run secrets:scan",
+    "test": "turbo run test",
+    "test:coverage": "turbo run test:coverage",
+    "test:determinism": "pnpm --filter @skymenders/project-guard run test:determinism",
+    "typecheck": "turbo run typecheck",
+    "workspace:check": "pnpm --filter @skymenders/project-guard run workspace:check"
+  },
+  "devDependencies": {
+    "@eslint/js": "catalog:",
+    "@types/node": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "eslint": "catalog:",
+    "globals": "catalog:",
+    "prettier": "catalog:",
+    "turbo": "^2.5.0",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:"
+  }
+}

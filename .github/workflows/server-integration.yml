@@ -1,0 +1,34 @@
+name: Server Integration
+
+on:
+  pull_request:
+    paths:
+      - "apps/game-server/**"
+      - "apps/game-worker/**"
+      - "packages/protocol/**"
+  push:
+    branches: [main]
+    paths:
+      - "apps/game-server/**"
+      - "apps/game-worker/**"
+      - "packages/protocol/**"
+
+permissions:
+  contents: read
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.31.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm infra:up
+      - run: pnpm db:migrate
+      - run: pnpm test:integration

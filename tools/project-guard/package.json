@@ -1,0 +1,29 @@
+{
+  "name": "@skymenders/project-guard",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "infra:validate": "tsx src/infra-cli.ts",
+    "lint": "eslint src test",
+    "sbom:generate": "tsx src/sbom-cli.ts",
+    "secrets:scan": "tsx src/secrets-cli.ts",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:determinism": "vitest run test/determinism-policy.test.ts && tsx src/determinism-cli.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "workspace:check": "tsx src/workspace-cli.ts"
+  },
+  "dependencies": {
+    "yaml": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "eslint": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}
