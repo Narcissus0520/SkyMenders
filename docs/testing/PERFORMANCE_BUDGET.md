@@ -8,4 +8,15 @@
 - Server normal API: target p95 below 300 ms under defined test conditions.
 - Replay verification: asynchronous worker path with queue and duration metrics.
 
-Concrete scene, map, memory, package, and load budgets are measured and frozen in Phase 10; platform package limits are read from current configuration rather than hard-coded in this document.
+## Phase 2 terrain benchmark
+
+The checked-in benchmark builds a 192 by 96 logical grid, destroys a bridge connection, inspects 2,519 locally connected occupied cells across nine chunks, and collapses a 2,200-cell island. It runs three warmups and fifteen measured samples. CI fails when p95 exceeds 100 ms.
+
+Development baseline on 2026-07-22:
+
+- median: 11.17 ms
+- p95: 15.67 ms
+- collapsed cells: 2,200
+- inspected cells: 2,519 of 18,432 possible grid cells
+
+The measurement is a deterministic authority microbenchmark, not a client frame-rate claim. Cocos rendering, contour generation, memory, package, scene, device, and load budgets are measured and frozen in Phase 10; platform package limits are read from current configuration rather than hard-coded here.

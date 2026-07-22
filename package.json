@@ -26,6 +26,7 @@
     "test": "turbo run test",
     "test:coverage": "turbo run test:coverage",
     "test:determinism": "turbo run test:determinism",
+    "test:performance": "turbo run test:performance",
     "typecheck": "turbo run typecheck",
     "workspace:check": "pnpm --filter @skymenders/project-guard run workspace:check"
   },

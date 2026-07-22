@@ -26,6 +26,11 @@
       "cache": false,
       "outputs": []
     },
+    "test:performance": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "outputs": []
+    },
     "typecheck": {
       "dependsOn": ["^build"]
     }
