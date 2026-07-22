@@ -1,6 +1,6 @@
 {
   "name": "@skymenders/game-server",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "exports": {
@@ -33,9 +33,14 @@
     "@prisma/adapter-pg": "7.9.0",
     "@prisma/client": "7.9.0",
     "@skymenders/protocol": "workspace:*",
+    "@skymenders/challenge-core": "workspace:*",
+    "@skymenders/content-schema": "workspace:*",
     "@skymenders/save-migration": "workspace:*",
     "@skymenders/security": "workspace:*",
+    "@skymenders/shared-types": "workspace:*",
     "fastify": "5.10.0",
+    "bullmq": "5.80.10",
+    "ioredis": "5.11.1",
     "pg": "8.16.3",
     "reflect-metadata": "0.2.2",
     "rxjs": "7.8.2",

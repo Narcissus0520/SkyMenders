@@ -45,3 +45,15 @@ Development baseline on 2026-07-22:
 - synthetic target: 30 FPS in budget
 
 This isolates event and telemetry overhead. It is not a render, GPU, thermal, memory, WeChat runtime, or real-device FPS claim. The latter remains blocked by `EXT-006` and must be recorded in `DEVICE_MATRIX.md`.
+
+## Phase 8 daily and replay benchmarks
+
+The checked-in daily-definition benchmark creates 500 complete fixed challenges, including route and battle assignments, with a five-second CI ceiling. The replay benchmark performs 100 trusted verifications that reconstruct server-owned initial states, execute the submitted player commands and server AI path, compare hashes, and recompute scores. Replay verification fails CI when p95 exceeds 100 ms.
+
+Development baseline on 2026-07-22:
+
+- 500 daily definitions: 2,415.59 ms
+- trusted replay verification p95: 10.62 ms
+- replay samples: 100
+
+These are isolated deterministic authority measurements on the development/CI class of CPU. They are not production throughput, queue-latency, Redis, PostgreSQL, autoscaling, or capacity claims; those require Phase 10 deployment load evidence.

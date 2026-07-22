@@ -1,6 +1,6 @@
 # Save and Replay Architecture
 
-Status: replay/runtime snapshots implemented in Phase 1; durable account and expedition persistence implemented in Phase 7; trusted replay submission remains Phase 8.
+Status: replay/runtime snapshots implemented in Phase 1; durable account and expedition persistence implemented in Phase 7; trusted daily replay submission and verification implemented in Phase 8.
 
 ## Replay contract
 
@@ -14,6 +14,10 @@ Replay schema `0.1.0` stores:
 - the expected final logical state hash.
 
 Replay parsing is strict and bounded to 100,000 commands and checkpoints. Verification recomputes all events and state; stored hashes are evidence to compare, never a source of authoritative state. Golden fixtures live under `packages/test-fixtures/replays/` and are executed by `tools/replay-runner`.
+
+Daily replay schema `0.2.0` wraps node replays in a server-owned challenge identity. It carries seed, rules/content/replay/client versions, completion status, completed route prefix, recovery count, node commands and hashes, and a claimed score that is compared but never trusted. The API persists and queues this envelope; it does not execute the battle inline.
+
+The Worker reloads the persisted definition and authored content, reconstructs every initial battle state, regenerates enemy commands from the deterministic server AI, executes the shared reducer, compares checkpoints and final hashes, validates route/outcome, and recomputes score. Only the atomic verified formal-attempt completion path can write a leaderboard entry. Rejected submissions remain isolated with a pseudonymous risk event.
 
 ## Runtime snapshot contract
 
@@ -43,4 +47,4 @@ Save schema `0.1.0` supports a tested migration from the internal `0.0.1` shape.
 
 ## Security properties
 
-The deterministic logical hash detects accidental drift and corruption; it is not a message-authentication code against a hostile client. Daily challenge and PvP submissions must be recomputed by a trusted worker/server and protected with cryptographic integrity controls. No client-provided final state or logical hash is accepted as a result by itself.
+The deterministic logical hash detects accidental drift and corruption; it is not a message-authentication code against a hostile client. Daily challenge submissions are recomputed by the trusted Worker, and the same rule remains mandatory for PvP. No client-provided final state, logical hash, enemy action, outcome, or score is accepted as a result by itself.

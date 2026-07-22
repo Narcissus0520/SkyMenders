@@ -22,6 +22,9 @@ model Account {
   recoveryRecords SaveRecovery[]
   privacyRequests PrivacyRequest[]
   idempotency     IdempotencyRecord[]
+  dailyAttempts   DailyAttempt[]
+  leaderboard     LeaderboardEntry[]
+  riskEvents      ReplayRiskEvent[]
 
   @@map("accounts")
 }
@@ -144,4 +147,96 @@ model IdempotencyRecord {
   @@unique([accountId, route, key])
   @@index([expiresAt])
   @@map("idempotency_records")
+}
+
+model DailyChallenge {
+  id             String             @id @db.VarChar(240)
+  businessDate   DateTime           @db.Date
+  rulesVersion   String             @db.VarChar(32)
+  contentVersion String             @db.VarChar(32)
+  seed           BigInt
+  definition     Json
+  createdAt      DateTime           @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime           @updatedAt @db.Timestamptz(3)
+  attempts       DailyAttempt[]
+  leaderboard    LeaderboardEntry[]
+
+  @@unique([businessDate, rulesVersion, contentVersion])
+  @@map("daily_challenges")
+}
+
+model DailyAttempt {
+  id              String            @id @db.Uuid
+  accountId       String            @db.Uuid
+  challengeId     String            @db.VarChar(240)
+  mode            String            @db.VarChar(16)
+  formalSlot      Int?
+  status          String            @db.VarChar(16)
+  checkpointIndex Int?
+  checkpoint      Json?
+  startedAt       DateTime          @db.Timestamptz(3)
+  updatedAt       DateTime          @db.Timestamptz(3)
+  completedAt     DateTime?         @db.Timestamptz(3)
+  account         Account           @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  challenge       DailyChallenge    @relation(fields: [challengeId], references: [id], onDelete: Restrict)
+  submission      ReplaySubmission?
+
+  @@unique([accountId, challengeId, formalSlot])
+  @@index([accountId, challengeId, status])
+  @@map("daily_attempts")
+}
+
+model ReplaySubmission {
+  id            String            @id @db.Uuid
+  attemptId     String            @unique @db.Uuid
+  request       Json
+  status        String            @db.VarChar(16)
+  score         Int?
+  totalTurns    Int?
+  rejectionCode String?           @db.VarChar(48)
+  createdAt     DateTime          @db.Timestamptz(3)
+  updatedAt     DateTime          @db.Timestamptz(3)
+  verifiedAt    DateTime?         @db.Timestamptz(3)
+  attempt       DailyAttempt      @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  leaderboard   LeaderboardEntry?
+  riskEvent     ReplayRiskEvent?
+
+  @@index([status, createdAt])
+  @@map("replay_submissions")
+}
+
+model LeaderboardEntry {
+  id                 String           @id @db.Uuid
+  challengeId        String           @db.VarChar(240)
+  accountId          String           @db.Uuid
+  submissionId       String           @unique @db.Uuid
+  systemCode         String           @db.VarChar(64)
+  avatarId           String           @db.VarChar(96)
+  score              Int
+  completionMs       Int
+  turns              Int
+  completionStatus   String           @db.VarChar(16)
+  verificationStatus String           @db.VarChar(16)
+  createdAt          DateTime         @db.Timestamptz(3)
+  updatedAt          DateTime         @db.Timestamptz(3)
+  challenge          DailyChallenge   @relation(fields: [challengeId], references: [id], onDelete: Restrict)
+  account            Account          @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  submission         ReplaySubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+
+  @@unique([challengeId, accountId])
+  @@index([challengeId, score(sort: Desc), completionMs, turns, createdAt])
+  @@map("leaderboard_entries")
+}
+
+model ReplayRiskEvent {
+  id           String           @id @db.Uuid
+  accountId    String           @db.Uuid
+  submissionId String           @unique @db.Uuid
+  code         String           @db.VarChar(48)
+  createdAt    DateTime         @db.Timestamptz(3)
+  account      Account          @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  submission   ReplaySubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+
+  @@index([code, createdAt])
+  @@map("replay_risk_events")
 }

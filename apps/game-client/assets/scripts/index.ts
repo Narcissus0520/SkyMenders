@@ -11,6 +11,7 @@ export * from "./battle/presentation/BattlePresentationStore.js";
 export * from "./battle/ui/BattleHudModel.js";
 export * from "./bootstrap/ApplicationController.js";
 export * from "./diagnostics/PerformanceMonitor.js";
+export * from "./daily/DailyChallengeClient.js";
 export * from "./localization/Localizer.js";
 export * from "./platform/mock/MockPlatformAdapter.js";
 export type * from "./platform/platform-adapter.js";

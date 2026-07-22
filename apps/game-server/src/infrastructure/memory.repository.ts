@@ -3,8 +3,11 @@ import { v7 as uuidv7 } from "uuid";
 
 import type {
   AccountProgressSave,
+  DailyAttemptCheckpointRequest,
   ExpeditionSaveDocument,
+  FinishDailyAttemptRequest,
   ProfileSettings,
+  ReplayVerificationResult,
 } from "@skymenders/protocol";
 
 import {
@@ -15,12 +18,17 @@ import {
 import type {
   AccountExport,
   AccountRecord,
+  DailyAttemptRecord,
+  DailyChallengeRecord,
   GameRepository,
   PrivacyRecord,
   ProfileRecord,
   SaveArchiveInput,
   SessionRecord,
+  StoredLeaderboardEntry,
   StoredHttpResult,
+  ReplaySubmissionRecord,
+  ReplayVerificationContext,
 } from "../core/contracts.js";
 
 interface RecoveryRecord {
@@ -40,6 +48,11 @@ export class MemoryGameRepository implements GameRepository {
   readonly #recovery: RecoveryRecord[] = [];
   readonly #privacy = new Map<string, PrivacyRecord>();
   readonly #idempotency = new Map<string, { result: StoredHttpResult; expiresAt: Date }>();
+  readonly #challenges = new Map<string, DailyChallengeRecord>();
+  readonly #attempts = new Map<string, DailyAttemptRecord>();
+  readonly #submissions = new Map<string, ReplaySubmissionRecord>();
+  readonly #leaderboard = new Map<string, StoredLeaderboardEntry>();
+  readonly #riskEvents: { readonly accountId: string; readonly code: string }[] = [];
 
   public async findOrCreateAccount(
     platform: "wechat",
@@ -222,6 +235,16 @@ export class MemoryGameRepository implements GameRepository {
       if (key.startsWith(`${accountId}:`)) this.#idempotency.delete(key);
     for (let index = this.#recovery.length - 1; index >= 0; index -= 1)
       if (this.#recovery[index]?.accountId === accountId) this.#recovery.splice(index, 1);
+    const attemptIds = [...this.#attempts.values()]
+      .filter((attempt) => attempt.accountId === accountId)
+      .map((attempt) => attempt.id);
+    for (const attemptId of attemptIds) this.#attempts.delete(attemptId);
+    for (const [id, submission] of this.#submissions)
+      if (attemptIds.includes(submission.attemptId)) this.#submissions.delete(id);
+    for (const [key, entry] of this.#leaderboard)
+      if (entry.accountId === accountId) this.#leaderboard.delete(key);
+    for (let index = this.#riskEvents.length - 1; index >= 0; index -= 1)
+      if (this.#riskEvents[index]?.accountId === accountId) this.#riskEvents.splice(index, 1);
   }
 
   public async getIdempotency(
@@ -245,8 +268,247 @@ export class MemoryGameRepository implements GameRepository {
     this.#idempotency.set(`${accountId}:${route}:${key}`, { result: clone(result), expiresAt });
   }
 
+  public async ensureDailyChallenge(record: DailyChallengeRecord): Promise<DailyChallengeRecord> {
+    const existing = [...this.#challenges.values()].find(
+      (challenge) =>
+        challenge.definition.businessDate === record.definition.businessDate &&
+        challenge.definition.rulesVersion === record.definition.rulesVersion &&
+        challenge.definition.contentVersion === record.definition.contentVersion,
+    );
+    if (existing !== undefined) return clone(existing);
+    this.#challenges.set(record.id, clone(record));
+    return clone(record);
+  }
+
+  public async getDailyChallenge(challengeId: string): Promise<DailyChallengeRecord | null> {
+    return cloneNullable(this.#challenges.get(challengeId));
+  }
+
+  public async countFormalAttempts(accountId: string, challengeId: string): Promise<number> {
+    return [...this.#attempts.values()].filter(
+      (attempt) =>
+        attempt.accountId === accountId &&
+        attempt.challengeId === challengeId &&
+        attempt.mode === "formal",
+    ).length;
+  }
+
+  public async findActiveDailyAttempt(
+    accountId: string,
+    challengeId: string,
+  ): Promise<DailyAttemptRecord | null> {
+    const active = [...this.#attempts.values()]
+      .filter(
+        (attempt) =>
+          attempt.accountId === accountId &&
+          attempt.challengeId === challengeId &&
+          attempt.status === "active",
+      )
+      .sort((left, right) => right.startedAt.getTime() - left.startedAt.getTime())[0];
+    return cloneNullable(active);
+  }
+
+  public async createPracticeAttempt(record: DailyAttemptRecord): Promise<DailyAttemptRecord> {
+    this.assertAccount(record.accountId);
+    if (!this.#challenges.has(record.challengeId)) throw new Error("daily challenge not found");
+    this.#attempts.set(record.id, clone(record));
+    return clone(record);
+  }
+
+  public async createFormalAttempt(record: DailyAttemptRecord): Promise<DailyAttemptRecord | null> {
+    this.assertAccount(record.accountId);
+    if (record.formalSlot === null) throw new Error("formal attempt requires a slot");
+    if (
+      [...this.#attempts.values()].some(
+        (attempt) =>
+          attempt.accountId === record.accountId &&
+          attempt.challengeId === record.challengeId &&
+          attempt.formalSlot === record.formalSlot,
+      )
+    )
+      return null;
+    this.#attempts.set(record.id, clone(record));
+    return clone(record);
+  }
+
+  public async getDailyAttempt(
+    accountId: string,
+    attemptId: string,
+  ): Promise<DailyAttemptRecord | null> {
+    const attempt = this.#attempts.get(attemptId);
+    return attempt?.accountId === accountId ? clone(attempt) : null;
+  }
+
+  public async saveDailyCheckpoint(
+    accountId: string,
+    attemptId: string,
+    checkpoint: DailyAttemptCheckpointRequest,
+    now: Date,
+  ): Promise<boolean> {
+    const attempt = this.#attempts.get(attemptId);
+    if (
+      attempt?.accountId !== accountId ||
+      attempt.status !== "active" ||
+      (attempt.checkpointIndex !== null && checkpoint.checkpointIndex <= attempt.checkpointIndex)
+    )
+      return false;
+    this.#attempts.set(attemptId, {
+      ...attempt,
+      checkpointIndex: checkpoint.checkpointIndex,
+      checkpoint: clone(checkpoint),
+      updatedAt: now,
+    });
+    return true;
+  }
+
+  public async abandonDailyAttempt(
+    accountId: string,
+    attemptId: string,
+    now: Date,
+  ): Promise<boolean> {
+    const attempt = this.#attempts.get(attemptId);
+    if (attempt?.accountId !== accountId || attempt.status !== "active") return false;
+    this.#attempts.set(attemptId, {
+      ...attempt,
+      status: "abandoned",
+      updatedAt: now,
+      completedAt: now,
+    });
+    return true;
+  }
+
+  public async submitDailyAttempt(
+    accountId: string,
+    attemptId: string,
+    request: FinishDailyAttemptRequest,
+    now: Date,
+  ): Promise<ReplaySubmissionRecord | null> {
+    const attempt = this.#attempts.get(attemptId);
+    const existing = [...this.#submissions.values()].find(
+      (submission) => submission.attemptId === attemptId,
+    );
+    if (existing !== undefined)
+      return existing.id === request.submissionId ? clone(existing) : null;
+    if (attempt?.accountId !== accountId || attempt.status !== "active") return null;
+    const submission: ReplaySubmissionRecord = {
+      id: request.submissionId,
+      attemptId,
+      request: clone(request),
+      status: "queued",
+      score: null,
+      totalTurns: null,
+      rejectionCode: null,
+      createdAt: now,
+      updatedAt: now,
+      verifiedAt: null,
+    };
+    this.#submissions.set(submission.id, submission);
+    this.#attempts.set(attemptId, { ...attempt, status: "submitted", updatedAt: now });
+    return clone(submission);
+  }
+
+  public async getReplaySubmission(submissionId: string): Promise<ReplaySubmissionRecord | null> {
+    return cloneNullable(this.#submissions.get(submissionId));
+  }
+
+  public async getReplayVerificationContext(
+    submissionId: string,
+  ): Promise<ReplayVerificationContext | null> {
+    const submission = this.#submissions.get(submissionId);
+    const attempt = submission === undefined ? undefined : this.#attempts.get(submission.attemptId);
+    const challenge = attempt === undefined ? undefined : this.#challenges.get(attempt.challengeId);
+    return submission === undefined || challenge === undefined
+      ? null
+      : clone({ submission, challenge });
+  }
+
+  public async completeReplaySubmission(
+    submissionId: string,
+    result: ReplayVerificationResult,
+    now: Date,
+  ): Promise<{ readonly challengeId: string; readonly leaderboardChanged: boolean } | null> {
+    const submission = this.#submissions.get(submissionId);
+    const attempt = submission === undefined ? undefined : this.#attempts.get(submission.attemptId);
+    if (submission === undefined || attempt === undefined) return null;
+    if (submission.status === "verified" || submission.status === "rejected")
+      return { challengeId: attempt.challengeId, leaderboardChanged: false };
+    this.#submissions.set(submissionId, {
+      ...submission,
+      status: result.status,
+      score: result.score,
+      totalTurns: result.totalTurns,
+      rejectionCode: result.rejectionCode,
+      updatedAt: now,
+      verifiedAt: now,
+    });
+    this.#attempts.set(attempt.id, {
+      ...attempt,
+      status: result.status,
+      updatedAt: now,
+      completedAt: now,
+    });
+    if (result.status === "rejected") {
+      this.#riskEvents.push({
+        accountId: attempt.accountId,
+        code: result.rejectionCode ?? "REPLAY_INVALID",
+      });
+      return { challengeId: attempt.challengeId, leaderboardChanged: false };
+    }
+    if (attempt.mode !== "formal" || result.score === null || result.totalTurns === null)
+      return { challengeId: attempt.challengeId, leaderboardChanged: false };
+    const profile = this.#profiles.get(attempt.accountId);
+    const challenge = this.#challenges.get(attempt.challengeId);
+    if (profile === undefined || challenge === undefined)
+      throw new Error("verified attempt owner is missing");
+    const key = `${attempt.challengeId}:${attempt.accountId}`;
+    const existing = this.#leaderboard.get(key);
+    const candidate: StoredLeaderboardEntry = {
+      id: existing?.id ?? uuidv7(),
+      challengeId: attempt.challengeId,
+      accountId: attempt.accountId,
+      submissionId,
+      systemCode: profile.systemCode,
+      avatarId: `avatar_${challenge.definition.loadouts[0].robotId}`,
+      score: result.score,
+      completionMs: submission.request.completionMs,
+      turns: result.totalTurns,
+      completionStatus: submission.request.completionStatus,
+      createdAt: existing?.createdAt ?? now,
+      updatedAt: now,
+    };
+    if (existing !== undefined && compareLeaderboard(existing, candidate) <= 0)
+      return { challengeId: attempt.challengeId, leaderboardChanged: false };
+    this.#leaderboard.set(key, candidate);
+    return { challengeId: attempt.challengeId, leaderboardChanged: true };
+  }
+
+  public async listLeaderboard(
+    challengeId: string,
+    offset: number,
+    limit: number,
+  ): Promise<readonly StoredLeaderboardEntry[]> {
+    return sortedLeaderboard(this.#leaderboard, challengeId)
+      .slice(offset, offset + limit)
+      .map(clone);
+  }
+
+  public async getLeaderboardEntry(
+    challengeId: string,
+    accountId: string,
+  ): Promise<{ readonly entry: StoredLeaderboardEntry; readonly rank: number } | null> {
+    const entries = sortedLeaderboard(this.#leaderboard, challengeId);
+    const index = entries.findIndex((entry) => entry.accountId === accountId);
+    if (index < 0) return null;
+    const entry = entries.at(index);
+    return entry === undefined ? null : { entry: clone(entry), rank: index + 1 };
+  }
+
   public async close(): Promise<void> {
     await Promise.resolve();
+  }
+
+  public health(): Promise<void> {
+    return Promise.resolve();
   }
 
   private assertAccount(accountId: string): void {
@@ -260,4 +522,23 @@ function clone<T>(value: T): T {
 
 function cloneNullable<T>(value: T | undefined): T | null {
   return value === undefined ? null : clone(value);
+}
+
+function sortedLeaderboard(
+  entries: ReadonlyMap<string, StoredLeaderboardEntry>,
+  challengeId: string,
+): StoredLeaderboardEntry[] {
+  return [...entries.values()]
+    .filter((entry) => entry.challengeId === challengeId)
+    .sort(compareLeaderboard);
+}
+
+function compareLeaderboard(left: StoredLeaderboardEntry, right: StoredLeaderboardEntry): number {
+  return (
+    right.score - left.score ||
+    left.completionMs - right.completionMs ||
+    left.turns - right.turns ||
+    left.createdAt.getTime() - right.createdAt.getTime() ||
+    left.id.localeCompare(right.id)
+  );
 }

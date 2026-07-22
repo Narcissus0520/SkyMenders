@@ -6,4 +6,6 @@ Phase 7 implements server-side WeChat code exchange, HMAC-SHA-256 pseudonymous p
 
 The client stores only the rotating refresh credential needed to restore a session; access tokens remain in memory. The WeChat AppSecret and the HMAC/JWT secrets exist only in server environment configuration. CI scans owned source for committed credential material.
 
-Phase 8 adds trusted replay verification and daily-attempt authority. Phase 9 adds admin separation and immutable audit writes. Production secret-store, TLS, network, monitoring, and deletion evidence remain deployment gates rather than local-test claims.
+Phase 8 implements server-business-date challenge definitions, PostgreSQL-enforced formal slots, idempotent attempt transitions, bounded replay envelopes, asynchronous trusted verification, server-generated enemy actions, server-recomputed scores, and verified-only leaderboard writes. Public ranking DTOs are allowlisted to generated system code, original robot avatar ID, score, time, turns, status, and rank. Redis transports replay identifiers and caches public pages but cannot authorize attempts or create durable results.
+
+Phase 9 adds admin separation and immutable audit writes. Production secret-store, TLS, network segmentation, Redis/PostgreSQL hardening, monitoring, deletion evidence, and recovery drills remain deployment gates rather than local-test claims.

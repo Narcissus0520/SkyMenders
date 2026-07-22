@@ -6,12 +6,14 @@ import type { FastifyInstance, InjectOptions, LightMyRequestResponse } from "fas
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { createRngState, createSnapshot } from "@skymenders/deterministic-runtime";
-import { runtimeSnapshotSchema } from "@skymenders/protocol";
+import { DAILY_REPLAY_SCHEMA_VERSION, runtimeSnapshotSchema } from "@skymenders/protocol";
 import type { ExpeditionSaveDocument, ExpeditionStateDocument } from "@skymenders/protocol";
 import { sealExpeditionSave } from "@skymenders/save-migration";
 
 import type { ServerClock, WechatCodeExchange } from "../src/core/contracts.js";
 import type { ServerConfig } from "../src/core/server-config.js";
+import { MemoryReplayVerificationQueue } from "../src/infrastructure/challenge-queue.js";
+import { loadChallengeContent } from "../src/infrastructure/challenge-runtime.js";
 import { MemoryGameRepository } from "../src/infrastructure/memory.repository.js";
 import { createGameServer } from "../src/server.js";
 
@@ -40,20 +42,29 @@ const config: ServerConfig = {
   wechatAppSecret: "server-only-test-secret",
   accessTokenIssuer: "skymenders-test",
   accessTokenAudience: "skymenders-client-test",
+  redisUrl: "redis://127.0.0.1:6379",
+  challengeSeedSecret: "integration-daily-challenge-secret-with-thirty-two-bytes",
+  dailyChallengeTimeZone: "Asia/Shanghai",
 };
 
 describe("game server HTTP contract", () => {
   let app: NestFastifyApplication;
   let server: FastifyInstance;
   let clock: FixedClock;
+  let repository: MemoryGameRepository;
+  let replayQueue: MemoryReplayVerificationQueue;
 
   beforeEach(async () => {
     clock = new FixedClock();
+    repository = new MemoryGameRepository();
+    replayQueue = new MemoryReplayVerificationQueue();
     app = await createGameServer({
       config,
-      repository: new MemoryGameRepository(),
+      repository,
       wechatCodeExchange: new FakeWechat(),
       clock,
+      challengeContent: loadChallengeContent(),
+      replayVerificationQueue: replayQueue,
     });
     server = app.getHttpAdapter().getInstance();
   });
@@ -66,6 +77,10 @@ describe("game server HTTP contract", () => {
     expect(await json(server, { method: "GET", url: "/health/live" })).toMatchObject({
       statusCode: 200,
       body: { status: "ok" },
+    });
+    expect(await json(server, { method: "GET", url: "/health/ready" })).toMatchObject({
+      statusCode: 200,
+      body: { status: "ready" },
     });
     const openApi = await json(server, { method: "GET", url: "/openapi.json" });
     expect(openApi.statusCode).toBe(200);
@@ -334,6 +349,241 @@ describe("game server HTTP contract", () => {
         statistics: { expeditions_started: 2 },
       },
     });
+  });
+
+  it("owns the daily date, atomically limits formal starts, and queues strict replays", async () => {
+    const session = await login(server, "daily-device");
+    const daily = await authorized(server, session.accessToken, {
+      method: "GET",
+      url: "/v1/challenges/daily",
+    });
+    expect(daily).toMatchObject({
+      statusCode: 200,
+      body: {
+        challenge: { businessDate: "2026-07-22" },
+        formalAttemptsRemaining: 3,
+        formalUnlocked: false,
+      },
+    });
+    expect(
+      await authorized(server, session.accessToken, {
+        method: "POST",
+        url: "/v1/challenges/daily/attempts/start",
+        headers: { "idempotency-key": "daily-locked-0001" },
+      }),
+    ).toMatchObject({ statusCode: 403, body: { error: { code: "FORMAL_CHALLENGE_LOCKED" } } });
+
+    const progress = await authorized(server, session.accessToken, {
+      method: "GET",
+      url: "/v1/saves/progress",
+    });
+    await authorized(server, session.accessToken, {
+      method: "PUT",
+      url: "/v1/saves/progress",
+      headers: { "idempotency-key": "daily-unlock-0001" },
+      payload: {
+        ...(progress.body as Record<string, unknown>),
+        logicalClock: 1,
+        updatedAt: "2026-07-22T08:00:01.000Z",
+        statistics: { standard_regions_completed: 1 },
+      },
+    });
+
+    const starts = await Promise.all(
+      [1, 2, 3, 4].map((index) =>
+        authorized(server, session.accessToken, {
+          method: "POST",
+          url: "/v1/challenges/daily/attempts/start",
+          headers: { "idempotency-key": `daily-start-000${index}` },
+          payload: { businessDate: "2099-01-01" },
+        }),
+      ),
+    );
+    expect(starts.map((response) => response.statusCode).sort()).toEqual([200, 200, 200, 409]);
+    const formal = starts.find((response) => response.statusCode === 200);
+    if (formal === undefined) throw new Error("formal attempt was not created");
+    const formalBody = formal.body as {
+      attemptId: string;
+      challenge: {
+        challengeId: string;
+        seed: number;
+        rulesVersion: string;
+        contentVersion: string;
+        businessDate: string;
+      };
+    };
+    expect(formalBody.challenge.businessDate).toBe("2026-07-22");
+    const replayedStart = await authorized(server, session.accessToken, {
+      method: "POST",
+      url: "/v1/challenges/daily/attempts/start",
+      headers: { "idempotency-key": "daily-start-0001" },
+    });
+    expect(replayedStart.body).toEqual(starts[0]?.body);
+
+    for (const index of [1, 2, 3, 4]) {
+      expect(
+        await authorized(server, session.accessToken, {
+          method: "POST",
+          url: "/v1/challenges/daily/practice/start",
+          headers: { "idempotency-key": `daily-practice-${index}` },
+        }),
+      ).toMatchObject({ statusCode: 200, body: { mode: "practice" } });
+    }
+
+    const checkpoint = await authorized(server, session.accessToken, {
+      method: "PUT",
+      url: `/v1/challenges/daily/attempts/${formalBody.attemptId}/checkpoint`,
+      headers: { "idempotency-key": "daily-checkpoint-0001" },
+      payload: {
+        checkpointIndex: 1,
+        commandCount: 2,
+        stateHash: "0123456789abcdef",
+        recoveryCount: 0,
+        payload: { nodeId: "route-node" },
+      },
+    });
+    expect(checkpoint).toMatchObject({ statusCode: 200, body: { checkpointIndex: 1 } });
+
+    const submissionId = crypto.randomUUID();
+    const finish = await authorized(server, session.accessToken, {
+      method: "POST",
+      url: `/v1/challenges/daily/attempts/${formalBody.attemptId}/finish`,
+      headers: { "idempotency-key": "daily-finish-0001" },
+      payload: {
+        submissionId,
+        challengeId: formalBody.challenge.challengeId,
+        seed: formalBody.challenge.seed,
+        rulesVersion: formalBody.challenge.rulesVersion,
+        contentVersion: formalBody.challenge.contentVersion,
+        replaySchemaVersion: DAILY_REPLAY_SCHEMA_VERSION,
+        clientVersion: "0.4.0",
+        claimedScore: 999_999,
+        completionMs: 1,
+        recoveryCount: 0,
+        completionStatus: "completed",
+        completedNodeIds: [],
+        nodeReplays: [],
+      },
+    });
+    expect(finish).toMatchObject({
+      statusCode: 200,
+      body: { submissionId, status: "queued" },
+    });
+    expect(replayQueue.jobs).toEqual([submissionId]);
+    expect(
+      await repository.getLeaderboardEntry(formalBody.challenge.challengeId, session.accountId),
+    ).toBeNull();
+
+    const leaderboard = await json(server, { method: "GET", url: "/v1/leaderboards/daily" });
+    expect(leaderboard).toMatchObject({ statusCode: 200, body: { entries: [] } });
+    expect(JSON.stringify(leaderboard.body)).not.toMatch(/openId|unionId|wechat|nickname/i);
+  });
+
+  it("paginates and caches only verified anonymous leaderboard projections", async () => {
+    const session = await login(server, "leaderboard-device");
+    const daily = await authorized(server, session.accessToken, {
+      method: "GET",
+      url: "/v1/challenges/daily",
+    });
+    const challenge = (
+      daily.body as {
+        challenge: {
+          challengeId: string;
+          seed: number;
+          rulesVersion: string;
+          contentVersion: string;
+        };
+      }
+    ).challenge;
+    const attemptId = crypto.randomUUID();
+    await repository.createFormalAttempt({
+      id: attemptId,
+      accountId: session.accountId,
+      challengeId: challenge.challengeId,
+      mode: "formal",
+      formalSlot: 1,
+      status: "active",
+      checkpointIndex: null,
+      checkpoint: null,
+      startedAt: clock.now(),
+      updatedAt: clock.now(),
+      completedAt: null,
+    });
+    const submissionId = crypto.randomUUID();
+    await repository.submitDailyAttempt(
+      session.accountId,
+      attemptId,
+      {
+        submissionId,
+        challengeId: challenge.challengeId,
+        seed: challenge.seed,
+        rulesVersion: challenge.rulesVersion,
+        contentVersion: challenge.contentVersion,
+        replaySchemaVersion: DAILY_REPLAY_SCHEMA_VERSION,
+        clientVersion: "0.4.0",
+        claimedScore: 90_000,
+        completionMs: 180_000,
+        recoveryCount: 0,
+        completionStatus: "completed",
+        completedNodeIds: [],
+        nodeReplays: [],
+      },
+      clock.now(),
+    );
+    await repository.completeReplaySubmission(
+      submissionId,
+      {
+        submissionId,
+        status: "verified",
+        score: 90_000,
+        totalTurns: 9,
+        rejectionCode: null,
+      },
+      clock.now(),
+    );
+
+    const first = await json(server, {
+      method: "GET",
+      url: "/v1/leaderboards/daily?limit=1",
+    });
+    expect(first).toMatchObject({
+      statusCode: 200,
+      body: {
+        challengeId: challenge.challengeId,
+        entries: [
+          {
+            rank: 1,
+            score: 90_000,
+            completionMs: 180_000,
+            turns: 9,
+            completionStatus: "completed",
+          },
+        ],
+      },
+    });
+    expect(JSON.stringify(first.body)).not.toMatch(/accountId|openId|unionId|wechat|nickname/i);
+    expect(await json(server, { method: "GET", url: "/v1/leaderboards/daily?limit=1" })).toEqual(
+      first,
+    );
+    const nextCursor = (first.body as { nextCursor: string }).nextCursor;
+    expect(
+      await json(server, {
+        method: "GET",
+        url: `/v1/leaderboards/daily?limit=1&cursor=${encodeURIComponent(nextCursor)}`,
+      }),
+    ).toMatchObject({ statusCode: 200, body: { entries: [], nextCursor: null } });
+    expect(
+      await authorized(server, session.accessToken, {
+        method: "GET",
+        url: "/v1/leaderboards/daily/me",
+      }),
+    ).toMatchObject({ statusCode: 200, body: { entry: { rank: 1, score: 90_000 } } });
+    expect(
+      await json(server, { method: "GET", url: "/v1/leaderboards/daily?limit=0" }),
+    ).toMatchObject({ statusCode: 400, body: { error: { code: "LIMIT_INVALID" } } });
+    expect(
+      await json(server, { method: "GET", url: "/v1/leaderboards/daily?cursor=not-a-cursor" }),
+    ).toMatchObject({ statusCode: 400, body: { error: { code: "CURSOR_INVALID" } } });
   });
 
   it("exports only pseudonymous account data and hard-deletes the account", async () => {

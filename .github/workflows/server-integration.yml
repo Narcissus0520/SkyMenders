@@ -5,9 +5,17 @@ on:
     paths:
       - "apps/game-server/**"
       - "apps/game-worker/**"
+      - "content/**"
+      - "packages/ai-core/**"
+      - "packages/battle-core/**"
+      - "packages/challenge-core/**"
+      - "packages/content-runtime/**"
+      - "packages/content-schema/**"
+      - "packages/deterministic-runtime/**"
       - "packages/protocol/**"
       - "packages/save-migration/**"
       - "packages/security/**"
+      - "packages/shared-types/**"
       - "pnpm-lock.yaml"
       - ".github/workflows/server-integration.yml"
   push:
@@ -15,9 +23,17 @@ on:
     paths:
       - "apps/game-server/**"
       - "apps/game-worker/**"
+      - "content/**"
+      - "packages/ai-core/**"
+      - "packages/battle-core/**"
+      - "packages/challenge-core/**"
+      - "packages/content-runtime/**"
+      - "packages/content-schema/**"
+      - "packages/deterministic-runtime/**"
       - "packages/protocol/**"
       - "packages/save-migration/**"
       - "packages/security/**"
+      - "packages/shared-types/**"
       - "pnpm-lock.yaml"
       - ".github/workflows/server-integration.yml"
 
@@ -41,9 +57,19 @@ jobs:
           --health-interval 5s
           --health-timeout 5s
           --health-retries 12
+      redis:
+        image: redis:7.4-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
     env:
       DATABASE_URL: postgresql://skymenders:skymenders_test_only@127.0.0.1:5432/skymenders_test
       TEST_DATABASE_URL: postgresql://skymenders:skymenders_test_only@127.0.0.1:5432/skymenders_test
+      REDIS_URL: redis://127.0.0.1:6379
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4

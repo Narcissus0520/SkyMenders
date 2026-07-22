@@ -1,8 +1,8 @@
 # Server Modules
 
-Status: Phase 7 account/profile/save/privacy foundation implemented; challenge, replay, leaderboard, admin, and audit modules continue in Phases 8-9.
+Status: Phase 7 account/profile/save/privacy foundation and Phase 8 challenge/replay/leaderboard boundaries implemented; admin, publication, and audit modules continue in Phase 9.
 
-The NestJS 11 Fastify application is a modular monolith. Auth, profiles, saves, privacy, and health are the first implemented boundaries. Challenge, attempt, replay, leaderboard, telemetry, admin, audit, and platform-compliance modules extend the same application later. Tables are not cross-module APIs.
+The NestJS 11 Fastify application is a modular monolith. Auth, profiles, saves, privacy, daily challenge, attempt, replay-submission, leaderboard, and health are implemented boundaries. A separate BullMQ Worker owns replay execution while sharing repository contracts and deterministic domain packages. Telemetry, admin, publication, audit, and platform-compliance modules extend these boundaries later. Tables are not cross-module APIs.
 
 `GameRepository` is the application persistence boundary. Production uses the Prisma PostgreSQL adapter; tests use an in-memory adapter against the same services and controllers. Prisma-generated source is build output and is not committed. The checked-in migration is the database source of truth.
 

@@ -1,0 +1,42 @@
+{
+  "name": "@skymenders/game-worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsx watch src/main.ts",
+    "lint": "eslint src test",
+    "start": "node dist/main.js",
+    "test": "vitest run --exclude test/redis.integration.test.ts",
+    "test:coverage": "vitest run --coverage --exclude test/redis.integration.test.ts",
+    "test:integration": "vitest run test/redis.integration.test.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@skymenders/challenge-core": "workspace:*",
+    "@skymenders/content-schema": "workspace:*",
+    "@skymenders/game-server": "workspace:*",
+    "@skymenders/protocol": "workspace:*",
+    "bullmq": "5.80.10",
+    "ioredis": "5.11.1",
+    "reflect-metadata": "0.2.2",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@skymenders/battle-core": "workspace:*",
+    "@skymenders/deterministic-runtime": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "eslint": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}
