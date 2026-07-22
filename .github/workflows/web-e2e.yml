@@ -6,12 +6,22 @@ on:
       - "apps/admin-console/**"
       - "apps/content-gateway/**"
       - "apps/content-studio/**"
+      - "apps/game-server/**"
+      - "packages/content-pipeline/**"
+      - "packages/protocol/**"
+      - "e2e/**"
+      - "playwright.config.ts"
   push:
     branches: [main]
     paths:
       - "apps/admin-console/**"
       - "apps/content-gateway/**"
       - "apps/content-studio/**"
+      - "apps/game-server/**"
+      - "packages/content-pipeline/**"
+      - "packages/protocol/**"
+      - "e2e/**"
+      - "playwright.config.ts"
 
 permissions:
   contents: read

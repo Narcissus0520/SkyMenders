@@ -8,6 +8,7 @@ export default defineConfig({
         "src/infrastructure/challenge-queue.ts",
         "src/infrastructure/leaderboard-cache.ts",
         "src/infrastructure/memory.repository.ts",
+        "src/infrastructure/prisma-admin.repository.ts",
         "src/infrastructure/prisma.repository.ts",
         "src/main.ts",
       ],

@@ -3,8 +3,10 @@ import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { createDailyChallenge } from "@skymenders/challenge-core";
+import { publishedContentManifestSchema } from "@skymenders/protocol";
 
 import { loadChallengeContent } from "../src/infrastructure/challenge-runtime.js";
+import { PrismaAdminRepository } from "../src/infrastructure/prisma-admin.repository.js";
 import { PrismaGameRepository } from "../src/infrastructure/prisma.repository.js";
 
 const databaseUrl = process.env.TEST_DATABASE_URL;
@@ -99,6 +101,91 @@ describe.runIf(databaseUrl !== undefined)("Prisma account persistence", () => {
       expect(await repository.countFormalAttempts(first.id, challenge.challengeId)).toBe(3);
       await repository.hardDeleteAccount(first.id);
       expect(await repository.findAccount(first.id)).toBeNull();
+    } finally {
+      await repository.close();
+    }
+  });
+});
+
+describe.runIf(databaseUrl !== undefined)("Prisma admin control-plane persistence", () => {
+  it("persists separate admin sessions, content lifecycle, risk controls and audit", async () => {
+    if (databaseUrl === undefined) throw new Error("TEST_DATABASE_URL is required");
+    const repository = new PrismaAdminRepository(databaseUrl);
+    const now = new Date("2026-07-23T03:00:00.000Z");
+    const artifactHash = crypto.randomUUID().replaceAll("-", "").padEnd(64, "0");
+    try {
+      const admin = await repository.ensureBootstrapAdmin(
+        `integration-${crypto.randomUUID()}`,
+        now,
+      );
+      const sessionId = crypto.randomUUID();
+      await repository.createSession({
+        id: sessionId,
+        adminId: admin.id,
+        createdAt: now,
+        expiresAt: new Date(now.getTime() + 900_000),
+        revokedAt: null,
+      });
+      expect((await repository.findSession(sessionId))?.adminId).toBe(admin.id);
+      const manifest = publishedContentManifestSchema.parse({
+        schemaVersion: "1.0.0",
+        contentVersion: "0.1.0",
+        rulesVersion: "0.5.0",
+        artifactHash,
+        commitSha: "integration-commit",
+        createdAt: now.toISOString(),
+        catalogHashes: { maps: artifactHash },
+        counts: { maps: 16 },
+        simulation: {
+          seedCount: 1,
+          passed: 1,
+          failedSeeds: [],
+          minimumMinutes: 40,
+          maximumMinutes: 40,
+        },
+      });
+      const version = await repository.ensureContentVersion({
+        id: artifactHash,
+        contentVersion: "0.1.0",
+        artifactHash,
+        manifest,
+        actorId: admin.id,
+        now,
+      });
+      expect(version.state).toBe("staged");
+      expect(
+        (
+          await repository.transitionContentVersion(
+            artifactHash,
+            "staged",
+            "approved",
+            admin.id,
+            now,
+          )
+        )?.state,
+      ).toBe("approved");
+      await repository.appendAudit({
+        id: crypto.randomUUID(),
+        actorId: admin.id,
+        action: "integration.approved",
+        targetType: "content_version",
+        targetId: artifactHash,
+        reason: "PostgreSQL integration evidence",
+        previousHash: null,
+        entryHash: artifactHash,
+        createdAt: now.toISOString(),
+      });
+      expect(
+        (await repository.listAudit(10)).some((entry) => entry.entryHash === artifactHash),
+      ).toBe(true);
+      const risk = await repository.setRiskSwitch({
+        key: `integration_${artifactHash.slice(0, 12)}`,
+        enabled: true,
+        reason: "PostgreSQL integration evidence",
+        updatedBy: admin.id,
+        updatedAt: now,
+      });
+      expect(risk.enabled).toBe(true);
     } finally {
       await repository.close();
     }

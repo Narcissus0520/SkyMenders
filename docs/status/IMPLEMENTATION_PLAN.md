@@ -12,8 +12,8 @@ This plan follows the mandatory phase order in `AGENTS.md`. A phase is complete 
 | 5     | Cocos client, WeChat adapter, input, camera, UI, audio, accessibility   | Complete; PR #6 merged        | Automated gates pass; external device evidence is release-gated |
 | 6     | Four-region expedition, rewards, workshop, events, unlocks, 6 tutorials | Complete; PR #7 merged        | Full-length expedition and content minimums                     |
 | 7     | Auth adapter, accounts, local/cloud saves, recovery, restart, migration | Complete; PR #8 merged        | Weak-network recovery and deletion flow                         |
-| 8     | Daily challenge, attempts, replay worker, anonymous leaderboard         | Local complete; PR/CI pending | Tamper rejection and server-date enforcement                    |
-| 9     | Content Studio, gateway, Admin Console, publication and audit           | Planned                       | UI-authored valid content and traceable admin writes            |
+| 8     | Daily challenge, attempts, replay worker, anonymous leaderboard         | Complete; PR #9 merged        | Tamper rejection and server-date enforcement                    |
+| 9     | Content Studio, gateway, Admin Console, publication and audit           | Local complete; PR/CI pending | UI-authored valid content and traceable admin writes            |
 | 10    | Approved assets, performance, package budget, operations, legal prep    | Planned                       | No placeholders/unlicensed assets or P0/P1 issues               |
 | 11    | V1 release candidate, regression, freeze, recovery drills               | Planned                       | Full V1 Definition of Done, except explicit external gates      |
 | 12+   | Server-authoritative real-time PvP                                      | Blocked by V1 gate            | PvP gates without breaking V1 replay compatibility              |
@@ -43,20 +43,20 @@ Phase 6 met its automated conditions and was squash-merged through PR #7 as `e2d
 
 Phase 7 met its automated conditions and was squash-merged through PR #8 as `cc4a0cb6fac0806c24d0bbc811477b8b4ea3c636`. Its real WeChat login, deployed infrastructure, and device evidence remain correctly tracked external gates.
 
-Phase 8 is locally complete on `codex/phase-08-daily-challenge`. Its PostgreSQL/Redis integration job, PR review, and merge remain required before this phase is marked complete.
+Phase 8 met its automated conditions and was squash-merged through PR #9 as `598c8aacd4264ded186e33a8c699738df0a28687` after the required PostgreSQL/Redis integration and all other checks passed.
 
-## Current Phase 8 acceptance
+## Current Phase 9 acceptance
 
-- The business date, challenge seed, route, squad, loadout, enemies, events, rewards, content version, and rules version are generated and frozen by server authority.
-- Practice starts are unlimited and unranked; formal starts atomically consume one of exactly three daily slots and cannot be refreshed with a client clock change.
-- Checkpoints and finish/abandon writes are authenticated and idempotent; an interrupted active attempt can resume from its accepted boundary.
-- Finish uploads contain commands and hashes, never an authoritative score. API handling only queues verification and never performs replay work inline.
-- The Worker regenerates server-owned initial states, replays the shared deterministic rules, compares checkpoints/final hashes, recomputes score, and isolates every mismatch.
-- Only verified submissions can create anonymous leaderboard entries; responses expose system codes and original robot avatar IDs without platform identity.
-- Leaderboard reads are cursor-paginated and Redis-cached, with cache invalidation after a verified best-score update.
-- Concurrency, replay tampering, client-date forgery, identity leakage, recovery, queue idempotency, database migration, and load budgets are covered by automated tests.
+- Main catalogs can be edited with structured fields, undo/redo, draft autosave, import/export and field-specific errors without hand-editing JSON.
+- Validation covers schemas, references, localization, maps and deterministic route simulations before packaging.
+- Artifacts bind rules/content versions, commit, counts, hashes and simulation evidence and cannot skip the staged, approved, signed and published states.
+- Content Gateway is loopback-only, path allow-listed, revision-safe and unable to write unchecked content to production.
+- Administrator identity, secret, token audience, session, guard and persistence remain isolated from players; browser tokens are memory-only.
+- Every privileged write records actor, target, reason, time and a linked audit hash; risky operations require exact second confirmation.
+- Content Studio and Admin Console pass browser E2E against real HTTP boundaries, including invalid-content rejection.
+- PostgreSQL migration and adapter coverage remain mandatory in Server Integration CI.
 - Full local gates and required GitHub checks must pass before merge.
 
 ## Compatibility discipline
 
-Rules, content, save, replay, protocol, client, and server versions remain independent. Phase 1 established `rulesVersion`, `replaySchemaVersion`, and `protocolVersion` at `0.1.0`. Phase 2 advanced only `rulesVersion` to `0.2.0`. Phase 3 advanced `rulesVersion` to `0.3.0` and `protocolVersion` to `0.2.0`. Phase 4 advanced only `rulesVersion` to `0.4.0` and started AI schema `0.1.0`. Phase 5 advanced only `clientVersion` to `0.1.0`. Phase 6 advanced content to `0.1.0`, expedition rules to `0.5.0`, and the PvE client flow to `0.2.0`. Phase 7 advanced client and protocol to `0.3.0` and started save and server schemas at `0.1.0`. Phase 8 advances client and protocol to `0.4.0`, server to `0.2.0`, and replay schema to `0.2.0`; content, rules, save, and AI versions remain unchanged. Later incompatible changes must increment only affected dimensions and include migrations or compatibility evidence.
+Rules, content, save, replay, protocol, client, and server versions remain independent. Phase 1 established `rulesVersion`, `replaySchemaVersion`, and `protocolVersion` at `0.1.0`. Phase 2 advanced only `rulesVersion` to `0.2.0`. Phase 3 advanced `rulesVersion` to `0.3.0` and `protocolVersion` to `0.2.0`. Phase 4 advanced only `rulesVersion` to `0.4.0` and started AI schema `0.1.0`. Phase 5 advanced only `clientVersion` to `0.1.0`. Phase 6 advanced content to `0.1.0`, expedition rules to `0.5.0`, and the PvE client flow to `0.2.0`. Phase 7 advanced client and protocol to `0.3.0` and started save and server schemas at `0.1.0`. Phase 8 advanced client and protocol to `0.4.0`, server to `0.2.0`, and replay schema to `0.2.0`. Phase 9 advances only protocol to `0.5.0` and server to `0.3.0`; player client, content, rules, save, replay and AI versions remain unchanged. Later incompatible changes must increment only affected dimensions and include migrations or compatibility evidence.

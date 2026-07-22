@@ -19,6 +19,9 @@ describe("server configuration boundary", () => {
         WECHAT_APP_SECRET: "app-secret",
         REDIS_URL: "redis://127.0.0.1:6379",
         CHALLENGE_SEED_SECRET: "challenge-seed-secret-with-thirty-two-bytes",
+        ADMIN_BOOTSTRAP_TOKEN: "admin-bootstrap-token-with-more-than-thirty-two-bytes",
+        ADMIN_ACCESS_TOKEN_SECRET: "admin-access-token-secret-with-more-than-thirty-two-bytes",
+        CONTENT_SIGNING_SECRET: "content-signing-secret-with-more-than-thirty-two-bytes",
       }),
     ).toMatchObject({
       nodeEnv: "test",
@@ -26,6 +29,8 @@ describe("server configuration boundary", () => {
       host: "127.0.0.1",
       accessTokenIssuer: "skymenders-api",
       accessTokenAudience: "skymenders-client",
+      adminAccessTokenAudience: "skymenders-admin-console",
+      adminAccessTokenIssuer: "skymenders-admin-api",
     });
     expect(() => loadServerConfig({ NODE_ENV: "production" })).toThrow();
   });

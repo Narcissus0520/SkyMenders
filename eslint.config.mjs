@@ -10,9 +10,9 @@ export default tseslint.config(
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
   {
-    files: ["**/*.ts"],
+    files: ["**/*.{ts,tsx}"],
     languageOptions: {
-      globals: globals.node,
+      globals: { ...globals.node, ...globals.browser },
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname,

@@ -11,6 +11,7 @@ import {
   PHASE_6_PRODUCT_VERSIONS,
   PHASE_7_PRODUCT_VERSIONS,
   PHASE_8_PRODUCT_VERSIONS,
+  PHASE_9_PRODUCT_VERSIONS,
   RELEASE_CHANNELS,
   isProductVersions,
 } from "../src/index.js";
@@ -104,7 +105,16 @@ describe("product version contract", () => {
       replaySchemaVersion: "0.2.0",
       serverVersion: "0.2.0",
     });
-    expect(CURRENT_PRODUCT_VERSIONS).toBe(PHASE_8_PRODUCT_VERSIONS);
+    expect(isProductVersions(PHASE_8_PRODUCT_VERSIONS)).toBe(true);
+  });
+
+  it("versions the Phase 9 control-plane protocol and server independently", () => {
+    expect(PHASE_9_PRODUCT_VERSIONS).toEqual({
+      ...PHASE_8_PRODUCT_VERSIONS,
+      protocolVersion: "0.5.0",
+      serverVersion: "0.3.0",
+    });
+    expect(CURRENT_PRODUCT_VERSIONS).toBe(PHASE_9_PRODUCT_VERSIONS);
     expect(isProductVersions(CURRENT_PRODUCT_VERSIONS)).toBe(true);
   });
 

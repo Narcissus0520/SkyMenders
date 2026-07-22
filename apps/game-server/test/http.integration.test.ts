@@ -45,6 +45,11 @@ const config: ServerConfig = {
   redisUrl: "redis://127.0.0.1:6379",
   challengeSeedSecret: "integration-daily-challenge-secret-with-thirty-two-bytes",
   dailyChallengeTimeZone: "Asia/Shanghai",
+  adminBootstrapToken: "integration-admin-bootstrap-token-with-thirty-two-bytes",
+  adminAccessTokenSecret: "integration-admin-access-secret-with-thirty-two-bytes",
+  adminAccessTokenIssuer: "skymenders-admin-api-test",
+  adminAccessTokenAudience: "skymenders-admin-console-test",
+  contentSigningSecret: "integration-content-signing-secret-with-thirty-two-bytes",
 };
 
 describe("game server HTTP contract", () => {

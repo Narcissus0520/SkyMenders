@@ -2,6 +2,7 @@ export * from "./app.module.js";
 export * from "./core/contracts.js";
 export * from "./core/server-config.js";
 export * from "./infrastructure/memory.repository.js";
+export * from "./infrastructure/memory-admin.repository.js";
 export * from "./infrastructure/prisma.repository.js";
 export * from "./infrastructure/challenge-queue.js";
 export * from "./infrastructure/challenge-runtime.js";
