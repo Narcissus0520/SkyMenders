@@ -88,6 +88,30 @@ export {
   replayVerificationJobSchema,
   replayVerificationResultSchema,
 } from "./daily-challenge.js";
+export {
+  adminAuditEntrySchema,
+  adminContentStateSchema,
+  adminContentVersionSchema,
+  adminRoleSchema,
+  adminSessionRequestSchema,
+  adminSessionResponseSchema,
+  announcementRequestSchema,
+  confirmedAdminActionSchema,
+  publishedContentManifestSchema,
+  riskSwitchRequestSchema,
+} from "./content-admin.js";
+export type {
+  AdminAuditEntry,
+  AdminContentState,
+  AdminContentVersion,
+  AdminRole,
+  AdminSessionRequest,
+  AdminSessionResponse,
+  AnnouncementRequest,
+  ConfirmedAdminAction,
+  PublishedContentManifest,
+  RiskSwitchRequest,
+} from "./content-admin.js";
 export type {
   DailyAttemptCheckpointRequest,
   DailyAttemptCheckpointResponse,

@@ -15,6 +15,11 @@ const serverConfigSchema = z
     redisUrl: z.string().min(1),
     challengeSeedSecret: z.string().min(32),
     dailyChallengeTimeZone: z.string().min(1),
+    adminBootstrapToken: z.string().min(32),
+    adminAccessTokenSecret: z.string().min(32),
+    adminAccessTokenIssuer: z.string().min(1),
+    adminAccessTokenAudience: z.string().min(1),
+    contentSigningSecret: z.string().min(32),
   })
   .strict();
 
@@ -35,5 +40,10 @@ export function loadServerConfig(environment: NodeJS.ProcessEnv = process.env): 
     redisUrl: environment.REDIS_URL,
     challengeSeedSecret: environment.CHALLENGE_SEED_SECRET,
     dailyChallengeTimeZone: environment.DAILY_CHALLENGE_TIME_ZONE ?? "Asia/Shanghai",
+    adminBootstrapToken: environment.ADMIN_BOOTSTRAP_TOKEN,
+    adminAccessTokenSecret: environment.ADMIN_ACCESS_TOKEN_SECRET,
+    adminAccessTokenIssuer: environment.ADMIN_ACCESS_TOKEN_ISSUER ?? "skymenders-admin-api",
+    adminAccessTokenAudience: environment.ADMIN_ACCESS_TOKEN_AUDIENCE ?? "skymenders-admin-console",
+    contentSigningSecret: environment.CONTENT_SIGNING_SECRET,
   });
 }

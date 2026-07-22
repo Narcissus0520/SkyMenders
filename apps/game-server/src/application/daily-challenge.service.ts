@@ -65,6 +65,10 @@ export class DailyChallengeService {
     };
   }
 
+  public previewCurrentChallenge(): Promise<DailyChallengeDefinition> {
+    return this.currentChallenge();
+  }
+
   public async startPractice(accountId: string): Promise<DailyAttemptStartResponse> {
     const challenge = await this.currentChallenge();
     const attempt = await this.repository.createPracticeAttempt(

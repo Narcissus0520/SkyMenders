@@ -1,6 +1,6 @@
 # External Blockers
 
-Last reviewed for Phase 7 on 2026-07-22. The account and save interfaces are implemented, but real WeChat credentials, deployed infrastructure, and device evidence remain unsatisfied external gates.
+Last reviewed for Phase 9 on 2026-07-23. Account, save, daily, content and admin interfaces are implemented, but real WeChat credentials, deployed infrastructure, final licensed assets, legal approval and device evidence remain unsatisfied external gates.
 
 These inputs cannot be fabricated or bypassed. Interfaces, local substitutes, validation, and integration documentation will be implemented in the relevant phase, but the external capability will not be reported as complete until verified.
 

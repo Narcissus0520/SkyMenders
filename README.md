@@ -34,6 +34,7 @@ pnpm test
 pnpm test:coverage
 pnpm test:determinism
 pnpm test:performance
+pnpm test:e2e
 pnpm content:validate
 pnpm assets:audit
 pnpm security:secrets
@@ -56,4 +57,4 @@ For an authorized local WeChat build, set untracked `COCOS_CREATOR_PATH` and `WE
 
 ## Current status
 
-Phases 0-7 are merged. Phase 8 adds server-date daily definitions, three atomic formal attempts plus unlimited practice, resumable attempt checkpoints, asynchronous trusted replay verification, server-recomputed scores, and an anonymous Redis-cached leaderboard. Real WeChat, deployed infrastructure, and device evidence remain explicitly external. Run `pnpm test`, `pnpm test:coverage`, `pnpm test:determinism`, `pnpm security:secrets`, and `pnpm infra:validate` for current automated evidence. See `docs/status/PROJECT_STATUS.md` for exact status.
+Phases 0-8 are merged. Phase 9 adds the validated Content Studio/Gateway pipeline, immutable content delivery, isolated Admin Console authentication, signed publication lifecycle, operational controls, and linked audit records. Real WeChat, deployed infrastructure, approved final assets, legal review, and device evidence remain explicitly external. Run `pnpm test`, `pnpm test:e2e`, `pnpm test:coverage`, `pnpm test:determinism`, `pnpm security:secrets`, and `pnpm infra:validate` for current automated evidence. See `docs/status/PROJECT_STATUS.md` for exact status.

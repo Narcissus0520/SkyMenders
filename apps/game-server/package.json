@@ -1,6 +1,6 @@
 {
   "name": "@skymenders/game-server",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "exports": {
@@ -15,12 +15,12 @@
     "db:migrate": "prisma migrate deploy",
     "db:seed": "tsx prisma/seed.ts",
     "dev": "tsx watch src/main.ts",
-    "lint": "prisma generate && eslint src test prisma",
+    "lint": "eslint src test prisma",
     "start": "node dist/main.js",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "test:integration": "pnpm --filter @skymenders/game-server... run build && vitest run test/http.integration.test.ts test/prisma.integration.test.ts",
-    "typecheck": "prisma generate && tsc -p tsconfig.json --noEmit"
+    "test:integration": "pnpm --filter @skymenders/game-server... run build && vitest run test/http.integration.test.ts test/admin.integration.test.ts test/prisma.integration.test.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@fastify/helmet": "13.1.0",
@@ -35,6 +35,7 @@
     "@skymenders/protocol": "workspace:*",
     "@skymenders/challenge-core": "workspace:*",
     "@skymenders/content-schema": "workspace:*",
+    "@skymenders/content-pipeline": "workspace:*",
     "@skymenders/save-migration": "workspace:*",
     "@skymenders/security": "workspace:*",
     "@skymenders/shared-types": "workspace:*",

@@ -240,3 +240,94 @@ model ReplayRiskEvent {
   @@index([code, createdAt])
   @@map("replay_risk_events")
 }
+
+model AdminUser {
+  id        String         @id @db.Uuid
+  code      String         @unique @db.VarChar(80)
+  role      String         @db.VarChar(32)
+  active    Boolean        @default(true)
+  createdAt DateTime       @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime       @updatedAt @db.Timestamptz(3)
+  sessions  AdminSession[]
+
+  @@map("admin_users")
+}
+
+model AdminSession {
+  id        String    @id @db.Uuid
+  adminId   String    @db.Uuid
+  createdAt DateTime  @db.Timestamptz(3)
+  expiresAt DateTime  @db.Timestamptz(3)
+  revokedAt DateTime? @db.Timestamptz(3)
+  admin     AdminUser @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@index([adminId, expiresAt])
+  @@map("admin_sessions")
+}
+
+model ContentVersion {
+  id             String   @id @db.VarChar(64)
+  contentVersion String   @db.VarChar(32)
+  artifactHash   String   @unique @db.VarChar(64)
+  state          String   @db.VarChar(24)
+  manifest       Json
+  createdBy      String   @db.Uuid
+  approvedBy     String?  @db.Uuid
+  signature      String?  @db.VarChar(64)
+  createdAt      DateTime @db.Timestamptz(3)
+  updatedAt      DateTime @db.Timestamptz(3)
+
+  @@index([contentVersion, state])
+  @@map("content_versions")
+}
+
+model AdminAuditLog {
+  id           String   @id @db.Uuid
+  actorId      String   @db.Uuid
+  action       String   @db.VarChar(96)
+  targetType   String   @db.VarChar(64)
+  targetId     String   @db.VarChar(160)
+  reason       String   @db.VarChar(500)
+  previousHash String?  @db.VarChar(64)
+  entryHash    String   @unique @db.VarChar(64)
+  createdAt    DateTime @db.Timestamptz(3)
+
+  @@index([createdAt(sort: Desc)])
+  @@index([actorId, createdAt(sort: Desc)])
+  @@map("admin_audit_logs")
+}
+
+model AdminAnnouncement {
+  id        String   @id @db.Uuid
+  titleKey  String   @db.VarChar(160)
+  bodyKey   String   @db.VarChar(160)
+  startsAt  DateTime @db.Timestamptz(3)
+  endsAt    DateTime @db.Timestamptz(3)
+  createdBy String   @db.Uuid
+  createdAt DateTime @db.Timestamptz(3)
+
+  @@index([startsAt, endsAt])
+  @@map("admin_announcements")
+}
+
+model AdminRiskSwitch {
+  key       String   @id @db.VarChar(64)
+  enabled   Boolean
+  reason    String   @db.VarChar(500)
+  updatedBy String   @db.Uuid
+  updatedAt DateTime @db.Timestamptz(3)
+
+  @@map("admin_risk_switches")
+}
+
+model AdminOperationalAction {
+  id        String   @id @db.Uuid
+  kind      String   @db.VarChar(32)
+  targetId  String   @db.VarChar(160)
+  reason    String   @db.VarChar(500)
+  actorId   String   @db.Uuid
+  createdAt DateTime @db.Timestamptz(3)
+
+  @@index([kind, createdAt(sort: Desc)])
+  @@map("admin_operational_actions")
+}
