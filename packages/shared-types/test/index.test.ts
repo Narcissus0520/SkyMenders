@@ -9,6 +9,7 @@ import {
   PHASE_4_PRODUCT_VERSIONS,
   PHASE_5_PRODUCT_VERSIONS,
   PHASE_6_PRODUCT_VERSIONS,
+  PHASE_7_PRODUCT_VERSIONS,
   RELEASE_CHANNELS,
   isProductVersions,
 } from "../src/index.js";
@@ -81,7 +82,17 @@ describe("product version contract", () => {
       contentVersion: "0.1.0",
       rulesVersion: "0.5.0",
     });
-    expect(CURRENT_PRODUCT_VERSIONS).toBe(PHASE_6_PRODUCT_VERSIONS);
+  });
+
+  it("increments only account, save, protocol, client, and server dimensions for Phase 7", () => {
+    expect(PHASE_7_PRODUCT_VERSIONS).toEqual({
+      ...PHASE_6_PRODUCT_VERSIONS,
+      clientVersion: "0.3.0",
+      protocolVersion: "0.3.0",
+      saveSchemaVersion: "0.1.0",
+      serverVersion: "0.1.0",
+    });
+    expect(CURRENT_PRODUCT_VERSIONS).toBe(PHASE_7_PRODUCT_VERSIONS);
     expect(isProductVersions(CURRENT_PRODUCT_VERSIONS)).toBe(true);
   });
 

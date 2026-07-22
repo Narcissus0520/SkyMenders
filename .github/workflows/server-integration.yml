@@ -6,12 +6,20 @@ on:
       - "apps/game-server/**"
       - "apps/game-worker/**"
       - "packages/protocol/**"
+      - "packages/save-migration/**"
+      - "packages/security/**"
+      - "pnpm-lock.yaml"
+      - ".github/workflows/server-integration.yml"
   push:
     branches: [main]
     paths:
       - "apps/game-server/**"
       - "apps/game-worker/**"
       - "packages/protocol/**"
+      - "packages/save-migration/**"
+      - "packages/security/**"
+      - "pnpm-lock.yaml"
+      - ".github/workflows/server-integration.yml"
 
 permissions:
   contents: read
@@ -19,37 +27,33 @@ permissions:
 jobs:
   integration:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17.5-alpine
+        env:
+          POSTGRES_DB: skymenders_test
+          POSTGRES_USER: skymenders
+          POSTGRES_PASSWORD: skymenders_test_only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U skymenders -d skymenders_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    env:
+      DATABASE_URL: postgresql://skymenders:skymenders_test_only@127.0.0.1:5432/skymenders_test
+      TEST_DATABASE_URL: postgresql://skymenders:skymenders_test_only@127.0.0.1:5432/skymenders_test
     steps:
       - uses: actions/checkout@v4
-
-      - name: Detect server integration scope
-        id: scope
-        shell: bash
-        run: |
-          if [[ -f apps/game-server/package.json && -f apps/game-worker/package.json ]]; then
-            echo "enabled=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "enabled=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Record deferred server gate
-        if: steps.scope.outputs.enabled != 'true'
-        run: echo "Server integration is not applicable until the real game-server and game-worker applications land."
-
       - uses: pnpm/action-setup@v4
-        if: steps.scope.outputs.enabled == 'true'
         with:
           version: 10.31.0
       - uses: actions/setup-node@v4
-        if: steps.scope.outputs.enabled == 'true'
         with:
           node-version: 24
           cache: pnpm
-      - if: steps.scope.outputs.enabled == 'true'
-        run: pnpm install --frozen-lockfile
-      - if: steps.scope.outputs.enabled == 'true'
-        run: pnpm infra:up
-      - if: steps.scope.outputs.enabled == 'true'
-        run: pnpm db:migrate
-      - if: steps.scope.outputs.enabled == 'true'
-        run: pnpm test:integration
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm db:generate
+      - run: pnpm db:migrate
+      - run: pnpm test:integration

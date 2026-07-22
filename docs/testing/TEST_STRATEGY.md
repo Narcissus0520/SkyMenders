@@ -37,3 +37,11 @@ Core deterministic packages must reach at least 95% statement and 90% branch cov
 - The AI golden decision freezes command, trace, next RNG state, and canonical hash. A 48-seed property suite repeats complete enemy phases and validates both battle and AI authority states.
 - Serializable debug-view tests cover behavior traces, candidate utility vectors, rejection reasons, selection markers, and text rendering without exposing a mutation path.
 - `ai-core` enforces at least 85% statement and 80% branch coverage; battle, terrain, and deterministic runtime retain their stricter 95%/90% gates.
+
+## Phase 7 account and save evidence
+
+- Protocol tests reject extra credential fields, malformed save documents, zero RNG state, and local conflict choices without a local document.
+- Save tests cover sealing/tamper detection, legacy migration, compatibility rejection, turn/node/expedition fallback, duplicate restart rejection, explicit branch choice, and monotonic progress merge.
+- Client tests cover an empty session, login/refresh/logout, access refresh after 401, invalid stored credentials, two-slot journal fallback, process restart, offline queueing, weak-network retries, stable idempotency keys, summary-only conflicts, and both conflict decisions.
+- HTTP integration tests cover OpenAPI, stable error envelopes, authorization and revocation, settings idempotency, progress merge, save compare-and-swap, conflict resolution, export, and hard deletion against the in-memory adapter.
+- Server Integration CI starts PostgreSQL 17.5, applies the checked-in Prisma migration to an empty database, then runs the HTTP suite and the real-adapter cascade deletion test. Local runs skip only this database test when `TEST_DATABASE_URL` is absent.

@@ -1,6 +1,6 @@
 {
   "name": "@skymenders/game-client",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "description": "Cocos Creator 3.8.8 WeChat Mini Game client for SkyMenders",
@@ -23,8 +23,11 @@
     "@skymenders/battle-core": "workspace:*",
     "@skymenders/content-runtime": "workspace:*",
     "@skymenders/content-schema": "workspace:*",
+    "@skymenders/deterministic-runtime": "workspace:*",
     "@skymenders/protocol": "workspace:*",
-    "@skymenders/terrain-core": "workspace:*"
+    "@skymenders/save-migration": "workspace:*",
+    "@skymenders/terrain-core": "workspace:*",
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@types/node": "catalog:",

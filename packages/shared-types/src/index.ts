@@ -60,7 +60,15 @@ export const PHASE_6_PRODUCT_VERSIONS: ProductVersions = Object.freeze({
   rulesVersion: "0.5.0",
 });
 
-export const CURRENT_PRODUCT_VERSIONS: ProductVersions = PHASE_6_PRODUCT_VERSIONS;
+export const PHASE_7_PRODUCT_VERSIONS: ProductVersions = Object.freeze({
+  ...PHASE_6_PRODUCT_VERSIONS,
+  clientVersion: "0.3.0",
+  protocolVersion: "0.3.0",
+  saveSchemaVersion: "0.1.0",
+  serverVersion: "0.1.0",
+});
+
+export const CURRENT_PRODUCT_VERSIONS: ProductVersions = PHASE_7_PRODUCT_VERSIONS;
 
 const VERSION_PATTERN = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/;
 

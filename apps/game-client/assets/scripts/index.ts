@@ -1,4 +1,5 @@
 export * from "./accessibility/accessibility.js";
+export * from "./account/AuthSessionManager.js";
 export * from "./audio/AudioDirector.js";
 export * from "./battle/animation/RobotAnimator.js";
 export * from "./battle/BattleSession.js";
@@ -15,5 +16,8 @@ export * from "./platform/mock/MockPlatformAdapter.js";
 export type * from "./platform/platform-adapter.js";
 export * from "./platform/wechat/WechatPlatformAdapter.js";
 export * from "./pve/PveFlowModel.js";
+export * from "./save/CloudSaveCoordinator.js";
+export * from "./save/HttpCloudSaveGateway.js";
+export * from "./save/LocalSaveStore.js";
 export * from "./settings/settings.js";
 export * from "./ui/MainMenuModel.js";
