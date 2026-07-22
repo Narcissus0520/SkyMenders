@@ -10,6 +10,7 @@ import {
   PHASE_5_PRODUCT_VERSIONS,
   PHASE_6_PRODUCT_VERSIONS,
   PHASE_7_PRODUCT_VERSIONS,
+  PHASE_8_PRODUCT_VERSIONS,
   RELEASE_CHANNELS,
   isProductVersions,
 } from "../src/index.js";
@@ -92,7 +93,18 @@ describe("product version contract", () => {
       saveSchemaVersion: "0.1.0",
       serverVersion: "0.1.0",
     });
-    expect(CURRENT_PRODUCT_VERSIONS).toBe(PHASE_7_PRODUCT_VERSIONS);
+    expect(isProductVersions(PHASE_7_PRODUCT_VERSIONS)).toBe(true);
+  });
+
+  it("versions the daily client, replay contract, protocol, and server for Phase 8", () => {
+    expect(PHASE_8_PRODUCT_VERSIONS).toEqual({
+      ...PHASE_7_PRODUCT_VERSIONS,
+      clientVersion: "0.4.0",
+      protocolVersion: "0.4.0",
+      replaySchemaVersion: "0.2.0",
+      serverVersion: "0.2.0",
+    });
+    expect(CURRENT_PRODUCT_VERSIONS).toBe(PHASE_8_PRODUCT_VERSIONS);
     expect(isProductVersions(CURRENT_PRODUCT_VERSIONS)).toBe(true);
   });
 

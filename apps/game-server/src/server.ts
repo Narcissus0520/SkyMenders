@@ -26,7 +26,7 @@ export async function createGameServer(
     app,
     new DocumentBuilder()
       .setTitle("SkyMenders Game API")
-      .setVersion("0.1.0")
+      .setVersion("0.2.0")
       .addBearerAuth()
       .build(),
   );

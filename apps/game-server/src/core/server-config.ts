@@ -12,6 +12,9 @@ const serverConfigSchema = z
     wechatAppSecret: z.string().min(1),
     accessTokenIssuer: z.string().min(1),
     accessTokenAudience: z.string().min(1),
+    redisUrl: z.string().min(1),
+    challengeSeedSecret: z.string().min(32),
+    dailyChallengeTimeZone: z.string().min(1),
   })
   .strict();
 
@@ -29,5 +32,8 @@ export function loadServerConfig(environment: NodeJS.ProcessEnv = process.env): 
     wechatAppSecret: environment.WECHAT_APP_SECRET,
     accessTokenIssuer: environment.ACCESS_TOKEN_ISSUER ?? "skymenders-api",
     accessTokenAudience: environment.ACCESS_TOKEN_AUDIENCE ?? "skymenders-client",
+    redisUrl: environment.REDIS_URL,
+    challengeSeedSecret: environment.CHALLENGE_SEED_SECRET,
+    dailyChallengeTimeZone: environment.DAILY_CHALLENGE_TIME_ZONE ?? "Asia/Shanghai",
   });
 }

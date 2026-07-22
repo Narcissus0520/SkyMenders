@@ -68,7 +68,15 @@ export const PHASE_7_PRODUCT_VERSIONS: ProductVersions = Object.freeze({
   serverVersion: "0.1.0",
 });
 
-export const CURRENT_PRODUCT_VERSIONS: ProductVersions = PHASE_7_PRODUCT_VERSIONS;
+export const PHASE_8_PRODUCT_VERSIONS: ProductVersions = Object.freeze({
+  ...PHASE_7_PRODUCT_VERSIONS,
+  clientVersion: "0.4.0",
+  protocolVersion: "0.4.0",
+  replaySchemaVersion: "0.2.0",
+  serverVersion: "0.2.0",
+});
+
+export const CURRENT_PRODUCT_VERSIONS: ProductVersions = PHASE_8_PRODUCT_VERSIONS;
 
 const VERSION_PATTERN = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/;
 

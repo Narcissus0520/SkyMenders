@@ -1,9 +1,16 @@
 import type {
   AccountProgressSave,
+  DailyAttemptCheckpointRequest,
+  DailyAttemptMode,
+  DailyAttemptStatus,
+  DailyChallengeDefinition,
   DeviceKind,
   ExpeditionSaveDocument,
+  FinishDailyAttemptRequest,
+  LeaderboardEntry,
   PrivacyRequestResponse,
   ProfileSettings,
+  ReplayVerificationResult,
 } from "@skymenders/protocol";
 
 export interface AccountRecord {
@@ -34,6 +41,53 @@ export interface PrivacyRecord extends PrivacyRequestResponse {
 export interface StoredHttpResult {
   readonly statusCode: number;
   readonly response: unknown;
+}
+
+export interface DailyChallengeRecord {
+  readonly id: string;
+  readonly definition: DailyChallengeDefinition;
+  readonly createdAt: Date;
+}
+
+export interface DailyAttemptRecord {
+  readonly id: string;
+  readonly accountId: string;
+  readonly challengeId: string;
+  readonly mode: DailyAttemptMode;
+  readonly formalSlot: number | null;
+  readonly status: DailyAttemptStatus;
+  readonly checkpointIndex: number | null;
+  readonly checkpoint: DailyAttemptCheckpointRequest | null;
+  readonly startedAt: Date;
+  readonly updatedAt: Date;
+  readonly completedAt: Date | null;
+}
+
+export interface ReplaySubmissionRecord {
+  readonly id: string;
+  readonly attemptId: string;
+  readonly request: FinishDailyAttemptRequest;
+  readonly status: "queued" | "verifying" | "verified" | "rejected";
+  readonly score: number | null;
+  readonly totalTurns: number | null;
+  readonly rejectionCode: ReplayVerificationResult["rejectionCode"];
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
+  readonly verifiedAt: Date | null;
+}
+
+export interface ReplayVerificationContext {
+  readonly submission: ReplaySubmissionRecord;
+  readonly challenge: DailyChallengeRecord;
+}
+
+export interface StoredLeaderboardEntry extends Omit<LeaderboardEntry, "rank"> {
+  readonly id: string;
+  readonly challengeId: string;
+  readonly accountId: string;
+  readonly submissionId: string;
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
 }
 
 export interface SaveArchiveInput {
@@ -99,6 +153,60 @@ export interface GameRepository {
     result: StoredHttpResult,
     expiresAt: Date,
   ): Promise<void>;
+  ensureDailyChallenge(record: DailyChallengeRecord): Promise<DailyChallengeRecord>;
+  getDailyChallenge(challengeId: string): Promise<DailyChallengeRecord | null>;
+  countFormalAttempts(accountId: string, challengeId: string): Promise<number>;
+  findActiveDailyAttempt(
+    accountId: string,
+    challengeId: string,
+  ): Promise<DailyAttemptRecord | null>;
+  createPracticeAttempt(record: DailyAttemptRecord): Promise<DailyAttemptRecord>;
+  createFormalAttempt(record: DailyAttemptRecord): Promise<DailyAttemptRecord | null>;
+  getDailyAttempt(accountId: string, attemptId: string): Promise<DailyAttemptRecord | null>;
+  saveDailyCheckpoint(
+    accountId: string,
+    attemptId: string,
+    checkpoint: DailyAttemptCheckpointRequest,
+    now: Date,
+  ): Promise<boolean>;
+  abandonDailyAttempt(accountId: string, attemptId: string, now: Date): Promise<boolean>;
+  submitDailyAttempt(
+    accountId: string,
+    attemptId: string,
+    request: FinishDailyAttemptRequest,
+    now: Date,
+  ): Promise<ReplaySubmissionRecord | null>;
+  getReplaySubmission(submissionId: string): Promise<ReplaySubmissionRecord | null>;
+  getReplayVerificationContext(submissionId: string): Promise<ReplayVerificationContext | null>;
+  completeReplaySubmission(
+    submissionId: string,
+    result: ReplayVerificationResult,
+    now: Date,
+  ): Promise<{ readonly challengeId: string; readonly leaderboardChanged: boolean } | null>;
+  listLeaderboard(
+    challengeId: string,
+    offset: number,
+    limit: number,
+  ): Promise<readonly StoredLeaderboardEntry[]>;
+  getLeaderboardEntry(
+    challengeId: string,
+    accountId: string,
+  ): Promise<{ readonly entry: StoredLeaderboardEntry; readonly rank: number } | null>;
+  health(): Promise<void>;
+  close(): Promise<void>;
+}
+
+export interface ReplayVerificationQueue {
+  enqueue(submissionId: string): Promise<void>;
+  health(): Promise<void>;
+  close(): Promise<void>;
+}
+
+export interface LeaderboardCache {
+  get(key: string): Promise<unknown>;
+  set(key: string, value: unknown, ttlSeconds: number): Promise<void>;
+  invalidateChallenge(challengeId: string): Promise<void>;
+  health(): Promise<void>;
   close(): Promise<void>;
 }
 
@@ -114,3 +222,6 @@ export const GAME_REPOSITORY = Symbol("GAME_REPOSITORY");
 export const WECHAT_CODE_EXCHANGE = Symbol("WECHAT_CODE_EXCHANGE");
 export const SERVER_CLOCK = Symbol("SERVER_CLOCK");
 export const SERVER_CONFIG = Symbol("SERVER_CONFIG");
+export const REPLAY_VERIFICATION_QUEUE = Symbol("REPLAY_VERIFICATION_QUEUE");
+export const LEADERBOARD_CACHE = Symbol("LEADERBOARD_CACHE");
+export const CHALLENGE_CONTENT = Symbol("CHALLENGE_CONTENT");

@@ -3,5 +3,8 @@ export * from "./core/contracts.js";
 export * from "./core/server-config.js";
 export * from "./infrastructure/memory.repository.js";
 export * from "./infrastructure/prisma.repository.js";
+export * from "./infrastructure/challenge-queue.js";
+export * from "./infrastructure/challenge-runtime.js";
+export * from "./infrastructure/leaderboard-cache.js";
 export * from "./infrastructure/wechat-code-exchange.js";
 export * from "./server.js";

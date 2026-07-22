@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 
+import { createDailyChallenge } from "@skymenders/challenge-core";
+
 import { loadServerConfig } from "../src/core/server-config.js";
+import { loadChallengeContent } from "../src/infrastructure/challenge-runtime.js";
+import { MemoryGameRepository } from "../src/infrastructure/memory.repository.js";
 import { HttpWechatCodeExchange } from "../src/infrastructure/wechat-code-exchange.js";
 
 describe("server configuration boundary", () => {
@@ -13,6 +17,8 @@ describe("server configuration boundary", () => {
         ACCESS_TOKEN_SECRET: "server-access-secret-with-thirty-two-bytes",
         WECHAT_APP_ID: "app-id",
         WECHAT_APP_SECRET: "app-secret",
+        REDIS_URL: "redis://127.0.0.1:6379",
+        CHALLENGE_SEED_SECRET: "challenge-seed-secret-with-thirty-two-bytes",
       }),
     ).toMatchObject({
       nodeEnv: "test",
@@ -63,5 +69,39 @@ describe("WeChat code exchange boundary", () => {
       statusCode: 503,
       code: "WECHAT_UNAVAILABLE",
     });
+  });
+});
+
+describe("daily definition persistence boundary", () => {
+  it("keeps the first definition frozen when a seed secret rotates during the business day", async () => {
+    const repository = new MemoryGameRepository();
+    const content = loadChallengeContent();
+    const instant = new Date("2026-07-22T08:00:00.000Z");
+    const common = {
+      instant,
+      timeZone: "Asia/Shanghai",
+      rulesVersion: "0.5.0",
+      contentVersion: "0.1.0",
+    };
+    const first = createDailyChallenge(content, {
+      ...common,
+      seedSecret: "first-daily-secret-with-at-least-thirty-two-bytes",
+    });
+    const rotated = createDailyChallenge(content, {
+      ...common,
+      seedSecret: "rotated-daily-secret-with-at-least-thirty-two-bytes",
+    });
+    expect(rotated.challengeId).not.toBe(first.challengeId);
+    await repository.ensureDailyChallenge({
+      id: first.challengeId,
+      definition: first,
+      createdAt: instant,
+    });
+    const frozen = await repository.ensureDailyChallenge({
+      id: rotated.challengeId,
+      definition: rotated,
+      createdAt: instant,
+    });
+    expect(frozen.definition).toEqual(first);
   });
 });

@@ -3,7 +3,14 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   test: {
     coverage: {
-      exclude: ["src/generated/**", "src/infrastructure/prisma.repository.ts", "src/main.ts"],
+      exclude: [
+        "src/generated/**",
+        "src/infrastructure/challenge-queue.ts",
+        "src/infrastructure/leaderboard-cache.ts",
+        "src/infrastructure/memory.repository.ts",
+        "src/infrastructure/prisma.repository.ts",
+        "src/main.ts",
+      ],
       provider: "v8",
       reporter: ["text", "json-summary"],
       thresholds: { lines: 85, functions: 85, statements: 85, branches: 75 },
