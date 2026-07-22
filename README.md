@@ -55,4 +55,4 @@ Service integration, Web E2E, and Cocos gates are added with the phases that int
 
 ## Current status
 
-Phases 0-2 are merged. Phase 3 implements whole-round battle authority, movement, shared energy, cooldowns, dual durability, objectives, all 18 launch modules and their two mechanical routes, deterministic field interactions, command checkpoints, content deadlock validation, and battle golden/property tests. Run `pnpm test:determinism` and `pnpm test:performance` for authority evidence. See `docs/status/PROJECT_STATUS.md` for the exact phase and publication state.
+Phases 0-3 are merged. Phase 4 adds deterministic behavior-tree and utility AI, eight enemy prototypes, whitelisted elite variants, three non-scalar difficulty profiles, and four multi-stage bosses. AI and bosses can change authority only by issuing commands accepted by the shared battle reducer. Run `pnpm test:determinism` and `pnpm test:performance` for authority evidence. See `docs/status/PROJECT_STATUS.md` for the exact phase and publication state.

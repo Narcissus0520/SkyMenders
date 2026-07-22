@@ -74,7 +74,8 @@ describe("battle state and definition validation", () => {
   it("detects required-module energy deadlocks while critical interaction stays free", () => {
     const deadlocked = battleFixture({
       actorOverrides: {
-        "enemy:1": {
+        "player:1": {
+          mainModuleId: "main_gravity_pin",
           structuralDamage: 30,
           faults: [{ kind: "cooling_fault", source: "overload", severity: "minor" }],
         },
@@ -105,6 +106,7 @@ describe("battle state and definition validation", () => {
       worldObjects: deadlocked.worldObjects,
       config: deadlocked.config,
       initialEnergy: deadlocked.energy.current,
+      initialEnemyEnergy: deadlocked.enemyEnergy.current,
     });
     expect(report.valid).toBe(false);
     expect(report.issues.map((issue) => issue.code)).toContain("OBJECTIVE_ENERGY_DEADLOCK");

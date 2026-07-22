@@ -179,7 +179,8 @@ describe("eight main module mechanics", () => {
       moduleCommand(turbine, "enemy:3", "main_wind_generator", 16, 3),
       turbine.config,
     );
-    expect(turbineResult.state.energy.current).toBe(10);
+    expect(turbineResult.state.enemyEnergy.current).toBe(10);
+    expect(turbineResult.state.energy.current).toBe(12);
   });
 
   it.each([
@@ -194,7 +195,8 @@ describe("eight main module mechanics", () => {
     );
     expect(result.state.terrain.supportRoots.at(-1)).toMatchObject({ capacity });
     expect(result.state.temporarySupports[0]?.remainingRounds).toBe(duration);
-    expect(result.state.energy.current).toBe(energy);
+    expect(result.state.enemyEnergy.current).toBe(energy);
+    expect(result.state.energy.current).toBe(12);
   });
 
   it.each([

@@ -16,11 +16,13 @@ import { applyObjectiveSignal } from "./objectives.js";
 import {
   actorCooldown,
   actorHasModule,
+  actorTeamEnergy,
   effectiveModuleCooldown,
   effectiveModuleEnergyCost,
   findBattleActor,
   manhattanDistance,
   replaceBattleActor,
+  replaceActorTeamEnergy,
   selectedRoute,
   terrainIntegrityPermille,
 } from "./state.js";
@@ -60,14 +62,16 @@ export function resolveModuleCommand(
     actionEnded: definition.endsAction || actor.actionEnded,
     cooldowns: setCooldown(actor.cooldowns, moduleId, cooldown),
   };
-  let prepared: BattleState = {
-    ...replaceBattleActor(state, preparedActor),
-    energy: { ...state.energy, current: state.energy.current - energyCost },
-  };
+  const teamEnergy = actorTeamEnergy(state, actor.team);
+  let prepared = replaceActorTeamEnergy(replaceBattleActor(state, preparedActor), actor.team, {
+    ...teamEnergy,
+    current: teamEnergy.current - energyCost,
+  });
   const effects: BattleRuleEffect[] = [
     ruleEffect("energy_changed", actor.id, null, null, null, -energyCost, 0, {
       moduleId,
       reason: "module_cost",
+      team: actor.team,
     }),
   ];
 
@@ -76,17 +80,21 @@ export function resolveModuleCommand(
   effects.push(...resolved.effects);
 
   if (existingRecycler !== undefined) {
+    const preparedTeamEnergy = actorTeamEnergy(prepared, actor.team);
     const refund = Math.min(
       existingRecycler.magnitude,
-      prepared.energy.maximum - prepared.energy.current,
+      preparedTeamEnergy.maximum - preparedTeamEnergy.current,
     );
-    prepared = {
-      ...prepared,
-      energy: { ...prepared.energy, current: prepared.energy.current + refund },
-      fieldEffects: prepared.fieldEffects.map((effect) =>
-        effect.id === existingRecycler.id ? { ...effect, consumed: true } : effect,
-      ),
-    };
+    prepared = replaceActorTeamEnergy(
+      {
+        ...prepared,
+        fieldEffects: prepared.fieldEffects.map((effect) =>
+          effect.id === existingRecycler.id ? { ...effect, consumed: true } : effect,
+        ),
+      },
+      actor.team,
+      { ...preparedTeamEnergy, current: preparedTeamEnergy.current + refund },
+    );
     effects.push(
       ruleEffect(
         "energy_changed",
@@ -99,6 +107,7 @@ export function resolveModuleCommand(
         {
           moduleId,
           reason: "energy_recycler",
+          team: actor.team,
         },
       ),
     );
@@ -404,16 +413,18 @@ function resolveWindGenerator(state: BattleState, command: UseModuleCommand): Ba
   );
   const appended = appendField(state, field);
   if (route !== "wind_generator_turbine") return appended;
-  const refund = Math.min(1, state.energy.maximum - appended.state.energy.current);
+  const teamEnergy = actorTeamEnergy(appended.state, actor.team);
+  const refund = Math.min(1, teamEnergy.maximum - teamEnergy.current);
   return {
-    state: {
-      ...appended.state,
-      energy: { ...appended.state.energy, current: appended.state.energy.current + refund },
-    },
+    state: replaceActorTeamEnergy(appended.state, actor.team, {
+      ...teamEnergy,
+      current: teamEnergy.current + refund,
+    }),
     effects: [
       ...appended.effects,
       ruleEffect("energy_changed", actor.id, null, target.x, target.y, refund, 0, {
         reason: "wind_turbine",
+        team: actor.team,
       }),
     ],
   };
@@ -451,11 +462,16 @@ function resolveSupportFrame(state: BattleState, command: UseModuleCommand): Bat
     }),
   ];
   if (route === "support_frame_mobile") {
-    const refund = Math.min(1, next.energy.maximum - next.energy.current);
-    next = { ...next, energy: { ...next.energy, current: next.energy.current + refund } };
+    const teamEnergy = actorTeamEnergy(next, actor.team);
+    const refund = Math.min(1, teamEnergy.maximum - teamEnergy.current);
+    next = replaceActorTeamEnergy(next, actor.team, {
+      ...teamEnergy,
+      current: teamEnergy.current + refund,
+    });
     effects.push(
       ruleEffect("energy_changed", actor.id, rootId, target.x, target.y, refund, 0, {
         reason: "mobile_support",
+        team: actor.team,
       }),
     );
   }
@@ -813,11 +829,16 @@ function resolveStructureScanner(state: BattleState, command: UseModuleCommand):
     ),
   ];
   if (route === "structure_scanner_salvage" && supportRiskCellIndices.length > 0) {
-    const refund = Math.min(1, next.energy.maximum - next.energy.current);
-    next = { ...next, energy: { ...next.energy, current: next.energy.current + refund } };
+    const teamEnergy = actorTeamEnergy(next, actor.team);
+    const refund = Math.min(1, teamEnergy.maximum - teamEnergy.current);
+    next = replaceActorTeamEnergy(next, actor.team, {
+      ...teamEnergy,
+      current: teamEnergy.current + refund,
+    });
     effects.push(
       ruleEffect("energy_changed", actor.id, null, null, null, refund, 0, {
         reason: "structure_salvage",
+        team: actor.team,
       }),
     );
   }
@@ -854,7 +875,9 @@ function assertModuleUsable(
   }
   if (actorCooldown(actor, moduleId) > 0) throw new Error(`module is cooling down: ${moduleId}`);
   const cost = effectiveModuleEnergyCost(actor, moduleId);
-  if (state.energy.current < cost) throw new Error(`insufficient team energy for ${moduleId}`);
+  if (actorTeamEnergy(state, actor.team).current < cost) {
+    throw new Error(`insufficient team energy for ${moduleId}`);
+  }
   if (command.originX !== actor.x || command.originY !== actor.y) {
     throw new Error("module origin must match the authoritative actor position");
   }

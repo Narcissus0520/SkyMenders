@@ -10,6 +10,7 @@ import { applyObjectiveSignal, failObjective } from "./objectives.js";
 import { replaceBattleActor, terrainIntegrityPermille } from "./state.js";
 import type {
   BattleActor,
+  BattleEnergyState,
   BattleRuleEffect,
   BattleState,
   BattleTransition,
@@ -124,23 +125,8 @@ function settleEnvironment(state: BattleState): BattleTransition {
   effects.push(...entitySettlement.effects);
 
   const actors = next.actors.map(resetActorForRound);
-  const regenerated = Math.min(
-    next.energy.maximum,
-    next.energy.current + next.energy.regenerationPerRound,
-  );
-  const regeneration = regenerated - next.energy.current;
-  if (regeneration > 0) {
-    effects.push({
-      kind: "energy_changed",
-      sourceId: "environment",
-      targetId: null,
-      targetX: null,
-      targetY: null,
-      magnitude: regeneration,
-      duration: 0,
-      details: { reason: "round_regeneration" },
-    });
-  }
+  const playerEnergy = regenerateEnergy(next.energy, "player", effects);
+  const enemyEnergy = regenerateEnergy(next.enemyEnergy, "enemy", effects);
   next = {
     ...next,
     turnIndex: next.turnIndex + 1,
@@ -149,11 +135,8 @@ function settleEnvironment(state: BattleState): BattleTransition {
     terrain,
     temporarySupports: survivingSupports,
     temporaryTerrain: survivingTerrain,
-    energy: {
-      ...next.energy,
-      current: regenerated,
-      waitEnergyGrantedThisRound: 0,
-    },
+    energy: playerEnergy,
+    enemyEnergy,
     statistics: {
       ...next.statistics,
       terrainIntegrityPermille: terrainIntegrityPermille(
@@ -184,6 +167,28 @@ function settleEnvironment(state: BattleState): BattleTransition {
     effects.push(...integrity.effects);
   }
   return { state: next, effects };
+}
+
+function regenerateEnergy(
+  energy: BattleEnergyState,
+  team: "player" | "enemy",
+  effects: BattleRuleEffect[],
+): BattleEnergyState {
+  const current = Math.min(energy.maximum, energy.current + energy.regenerationPerRound);
+  const regeneration = current - energy.current;
+  if (regeneration > 0) {
+    effects.push({
+      kind: "energy_changed",
+      sourceId: "environment",
+      targetId: null,
+      targetX: null,
+      targetY: null,
+      magnitude: regeneration,
+      duration: 0,
+      details: { reason: "round_regeneration", team },
+    });
+  }
+  return { ...energy, current, waitEnergyGrantedThisRound: 0 };
 }
 
 function settleEntities(state: BattleState, terrain: BattleState["terrain"]): BattleTransition {
