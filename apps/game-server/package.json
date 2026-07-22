@@ -1,0 +1,56 @@
+{
+  "name": "@skymenders/game-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "prisma generate && tsc -p tsconfig.build.json",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate deploy",
+    "db:seed": "tsx prisma/seed.ts",
+    "dev": "tsx watch src/main.ts",
+    "lint": "prisma generate && eslint src test prisma",
+    "start": "node dist/main.js",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:integration": "pnpm --filter @skymenders/game-server... run build && vitest run test/http.integration.test.ts test/prisma.integration.test.ts",
+    "typecheck": "prisma generate && tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@fastify/helmet": "13.1.0",
+    "@fastify/rate-limit": "11.1.0",
+    "@fastify/static": "9.3.0",
+    "@nestjs/common": "11.1.28",
+    "@nestjs/core": "11.1.28",
+    "@nestjs/platform-fastify": "11.1.28",
+    "@nestjs/swagger": "11.4.6",
+    "@prisma/adapter-pg": "7.9.0",
+    "@prisma/client": "7.9.0",
+    "@skymenders/protocol": "workspace:*",
+    "@skymenders/save-migration": "workspace:*",
+    "@skymenders/security": "workspace:*",
+    "fastify": "5.10.0",
+    "pg": "8.16.3",
+    "reflect-metadata": "0.2.2",
+    "rxjs": "7.8.2",
+    "uuid": "14.0.1",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@types/pg": "8.15.5",
+    "@vitest/coverage-v8": "catalog:",
+    "@skymenders/deterministic-runtime": "workspace:*",
+    "eslint": "catalog:",
+    "prisma": "7.9.0",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

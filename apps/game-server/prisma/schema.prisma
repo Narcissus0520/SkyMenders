@@ -1,0 +1,147 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "esm"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Account {
+  id              String              @id @db.Uuid
+  createdAt       DateTime            @default(now()) @db.Timestamptz(3)
+  updatedAt       DateTime            @updatedAt @db.Timestamptz(3)
+  platformSubject PlatformSubject?
+  sessions        Session[]
+  profile         Profile?
+  progress        AccountProgress?
+  unlocks         Unlock[]
+  achievements    Achievement[]
+  expeditionSave  ExpeditionSave?
+  recoveryRecords SaveRecovery[]
+  privacyRequests PrivacyRequest[]
+  idempotency     IdempotencyRecord[]
+
+  @@map("accounts")
+}
+
+model PlatformSubject {
+  id          String   @id @db.Uuid
+  accountId   String   @unique @db.Uuid
+  platform    String
+  subjectHash String   @unique @db.VarChar(64)
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  account     Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@index([platform, subjectHash])
+  @@map("platform_subjects")
+}
+
+model Session {
+  id               String    @id @db.Uuid
+  accountId        String    @db.Uuid
+  refreshTokenHash String    @unique @db.VarChar(64)
+  deviceKind       String    @db.VarChar(16)
+  createdAt        DateTime  @default(now()) @db.Timestamptz(3)
+  expiresAt        DateTime  @db.Timestamptz(3)
+  revokedAt        DateTime? @db.Timestamptz(3)
+  account          Account   @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@index([accountId, expiresAt])
+  @@map("sessions")
+}
+
+model Profile {
+  accountId  String   @id @db.Uuid
+  systemCode String   @unique @db.VarChar(64)
+  settings   Json
+  createdAt  DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt  DateTime @updatedAt @db.Timestamptz(3)
+  account    Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@map("profiles")
+}
+
+model AccountProgress {
+  accountId    String   @id @db.Uuid
+  logicalClock Int
+  document     Json
+  updatedAt    DateTime @db.Timestamptz(3)
+  account      Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@map("account_progress")
+}
+
+model Unlock {
+  accountId  String   @db.Uuid
+  unlockId   String   @db.VarChar(96)
+  unlockedAt DateTime @default(now()) @db.Timestamptz(3)
+  account    Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@id([accountId, unlockId])
+  @@map("unlocks")
+}
+
+model Achievement {
+  accountId     String   @db.Uuid
+  achievementId String   @db.VarChar(96)
+  unlockedAt    DateTime @default(now()) @db.Timestamptz(3)
+  account       Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@id([accountId, achievementId])
+  @@map("achievements")
+}
+
+model ExpeditionSave {
+  accountId    String   @id @db.Uuid
+  revision     Int
+  logicalClock Int
+  document     Json
+  updatedAt    DateTime @db.Timestamptz(3)
+  account      Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@map("expedition_saves")
+}
+
+model SaveRecovery {
+  id        String   @id @db.Uuid
+  accountId String   @db.Uuid
+  kind      String   @db.VarChar(32)
+  document  Json
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  expiresAt DateTime @db.Timestamptz(3)
+  account   Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@index([accountId, expiresAt])
+  @@map("save_recovery")
+}
+
+model PrivacyRequest {
+  id          String    @id @db.Uuid
+  accountId   String?   @db.Uuid
+  kind        String    @db.VarChar(16)
+  status      String    @db.VarChar(16)
+  createdAt   DateTime  @default(now()) @db.Timestamptz(3)
+  completedAt DateTime? @db.Timestamptz(3)
+  account     Account?  @relation(fields: [accountId], references: [id], onDelete: SetNull)
+
+  @@index([accountId, createdAt])
+  @@map("privacy_requests")
+}
+
+model IdempotencyRecord {
+  id         String   @id @db.Uuid
+  accountId  String   @db.Uuid
+  route      String   @db.VarChar(128)
+  key        String   @db.VarChar(128)
+  statusCode Int
+  response   Json
+  createdAt  DateTime @default(now()) @db.Timestamptz(3)
+  expiresAt  DateTime @db.Timestamptz(3)
+  account    Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@unique([accountId, route, key])
+  @@index([expiresAt])
+  @@map("idempotency_records")
+}

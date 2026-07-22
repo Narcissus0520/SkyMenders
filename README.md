@@ -56,4 +56,4 @@ For an authorized local WeChat build, set untracked `COCOS_CREATOR_PATH` and `WE
 
 ## Current status
 
-Phases 0-5 are merged. Phase 6 adds the versioned four-region PvE content pack, deterministic route and reward runtime, sixteen validated maps, events, workshop, unlocks, achievements, compendium, six tutorials, and the Cocos PvE flow shell. Real WeChat/device evidence remains explicitly external. Run `pnpm content:validate`, `pnpm cocos:check`, `pnpm test:determinism`, and `pnpm test:performance` for current automated evidence. See `docs/status/PROJECT_STATUS.md` for exact status.
+Phases 0-6 are merged. Phase 7 adds pseudonymous accounts, rotating sessions, versioned local/cloud saves, deterministic recovery and migration, explicit conflict handling, privacy export/deletion, and the first NestJS/Fastify/PostgreSQL service. Real WeChat, deployed infrastructure, and device evidence remain explicitly external. Run `pnpm test`, `pnpm test:coverage`, `pnpm test:determinism`, `pnpm security:secrets`, and `pnpm infra:validate` for current automated evidence. See `docs/status/PROJECT_STATUS.md` for exact status.

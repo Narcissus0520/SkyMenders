@@ -1,6 +1,6 @@
 # Known Issues
 
-Last reviewed for Phase 6 on 2026-07-22. No open P0 or P1 issue remains.
+Last reviewed for Phase 7 on 2026-07-22. No open P0 or P1 issue remains.
 
 ## Open
 
@@ -13,12 +13,12 @@ Last reviewed for Phase 6 on 2026-07-22. No open P0 or P1 issue remains.
 
 ## Closed
 
-| ID      | Severity | Area                | Description                                                                                                         | Resolution                                                                                                                    |
-| ------- | -------- | ------------------- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| DET-001 | P1       | Determinism tooling | The authority scanner followed package-local `node_modules` links and reported forbidden APIs from dependencies.    | Restricted scanning to owned `src/` trees and added regression coverage for dependency and build outputs.                     |
-| DET-002 | P1       | Canonical state     | Sparse arrays could serialize to invalid JSON-shaped output instead of failing closed.                              | Canonical serialization now rejects holes explicitly and has a regression test.                                               |
-| DET-003 | P1       | Replay contract     | The first reducer contract did not expose the replay root seed and the golden reducer therefore did not bind to it. | Added immutable replay context, seed-sensitive golden state, checkpoint events, and a seed-change test.                       |
-| CI-001  | P1       | Server CI           | Protocol changes triggered server integration before the Phase 7 server/worker applications and scripts existed.    | The workflow now detects real app manifests, records an explicit deferred gate, and runs all real steps once both apps exist. |
-| TER-001 | P1       | Terrain anchors     | Treating every detached root as a malformed runtime state prevented deterministic destruction and later repair.     | Creation and map validation require attachment; runtime analysis skips destroyed roots while preserving them for repair.      |
+| ID      | Severity | Area                | Description                                                                                                         | Resolution                                                                                                                                 |
+| ------- | -------- | ------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| DET-001 | P1       | Determinism tooling | The authority scanner followed package-local `node_modules` links and reported forbidden APIs from dependencies.    | Restricted scanning to owned `src/` trees and added regression coverage for dependency and build outputs.                                  |
+| DET-002 | P1       | Canonical state     | Sparse arrays could serialize to invalid JSON-shaped output instead of failing closed.                              | Canonical serialization now rejects holes explicitly and has a regression test.                                                            |
+| DET-003 | P1       | Replay contract     | The first reducer contract did not expose the replay root seed and the golden reducer therefore did not bind to it. | Added immutable replay context, seed-sensitive golden state, checkpoint events, and a seed-change test.                                    |
+| CI-001  | P1       | Server CI           | Protocol changes triggered server integration before the Phase 7 server application and scripts existed.            | The workflow now provisions PostgreSQL, applies the real migration, and runs HTTP/database integration whenever server-owned paths change. |
+| TER-001 | P1       | Terrain anchors     | Treating every detached root as a malformed runtime state prevented deterministic destruction and later repair.     | Creation and map validation require attachment; runtime analysis skips destroyed roots while preserving them for repair.                   |
 
 P0 and P1 issues block phase completion and merge. P2 acceptance requires an explicit owner, impact, and release disposition.

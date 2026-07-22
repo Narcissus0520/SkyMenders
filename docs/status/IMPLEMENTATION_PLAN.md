@@ -10,8 +10,8 @@ This plan follows the mandatory phase order in `AGENTS.md`. A phase is complete 
 | 3     | Turn rules, movement, energy, durability, objectives, 18 modules        | Complete; PR #4 merged                | Complete module behavior and combination tests                  |
 | 4     | Behavior trees, utility AI, 8 enemies, elites, 4 bosses                 | Complete; PR #5 merged                | Legal commands and multi-strategy boss tests                    |
 | 5     | Cocos client, WeChat adapter, input, camera, UI, audio, accessibility   | Complete; PR #6 merged                | Automated gates pass; external device evidence is release-gated |
-| 6     | Four-region expedition, rewards, workshop, events, unlocks, 6 tutorials | Local full gate passed; PR/CI pending | Full-length expedition and content minimums                     |
-| 7     | Auth adapter, accounts, local/cloud saves, recovery, restart, migration | Planned                               | Weak-network recovery and deletion flow                         |
+| 6     | Four-region expedition, rewards, workshop, events, unlocks, 6 tutorials | Complete; PR #7 merged                | Full-length expedition and content minimums                     |
+| 7     | Auth adapter, accounts, local/cloud saves, recovery, restart, migration | Local full gate passed; PR/CI pending | Weak-network recovery and deletion flow                         |
 | 8     | Daily challenge, attempts, replay worker, anonymous leaderboard         | Planned                               | Tamper rejection and server-date enforcement                    |
 | 9     | Content Studio, gateway, Admin Console, publication and audit           | Planned                               | UI-authored valid content and traceable admin writes            |
 | 10    | Approved assets, performance, package budget, operations, legal prep    | Planned                               | No placeholders/unlicensed assets or P0/P1 issues               |
@@ -39,17 +39,20 @@ Phase 4 met these conditions and was squash-merged through PR #5 as `8b379497372
 
 Phase 5 met its automated conditions and was squash-merged through PR #6 as `6c1a70304f0c3e8d61d1ffb708ccee7c39a45fcb`. Its real Creator/device evidence remains correctly tracked under `EXT-001` and `EXT-006` and is not misrepresented as complete release evidence.
 
-## Current Phase 6 acceptance
+Phase 6 met its automated conditions and was squash-merged through PR #7 as `e2d90dee36b761bb67e9cb154cb99101f79d83b5`. Approved release assets and final balance evidence remain later release gates.
 
-- The content pack contains every required first-version robot, module route, enemy, Boss, region, map, objective, event, reward, workshop service, achievement, compendium entry, and tutorial.
-- All content is strict runtime-validated JSON and all player-facing strings use localization keys.
-- Every authored ID aligns with battle and AI authority catalogs; all sixteen maps pass terrain pre-battle validation.
-- A fixed seed generates four regions, two selected nodes plus a Boss per region, independent RNG streams, stable route visibility, and a twelve-node successful expedition.
-- Reward sets are locked, compatible, distinct, weighted toward owned-module upgrades, and protected from repeated attack-only offerings.
-- Progression unlocks options rather than permanent combat stats; workshop, event, achievement, compendium, recovery, defeat, and restart transitions are tested.
-- Six short tutorials require validated actions; standard expedition and formal daily access gates follow the product rules.
+## Current Phase 7 acceptance
+
+- WeChat login codes are exchanged only on the server; platform subjects are pseudonymized and client bundles contain no platform secret.
+- Access tokens are short-lived and memory-only on the client; opaque refresh tokens are hashed, rotated, revoked on logout, and never exported.
+- Account progress merges monotonically while expedition saves use explicit revision compare-and-swap and summary-only conflicts.
+- Every durable expedition document is integrity-sealed and versioned; recovery falls back from turn start to node start to the expedition boundary.
+- One node restart is durable across devices, while migrations and incompatible-version failures are explicit and tested.
+- Local saves survive interrupted writes through a two-slot journal; cloud writes survive offline and transient failures through a durable queue and stable idempotency keys.
+- Privacy export omits platform and token secrets; hard deletion removes the account-owned graph and revokes the active session.
+- PostgreSQL migration and adapter behavior are mandatory in the dedicated Server Integration CI job.
 - Full local gates and required GitHub checks must pass before merge.
 
 ## Compatibility discipline
 
-Rules, content, save, replay, protocol, client, and server versions remain independent. Phase 1 established `rulesVersion`, `replaySchemaVersion`, and `protocolVersion` at `0.1.0`. Phase 2 advanced only `rulesVersion` to `0.2.0`. Phase 3 advanced `rulesVersion` to `0.3.0` and `protocolVersion` to `0.2.0`. Phase 4 advanced only `rulesVersion` to `0.4.0` and started AI schema `0.1.0`. Phase 5 advanced only `clientVersion` to `0.1.0`. Phase 6 advances content to `0.1.0`, expedition rules to `0.5.0`, and the PvE client flow to `0.2.0`; save, replay, protocol, and server versions remain unchanged. Later incompatible changes must increment only affected dimensions and include migrations or compatibility evidence.
+Rules, content, save, replay, protocol, client, and server versions remain independent. Phase 1 established `rulesVersion`, `replaySchemaVersion`, and `protocolVersion` at `0.1.0`. Phase 2 advanced only `rulesVersion` to `0.2.0`. Phase 3 advanced `rulesVersion` to `0.3.0` and `protocolVersion` to `0.2.0`. Phase 4 advanced only `rulesVersion` to `0.4.0` and started AI schema `0.1.0`. Phase 5 advanced only `clientVersion` to `0.1.0`. Phase 6 advanced content to `0.1.0`, expedition rules to `0.5.0`, and the PvE client flow to `0.2.0`. Phase 7 advances client and protocol to `0.3.0` and starts save and server schemas at `0.1.0`; content, rules, replay, and AI versions remain unchanged. Later incompatible changes must increment only affected dimensions and include migrations or compatibility evidence.
