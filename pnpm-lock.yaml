@@ -83,6 +83,12 @@ importers:
       '@skymenders/battle-core':
         specifier: workspace:*
         version: link:../../packages/battle-core
+      '@skymenders/content-runtime':
+        specifier: workspace:*
+        version: link:../../packages/content-runtime
+      '@skymenders/content-schema':
+        specifier: workspace:*
+        version: link:../../packages/content-schema
       '@skymenders/protocol':
         specifier: workspace:*
         version: link:../../packages/protocol
@@ -154,6 +160,59 @@ importers:
       '@skymenders/terrain-core':
         specifier: workspace:*
         version: link:../terrain-core
+    devDependencies:
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.13.3
+      '@vitest/coverage-v8':
+        specifier: 'catalog:'
+        version: 4.1.10(vitest@4.1.10)
+      eslint:
+        specifier: 'catalog:'
+        version: 9.39.5
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      vitest:
+        specifier: 'catalog:'
+        version: 4.1.10(@types/node@24.13.3)(@vitest/coverage-v8@4.1.10)(vite@7.3.6(@types/node@24.13.3)(tsx@4.23.1)(yaml@2.9.0))
+
+  packages/content-runtime:
+    dependencies:
+      '@skymenders/content-schema':
+        specifier: workspace:*
+        version: link:../content-schema
+      '@skymenders/deterministic-runtime':
+        specifier: workspace:*
+        version: link:../deterministic-runtime
+      '@skymenders/terrain-core':
+        specifier: workspace:*
+        version: link:../terrain-core
+    devDependencies:
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.13.3
+      '@vitest/coverage-v8':
+        specifier: 'catalog:'
+        version: 4.1.10(vitest@4.1.10)
+      eslint:
+        specifier: 'catalog:'
+        version: 9.39.5
+      tsx:
+        specifier: 'catalog:'
+        version: 4.23.1
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      vitest:
+        specifier: 'catalog:'
+        version: 4.1.10(@types/node@24.13.3)(@vitest/coverage-v8@4.1.10)(vite@7.3.6(@types/node@24.13.3)(tsx@4.23.1)(yaml@2.9.0))
+
+  packages/content-schema:
+    dependencies:
+      zod:
+        specifier: 'catalog:'
+        version: 4.4.3
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -306,6 +365,18 @@ importers:
 
   tools/content-validator:
     dependencies:
+      '@skymenders/ai-core':
+        specifier: workspace:*
+        version: link:../../packages/ai-core
+      '@skymenders/battle-core':
+        specifier: workspace:*
+        version: link:../../packages/battle-core
+      '@skymenders/content-runtime':
+        specifier: workspace:*
+        version: link:../../packages/content-runtime
+      '@skymenders/content-schema':
+        specifier: workspace:*
+        version: link:../../packages/content-schema
       zod:
         specifier: 'catalog:'
         version: 4.4.3

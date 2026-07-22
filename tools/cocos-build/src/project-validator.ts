@@ -7,6 +7,12 @@ export const BOOTSTRAP_SCENE = "assets/scenes/Bootstrap.scene";
 export const BOOTSTRAP_COMPONENT = "assets/scripts/cocos/CocosAppRoot.ts";
 export const BUILDER_SETTINGS = "settings/v2/packages/builder.json";
 export const FEATURE_BUNDLE_META = "assets/bundles/feature-collection.meta";
+export const PVE_FEATURE_BUNDLE_META = "assets/bundles/feature-pve.meta";
+
+const FEATURE_BUNDLES = [
+  { metaPath: FEATURE_BUNDLE_META, name: "feature-collection", configId: "auto_featureCollection" },
+  { metaPath: PVE_FEATURE_BUNDLE_META, name: "feature-pve", configId: "auto_featurePve" },
+] as const;
 
 export interface CocosProjectIssue {
   readonly code: string;
@@ -47,7 +53,7 @@ export function validateCocosProject(
     BOOTSTRAP_COMPONENT,
     `${BOOTSTRAP_COMPONENT}.meta`,
     BUILDER_SETTINGS,
-    FEATURE_BUNDLE_META,
+    ...FEATURE_BUNDLES.map((bundle) => bundle.metaPath),
   ];
   for (const path of requiredFiles) {
     if (!reader.exists(join(projectRoot, path))) {
@@ -68,7 +74,6 @@ export function validateCocosProject(
   const sceneValue = readJson(reader, projectRoot, BOOTSTRAP_SCENE, issues);
   const scene = Array.isArray(sceneValue) ? sceneValue : [];
   const builderSettings = objectAt(readJson(reader, projectRoot, BUILDER_SETTINGS, issues));
-  const bundleMeta = objectAt(readJson(reader, projectRoot, FEATURE_BUNDLE_META, issues));
 
   if (objectAt(project, "creator")?.version !== REQUIRED_COCOS_VERSION) {
     issue(
@@ -169,27 +174,30 @@ export function validateCocosProject(
     );
   }
 
-  const bundleUserData = objectAt(bundleMeta, "userData");
   const customBundles = objectAt(objectAt(builderSettings, "bundleConfig"), "custom");
-  const collectionBundle = objectAt(customBundles, "auto_featureCollection");
-  const bundleConfigs = objectAt(collectionBundle, "configs");
-  const miniGameConfig = objectAt(bundleConfigs, "miniGame");
-  const miniGameOverrides = objectAt(miniGameConfig, "overwriteSettings");
-  const wechatBundleConfig = objectAt(miniGameOverrides, "wechatgame");
-  if (
-    bundleUserData?.isBundle !== true ||
-    bundleUserData.bundleName !== "feature-collection" ||
-    bundleUserData.bundleConfigID !== "auto_featureCollection" ||
-    collectionBundle?.displayName !== "feature-collection" ||
-    wechatBundleConfig?.compressionType !== "subpackage" ||
-    wechatBundleConfig.isRemote !== false
-  ) {
-    issue(
-      issues,
-      "COCOS_FEATURE_BUNDLE_INVALID",
-      BUILDER_SETTINGS,
-      "collection assets must be a local WeChat mini-game subpackage Asset Bundle",
-    );
+  for (const expected of FEATURE_BUNDLES) {
+    const bundleMeta = objectAt(readJson(reader, projectRoot, expected.metaPath, issues));
+    const bundleUserData = objectAt(bundleMeta, "userData");
+    const bundle = objectAt(customBundles, expected.configId);
+    const bundleConfigs = objectAt(bundle, "configs");
+    const miniGameConfig = objectAt(bundleConfigs, "miniGame");
+    const miniGameOverrides = objectAt(miniGameConfig, "overwriteSettings");
+    const wechatBundleConfig = objectAt(miniGameOverrides, "wechatgame");
+    if (
+      bundleUserData?.isBundle !== true ||
+      bundleUserData.bundleName !== expected.name ||
+      bundleUserData.bundleConfigID !== expected.configId ||
+      bundle?.displayName !== expected.name ||
+      wechatBundleConfig?.compressionType !== "subpackage" ||
+      wechatBundleConfig.isRemote !== false
+    ) {
+      issue(
+        issues,
+        "COCOS_FEATURE_BUNDLE_INVALID",
+        BUILDER_SETTINGS,
+        `${expected.name} assets must be a local WeChat mini-game subpackage Asset Bundle`,
+      );
+    }
   }
 
   const scriptRoot = join(projectRoot, "assets", "scripts");

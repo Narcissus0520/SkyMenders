@@ -14,5 +14,6 @@ export * from "./localization/Localizer.js";
 export * from "./platform/mock/MockPlatformAdapter.js";
 export type * from "./platform/platform-adapter.js";
 export * from "./platform/wechat/WechatPlatformAdapter.js";
+export * from "./pve/PveFlowModel.js";
 export * from "./settings/settings.js";
 export * from "./ui/MainMenuModel.js";

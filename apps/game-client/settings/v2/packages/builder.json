@@ -33,6 +33,32 @@
             }
           }
         }
+      },
+      "auto_featurePve": {
+        "displayName": "feature-pve",
+        "configs": {
+          "native": {
+            "preferredOptions": {
+              "compressionType": "merge_dep",
+              "isRemote": false
+            }
+          },
+          "miniGame": {
+            "configMode": "overwrite",
+            "overwriteSettings": {
+              "wechatgame": {
+                "compressionType": "subpackage",
+                "isRemote": false
+              }
+            }
+          },
+          "web": {
+            "preferredOptions": {
+              "compressionType": "merge_dep",
+              "isRemote": false
+            }
+          }
+        }
       }
     }
   }

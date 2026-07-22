@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0.0",
+  "contentVersion": "0.1.0",
+  "robots": [
+    {
+      "id": "robot_rivet",
+      "nameKey": "robot.robot_rivet.name",
+      "roleKey": "robot.robot_rivet.role",
+      "passiveKey": "robot.robot_rivet.passive",
+      "skillKey": "robot.robot_rivet.skill",
+      "mainModuleId": "main_fold_bridge",
+      "auxiliaryModuleIds": ["aux_repair_spray", "aux_structure_scanner"],
+      "unlockCost": 0,
+      "strategyTags": ["build", "repair", "support"]
+    },
+    {
+      "id": "robot_anchor",
+      "nameKey": "robot.robot_anchor.name",
+      "roleKey": "robot.robot_anchor.role",
+      "passiveKey": "robot.robot_anchor.passive",
+      "skillKey": "robot.robot_anchor.skill",
+      "mainModuleId": "main_magnetic_anchor",
+      "auxiliaryModuleIds": ["aux_stabilizer", "aux_jammer"],
+      "unlockCost": 0,
+      "strategyTags": ["control", "magnetic", "objective"]
+    },
+    {
+      "id": "robot_gale",
+      "nameKey": "robot.robot_gale.name",
+      "roleKey": "robot.robot_gale.role",
+      "passiveKey": "robot.robot_gale.passive",
+      "skillKey": "robot.robot_gale.skill",
+      "mainModuleId": "main_wind_generator",
+      "auxiliaryModuleIds": ["aux_ejector", "aux_grapple"],
+      "unlockCost": 0,
+      "strategyTags": ["movement", "rescue", "wind"]
+    },
+    {
+      "id": "robot_prism",
+      "nameKey": "robot.robot_prism.name",
+      "roleKey": "robot.robot_prism.role",
+      "passiveKey": "robot.robot_prism.passive",
+      "skillKey": "robot.robot_prism.skill",
+      "mainModuleId": "main_energy_rail",
+      "auxiliaryModuleIds": ["aux_route_scanner", "aux_reflector"],
+      "unlockCost": 18,
+      "strategyTags": ["intel", "trajectory", "energy"]
+    },
+    {
+      "id": "robot_forge",
+      "nameKey": "robot.robot_forge.name",
+      "roleKey": "robot.robot_forge.role",
+      "passiveKey": "robot.robot_forge.passive",
+      "skillKey": "robot.robot_forge.skill",
+      "mainModuleId": "main_drill_bee",
+      "auxiliaryModuleIds": ["aux_terrain_foam", "aux_stabilizer"],
+      "unlockCost": 24,
+      "strategyTags": ["breach", "terrain", "precision"]
+    },
+    {
+      "id": "robot_echo",
+      "nameKey": "robot.robot_echo.name",
+      "roleKey": "robot.robot_echo.role",
+      "passiveKey": "robot.robot_echo.passive",
+      "skillKey": "robot.robot_echo.skill",
+      "mainModuleId": "main_bubble_capsule",
+      "auxiliaryModuleIds": ["aux_energy_recycler", "aux_repair_spray"],
+      "unlockCost": 30,
+      "strategyTags": ["support", "energy", "copy"]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "name": "@skymenders/content-runtime",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint src test benchmark",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:determinism": "vitest run test/determinism.test.ts",
+    "test:performance": "tsx benchmark/expedition-benchmark.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@skymenders/content-schema": "workspace:*",
+    "@skymenders/deterministic-runtime": "workspace:*",
+    "@skymenders/terrain-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "eslint": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

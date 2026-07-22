@@ -9,9 +9,13 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "validate": "tsx src/cli.ts"
+    "validate": "pnpm --filter @skymenders/content-validator... run build && node dist/cli.js"
   },
   "dependencies": {
+    "@skymenders/content-schema": "workspace:*",
+    "@skymenders/content-runtime": "workspace:*",
+    "@skymenders/ai-core": "workspace:*",
+    "@skymenders/battle-core": "workspace:*",
     "zod": "catalog:"
   },
   "devDependencies": {

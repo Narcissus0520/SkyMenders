@@ -95,6 +95,30 @@ describe("Cocos project validation", () => {
       ),
     ).toBe(true);
   });
+
+  it("requires the PvE bundle to remain a local mini-game subpackage", () => {
+    const root = copyProject();
+    const path = join(root, "settings", "v2", "packages", "builder.json");
+    const settings = JSON.parse(readFileSync(path, "utf8")) as {
+      bundleConfig: {
+        custom: {
+          auto_featurePve: {
+            configs: { miniGame: { overwriteSettings: { wechatgame: Record<string, unknown> } } };
+          };
+        };
+      };
+    };
+    settings.bundleConfig.custom.auto_featurePve.configs.miniGame.overwriteSettings.wechatgame = {
+      compressionType: "merge_dep",
+      isRemote: true,
+    };
+    writeFileSync(path, JSON.stringify(settings), "utf8");
+    expect(
+      validateCocosProject(root).issues.some(
+        (issue) => issue.code === "COCOS_FEATURE_BUNDLE_INVALID",
+      ),
+    ).toBe(true);
+  });
 });
 
 function copyProject(): string {

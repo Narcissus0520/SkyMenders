@@ -111,7 +111,11 @@ export class CocosAppRoot extends Component {
     if (this.application === null) return;
     const network = await this.application.platform.getNetworkState();
     const state = await this.application.menu.navigate(route, network, () =>
-      route === "collection" ? loadFeatureBundle("feature-collection") : Promise.resolve(),
+      route === "collection"
+        ? loadFeatureBundle("feature-collection")
+        : route === "expedition"
+          ? loadFeatureBundle("feature-pve")
+          : Promise.resolve(),
     );
     if (this.statusLabel !== null) {
       this.statusLabel.string = this.application.localizer.text(

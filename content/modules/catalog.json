@@ -1,0 +1,402 @@
+{
+  "schemaVersion": "1.0.0",
+  "contentVersion": "0.1.0",
+  "modules": [
+    {
+      "id": "main_fold_bridge",
+      "nameKey": "module.main_fold_bridge.name",
+      "descriptionKey": "module.main_fold_bridge.description",
+      "class": "main",
+      "unlockCost": 0,
+      "rewardTags": ["build", "support"],
+      "routes": [
+        {
+          "id": "fold_bridge_reinforced",
+          "nameKey": "route.fold_bridge_reinforced.name",
+          "mechanismKey": "route.fold_bridge_reinforced.mechanism",
+          "conditionKey": "route.fold_bridge_reinforced.condition"
+        },
+        {
+          "id": "fold_bridge_conductive",
+          "nameKey": "route.fold_bridge_conductive.name",
+          "mechanismKey": "route.fold_bridge_conductive.mechanism",
+          "conditionKey": "route.fold_bridge_conductive.condition"
+        }
+      ]
+    },
+    {
+      "id": "main_drill_bee",
+      "nameKey": "module.main_drill_bee.name",
+      "descriptionKey": "module.main_drill_bee.description",
+      "class": "main",
+      "unlockCost": 12,
+      "rewardTags": ["breach", "attack"],
+      "routes": [
+        {
+          "id": "drill_bee_deep_bore",
+          "nameKey": "route.drill_bee_deep_bore.name",
+          "mechanismKey": "route.drill_bee_deep_bore.mechanism",
+          "conditionKey": "route.drill_bee_deep_bore.condition"
+        },
+        {
+          "id": "drill_bee_precision",
+          "nameKey": "route.drill_bee_precision.name",
+          "mechanismKey": "route.drill_bee_precision.mechanism",
+          "conditionKey": "route.drill_bee_precision.condition"
+        }
+      ]
+    },
+    {
+      "id": "main_magnetic_anchor",
+      "nameKey": "module.main_magnetic_anchor.name",
+      "descriptionKey": "module.main_magnetic_anchor.description",
+      "class": "main",
+      "unlockCost": 0,
+      "rewardTags": ["control", "objective"],
+      "routes": [
+        {
+          "id": "magnetic_anchor_heavy_pull",
+          "nameKey": "route.magnetic_anchor_heavy_pull.name",
+          "mechanismKey": "route.magnetic_anchor_heavy_pull.mechanism",
+          "conditionKey": "route.magnetic_anchor_heavy_pull.condition"
+        },
+        {
+          "id": "magnetic_anchor_precision",
+          "nameKey": "route.magnetic_anchor_precision.name",
+          "mechanismKey": "route.magnetic_anchor_precision.mechanism",
+          "conditionKey": "route.magnetic_anchor_precision.condition"
+        }
+      ]
+    },
+    {
+      "id": "main_gravity_pin",
+      "nameKey": "module.main_gravity_pin.name",
+      "descriptionKey": "module.main_gravity_pin.description",
+      "class": "main",
+      "unlockCost": 22,
+      "rewardTags": ["control", "rescue"],
+      "routes": [
+        {
+          "id": "gravity_pin_inversion",
+          "nameKey": "route.gravity_pin_inversion.name",
+          "mechanismKey": "route.gravity_pin_inversion.mechanism",
+          "conditionKey": "route.gravity_pin_inversion.condition"
+        },
+        {
+          "id": "gravity_pin_rescue",
+          "nameKey": "route.gravity_pin_rescue.name",
+          "mechanismKey": "route.gravity_pin_rescue.mechanism",
+          "conditionKey": "route.gravity_pin_rescue.condition"
+        }
+      ]
+    },
+    {
+      "id": "main_bubble_capsule",
+      "nameKey": "module.main_bubble_capsule.name",
+      "descriptionKey": "module.main_bubble_capsule.description",
+      "class": "main",
+      "unlockCost": 14,
+      "rewardTags": ["rescue", "control"],
+      "routes": [
+        {
+          "id": "bubble_capsule_rescue",
+          "nameKey": "route.bubble_capsule_rescue.name",
+          "mechanismKey": "route.bubble_capsule_rescue.mechanism",
+          "conditionKey": "route.bubble_capsule_rescue.condition"
+        },
+        {
+          "id": "bubble_capsule_rebound",
+          "nameKey": "route.bubble_capsule_rebound.name",
+          "mechanismKey": "route.bubble_capsule_rebound.mechanism",
+          "conditionKey": "route.bubble_capsule_rebound.condition"
+        }
+      ]
+    },
+    {
+      "id": "main_wind_generator",
+      "nameKey": "module.main_wind_generator.name",
+      "descriptionKey": "module.main_wind_generator.description",
+      "class": "main",
+      "unlockCost": 16,
+      "rewardTags": ["wind", "control"],
+      "routes": [
+        {
+          "id": "wind_generator_sustained",
+          "nameKey": "route.wind_generator_sustained.name",
+          "mechanismKey": "route.wind_generator_sustained.mechanism",
+          "conditionKey": "route.wind_generator_sustained.condition"
+        },
+        {
+          "id": "wind_generator_turbine",
+          "nameKey": "route.wind_generator_turbine.name",
+          "mechanismKey": "route.wind_generator_turbine.mechanism",
+          "conditionKey": "route.wind_generator_turbine.condition"
+        }
+      ]
+    },
+    {
+      "id": "main_support_frame",
+      "nameKey": "module.main_support_frame.name",
+      "descriptionKey": "module.main_support_frame.description",
+      "class": "main",
+      "unlockCost": 0,
+      "rewardTags": ["support", "repair"],
+      "routes": [
+        {
+          "id": "support_frame_fortified",
+          "nameKey": "route.support_frame_fortified.name",
+          "mechanismKey": "route.support_frame_fortified.mechanism",
+          "conditionKey": "route.support_frame_fortified.condition"
+        },
+        {
+          "id": "support_frame_mobile",
+          "nameKey": "route.support_frame_mobile.name",
+          "mechanismKey": "route.support_frame_mobile.mechanism",
+          "conditionKey": "route.support_frame_mobile.condition"
+        }
+      ]
+    },
+    {
+      "id": "main_energy_rail",
+      "nameKey": "module.main_energy_rail.name",
+      "descriptionKey": "module.main_energy_rail.description",
+      "class": "main",
+      "unlockCost": 26,
+      "rewardTags": ["energy", "trajectory"],
+      "routes": [
+        {
+          "id": "energy_rail_accelerator",
+          "nameKey": "route.energy_rail_accelerator.name",
+          "mechanismKey": "route.energy_rail_accelerator.mechanism",
+          "conditionKey": "route.energy_rail_accelerator.condition"
+        },
+        {
+          "id": "energy_rail_switchback",
+          "nameKey": "route.energy_rail_switchback.name",
+          "mechanismKey": "route.energy_rail_switchback.mechanism",
+          "conditionKey": "route.energy_rail_switchback.condition"
+        }
+      ]
+    },
+    {
+      "id": "aux_repair_spray",
+      "nameKey": "module.aux_repair_spray.name",
+      "descriptionKey": "module.aux_repair_spray.description",
+      "class": "auxiliary",
+      "unlockCost": 0,
+      "rewardTags": ["repair", "support"],
+      "routes": [
+        {
+          "id": "repair_spray_unit_specialist",
+          "nameKey": "route.repair_spray_unit_specialist.name",
+          "mechanismKey": "route.repair_spray_unit_specialist.mechanism",
+          "conditionKey": "route.repair_spray_unit_specialist.condition"
+        },
+        {
+          "id": "repair_spray_terrain_specialist",
+          "nameKey": "route.repair_spray_terrain_specialist.name",
+          "mechanismKey": "route.repair_spray_terrain_specialist.mechanism",
+          "conditionKey": "route.repair_spray_terrain_specialist.condition"
+        }
+      ]
+    },
+    {
+      "id": "aux_reflector",
+      "nameKey": "module.aux_reflector.name",
+      "descriptionKey": "module.aux_reflector.description",
+      "class": "auxiliary",
+      "unlockCost": 8,
+      "rewardTags": ["trajectory", "defense"],
+      "routes": [
+        {
+          "id": "reflector_prismatic",
+          "nameKey": "route.reflector_prismatic.name",
+          "mechanismKey": "route.reflector_prismatic.mechanism",
+          "conditionKey": "route.reflector_prismatic.condition"
+        },
+        {
+          "id": "reflector_wide_guard",
+          "nameKey": "route.reflector_wide_guard.name",
+          "mechanismKey": "route.reflector_wide_guard.mechanism",
+          "conditionKey": "route.reflector_wide_guard.condition"
+        }
+      ]
+    },
+    {
+      "id": "aux_ejector",
+      "nameKey": "module.aux_ejector.name",
+      "descriptionKey": "module.aux_ejector.description",
+      "class": "auxiliary",
+      "unlockCost": 10,
+      "rewardTags": ["movement", "rescue"],
+      "routes": [
+        {
+          "id": "ejector_tandem",
+          "nameKey": "route.ejector_tandem.name",
+          "mechanismKey": "route.ejector_tandem.mechanism",
+          "conditionKey": "route.ejector_tandem.condition"
+        },
+        {
+          "id": "ejector_long_burn",
+          "nameKey": "route.ejector_long_burn.name",
+          "mechanismKey": "route.ejector_long_burn.mechanism",
+          "conditionKey": "route.ejector_long_burn.condition"
+        }
+      ]
+    },
+    {
+      "id": "aux_stabilizer",
+      "nameKey": "module.aux_stabilizer.name",
+      "descriptionKey": "module.aux_stabilizer.description",
+      "class": "auxiliary",
+      "unlockCost": 0,
+      "rewardTags": ["defense", "support"],
+      "routes": [
+        {
+          "id": "stabilizer_anchor",
+          "nameKey": "route.stabilizer_anchor.name",
+          "mechanismKey": "route.stabilizer_anchor.mechanism",
+          "conditionKey": "route.stabilizer_anchor.condition"
+        },
+        {
+          "id": "stabilizer_counterforce",
+          "nameKey": "route.stabilizer_counterforce.name",
+          "mechanismKey": "route.stabilizer_counterforce.mechanism",
+          "conditionKey": "route.stabilizer_counterforce.condition"
+        }
+      ]
+    },
+    {
+      "id": "aux_route_scanner",
+      "nameKey": "module.aux_route_scanner.name",
+      "descriptionKey": "module.aux_route_scanner.description",
+      "class": "auxiliary",
+      "unlockCost": 9,
+      "rewardTags": ["intel", "trajectory"],
+      "routes": [
+        {
+          "id": "route_scanner_deep_intel",
+          "nameKey": "route.route_scanner_deep_intel.name",
+          "mechanismKey": "route.route_scanner_deep_intel.mechanism",
+          "conditionKey": "route.route_scanner_deep_intel.condition"
+        },
+        {
+          "id": "route_scanner_ballistic",
+          "nameKey": "route.route_scanner_ballistic.name",
+          "mechanismKey": "route.route_scanner_ballistic.mechanism",
+          "conditionKey": "route.route_scanner_ballistic.condition"
+        }
+      ]
+    },
+    {
+      "id": "aux_energy_recycler",
+      "nameKey": "module.aux_energy_recycler.name",
+      "descriptionKey": "module.aux_energy_recycler.description",
+      "class": "auxiliary",
+      "unlockCost": 15,
+      "rewardTags": ["energy", "support"],
+      "routes": [
+        {
+          "id": "energy_recycler_team_loop",
+          "nameKey": "route.energy_recycler_team_loop.name",
+          "mechanismKey": "route.energy_recycler_team_loop.mechanism",
+          "conditionKey": "route.energy_recycler_team_loop.condition"
+        },
+        {
+          "id": "energy_recycler_overclock",
+          "nameKey": "route.energy_recycler_overclock.name",
+          "mechanismKey": "route.energy_recycler_overclock.mechanism",
+          "conditionKey": "route.energy_recycler_overclock.condition"
+        }
+      ]
+    },
+    {
+      "id": "aux_grapple",
+      "nameKey": "module.aux_grapple.name",
+      "descriptionKey": "module.aux_grapple.description",
+      "class": "auxiliary",
+      "unlockCost": 7,
+      "rewardTags": ["movement", "rescue"],
+      "routes": [
+        {
+          "id": "grapple_rescue_line",
+          "nameKey": "route.grapple_rescue_line.name",
+          "mechanismKey": "route.grapple_rescue_line.mechanism",
+          "conditionKey": "route.grapple_rescue_line.condition"
+        },
+        {
+          "id": "grapple_slingshot",
+          "nameKey": "route.grapple_slingshot.name",
+          "mechanismKey": "route.grapple_slingshot.mechanism",
+          "conditionKey": "route.grapple_slingshot.condition"
+        }
+      ]
+    },
+    {
+      "id": "aux_terrain_foam",
+      "nameKey": "module.aux_terrain_foam.name",
+      "descriptionKey": "module.aux_terrain_foam.description",
+      "class": "auxiliary",
+      "unlockCost": 11,
+      "rewardTags": ["build", "repair"],
+      "routes": [
+        {
+          "id": "terrain_foam_reinforced",
+          "nameKey": "route.terrain_foam_reinforced.name",
+          "mechanismKey": "route.terrain_foam_reinforced.mechanism",
+          "conditionKey": "route.terrain_foam_reinforced.condition"
+        },
+        {
+          "id": "terrain_foam_elastic",
+          "nameKey": "route.terrain_foam_elastic.name",
+          "mechanismKey": "route.terrain_foam_elastic.mechanism",
+          "conditionKey": "route.terrain_foam_elastic.condition"
+        }
+      ]
+    },
+    {
+      "id": "aux_jammer",
+      "nameKey": "module.aux_jammer.name",
+      "descriptionKey": "module.aux_jammer.description",
+      "class": "auxiliary",
+      "unlockCost": 13,
+      "rewardTags": ["control", "defense"],
+      "routes": [
+        {
+          "id": "jammer_decoy",
+          "nameKey": "route.jammer_decoy.name",
+          "mechanismKey": "route.jammer_decoy.mechanism",
+          "conditionKey": "route.jammer_decoy.condition"
+        },
+        {
+          "id": "jammer_silence",
+          "nameKey": "route.jammer_silence.name",
+          "mechanismKey": "route.jammer_silence.mechanism",
+          "conditionKey": "route.jammer_silence.condition"
+        }
+      ]
+    },
+    {
+      "id": "aux_structure_scanner",
+      "nameKey": "module.aux_structure_scanner.name",
+      "descriptionKey": "module.aux_structure_scanner.description",
+      "class": "auxiliary",
+      "unlockCost": 0,
+      "rewardTags": ["intel", "support"],
+      "routes": [
+        {
+          "id": "structure_scanner_predictive",
+          "nameKey": "route.structure_scanner_predictive.name",
+          "mechanismKey": "route.structure_scanner_predictive.mechanism",
+          "conditionKey": "route.structure_scanner_predictive.condition"
+        },
+        {
+          "id": "structure_scanner_salvage",
+          "nameKey": "route.structure_scanner_salvage.name",
+          "mechanismKey": "route.structure_scanner_salvage.mechanism",
+          "conditionKey": "route.structure_scanner_salvage.condition"
+        }
+      ]
+    }
+  ]
+}

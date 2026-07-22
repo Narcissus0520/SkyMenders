@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "contentVersion": "0.1.0",
+  "regions": [
+    {
+      "id": "region_cloudbreak",
+      "index": 1,
+      "nameKey": "region.region_cloudbreak.name",
+      "environmentKey": "region.region_cloudbreak.environment",
+      "bossId": "boss_rift_drill",
+      "mapIds": [
+        "map_cloudbreak_relay",
+        "map_cloudbreak_span",
+        "map_cloudbreak_rescue",
+        "map_boss_rift_drill"
+      ],
+      "enemyPool": ["enemy_scout", "enemy_guard", "enemy_artillery", "enemy_driller"],
+      "nodePool": ["battle", "engineering", "elite", "event", "workshop", "supply"],
+      "windPermille": 120,
+      "gravityPermille": 1000
+    },
+    {
+      "id": "region_polar_foundry",
+      "index": 2,
+      "nameKey": "region.region_polar_foundry.name",
+      "environmentKey": "region.region_polar_foundry.environment",
+      "bossId": "boss_polar_magnetic_tower",
+      "mapIds": [
+        "map_polar_foundry",
+        "map_polar_switchyard",
+        "map_polar_conduits",
+        "map_boss_magnetic_tower"
+      ],
+      "enemyPool": [
+        "enemy_guard",
+        "enemy_driller",
+        "enemy_magnet",
+        "enemy_repairer",
+        "enemy_artillery"
+      ],
+      "nodePool": ["battle", "engineering", "elite", "event", "workshop", "supply"],
+      "windPermille": -80,
+      "gravityPermille": 1080
+    },
+    {
+      "id": "region_verdant_updraft",
+      "index": 3,
+      "nameKey": "region.region_verdant_updraft.name",
+      "environmentKey": "region.region_verdant_updraft.environment",
+      "bossId": "boss_inverted_controller",
+      "mapIds": [
+        "map_verdant_updraft",
+        "map_verdant_canopy",
+        "map_verdant_lifeline",
+        "map_boss_inverted_controller"
+      ],
+      "enemyPool": ["enemy_scout", "enemy_wind", "enemy_carrier", "enemy_repairer", "enemy_magnet"],
+      "nodePool": ["battle", "engineering", "elite", "event", "workshop", "supply"],
+      "windPermille": 360,
+      "gravityPermille": 820
+    },
+    {
+      "id": "region_corefall",
+      "index": 4,
+      "nameKey": "region.region_corefall.name",
+      "environmentKey": "region.region_corefall.environment",
+      "bossId": "boss_unbound_island_mainframe",
+      "mapIds": [
+        "map_corefall_rim",
+        "map_corefall_archive",
+        "map_corefall_nexus",
+        "map_boss_island_mainframe"
+      ],
+      "enemyPool": [
+        "enemy_artillery",
+        "enemy_driller",
+        "enemy_magnet",
+        "enemy_repairer",
+        "enemy_wind",
+        "enemy_carrier"
+      ],
+      "nodePool": ["battle", "engineering", "elite", "event", "workshop", "supply"],
+      "windPermille": -240,
+      "gravityPermille": 1160
+    }
+  ]
+}

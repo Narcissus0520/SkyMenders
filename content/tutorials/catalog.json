@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "1.0.0",
+  "contentVersion": "0.1.0",
+  "tutorials": [
+    {
+      "id": "tutorial_01_navigation",
+      "order": 1,
+      "nameKey": "tutorial.tutorial_01_navigation.name",
+      "estimatedMinutes": 2,
+      "unlocks": [],
+      "steps": [
+        {
+          "id": "select_rivet",
+          "instructionKey": "tutorial.step.select_rivet",
+          "validation": "select_actor",
+          "skippableText": true,
+          "requiredAction": true
+        },
+        {
+          "id": "move_rivet",
+          "instructionKey": "tutorial.step.move_rivet",
+          "validation": "move_actor",
+          "skippableText": true,
+          "requiredAction": true
+        },
+        {
+          "id": "inspect_island",
+          "instructionKey": "tutorial.step.inspect_island",
+          "validation": "inspect_camera",
+          "skippableText": true,
+          "requiredAction": true
+        }
+      ]
+    },
+    {
+      "id": "tutorial_02_ballistics",
+      "order": 2,
+      "nameKey": "tutorial.tutorial_02_ballistics.name",
+      "estimatedMinutes": 3,
+      "unlocks": ["main_energy_rail"],
+      "steps": [
+        {
+          "id": "select_prism",
+          "instructionKey": "tutorial.step.select_prism",
+          "validation": "select_actor",
+          "skippableText": true,
+          "requiredAction": true
+        },
+        {
+          "id": "inspect_wind",
+          "instructionKey": "tutorial.step.inspect_wind",
+          "validation": "inspect_camera",
+          "skippableText": true,
+          "requiredAction": true
+        },
+        {
+          "id": "confirm_shot",
+          "instructionKey": "tutorial.step.confirm_shot",
+          "validation": "confirm_shot",
+          "skippableText": true,
+          "requiredAction": true
+        }
+      ]
+    },
+    {
+      "id": "tutorial_03_terrain",
+      "order": 3,
+      "nameKey": "tutorial.tutorial_03_terrain.name",
+      "estimatedMinutes": 3,
+      "unlocks": ["main_drill_bee"],
+      "steps": [
+        {
+          "id": "scan_support",
+          "instructionKey": "tutorial.step.scan_support",
+          "validation": "inspect_camera",
+          "skippableText": true,
+          "requiredAction": true
+        },
+        {
+          "id": "open_passage",
+          "instructionKey": "tutorial.step.open_passage",
+          "validation": "destroy_terrain",
+          "skippableText": true,
+          "requiredAction": true
+        },
+        {
+          "id": "restore_span",
+          "instructionKey": "tutorial.step.restore_span",
+          "validation": "restore_support",
+          "skippableText": true,
+          "requiredAction": true
+        }
+      ]
+    },
+    {
+      "id": "tutorial_04_build_repair",
+      "order": 4,
+      "nameKey": "tutorial.tutorial_04_build_repair.name",
+      "estimatedMinutes": 3,
+      "unlocks": ["main_fold_bridge", "aux_repair_spray"],
+      "steps": [
+        {
+          "id": "build_bridge",
+          "instructionKey": "tutorial.step.build_bridge",
+          "validation": "build_structure",
+          "skippableText": true,
+          "requiredAction": true
+        },
+        {
+          "id": "cross_bridge",
+          "instructionKey": "tutorial.step.cross_bridge",
+          "validation": "move_actor",
+          "skippableText": true,
+          "requiredAction": true
+        },
+        {
+          "id": "repair_relay",
+          "instructionKey": "tutorial.step.repair_relay",
+          "validation": "repair_target",
+          "skippableText": true,
+          "requiredAction": true
+        }
+      ]
+    },
+    {
+      "id": "tutorial_05_team_energy",
+      "order": 5,
+      "nameKey": "tutorial.tutorial_05_team_energy.name",
+      "estimatedMinutes": 4,
+      "unlocks": ["robot_anchor"],
+      "steps": [
+        {
+          "id": "choose_order",
+          "instructionKey": "tutorial.step.choose_order",
+          "validation": "choose_action_order",
+          "skippableText": true,
+          "requiredAction": true
+        },
+        {
+          "id": "spend_energy",
+          "instructionKey": "tutorial.step.spend_energy",
+          "validation": "spend_shared_energy",
+          "skippableText": true,
+          "requiredAction": true
+        },
+        {
+          "id": "finish_team_round",
+          "instructionKey": "tutorial.step.finish_team_round",
+          "validation": "complete_node",
+          "skippableText": true,
+          "requiredAction": true
+        }
+      ]
+    },
+    {
+      "id": "tutorial_06_mini_expedition",
+      "order": 6,
+      "nameKey": "tutorial.tutorial_06_mini_expedition.name",
+      "estimatedMinutes": 4,
+      "unlocks": ["standard_expedition", "daily_practice"],
+      "steps": [
+        {
+          "id": "choose_route",
+          "instructionKey": "tutorial.step.choose_route",
+          "validation": "choose_route",
+          "skippableText": true,
+          "requiredAction": true
+        },
+        {
+          "id": "complete_encounter",
+          "instructionKey": "tutorial.step.complete_encounter",
+          "validation": "complete_node",
+          "skippableText": true,
+          "requiredAction": true
+        },
+        {
+          "id": "select_reward",
+          "instructionKey": "tutorial.step.select_reward",
+          "validation": "choose_reward",
+          "skippableText": true,
+          "requiredAction": true
+        }
+      ]
+    }
+  ]
+}

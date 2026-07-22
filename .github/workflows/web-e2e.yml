@@ -6,14 +6,12 @@ on:
       - "apps/admin-console/**"
       - "apps/content-gateway/**"
       - "apps/content-studio/**"
-      - "packages/content-schema/**"
   push:
     branches: [main]
     paths:
       - "apps/admin-console/**"
       - "apps/content-gateway/**"
       - "apps/content-studio/**"
-      - "packages/content-schema/**"
 
 permissions:
   contents: read
