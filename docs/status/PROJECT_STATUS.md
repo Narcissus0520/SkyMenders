@@ -49,7 +49,7 @@ Current local evidence on Node.js 24 and pnpm 10:
 - Full repository tests: 368 passed; two real PostgreSQL adapter tests skipped locally because Docker is unavailable and remain mandatory with the Redis queue test in Server Integration CI.
 - Protocol coverage: 99.09% statements / 87.50% branches / 100% functions / 99.09% lines.
 - Content pipeline coverage: 90.19% statements / 83.87% branches / 100% functions / 93.33% lines.
-- Content Gateway coverage: 63.76% statements / 59.18% branches / 59.32% functions / 66.66% lines; browser E2E additionally covers the authoring, staging and invalid-content boundaries.
+- Content Gateway coverage: 65.72% statements / 68.25% branches / 61.66% functions / 68.20% lines; browser E2E additionally covers the authoring, staging and invalid-content boundaries.
 - Content Studio history coverage: 78.57% statements / 57.14% branches / 100% functions / 100% lines; browser E2E covers structured editing and publication interaction.
 - Admin Console session-vault coverage: 100% statements / branches / functions / lines; browser E2E covers isolated login and confirmed privileged writes.
 - Challenge authority coverage: 92.37% statements / 80% branches / 100% functions / 96.23% lines.

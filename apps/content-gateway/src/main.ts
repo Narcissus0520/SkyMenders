@@ -9,7 +9,7 @@ assertLoopbackHost(host);
 if (!Number.isInteger(port) || port < 1024 || port > 65_535)
   throw new Error("invalid CONTENT_GATEWAY_PORT");
 const rootDirectory = resolve(process.env.CONTENT_WORKSPACE_ROOT ?? process.cwd());
-const app = createContentGateway({
+const app = await createContentGateway({
   workspace: new ContentWorkspace({ rootDirectory }),
   ...(process.env.CONTENT_GATEWAY_SESSION === undefined
     ? {}

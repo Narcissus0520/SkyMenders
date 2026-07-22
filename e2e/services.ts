@@ -51,7 +51,7 @@ const gameServer = await createGameServer({
 });
 await gameServer.listen({ host: "127.0.0.1", port: 4_320 });
 
-const gateway = createContentGateway({
+const gateway = await createContentGateway({
   workspace: new ContentWorkspace({ rootDirectory: temporaryRoot, now: () => clock.now() }),
   sessionToken: "e2e-content-session-token",
   signingSecret: "e2e-content-signing-secret-with-more-than-thirty-two-bytes",

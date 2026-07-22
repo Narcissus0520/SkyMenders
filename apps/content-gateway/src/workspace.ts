@@ -415,5 +415,19 @@ export function normalizeGatewayError(error: unknown): GatewayError {
       })),
     );
   }
+  if (
+    typeof error === "object" &&
+    error !== null &&
+    "statusCode" in error &&
+    typeof error.statusCode === "number" &&
+    error.statusCode >= 400 &&
+    error.statusCode < 500
+  ) {
+    return new GatewayError(
+      error.statusCode === 429 ? "RATE_LIMITED" : "REQUEST_REJECTED",
+      error.statusCode,
+      [],
+    );
+  }
   return new GatewayError("CONTENT_GATEWAY_FAILURE", 500, [], { message: String(error) });
 }

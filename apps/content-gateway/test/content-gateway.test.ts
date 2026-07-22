@@ -81,7 +81,7 @@ describe("content gateway", () => {
 
   it("protects writes with a per-process session and exposes field errors", async () => {
     const { workspace } = await fixture();
-    const app = createContentGateway({ workspace, sessionToken: "test-session" });
+    const app = await createContentGateway({ workspace, sessionToken: "test-session" });
     const document = await app.inject({ method: "GET", url: "/api/catalogs/maps" });
     expect(document.statusCode).toBe(200);
     const authority = await app.inject({ method: "GET", url: "/api/authority" });
@@ -101,5 +101,17 @@ describe("content gateway", () => {
     expect(allowed.statusCode).toBe(200);
     expect(allowed.json()).toMatchObject({ valid: true });
     await app.close();
+
+    const limited = await createContentGateway({
+      workspace,
+      sessionToken: "limited-session",
+      rateLimitMax: 2,
+    });
+    expect((await limited.inject({ method: "GET", url: "/health" })).statusCode).toBe(200);
+    expect((await limited.inject({ method: "GET", url: "/health" })).statusCode).toBe(200);
+    const limitedResponse = await limited.inject({ method: "GET", url: "/health" });
+    expect(limitedResponse.statusCode).toBe(429);
+    expect(limitedResponse.json()).toMatchObject({ error: { code: "RATE_LIMITED" } });
+    await limited.close();
   });
 });

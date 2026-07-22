@@ -1,5 +1,6 @@
 import { randomBytes } from "node:crypto";
 
+import rateLimit from "@fastify/rate-limit";
 import Fastify from "fastify";
 import type { FastifyInstance, FastifyRequest } from "fastify";
 import { z } from "zod";
@@ -38,11 +39,15 @@ export interface ContentGatewayOptions {
   readonly workspace: ContentWorkspace;
   readonly sessionToken?: string;
   readonly signingSecret?: string;
+  readonly rateLimitMax?: number;
 }
 
-export function createContentGateway(options: ContentGatewayOptions): FastifyInstance {
+export async function createContentGateway(
+  options: ContentGatewayOptions,
+): Promise<FastifyInstance> {
   const app = Fastify({ logger: false, bodyLimit: 5 * 1024 * 1024 });
   const sessionToken = options.sessionToken ?? randomBytes(32).toString("hex");
+  await app.register(rateLimit, { max: options.rateLimitMax ?? 120, timeWindow: "1 minute" });
   app.setErrorHandler((error, _request, reply) => {
     const normalized = normalizeGatewayError(error);
     void reply.status(normalized.statusCode).send({

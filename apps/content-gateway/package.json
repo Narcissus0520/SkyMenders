@@ -19,6 +19,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@fastify/rate-limit": "11.1.0",
     "@skymenders/ai-core": "workspace:*",
     "@skymenders/battle-core": "workspace:*",
     "@skymenders/content-pipeline": "workspace:*",

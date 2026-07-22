@@ -20,7 +20,7 @@ flowchart LR
   I --> K["Rolled back"]
 ```
 
-`ContentWorkspace` limits reads and writes to the declared catalog allow-list. Catalog saves use a revision hash and atomic replacement. Drafts and publication metadata live outside the authored `content/` tree and are ignored by Git. A freeze rejects further source and artifact writes.
+`ContentWorkspace` limits reads and writes to the declared catalog allow-list. The loopback HTTP boundary applies a global rate limit before routes are registered. Catalog saves use a revision hash and atomic replacement. Drafts and publication metadata live outside the authored `content/` tree and are ignored by Git. A freeze rejects further source and artifact writes.
 
 `Content Studio` exposes structured fields rather than a raw JSON editor. Its six modules cover maps/objectives/regions, routes/rewards/progression, robots/modules and their deterministic runtime authority, enemies/AI/bosses, events/tutorial/localization, and daily fixed-content review. Undo/redo, dirty state, delayed draft autosave, import/export, diff retrieval, field errors, validation, packaging, and staging are integrated.
 
