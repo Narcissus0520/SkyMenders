@@ -26,7 +26,7 @@
     "security:sbom": "pnpm --filter @skymenders/project-guard run sbom:generate",
     "security:secrets": "pnpm --filter @skymenders/project-guard run secrets:scan",
     "test": "turbo run test",
-    "test:coverage": "turbo run test:coverage",
+    "test:coverage": "turbo run test:coverage --concurrency=4",
     "test:determinism": "turbo run test:determinism",
     "test:performance": "turbo run test:performance",
     "typecheck": "turbo run typecheck",

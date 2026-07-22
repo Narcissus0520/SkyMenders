@@ -29,6 +29,7 @@
 - Presentation benchmark: 10,000 validated events in 31.98 ms at the final component run, bounded to 256 queued cues; synthetic 30 FPS telemetry remained in budget.
 - Strict TypeScript and ESLint passed for both new packages.
 - Full repository tests: 278 passed; format, workspace/infrastructure policy, content/catalog validation, asset/secret policy, build, coverage, determinism, performance, dependency audit, and SBOM passed.
+- Workspace coverage execution is capped at four concurrent packages so Windows runners do not overcommit memory as the app/tool count grows; package-internal test semantics and coverage thresholds are unchanged.
 
 ## External acceptance still required
 
