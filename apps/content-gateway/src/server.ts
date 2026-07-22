@@ -48,6 +48,9 @@ export async function createContentGateway(
   const app = Fastify({ logger: false, bodyLimit: 5 * 1024 * 1024 });
   const sessionToken = options.sessionToken ?? randomBytes(32).toString("hex");
   await app.register(rateLimit, { max: options.rateLimitMax ?? 120, timeWindow: "1 minute" });
+  const rateLimitedRoute = {
+    config: { rateLimit: { max: options.rateLimitMax ?? 120, timeWindow: "1 minute" } },
+  };
   app.setErrorHandler((error, _request, reply) => {
     const normalized = normalizeGatewayError(error);
     void reply.status(normalized.statusCode).send({
@@ -55,13 +58,13 @@ export async function createContentGateway(
     });
   });
 
-  app.get("/health", () => ({ status: "ok", scope: "loopback-only" }));
-  app.get("/api/bootstrap", () => ({
+  app.get("/health", rateLimitedRoute, () => ({ status: "ok", scope: "loopback-only" }));
+  app.get("/api/bootstrap", rateLimitedRoute, () => ({
     sessionToken,
     catalogs: options.workspace.listCatalogs(),
   }));
-  app.get("/api/catalogs", () => options.workspace.listCatalogs());
-  app.get("/api/authority", () => ({
+  app.get("/api/catalogs", rateLimitedRoute, () => options.workspace.listCatalogs());
+  app.get("/api/authority", rateLimitedRoute, () => ({
     modules: MODULE_DEFINITIONS,
     ai: {
       difficulties: AI_DIFFICULTY_PROFILES,
@@ -71,15 +74,17 @@ export async function createContentGateway(
       bosses: BOSS_DEFINITIONS,
     },
   }));
-  app.get("/api/catalogs/:key", async (request) =>
+  app.get("/api/catalogs/:key", rateLimitedRoute, async (request) =>
     options.workspace.readCatalog(parseKey(request.params)),
   );
-  app.get("/api/drafts/:key", async (request) => ({
+  app.get("/api/drafts/:key", rateLimitedRoute, async (request) => ({
     data: await options.workspace.readDraft(parseKey(request.params)),
   }));
-  app.get("/api/freeze", async () => ({ freeze: await options.workspace.currentFreeze() }));
+  app.get("/api/freeze", rateLimitedRoute, async () => ({
+    freeze: await options.workspace.currentFreeze(),
+  }));
 
-  app.put("/api/catalogs/:key", async (request) => {
+  app.put("/api/catalogs/:key", rateLimitedRoute, async (request) => {
     authorize(request, sessionToken);
     const body = z
       .object({ expectedRevision: z.string().length(64), data: z.unknown(), actor: actorSchema })
@@ -92,21 +97,21 @@ export async function createContentGateway(
       body.actor,
     );
   });
-  app.put("/api/drafts/:key", async (request) => {
+  app.put("/api/drafts/:key", rateLimitedRoute, async (request) => {
     authorize(request, sessionToken);
     const body = z.object({ data: z.unknown(), actor: actorSchema }).strict().parse(request.body);
     await options.workspace.saveDraft(parseKey(request.params), body.data, body.actor);
     return { saved: true };
   });
-  app.post("/api/validate", async (request) => {
+  app.post("/api/validate", rateLimitedRoute, async (request) => {
     authorize(request, sessionToken);
     return options.workspace.validate();
   });
-  app.get("/api/publications/:id/diff", async (request) => {
+  app.get("/api/publications/:id/diff", rateLimitedRoute, async (request) => {
     const { id } = z.object({ id: idSchema }).parse(request.params);
     return options.workspace.diffAgainstPublication(id);
   });
-  app.post("/api/publications", async (request) => {
+  app.post("/api/publications", rateLimitedRoute, async (request) => {
     authorize(request, sessionToken);
     const body = z
       .object({
@@ -118,15 +123,15 @@ export async function createContentGateway(
       .parse(request.body);
     return options.workspace.buildPublication(body);
   });
-  app.post("/api/publications/:id/stage", async (request) => {
+  app.post("/api/publications/:id/stage", rateLimitedRoute, async (request) => {
     authorize(request, sessionToken);
     return options.workspace.stagePublication(parseId(request.params), parseActor(request.body));
   });
-  app.post("/api/publications/:id/approve", async (request) => {
+  app.post("/api/publications/:id/approve", rateLimitedRoute, async (request) => {
     authorize(request, sessionToken);
     return options.workspace.approvePublication(parseId(request.params), parseActor(request.body));
   });
-  app.post("/api/publications/:id/sign", async (request) => {
+  app.post("/api/publications/:id/sign", rateLimitedRoute, async (request) => {
     authorize(request, sessionToken);
     if (options.signingSecret === undefined)
       throw new Error("CONTENT_SIGNING_SECRET is not configured");
@@ -136,7 +141,7 @@ export async function createContentGateway(
       options.signingSecret,
     );
   });
-  app.post("/api/publications/:id/publish", async (request) => {
+  app.post("/api/publications/:id/publish", rateLimitedRoute, async (request) => {
     authorize(request, sessionToken);
     const body = z
       .object({ actor: actorSchema, confirmation: z.string() })
@@ -144,7 +149,7 @@ export async function createContentGateway(
       .parse(request.body);
     return options.workspace.publish(parseId(request.params), body.actor, body.confirmation);
   });
-  app.post("/api/publications/:id/rollback", async (request) => {
+  app.post("/api/publications/:id/rollback", rateLimitedRoute, async (request) => {
     authorize(request, sessionToken);
     const body = z
       .object({ actor: actorSchema, targetId: idSchema, confirmation: z.string() })
@@ -157,7 +162,7 @@ export async function createContentGateway(
       body.confirmation,
     );
   });
-  app.post("/api/freeze", async (request) => {
+  app.post("/api/freeze", rateLimitedRoute, async (request) => {
     authorize(request, sessionToken);
     const body = z
       .object({
