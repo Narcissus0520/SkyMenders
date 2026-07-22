@@ -54,4 +54,4 @@ Service integration, Web E2E, and Cocos gates are added with the phases that int
 
 ## Current status
 
-Phase 0 is establishing governance, build tooling, automated policy checks, CI, Compose infrastructure, documentation, and asset/content gates. See `docs/status/PROJECT_STATUS.md` for current evidence.
+Phase 0 governance and infrastructure are merged. Phase 1 implements the fixed-point, isolated RNG, strict protocol, canonical state, snapshot, logical hash, and golden replay foundation. Run `pnpm test:determinism` to execute the authority policy and checked-in golden replay. See `docs/status/PROJECT_STATUS.md` for current evidence.

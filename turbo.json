@@ -21,6 +21,11 @@
       "dependsOn": ["^build"],
       "outputs": ["coverage/**"]
     },
+    "test:determinism": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "outputs": []
+    },
     "typecheck": {
       "dependsOn": ["^build"]
     }

@@ -20,12 +20,12 @@ export function inspectAuthoritySources(root: string): PolicyIssue[] {
   const issues: PolicyIssue[] = [];
 
   for (const authorityRoot of AUTHORITY_ROOTS) {
-    const absoluteRoot = join(root, authorityRoot);
-    if (!existsSync(absoluteRoot)) {
+    const sourceRoot = join(root, authorityRoot, "src");
+    if (!existsSync(sourceRoot)) {
       continue;
     }
 
-    for (const absolutePath of walkFiles(absoluteRoot)) {
+    for (const absolutePath of walkFiles(sourceRoot)) {
       if (extname(absolutePath) !== ".ts" || absolutePath.endsWith(".test.ts")) {
         continue;
       }

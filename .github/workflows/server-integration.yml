@@ -21,14 +21,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Detect server integration scope
+        id: scope
+        shell: bash
+        run: |
+          if [[ -f apps/game-server/package.json && -f apps/game-worker/package.json ]]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Record deferred server gate
+        if: steps.scope.outputs.enabled != 'true'
+        run: echo "Server integration is not applicable until the real game-server and game-worker applications land."
+
       - uses: pnpm/action-setup@v4
+        if: steps.scope.outputs.enabled == 'true'
         with:
           version: 10.31.0
       - uses: actions/setup-node@v4
+        if: steps.scope.outputs.enabled == 'true'
         with:
           node-version: 24
           cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm infra:up
-      - run: pnpm db:migrate
-      - run: pnpm test:integration
+      - if: steps.scope.outputs.enabled == 'true'
+        run: pnpm install --frozen-lockfile
+      - if: steps.scope.outputs.enabled == 'true'
+        run: pnpm infra:up
+      - if: steps.scope.outputs.enabled == 'true'
+        run: pnpm db:migrate
+      - if: steps.scope.outputs.enabled == 'true'
+        run: pnpm test:integration

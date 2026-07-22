@@ -1,0 +1,27 @@
+{
+  "name": "@skymenders/replay-runner",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint src test",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:determinism": "vitest run test/golden-replay.test.ts && tsx src/cli.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "verify": "tsx src/cli.ts"
+  },
+  "dependencies": {
+    "@skymenders/deterministic-runtime": "workspace:*",
+    "@skymenders/protocol": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "eslint": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

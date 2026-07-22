@@ -25,7 +25,7 @@
     "security:secrets": "pnpm --filter @skymenders/project-guard run secrets:scan",
     "test": "turbo run test",
     "test:coverage": "turbo run test:coverage",
-    "test:determinism": "pnpm --filter @skymenders/project-guard run test:determinism",
+    "test:determinism": "turbo run test:determinism",
     "typecheck": "turbo run typecheck",
     "workspace:check": "pnpm --filter @skymenders/project-guard run workspace:check"
   },

@@ -1,0 +1,63 @@
+{
+  "replaySchemaVersion": "0.1.0",
+  "rulesVersion": "0.1.0",
+  "contentVersion": "0.0.0",
+  "fixtureId": "runtime-ledger:1",
+  "rootSeed": 305419896,
+  "initialState": {
+    "positions": {
+      "robot:1": { "x": 0, "y": 0 }
+    },
+    "waits": 0,
+    "modules": [],
+    "interactions": [],
+    "checksum": 0
+  },
+  "commands": [
+    {
+      "kind": "move",
+      "commandId": "cmd:1",
+      "battleId": "battle:golden",
+      "turnIndex": 0,
+      "actorId": "robot:1",
+      "destinationX": 1250,
+      "destinationY": 2750
+    },
+    {
+      "kind": "use_module",
+      "commandId": "cmd:2",
+      "battleId": "battle:golden",
+      "turnIndex": 0,
+      "actorId": "robot:1",
+      "moduleId": "main_fold_bridge",
+      "originX": 1250,
+      "originY": 2750,
+      "angleMilliDegrees": 45000,
+      "powerPermille": 750,
+      "targetX": 5000,
+      "targetY": 2750
+    },
+    {
+      "kind": "interact",
+      "commandId": "cmd:3",
+      "battleId": "battle:golden",
+      "turnIndex": 0,
+      "actorId": "robot:1",
+      "targetId": "objective:tower"
+    },
+    {
+      "kind": "wait",
+      "commandId": "cmd:4",
+      "battleId": "battle:golden",
+      "turnIndex": 0,
+      "actorId": "robot:1"
+    }
+  ],
+  "expectedCheckpoints": [
+    { "commandIndex": 0, "stateHash": "79cf92da9774d7f6" },
+    { "commandIndex": 1, "stateHash": "703b765e6b013fea" },
+    { "commandIndex": 2, "stateHash": "002fe4af084317a3" },
+    { "commandIndex": 3, "stateHash": "73b0d3c57d06fa99" }
+  ],
+  "expectedFinalHash": "73b0d3c57d06fa99"
+}
