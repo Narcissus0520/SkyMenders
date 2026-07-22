@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { INITIAL_PRODUCT_VERSIONS, RELEASE_CHANNELS, isProductVersions } from "../src/index.js";
+import {
+  CURRENT_PRODUCT_VERSIONS,
+  INITIAL_PRODUCT_VERSIONS,
+  RELEASE_CHANNELS,
+  isProductVersions,
+} from "../src/index.js";
 
 describe("product version contract", () => {
   it("keeps compatibility dimensions independent", () => {
@@ -19,6 +24,16 @@ describe("product version contract", () => {
     expect(isProductVersions(INITIAL_PRODUCT_VERSIONS)).toBe(true);
     expect(isProductVersions({ clientVersion: "0.0.0" })).toBe(false);
     expect(isProductVersions({ ...INITIAL_PRODUCT_VERSIONS, rulesVersion: "latest" })).toBe(false);
+  });
+
+  it("increments only the dimensions implemented by Phase 1", () => {
+    expect(CURRENT_PRODUCT_VERSIONS).toEqual({
+      ...INITIAL_PRODUCT_VERSIONS,
+      protocolVersion: "0.1.0",
+      replaySchemaVersion: "0.1.0",
+      rulesVersion: "0.1.0",
+    });
+    expect(isProductVersions(CURRENT_PRODUCT_VERSIONS)).toBe(true);
   });
 
   it("uses an explicit release channel allow-list", () => {

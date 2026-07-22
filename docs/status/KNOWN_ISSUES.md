@@ -10,6 +10,10 @@
 
 ## Closed
 
-No implementation defects are closed yet. Governance findings are not gameplay completion evidence.
+| ID      | Severity | Area                | Description                                                                                                         | Resolution                                                                                                |
+| ------- | -------- | ------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| DET-001 | P1       | Determinism tooling | The authority scanner followed package-local `node_modules` links and reported forbidden APIs from dependencies.    | Restricted scanning to owned `src/` trees and added regression coverage for dependency and build outputs. |
+| DET-002 | P1       | Canonical state     | Sparse arrays could serialize to invalid JSON-shaped output instead of failing closed.                              | Canonical serialization now rejects holes explicitly and has a regression test.                           |
+| DET-003 | P1       | Replay contract     | The first reducer contract did not expose the replay root seed and the golden reducer therefore did not bind to it. | Added immutable replay context, seed-sensitive golden state, checkpoint events, and a seed-change test.   |
 
 P0 and P1 issues block phase completion and merge. P2 acceptance requires an explicit owner, impact, and release disposition.
