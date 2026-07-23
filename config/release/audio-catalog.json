@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseStatus": "blocked",
+  "blockerId": "EXT-005",
+  "music": [
+    { "cueId": "music.main_menu", "bus": "music", "assetId": null, "loop": true },
+    { "cueId": "music.exploration", "bus": "music", "assetId": null, "loop": true },
+    { "cueId": "music.high_risk", "bus": "music", "assetId": null, "loop": true },
+    { "cueId": "music.boss", "bus": "music", "assetId": null, "loop": true },
+    { "cueId": "music.results_workshop", "bus": "music", "assetId": null, "loop": true }
+  ],
+  "criticalCues": [
+    {
+      "cueId": "sfx.projectile_impact",
+      "bus": "battle",
+      "assetId": null,
+      "fallbackTextKey": "audio.projectile_impact",
+      "fallbackIconKey": "icon.projectile_impact"
+    },
+    {
+      "cueId": "sfx.objective_changed",
+      "bus": "ui",
+      "assetId": null,
+      "fallbackTextKey": "audio.objective_changed",
+      "fallbackIconKey": "icon.objective"
+    },
+    {
+      "cueId": "sfx.boss_phase",
+      "bus": "battle",
+      "assetId": null,
+      "fallbackTextKey": "audio.boss_phase",
+      "fallbackIconKey": "icon.warning"
+    },
+    {
+      "cueId": "sfx.robot_disabled",
+      "bus": "battle",
+      "assetId": null,
+      "fallbackTextKey": "audio.robot_disabled",
+      "fallbackIconKey": "icon.recovery"
+    }
+  ],
+  "requiredSfxFamilies": [
+    "ui_navigation",
+    "aim_and_charge",
+    "module_activation",
+    "impact_and_knockback",
+    "terrain_damage_repair_collapse",
+    "energy_and_status",
+    "reward_and_results",
+    "boss_warning"
+  ]
+}

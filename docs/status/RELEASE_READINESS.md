@@ -1,18 +1,21 @@
 # Release Readiness
 
-Current conclusion: **not ready for release**. Phases 0-7 are merged and the Phase 8 daily/leaderboard scope is locally implemented, but remote CI, real platform login, deployed infrastructure, physical WeChat device evidence, later tooling phases, approved assets, and release operations are not complete.
+Last reviewed for Phase 10 on 2026-07-23.
 
-| Gate                                         | State              | Evidence / next action                                                                 |
-| -------------------------------------------- | ------------------ | -------------------------------------------------------------------------------------- |
-| Engineering build and CI                     | In progress        | Phases 0-7 merged; Phase 8 local gate passed, PR/CI pending                            |
-| Deterministic battle/replay                  | In progress        | Trusted daily replay verification is local; production load/operations remain gated    |
-| Cocos/WeChat client                          | In progress        | Automated shell and build wrapper exist; EXT-001/006 block real build/device evidence  |
-| Complete PvE V1 content                      | In progress        | Phase 6 engineering scope merged; approved assets and final balance remain later gates |
-| Cloud save and privacy deletion              | In progress        | Phase 7 merged; real deployed infrastructure and platform evidence remain pending      |
-| Verified daily leaderboard                   | In progress        | Phase 8 local implementation complete; PostgreSQL/Redis CI and operations pending      |
-| Content/admin tooling                        | Not started        | Phase 9                                                                                |
-| Performance, package, backup/recovery        | Not started        | Phases 10-11                                                                           |
-| Approved final assets                        | Blocked externally | EXT-005                                                                                |
-| Legal, publishing, privacy, trademark review | Blocked externally | EXT-003, EXT-004                                                                       |
+`pnpm release:check` is the engineering readiness gate and is mandatory in Build CI. `pnpm release:gate` is the fail-closed release-candidate gate. The source of truth is `config/release/release-evidence.json`; prose cannot override it.
 
-No `v1.0.0` tag, production deployment, WeChat submission, public-release claim, device-performance claim, or finished-art claim is permitted until all applicable Definition of Done items are evidenced.
+| Gate                                           | Automated control                                                   | Current state                                                          |
+| ---------------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Full regression and deterministic performance  | Repository quality, integration and E2E workflows                   | Local gates passed; Phase 10 PR/CI pending                             |
+| No open P0/P1                                  | Release preflight parses `KNOWN_ISSUES.md`                          | Passed                                                                 |
+| Original/licensed assets and fonts             | Registry v2 plus `assets:audit`                                     | Blocked: `EXT-005`; release directory contains no final media          |
+| Complete music/SFX and accessible alternatives | Audio catalog plus runtime critical-cue validation                  | Blocked: `EXT-005`; required cue slots intentionally have no asset IDs |
+| Real WeChat package and current limits         | Compiled-package analyzer plus dated official evidence              | Blocked: `EXT-001`, `EXT-006`                                          |
+| Supported device matrix                        | Signed device report                                                | Blocked: `EXT-006`                                                     |
+| Privacy, publishing, rating and legal          | Data/SDK inventories, drafts and signed checklist                   | Blocked: `EXT-003`                                                     |
+| Restorable production backup                   | CI restore drill plus dated production drill                        | CI mechanism present; production evidence blocked by `EXT-002`         |
+| Production operations                          | Health, metrics, alert matrix, runbook and routed staging rehearsal | Engineering contract present; deployment blocked by `EXT-002`          |
+| Public name                                    | Dated trademark and platform similarity decision                    | Blocked: `EXT-004`                                                     |
+| Operating identity                             | Verified entity, AppID and server-side secret installation          | Blocked: `EXT-001`                                                     |
+
+The strict release gate must also bind a candidate semantic version and 40-character commit. It is correct for that command to fail now. No current branch, CI result or local substitute authorizes production deployment, WeChat submission or a public V1 claim.

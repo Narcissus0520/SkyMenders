@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "audit": "tsx src/cli.ts",
+    "audit:release": "tsx src/cli.ts --release",
     "build": "tsc -p tsconfig.build.json",
     "lint": "eslint src test",
     "test": "vitest run",

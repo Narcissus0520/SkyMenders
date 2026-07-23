@@ -12,6 +12,7 @@ import {
   PHASE_7_PRODUCT_VERSIONS,
   PHASE_8_PRODUCT_VERSIONS,
   PHASE_9_PRODUCT_VERSIONS,
+  PHASE_10_PRODUCT_VERSIONS,
   RELEASE_CHANNELS,
   isProductVersions,
 } from "../src/index.js";
@@ -114,7 +115,16 @@ describe("product version contract", () => {
       protocolVersion: "0.5.0",
       serverVersion: "0.3.0",
     });
-    expect(CURRENT_PRODUCT_VERSIONS).toBe(PHASE_9_PRODUCT_VERSIONS);
+    expect(isProductVersions(PHASE_9_PRODUCT_VERSIONS)).toBe(true);
+  });
+
+  it("versions the Phase 10 release-preparation client and server surfaces", () => {
+    expect(PHASE_10_PRODUCT_VERSIONS).toEqual({
+      ...PHASE_9_PRODUCT_VERSIONS,
+      clientVersion: "0.5.0",
+      serverVersion: "0.4.0",
+    });
+    expect(CURRENT_PRODUCT_VERSIONS).toBe(PHASE_10_PRODUCT_VERSIONS);
     expect(isProductVersions(CURRENT_PRODUCT_VERSIONS)).toBe(true);
   });
 

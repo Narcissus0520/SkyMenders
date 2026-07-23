@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "buildRoot": "apps/game-client/build/wechatgame",
+  "sourceFallbackRoot": "apps/game-client/assets",
+  "subpackages": [
+    {
+      "name": "feature-collection",
+      "buildDirectory": "assets/feature-collection",
+      "sourceDirectory": "bundles/feature-collection"
+    },
+    {
+      "name": "feature-pve",
+      "buildDirectory": "assets/feature-pve",
+      "sourceDirectory": "bundles/feature-pve"
+    }
+  ],
+  "internalBudgets": {
+    "mainPackageBytes": 1887436,
+    "individualSubpackageBytes": 3774873,
+    "totalPackageBytes": 15728640
+  },
+  "maximumOfficialEvidenceAgeDays": 30,
+  "officialLimitEvidence": {
+    "status": "blocked",
+    "blockerId": "EXT-006"
+  }
+}

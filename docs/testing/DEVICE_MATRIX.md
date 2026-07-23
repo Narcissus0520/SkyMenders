@@ -22,3 +22,9 @@ Real-device execution is a Phase 5 external acceptance gate. Each run must recor
 7. Initial package, Asset Bundle/subpackage load, cache update, and a clean-install/update comparison.
 
 Current state: no physical-device or Developer Tools evidence. Automated tests and synthetic telemetry are recorded in `PHASE_05_REPORT.md`, but they do not pass this matrix.
+
+## Evidence record
+
+Each row must link an immutable candidate commit/build hash and a dated record containing tester, device model/class, OS, WeChat/base-library/Developer Tools versions, renderer, available/peak memory, install and subpackage bytes, network profile, cold/interactive timings, 30-minute FPS/frame-time samples, frames over 100 ms, resume result, touch/input result, audio/visual-alternative result and accessibility preset results. Failures require an issue ID and rerun evidence. A screenshot or “works on my phone” note is not sufficient.
+
+The QA owner may mark `device-matrix` passed in `config/release/release-evidence.json` only after every supported class and mandatory scenario is represented for the same immutable candidate. Current official package limits must be captured separately in `package-budget.json` with a verification date and authoritative source.

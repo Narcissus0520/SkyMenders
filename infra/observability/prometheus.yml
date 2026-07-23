@@ -5,3 +5,7 @@ scrape_configs:
   - job_name: prometheus
     static_configs:
       - targets: ["prometheus:9090"]
+  - job_name: game-server
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["game-server:3000"]

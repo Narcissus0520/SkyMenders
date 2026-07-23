@@ -17,6 +17,7 @@ on:
       - "packages/save-migration/**"
       - "packages/security/**"
       - "packages/shared-types/**"
+      - "tools/database/**"
       - "pnpm-lock.yaml"
       - ".github/workflows/server-integration.yml"
   push:
@@ -36,6 +37,7 @@ on:
       - "packages/save-migration/**"
       - "packages/security/**"
       - "packages/shared-types/**"
+      - "tools/database/**"
       - "pnpm-lock.yaml"
       - ".github/workflows/server-integration.yml"
 
@@ -72,6 +74,7 @@ jobs:
       DATABASE_URL: postgresql://skymenders:skymenders_test_only@127.0.0.1:5432/skymenders_test
       TEST_DATABASE_URL: postgresql://skymenders:skymenders_test_only@127.0.0.1:5432/skymenders_test
       REDIS_URL: redis://127.0.0.1:6379
+      RESTORE_DATABASE_URL: postgresql://skymenders:skymenders_test_only@127.0.0.1:5432/skymenders_restore_drill
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -85,3 +88,13 @@ jobs:
       - run: pnpm db:generate
       - run: pnpm db:migrate
       - run: pnpm test:integration
+      - name: Install matching PostgreSQL client
+        run: |
+          sudo install -d /usr/share/postgresql-common/pgdg
+          sudo curl --fail --silent --show-error -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc https://www.postgresql.org/media/keys/ACCC4CF8.asc
+          . /etc/os-release
+          echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt ${VERSION_CODENAME}-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+          sudo apt-get update
+          sudo apt-get install --yes postgresql-client-17
+          echo "/usr/lib/postgresql/17/bin" >> "$GITHUB_PATH"
+      - run: pnpm backup:drill

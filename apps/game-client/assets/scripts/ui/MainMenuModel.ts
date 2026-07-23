@@ -1,6 +1,7 @@
 import type { NetworkState } from "../platform/platform-adapter.js";
 
-export type MainRoute = "expedition" | "daily" | "collection" | "settings";
+export type MainRoute =
+  "expedition" | "daily" | "collection" | "settings" | "privacy" | "user_agreement";
 export type ScreenStatus = "idle" | "loading" | "ready" | "offline" | "error";
 export interface MainScreenState {
   readonly route: MainRoute | null;

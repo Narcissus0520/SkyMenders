@@ -57,3 +57,11 @@ Development baseline on 2026-07-22:
 - replay samples: 100
 
 These are isolated deterministic authority measurements on the development/CI class of CPU. They are not production throughput, queue-latency, Redis, PostgreSQL, autoscaling, or capacity claims; those require Phase 10 deployment load evidence.
+
+## Phase 10 package and operations budgets
+
+`pnpm package:budget` scans the compiled WeChat output when available and otherwise reports an explicitly labeled source-tree estimate. The stable internal budgets are 1.8 MiB for the main package, 3.6 MiB per configured subpackage and 15 MiB total. These are conservative engineering thresholds, not claims about current WeChat policy.
+
+A release candidate must run `pnpm package:budget:release` against the real build and include dated current official main/subpackage/total limits plus their authoritative source. The audit rejects TypeScript, source maps and placeholder/development paths in compiled output. Real cold start, load, memory, thermal, network, FPS and package behavior remain part of `DEVICE_MATRIX.md` and `EXT-006`.
+
+API operational targets are p95 under 300 ms, 5xx below 1%, replay oldest-job age under 60 seconds and no routine supported-client frame over 100 ms. Prometheus request counters/durations, readiness and worker health provide instrumentation; production baselines, capacity, alerts and recovery timing require `EXT-002` evidence.

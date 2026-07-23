@@ -60,7 +60,7 @@ describe("daily challenge protocol", () => {
         rulesVersion: "0.5.0",
         contentVersion: "0.1.0",
         replaySchemaVersion: DAILY_REPLAY_SCHEMA_VERSION,
-        clientVersion: "0.4.0",
+        clientVersion: "0.5.0",
         claimedScore: 0,
         completionMs: 10,
         recoveryCount: 0,

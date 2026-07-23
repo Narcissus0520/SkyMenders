@@ -436,5 +436,12 @@
   "achievement.achievement_terrain_keeper.name": "地形守护者",
   "achievement.achievement_terrain_keeper.description": "十五个节点保持高地形完整度。",
   "achievement.achievement_all_robots.name": "工坊全员",
-  "achievement.achievement_all_robots.description": "解锁六名机器人。"
+  "achievement.achievement_all_robots.description": "解锁六名机器人。",
+  "menu.privacy": "隐私政策",
+  "menu.user_agreement": "用户协议",
+  "audio.warning": "重要声音提示",
+  "audio.projectile_impact": "投射物已命中",
+  "audio.objective_changed": "任务目标已更新",
+  "audio.boss_phase": "首领机制已切换",
+  "audio.robot_disabled": "机器人已进入回收状态"
 }

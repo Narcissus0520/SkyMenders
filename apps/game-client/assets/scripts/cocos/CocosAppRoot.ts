@@ -51,12 +51,14 @@ export class CocosAppRoot extends Component {
     this.addLabel("Title", this.application.localizer.text(titleKey), 0, 250, 42);
     this.statusLabel = this.addLabel("Status", "", 0, 175, 22);
     const entries = [
-      ["menu.expedition", "expedition", -330],
-      ["menu.daily", "daily", -110],
-      ["menu.collection", "collection", 110],
-      ["menu.settings", "settings", 330],
+      ["menu.expedition", "expedition", -330, 50],
+      ["menu.daily", "daily", -110, 50],
+      ["menu.collection", "collection", 110, 50],
+      ["menu.settings", "settings", 330, 50],
+      ["menu.privacy", "privacy", -110, -70],
+      ["menu.user_agreement", "user_agreement", 110, -70],
     ] as const;
-    for (const [key, route, x] of entries) this.addButton(key, route, x, 50);
+    for (const [key, route, x, y] of entries) this.addButton(key, route, x, y);
   }
 
   private addButton(key: string, route: MainRoute, x: number, y: number): void {
