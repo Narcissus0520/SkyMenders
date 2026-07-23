@@ -3,10 +3,10 @@
 ## Snapshot
 
 - Date: 2026-07-23
-- Current phase: Phase 11 - V1 release-candidate engineering
-- Phase state: local implementation and full regression complete; PR #12 passed all required CI checks
-- Branch: `codex/phase-11-v1-release-candidate`
-- Baseline: Phase 10 squash commit `57366dd308a8d2e2c3fc3656462ccf87c9a8ce7e` on `main`
+- Current phase: V1 external-evidence closure before the Phase 12 PvP gate
+- Phase state: Phases 0-11 are merged; engineering gates pass and strict external release gates remain blocked
+- Branch: `main`
+- Baseline: Phase 11 squash commit `d0e8698cd77c12369cf98c5366d6b25980cbd7e8` on `main`
 - Phase 0 delivery: PR #1 merged after all required checks passed
 - Phase 1 delivery: PR #2 merged after all required checks passed
 - Phase 2 delivery: PR #3 merged after all required checks passed
@@ -18,7 +18,7 @@
 - Phase 8 delivery: PR #9 merged after all required checks, including PostgreSQL/Redis integration, passed
 - Phase 9 delivery: PR #10 merged after all required checks, including PostgreSQL/Redis integration and Web E2E, passed
 - Phase 10 delivery: PR #11 merged after all required checks, including the PostgreSQL 17 restore drill, passed
-- Phase 11 delivery: PR #12 passed all required checks and was approved for squash merge
+- Phase 11 delivery: PR #12 squash-merged as `d0e8698cd77c12369cf98c5366d6b25980cbd7e8` after all required checks passed
 - Next phase: V1 external evidence closure; Phase 12 PvP remains blocked by the V1 gate
 
 ## Version matrix

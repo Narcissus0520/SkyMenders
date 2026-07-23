@@ -20,3 +20,4 @@ Engineering controls can prepare and verify a candidate, but no RC is declared. 
 - Content freeze, save migration and content rollback/freeze drills passed. Engineering release readiness reported six passed and nine externally blocked gates.
 - Format, workspace and infrastructure policy, lint, strict TypeScript, build, static Cocos validation, three Playwright journeys, asset/source-package audits, secret scan, dependency audit and 497-component SBOM passed.
 - The strict release gate rejected the empty final-asset inventory as designed. PR #12 passed every required GitHub check, including both quality platforms, Server Integration, Web E2E, Determinism, Build, validation, supply-chain and CodeQL gates.
+- Delivery: PR #12 was squash-merged to `main` as `d0e8698cd77c12369cf98c5366d6b25980cbd7e8`.
