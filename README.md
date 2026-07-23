@@ -64,4 +64,4 @@ For an authorized local WeChat build, set untracked `COCOS_CREATOR_PATH` and `WE
 
 ## Current status
 
-Phases 0-10 are merged. Phase 11 freezes content `0.2.0` / rules `0.6.0`, enforces the full V1 content inventory, and adds executable save-migration and content-rollback drills plus immutable candidate identity checks. Real WeChat, deployed infrastructure, approved final assets, legal review, and device evidence remain explicitly external; no RC is declared. Run `pnpm release:check` with the ordinary quality suite for current engineering evidence. See `docs/status/PROJECT_STATUS.md` for exact status.
+Phases 0-11 are merged. Phase 11 freezes content `0.2.0` / rules `0.6.0`, enforces the full V1 content inventory, and adds executable save-migration and content-rollback drills plus immutable candidate identity checks. Real WeChat, deployed infrastructure, approved final assets, legal review, and device evidence remain explicitly external; no RC is declared, and the Phase 12 PvP gate remains closed. Run `pnpm release:check` with the ordinary quality suite for current engineering evidence. See `docs/status/PROJECT_STATUS.md` for exact status.

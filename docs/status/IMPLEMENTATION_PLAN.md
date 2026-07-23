@@ -15,7 +15,7 @@ This plan follows the mandatory phase order in `AGENTS.md`. A phase is complete 
 | 8     | Daily challenge, attempts, replay worker, anonymous leaderboard         | Complete; PR #9 merged  | Tamper rejection and server-date enforcement                    |
 | 9     | Content Studio, gateway, Admin Console, publication and audit           | Complete; PR #10 merged | UI-authored valid content and traceable admin writes            |
 | 10    | Approved assets, performance, package budget, operations, legal prep    | Complete; PR #11 merged | Engineering gates pass; external release evidence fails closed  |
-| 11    | V1 release candidate, regression, freeze, recovery drills               | In progress             | Full V1 engineering DoD; explicit external gates remain blocked |
+| 11    | V1 release candidate, regression, freeze, recovery drills               | Complete; PR #12 merged | Full V1 engineering DoD; explicit external gates remain blocked |
 | 12+   | Server-authoritative real-time PvP                                      | Blocked by V1 gate      | PvP gates without breaking V1 replay compatibility              |
 
 ## Phase 0 acceptance
@@ -49,7 +49,7 @@ Phase 9 met its automated conditions and was squash-merged through PR #10 as `e4
 
 Phase 10 met its engineering conditions and was squash-merged through PR #11 as `57366dd308a8d2e2c3fc3656462ccf87c9a8ce7e` after all required checks passed. Approved final media, current official package evidence, production rehearsal, qualified legal approval, public-name clearance and device evidence remain fail-closed external gates.
 
-## Current Phase 11 acceptance
+## Phase 11 acceptance
 
 - The root V1 content minimums are exact executable validations rather than prose-only claims.
 - Content `0.2.0` is frozen by catalog path and SHA-256; edits require an intentional lock update and review.
@@ -57,6 +57,8 @@ Phase 10 met its engineering conditions and was squash-merged through PR #11 as 
 - A checked-in legacy save migrates, verifies and resumes without changing played progress or its compatibility dimensions.
 - The release workflow rejects an unbound candidate and requires an `x.y.z-rc.n` version plus exact 40-character commit.
 - Full local gates and required GitHub checks must pass before merge; no tag or RC may be created while strict external gates remain blocked.
+
+Phase 11 met these engineering conditions and was squash-merged through PR #12 as `d0e8698cd77c12369cf98c5366d6b25980cbd7e8` after all required checks passed. Phase 12+ remains blocked by the V1 gate until the external evidence in `EXTERNAL_BLOCKERS.md` is verified.
 
 ## Compatibility discipline
 
