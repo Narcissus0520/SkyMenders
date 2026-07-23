@@ -4,7 +4,7 @@
 
 - Date: 2026-07-23
 - Current phase: Phase 11 - V1 release-candidate engineering
-- Phase state: local implementation and full regression complete; PR and required CI pending
+- Phase state: local implementation and full regression complete; PR #12 passed all required CI checks
 - Branch: `codex/phase-11-v1-release-candidate`
 - Baseline: Phase 10 squash commit `57366dd308a8d2e2c3fc3656462ccf87c9a8ce7e` on `main`
 - Phase 0 delivery: PR #1 merged after all required checks passed
@@ -18,6 +18,7 @@
 - Phase 8 delivery: PR #9 merged after all required checks, including PostgreSQL/Redis integration, passed
 - Phase 9 delivery: PR #10 merged after all required checks, including PostgreSQL/Redis integration and Web E2E, passed
 - Phase 10 delivery: PR #11 merged after all required checks, including the PostgreSQL 17 restore drill, passed
+- Phase 11 delivery: PR #12 passed all required checks and was approved for squash merge
 - Next phase: V1 external evidence closure; Phase 12 PvP remains blocked by the V1 gate
 
 ## Version matrix
@@ -56,7 +57,7 @@ Current local evidence on Node.js 24 and pnpm 10:
 - `pnpm release:gate` fails closed at the release-asset audit as designed; no candidate version or commit has been asserted.
 - Format, workspace/infrastructure policy, lint, strict TypeScript, build, static Cocos validation across 37 files, asset audit, source package budget, secret scan, dependency audit and 497-component SBOM pass.
 
-Required GitHub checks, including the PostgreSQL 17 restore drill, must pass before Phase 11 is merged. Neither engineering readiness nor CI is a production-readiness claim.
+All required GitHub checks, including the PostgreSQL 17 restore drill, passed on PR #12. Neither engineering readiness nor CI is a production-readiness claim.
 
 ## Known limits
 

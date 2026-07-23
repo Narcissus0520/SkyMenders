@@ -6,7 +6,7 @@ Last reviewed for Phase 11 on 2026-07-23.
 
 | Gate                                           | Automated control                                                   | Current state                                                          |
 | ---------------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Full regression and deterministic performance  | Repository quality, integration and E2E workflows                   | Passed locally; Phase 11 PR/CI pending                                 |
+| Full regression and deterministic performance  | Repository quality, integration and E2E workflows                   | Passed locally and in Phase 11 PR #12                                  |
 | Frozen V1 content                              | Catalog SHA-256 lock and strict V1 count validation                 | Passed locally for content `0.2.0` / rules `0.6.0`                     |
 | Save migration and content rollback            | Serialized legacy corpus and isolated rollback/freeze drills        | Passed locally                                                         |
 | Candidate identity and submission materials    | RC version/commit binding plus checked-in submission draft          | Engineering control passed; no actual candidate declared               |

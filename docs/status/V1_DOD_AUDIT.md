@@ -6,7 +6,7 @@ Last reviewed on 2026-07-23 for Phase 11 engineering readiness. `passed` below m
 
 | Requirement                                                                                                      | Evidence                                                                 | State                                  |
 | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | -------------------------------------- |
-| All applications build; core tests, deterministic replay, integration and E2E pass                               | Quality, Build, Determinism, Server Integration, Web E2E workflows       | Passed locally; Phase 11 PR/CI pending |
+| All applications build; core tests, deterministic replay, integration and E2E pass                               | Quality, Build, Determinism, Server Integration, Web E2E workflows       | Passed locally and in PR #12          |
 | Empty database migration and isolated restore                                                                    | Prisma migration plus `pnpm backup:drill` in Server Integration          | Passed in CI                           |
 | Content publication, freeze and rollback                                                                         | Content Gateway plus `content:freeze:check` and `content:rollback:drill` | Passed locally                         |
 | Save migration and compatible resume                                                                             | Serialized legacy corpus plus `save:migration:drill`                     | Passed locally                         |
