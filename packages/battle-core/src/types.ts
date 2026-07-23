@@ -89,7 +89,22 @@ export type ObjectiveTrigger =
   | "rescue_without_attack"
   | "hidden_pipeline_repaired"
   | "reflected_hit"
-  | "relic_preserved";
+  | "relic_preserved"
+  | "multi_magnetic_collision"
+  | "all_rescues_completed"
+  | "primary_modules_avoided"
+  | "energy_reserve_maintained"
+  | "collapse_avoided"
+  | "bridge_preserved"
+  | "crystal_energy_collected"
+  | "wind_redirected"
+  | "gravity_restored"
+  | "carrier_intercepted"
+  | "repair_chain_completed"
+  | "fall_damage_avoided"
+  | "support_network_completed"
+  | "distinct_modules_used"
+  | "stabilized_early";
 
 export interface BattleObjective {
   readonly id: string;

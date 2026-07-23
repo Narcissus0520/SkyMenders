@@ -86,7 +86,7 @@ export class ContentGatewayClient {
   public buildPublication(actor: string): Promise<{ readonly id: string; readonly state: string }> {
     return this.write("/api/publications", "POST", {
       actor,
-      rulesVersion: "0.5.0",
+      rulesVersion: "0.6.0",
       commitSha: "workspace-draft",
     });
   }

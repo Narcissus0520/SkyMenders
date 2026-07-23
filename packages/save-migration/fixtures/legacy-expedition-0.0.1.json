@@ -1,0 +1,322 @@
+{
+  "saveSchemaVersion": "0.0.1",
+  "saveId": "018f0f40-7b1a-7000-8000-000000000011",
+  "updatedAt": "2026-07-22T08:00:00.000Z",
+  "contentVersion": "0.1.0",
+  "rulesVersion": "0.5.0",
+  "expedition": {
+    "plan": {
+      "schemaVersion": "0.1.0",
+      "contentVersion": "0.1.0",
+      "rulesVersion": "0.5.0",
+      "seed": 4242,
+      "regions": [
+        {
+          "id": "region_cloudbreak",
+          "regionIndex": 1,
+          "layers": [
+            [
+              {
+                "id": "region_1_layer_0_node_0",
+                "regionIndex": 1,
+                "layer": 0,
+                "type": "battle",
+                "mapId": "map_cloudbreak_relay",
+                "eventId": null,
+                "bossId": null,
+                "risk": 1,
+                "nextNodeIds": []
+              },
+              {
+                "id": "region_1_layer_0_node_1",
+                "regionIndex": 1,
+                "layer": 0,
+                "type": "engineering",
+                "mapId": "map_cloudbreak_rescue",
+                "eventId": null,
+                "bossId": null,
+                "risk": 1,
+                "nextNodeIds": []
+              }
+            ],
+            [
+              {
+                "id": "region_1_layer_1_node_0",
+                "regionIndex": 1,
+                "layer": 1,
+                "type": "elite",
+                "mapId": "map_cloudbreak_span",
+                "eventId": null,
+                "bossId": null,
+                "risk": 2,
+                "nextNodeIds": []
+              },
+              {
+                "id": "region_1_layer_1_node_1",
+                "regionIndex": 1,
+                "layer": 1,
+                "type": "event",
+                "mapId": null,
+                "eventId": "event_drifting_toolbox",
+                "bossId": null,
+                "risk": 1,
+                "nextNodeIds": []
+              }
+            ],
+            [
+              {
+                "id": "region_1_boss",
+                "regionIndex": 1,
+                "layer": 2,
+                "type": "boss",
+                "mapId": "map_boss_rift_drill",
+                "eventId": null,
+                "bossId": "boss_rift_drill",
+                "risk": 3,
+                "nextNodeIds": []
+              }
+            ]
+          ]
+        },
+        {
+          "id": "region_polar_foundry",
+          "regionIndex": 2,
+          "layers": [
+            [
+              {
+                "id": "region_2_layer_0_node_0",
+                "regionIndex": 2,
+                "layer": 0,
+                "type": "battle",
+                "mapId": "map_polar_foundry",
+                "eventId": null,
+                "bossId": null,
+                "risk": 2,
+                "nextNodeIds": []
+              },
+              {
+                "id": "region_2_layer_0_node_1",
+                "regionIndex": 2,
+                "layer": 0,
+                "type": "engineering",
+                "mapId": "map_polar_conduits",
+                "eventId": null,
+                "bossId": null,
+                "risk": 2,
+                "nextNodeIds": []
+              }
+            ],
+            [
+              {
+                "id": "region_2_layer_1_node_0",
+                "regionIndex": 2,
+                "layer": 1,
+                "type": "elite",
+                "mapId": "map_polar_switchyard",
+                "eventId": null,
+                "bossId": null,
+                "risk": 3,
+                "nextNodeIds": []
+              },
+              {
+                "id": "region_2_layer_1_node_1",
+                "regionIndex": 2,
+                "layer": 1,
+                "type": "workshop",
+                "mapId": null,
+                "eventId": null,
+                "bossId": null,
+                "risk": 2,
+                "nextNodeIds": []
+              }
+            ],
+            [
+              {
+                "id": "region_2_boss",
+                "regionIndex": 2,
+                "layer": 2,
+                "type": "boss",
+                "mapId": "map_boss_magnetic_tower",
+                "eventId": null,
+                "bossId": "boss_polar_magnetic_tower",
+                "risk": 3,
+                "nextNodeIds": []
+              }
+            ]
+          ]
+        },
+        {
+          "id": "region_verdant_updraft",
+          "regionIndex": 3,
+          "layers": [
+            [
+              {
+                "id": "region_3_layer_0_node_0",
+                "regionIndex": 3,
+                "layer": 0,
+                "type": "battle",
+                "mapId": "map_verdant_updraft",
+                "eventId": null,
+                "bossId": null,
+                "risk": 3,
+                "nextNodeIds": []
+              },
+              {
+                "id": "region_3_layer_0_node_1",
+                "regionIndex": 3,
+                "layer": 0,
+                "type": "engineering",
+                "mapId": "map_verdant_lifeline",
+                "eventId": null,
+                "bossId": null,
+                "risk": 3,
+                "nextNodeIds": []
+              }
+            ],
+            [
+              {
+                "id": "region_3_layer_1_node_0",
+                "regionIndex": 3,
+                "layer": 1,
+                "type": "elite",
+                "mapId": "map_verdant_canopy",
+                "eventId": null,
+                "bossId": null,
+                "risk": 3,
+                "nextNodeIds": []
+              },
+              {
+                "id": "region_3_layer_1_node_1",
+                "regionIndex": 3,
+                "layer": 1,
+                "type": "supply",
+                "mapId": null,
+                "eventId": null,
+                "bossId": null,
+                "risk": 3,
+                "nextNodeIds": []
+              }
+            ],
+            [
+              {
+                "id": "region_3_boss",
+                "regionIndex": 3,
+                "layer": 2,
+                "type": "boss",
+                "mapId": "map_boss_inverted_controller",
+                "eventId": null,
+                "bossId": "boss_inverted_controller",
+                "risk": 3,
+                "nextNodeIds": []
+              }
+            ]
+          ]
+        },
+        {
+          "id": "region_corefall",
+          "regionIndex": 4,
+          "layers": [
+            [
+              {
+                "id": "region_4_layer_0_node_0",
+                "regionIndex": 4,
+                "layer": 0,
+                "type": "battle",
+                "mapId": "map_corefall_rim",
+                "eventId": null,
+                "bossId": null,
+                "risk": 3,
+                "nextNodeIds": []
+              },
+              {
+                "id": "region_4_layer_0_node_1",
+                "regionIndex": 4,
+                "layer": 0,
+                "type": "engineering",
+                "mapId": "map_corefall_nexus",
+                "eventId": null,
+                "bossId": null,
+                "risk": 3,
+                "nextNodeIds": []
+              }
+            ],
+            [
+              {
+                "id": "region_4_layer_1_node_0",
+                "regionIndex": 4,
+                "layer": 1,
+                "type": "elite",
+                "mapId": "map_corefall_archive",
+                "eventId": null,
+                "bossId": null,
+                "risk": 3,
+                "nextNodeIds": []
+              },
+              {
+                "id": "region_4_layer_1_node_1",
+                "regionIndex": 4,
+                "layer": 1,
+                "type": "event",
+                "mapId": null,
+                "eventId": "event_mainframe_fragment",
+                "bossId": null,
+                "risk": 3,
+                "nextNodeIds": []
+              }
+            ],
+            [
+              {
+                "id": "region_4_boss",
+                "regionIndex": 4,
+                "layer": 2,
+                "type": "boss",
+                "mapId": "map_boss_island_mainframe",
+                "eventId": null,
+                "bossId": "boss_unbound_island_mainframe",
+                "risk": 3,
+                "nextNodeIds": []
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    "status": "active",
+    "regionIndex": 1,
+    "layer": 0,
+    "completedNodeIds": [],
+    "robots": [
+      {
+        "robotId": "robot_rivet",
+        "hp": 90,
+        "maxHp": 100,
+        "structuralDamage": 12,
+        "disabled": false
+      },
+      {
+        "robotId": "robot_anchor",
+        "hp": 75,
+        "maxHp": 100,
+        "structuralDamage": 28,
+        "disabled": false
+      },
+      { "robotId": "robot_gale", "hp": 100, "maxHp": 100, "structuralDamage": 0, "disabled": false }
+    ],
+    "researchEarned": 7,
+    "supplies": 5,
+    "routeRevealDepth": 1,
+    "inventory": {
+      "moduleIds": ["main_fold_bridge", "aux_repair_spray"],
+      "upgradeRouteIds": [],
+      "temporaryModIds": [],
+      "consumables": 1
+    },
+    "restartUsedNodeIds": []
+  },
+  "summary": {
+    "regionIndex": 1,
+    "layer": 0,
+    "completedNodes": 0,
+    "squadRobotIds": ["robot_rivet", "robot_anchor", "robot_gale"]
+  }
+}

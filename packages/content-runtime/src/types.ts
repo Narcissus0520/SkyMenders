@@ -31,7 +31,7 @@ export interface ExpeditionRegionPlan {
 export interface ExpeditionPlan {
   readonly schemaVersion: "0.1.0";
   readonly contentVersion: string;
-  readonly rulesVersion: "0.5.0";
+  readonly rulesVersion: "0.6.0";
   readonly seed: number;
   readonly regions: readonly ExpeditionRegionPlan[];
 }

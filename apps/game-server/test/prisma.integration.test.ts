@@ -52,8 +52,8 @@ describe.runIf(databaseUrl !== undefined)("Prisma account persistence", () => {
           instant: now,
           timeZone: "Asia/Shanghai",
           seedSecret: "postgres-integration-secret-with-thirty-two-bytes",
-          rulesVersion: "0.5.0",
-          contentVersion: "0.1.0",
+          rulesVersion: "0.6.0",
+          contentVersion: "0.2.0",
         },
       );
       const storedChallenge = await repository.ensureDailyChallenge({
@@ -67,8 +67,8 @@ describe.runIf(databaseUrl !== undefined)("Prisma account persistence", () => {
           instant: now,
           timeZone: "Asia/Shanghai",
           seedSecret: "rotated-integration-secret-with-thirty-two-bytes",
-          rulesVersion: "0.5.0",
-          contentVersion: "0.1.0",
+          rulesVersion: "0.6.0",
+          contentVersion: "0.2.0",
         },
       );
       expect(
@@ -129,8 +129,8 @@ describe.runIf(databaseUrl !== undefined)("Prisma admin control-plane persistenc
       expect((await repository.findSession(sessionId))?.adminId).toBe(admin.id);
       const manifest = publishedContentManifestSchema.parse({
         schemaVersion: "1.0.0",
-        contentVersion: "0.1.0",
-        rulesVersion: "0.5.0",
+        contentVersion: "0.2.0",
+        rulesVersion: "0.6.0",
         artifactHash,
         commitSha: "integration-commit",
         createdAt: now.toISOString(),
@@ -146,7 +146,7 @@ describe.runIf(databaseUrl !== undefined)("Prisma admin control-plane persistenc
       });
       const version = await repository.ensureContentVersion({
         id: artifactHash,
-        contentVersion: "0.1.0",
+        contentVersion: "0.2.0",
         artifactHash,
         manifest,
         actorId: admin.id,

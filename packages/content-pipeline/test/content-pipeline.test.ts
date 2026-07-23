@@ -44,14 +44,14 @@ describe("content publication pipeline", () => {
 
     const first = createPublicationArtifact({
       pack,
-      rulesVersion: "0.5.0",
+      rulesVersion: "0.6.0",
       commitSha: "abc123",
       createdAt: "2026-07-22T00:00:00.000Z",
       seeds: [13, 21],
     });
     const second = createPublicationArtifact({
       pack,
-      rulesVersion: "0.5.0",
+      rulesVersion: "0.6.0",
       commitSha: "abc123",
       createdAt: "2026-07-22T00:00:00.000Z",
       seeds: [13, 21],
@@ -82,7 +82,7 @@ describe("content publication pipeline", () => {
     expect(() =>
       createPublicationArtifact({
         pack: invalid,
-        rulesVersion: "0.5.0",
+        rulesVersion: "0.6.0",
         commitSha: "abc123",
         createdAt: "2026-07-22T00:00:00.000Z",
       }),

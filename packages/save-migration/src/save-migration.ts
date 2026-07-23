@@ -18,6 +18,12 @@ export interface SaveCompatibility {
   readonly rulesVersion: string;
   readonly contentVersion: string;
   readonly replaySchemaVersion: string;
+  readonly supportedVersionPairs?: readonly SaveVersionPair[];
+}
+
+export interface SaveVersionPair {
+  readonly rulesVersion: string;
+  readonly contentVersion: string;
 }
 
 export interface RecoveryResult {
@@ -110,15 +116,35 @@ export function recoverExpeditionSave(
   compatibility: SaveCompatibility,
 ): RecoveryResult {
   const document = migrateExpeditionSave(input);
+  const supportedPairs: readonly SaveVersionPair[] = [
+    {
+      rulesVersion: compatibility.rulesVersion,
+      contentVersion: compatibility.contentVersion,
+    },
+    ...(compatibility.supportedVersionPairs ?? []),
+  ];
   if (
-    document.rulesVersion !== compatibility.rulesVersion ||
-    document.contentVersion !== compatibility.contentVersion
+    !supportedPairs.some(
+      (pair) =>
+        pair.rulesVersion === document.rulesVersion &&
+        pair.contentVersion === document.contentVersion,
+    )
   )
     throw new Error("save requires an unavailable rules or content version");
   const warnings: string[] = [];
-  const battle = restore(document.battleTurnSnapshot, compatibility, "battle turn", warnings);
+  const snapshotCompatibility = {
+    rulesVersion: document.rulesVersion,
+    contentVersion: document.contentVersion,
+    replaySchemaVersion: compatibility.replaySchemaVersion,
+  };
+  const battle = restore(
+    document.battleTurnSnapshot,
+    snapshotCompatibility,
+    "battle turn",
+    warnings,
+  );
   if (battle !== null) return { document, source: "battle_turn", recoveredState: battle, warnings };
-  const node = restore(document.nodeStartSnapshot, compatibility, "node start", warnings);
+  const node = restore(document.nodeStartSnapshot, snapshotCompatibility, "node start", warnings);
   if (node !== null) return { document, source: "node_start", recoveredState: node, warnings };
   return { document, source: "expedition", recoveredState: null, warnings };
 }

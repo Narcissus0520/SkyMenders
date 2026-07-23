@@ -48,6 +48,15 @@ describe("expedition route and lifecycle", () => {
       expect(
         region.layers
           .slice(0, 2)
+          .flat()
+          .filter((node) => node.mapId !== null)
+          .every((node) =>
+            pack.maps.maps.find((map) => map.id === node.mapId)?.nodeTypes.includes(node.type),
+          ),
+      ).toBe(true);
+      expect(
+        region.layers
+          .slice(0, 2)
           .every((layer) =>
             layer.some((node) => pack.routes.route.nodeDurationMinutes[node.type] === 2),
           ),
@@ -69,7 +78,7 @@ describe("expedition route and lifecycle", () => {
 
   it("materializes every authored template into a valid deterministic terrain map", () => {
     const reports = validateAuthoredMaps(pack);
-    expect(reports).toHaveLength(16);
+    expect(reports).toHaveLength(48);
     expect(reports.every((report) => report.valid && report.metrics.unstableCells === 0)).toBe(
       true,
     );

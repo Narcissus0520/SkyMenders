@@ -24,8 +24,8 @@ const options = {
   instant: new Date("2026-07-22T15:59:59.000Z"),
   timeZone: "Asia/Shanghai",
   seedSecret: "daily-challenge-test-secret-with-32-bytes",
-  rulesVersion: "0.5.0",
-  contentVersion: "0.1.0",
+  rulesVersion: "0.6.0",
+  contentVersion: "0.2.0",
 };
 
 describe("daily challenge authority", () => {

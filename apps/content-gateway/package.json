@@ -12,6 +12,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsx watch src/main.ts",
+    "drill:rollback": "tsx src/rollback-drill-cli.ts",
     "lint": "eslint src test",
     "start": "node dist/main.js",
     "test": "vitest run",

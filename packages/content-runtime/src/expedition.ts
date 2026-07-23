@@ -67,7 +67,7 @@ export function generateExpeditionPlan(pack: PveContentPack, seed: number): Expe
   return {
     schemaVersion: "0.1.0",
     contentVersion: pack.regions.contentVersion,
-    rulesVersion: "0.5.0",
+    rulesVersion: "0.6.0",
     seed,
     regions: connectedRegions,
   };
@@ -148,9 +148,15 @@ function createLayer(
         : (ordinaryNodePool[typeResult.value] ?? shortestNodeType);
     includesShortestDuration ||= nodeMinutes(pack, type) === shortestNodeMinutes;
     const bossMapId = pack.bosses.bosses.find((boss) => boss.id === region.bossId)?.mapId;
-    const ordinaryMapIds = region.mapIds.filter((mapId) => mapId !== bossMapId);
-    if (ordinaryMapIds.length === 0) throw new Error(`region has no ordinary map: ${region.id}`);
-    const mapResult = nextInteger(mapRng, 0, ordinaryMapIds.length - 1);
+    const compatibleMapIds = BATTLE_NODE_TYPES.has(type)
+      ? region.mapIds.filter((mapId) => {
+          const map = pack.maps.maps.find((candidate) => candidate.id === mapId);
+          return mapId !== bossMapId && map?.nodeTypes.includes(type);
+        })
+      : [];
+    if (BATTLE_NODE_TYPES.has(type) && compatibleMapIds.length === 0)
+      throw new Error(`region has no ${type} map: ${region.id}`);
+    const mapResult = nextInteger(mapRng, 0, Math.max(0, compatibleMapIds.length - 1));
     mapRng = mapResult.state;
     const eventPool = pack.events.events.filter((event) => event.regionIds.includes(region.id));
     const eventResult = nextInteger(eventRng, 0, Math.max(0, eventPool.length - 1));
@@ -160,7 +166,7 @@ function createLayer(
       regionIndex: region.index,
       layer,
       type,
-      mapId: BATTLE_NODE_TYPES.has(type) ? (ordinaryMapIds[mapResult.value] ?? null) : null,
+      mapId: BATTLE_NODE_TYPES.has(type) ? (compatibleMapIds[mapResult.value] ?? null) : null,
       eventId: type === "event" ? (eventPool[eventResult.value]?.id ?? null) : null,
       bossId: null,
       risk: Math.min(3, region.index + (type === "elite" ? 1 : 0)) as 1 | 2 | 3,

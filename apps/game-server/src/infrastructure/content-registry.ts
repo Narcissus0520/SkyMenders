@@ -2,6 +2,7 @@ import { createPublicationArtifact } from "@skymenders/content-pipeline";
 import type { PveContentPack } from "@skymenders/content-schema";
 import { publishedContentManifestSchema } from "@skymenders/protocol";
 import type { PublishedContentManifest } from "@skymenders/protocol";
+import { CURRENT_PRODUCT_VERSIONS } from "@skymenders/shared-types";
 
 export interface PublishedContentVersion {
   readonly manifest: PublishedContentManifest;
@@ -15,7 +16,7 @@ export class ContentRegistry {
     if (pack === null) return;
     const artifact = createPublicationArtifact({
       pack,
-      rulesVersion: "0.5.0",
+      rulesVersion: CURRENT_PRODUCT_VERSIONS.rulesVersion,
       commitSha: "embedded-content",
       createdAt: now.toISOString(),
     });

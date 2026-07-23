@@ -1,26 +1,44 @@
 {
   "schemaVersion": "1.0.0",
-  "contentVersion": "0.1.0",
+  "contentVersion": "0.2.0",
   "maps": [
     {
       "id": "map_cloudbreak_relay",
       "regionId": "region_cloudbreak",
       "nameKey": "map.map_cloudbreak_relay.name",
-      "nodeTypes": ["battle", "engineering"],
+      "nodeTypes": ["battle"],
       "width": 24,
       "height": 12,
       "floorY": 2,
       "materialId": "terrain_cloud_soil",
       "playerSpawns": [
-        { "x": 2, "y": 3 },
-        { "x": 4, "y": 3 },
-        { "x": 6, "y": 3 }
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 6,
+          "y": 3
+        }
       ],
       "enemySpawns": [
-        { "x": 17, "y": 3 },
-        { "x": 20, "y": 3 }
+        {
+          "x": 17,
+          "y": 3
+        },
+        {
+          "x": 20,
+          "y": 3
+        }
       ],
-      "objectivePoint": { "x": 12, "y": 3 },
+      "objectivePoint": {
+        "x": 12,
+        "y": 3
+      },
       "fixedAnchorXs": ["0", "12", "23"],
       "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
       "requiredCapabilities": ["repair"],
@@ -33,21 +51,39 @@
       "id": "map_cloudbreak_span",
       "regionId": "region_cloudbreak",
       "nameKey": "map.map_cloudbreak_span.name",
-      "nodeTypes": ["battle", "elite"],
+      "nodeTypes": ["elite"],
       "width": 26,
       "height": 12,
       "floorY": 2,
       "materialId": "terrain_alloy_frame",
       "playerSpawns": [
-        { "x": 2, "y": 3 },
-        { "x": 4, "y": 3 },
-        { "x": 6, "y": 3 }
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 6,
+          "y": 3
+        }
       ],
       "enemySpawns": [
-        { "x": 19, "y": 3 },
-        { "x": 22, "y": 3 }
+        {
+          "x": 19,
+          "y": 3
+        },
+        {
+          "x": 22,
+          "y": 3
+        }
       ],
-      "objectivePoint": { "x": 13, "y": 3 },
+      "objectivePoint": {
+        "x": 13,
+        "y": 3
+      },
       "fixedAnchorXs": ["0", "13", "25"],
       "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
       "requiredCapabilities": ["support"],
@@ -60,21 +96,39 @@
       "id": "map_cloudbreak_rescue",
       "regionId": "region_cloudbreak",
       "nameKey": "map.map_cloudbreak_rescue.name",
-      "nodeTypes": ["engineering", "battle"],
+      "nodeTypes": ["engineering"],
       "width": 28,
       "height": 13,
       "floorY": 2,
       "materialId": "terrain_elastic_moss",
       "playerSpawns": [
-        { "x": 2, "y": 3 },
-        { "x": 5, "y": 3 },
-        { "x": 8, "y": 3 }
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
       ],
       "enemySpawns": [
-        { "x": 21, "y": 3 },
-        { "x": 24, "y": 3 }
+        {
+          "x": 21,
+          "y": 3
+        },
+        {
+          "x": 24,
+          "y": 3
+        }
       ],
-      "objectivePoint": { "x": 15, "y": 3 },
+      "objectivePoint": {
+        "x": 15,
+        "y": 3
+      },
       "fixedAnchorXs": ["0", "14", "27"],
       "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
       "requiredCapabilities": ["rescue"],
@@ -93,12 +147,29 @@
       "floorY": 2,
       "materialId": "terrain_alloy_frame",
       "playerSpawns": [
-        { "x": 2, "y": 3 },
-        { "x": 5, "y": 3 },
-        { "x": 8, "y": 3 }
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
       ],
-      "enemySpawns": [{ "x": 24, "y": 3 }],
-      "objectivePoint": { "x": 16, "y": 3 },
+      "enemySpawns": [
+        {
+          "x": 24,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 16,
+        "y": 3
+      },
       "fixedAnchorXs": ["0", "10", "20", "29"],
       "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
       "requiredCapabilities": ["support"],
@@ -107,26 +178,43 @@
       "hiddenObjectiveIds": ["hidden_pipeline", "hidden_preserve_relic"],
       "variationSlots": ["weak_point", "hazard", "device"]
     },
-
     {
       "id": "map_polar_foundry",
       "regionId": "region_polar_foundry",
       "nameKey": "map.map_polar_foundry.name",
-      "nodeTypes": ["battle", "engineering"],
+      "nodeTypes": ["battle"],
       "width": 26,
       "height": 13,
       "floorY": 2,
       "materialId": "terrain_energy_crystal",
       "playerSpawns": [
-        { "x": 2, "y": 3 },
-        { "x": 4, "y": 3 },
-        { "x": 7, "y": 3 }
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 7,
+          "y": 3
+        }
       ],
       "enemySpawns": [
-        { "x": 19, "y": 3 },
-        { "x": 23, "y": 3 }
+        {
+          "x": 19,
+          "y": 3
+        },
+        {
+          "x": 23,
+          "y": 3
+        }
       ],
-      "objectivePoint": { "x": 13, "y": 3 },
+      "objectivePoint": {
+        "x": 13,
+        "y": 3
+      },
       "fixedAnchorXs": ["0", "12", "25"],
       "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
       "requiredCapabilities": ["magnetic"],
@@ -139,21 +227,39 @@
       "id": "map_polar_switchyard",
       "regionId": "region_polar_foundry",
       "nameKey": "map.map_polar_switchyard.name",
-      "nodeTypes": ["battle", "elite"],
+      "nodeTypes": ["elite"],
       "width": 28,
       "height": 13,
       "floorY": 2,
       "materialId": "terrain_alloy_frame",
       "playerSpawns": [
-        { "x": 2, "y": 3 },
-        { "x": 5, "y": 3 },
-        { "x": 8, "y": 3 }
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
       ],
       "enemySpawns": [
-        { "x": 21, "y": 3 },
-        { "x": 25, "y": 3 }
+        {
+          "x": 21,
+          "y": 3
+        },
+        {
+          "x": 25,
+          "y": 3
+        }
       ],
-      "objectivePoint": { "x": 14, "y": 3 },
+      "objectivePoint": {
+        "x": 14,
+        "y": 3
+      },
       "fixedAnchorXs": ["0", "14", "27"],
       "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
       "requiredCapabilities": ["carry"],
@@ -166,21 +272,39 @@
       "id": "map_polar_conduits",
       "regionId": "region_polar_foundry",
       "nameKey": "map.map_polar_conduits.name",
-      "nodeTypes": ["engineering", "elite"],
+      "nodeTypes": ["engineering"],
       "width": 30,
       "height": 14,
       "floorY": 2,
       "materialId": "terrain_energy_crystal",
       "playerSpawns": [
-        { "x": 2, "y": 3 },
-        { "x": 5, "y": 3 },
-        { "x": 8, "y": 3 }
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
       ],
       "enemySpawns": [
-        { "x": 23, "y": 3 },
-        { "x": 27, "y": 3 }
+        {
+          "x": 23,
+          "y": 3
+        },
+        {
+          "x": 27,
+          "y": 3
+        }
       ],
-      "objectivePoint": { "x": 15, "y": 3 },
+      "objectivePoint": {
+        "x": 15,
+        "y": 3
+      },
       "fixedAnchorXs": ["0", "10", "20", "29"],
       "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
       "requiredCapabilities": ["repair"],
@@ -199,12 +323,29 @@
       "floorY": 2,
       "materialId": "terrain_alloy_frame",
       "playerSpawns": [
-        { "x": 2, "y": 3 },
-        { "x": 5, "y": 3 },
-        { "x": 8, "y": 3 }
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
       ],
-      "enemySpawns": [{ "x": 27, "y": 3 }],
-      "objectivePoint": { "x": 16, "y": 3 },
+      "enemySpawns": [
+        {
+          "x": 27,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 16,
+        "y": 3
+      },
       "fixedAnchorXs": ["0", "10", "21", "31"],
       "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
       "requiredCapabilities": ["magnetic", "carry"],
@@ -213,26 +354,43 @@
       "hiddenObjectiveIds": ["hidden_magnetic_collision", "hidden_preserve_relic"],
       "variationSlots": ["hazard", "device", "height"]
     },
-
     {
       "id": "map_verdant_updraft",
       "regionId": "region_verdant_updraft",
       "nameKey": "map.map_verdant_updraft.name",
-      "nodeTypes": ["battle", "engineering"],
+      "nodeTypes": ["battle"],
       "width": 28,
       "height": 14,
       "floorY": 2,
       "materialId": "terrain_elastic_moss",
       "playerSpawns": [
-        { "x": 2, "y": 3 },
-        { "x": 5, "y": 3 },
-        { "x": 8, "y": 3 }
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
       ],
       "enemySpawns": [
-        { "x": 21, "y": 3 },
-        { "x": 25, "y": 3 }
+        {
+          "x": 21,
+          "y": 3
+        },
+        {
+          "x": 25,
+          "y": 3
+        }
       ],
-      "objectivePoint": { "x": 14, "y": 3 },
+      "objectivePoint": {
+        "x": 14,
+        "y": 3
+      },
       "fixedAnchorXs": ["0", "14", "27"],
       "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
       "requiredCapabilities": ["rescue"],
@@ -245,21 +403,39 @@
       "id": "map_verdant_canopy",
       "regionId": "region_verdant_updraft",
       "nameKey": "map.map_verdant_canopy.name",
-      "nodeTypes": ["battle", "elite"],
+      "nodeTypes": ["elite"],
       "width": 30,
       "height": 15,
       "floorY": 2,
       "materialId": "terrain_cloud_soil",
       "playerSpawns": [
-        { "x": 2, "y": 3 },
-        { "x": 5, "y": 3 },
-        { "x": 8, "y": 3 }
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
       ],
       "enemySpawns": [
-        { "x": 23, "y": 3 },
-        { "x": 27, "y": 3 }
+        {
+          "x": 23,
+          "y": 3
+        },
+        {
+          "x": 27,
+          "y": 3
+        }
       ],
-      "objectivePoint": { "x": 15, "y": 3 },
+      "objectivePoint": {
+        "x": 15,
+        "y": 3
+      },
       "fixedAnchorXs": ["0", "10", "20", "29"],
       "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
       "requiredCapabilities": ["support"],
@@ -272,21 +448,39 @@
       "id": "map_verdant_lifeline",
       "regionId": "region_verdant_updraft",
       "nameKey": "map.map_verdant_lifeline.name",
-      "nodeTypes": ["engineering", "elite"],
+      "nodeTypes": ["engineering"],
       "width": 32,
       "height": 15,
       "floorY": 2,
       "materialId": "terrain_elastic_moss",
       "playerSpawns": [
-        { "x": 2, "y": 3 },
-        { "x": 5, "y": 3 },
-        { "x": 8, "y": 3 }
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
       ],
       "enemySpawns": [
-        { "x": 25, "y": 3 },
-        { "x": 29, "y": 3 }
+        {
+          "x": 25,
+          "y": 3
+        },
+        {
+          "x": 29,
+          "y": 3
+        }
       ],
-      "objectivePoint": { "x": 16, "y": 3 },
+      "objectivePoint": {
+        "x": 16,
+        "y": 3
+      },
       "fixedAnchorXs": ["0", "10", "21", "31"],
       "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
       "requiredCapabilities": ["repair", "rescue"],
@@ -305,12 +499,29 @@
       "floorY": 2,
       "materialId": "terrain_alloy_frame",
       "playerSpawns": [
-        { "x": 2, "y": 3 },
-        { "x": 5, "y": 3 },
-        { "x": 8, "y": 3 }
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
       ],
-      "enemySpawns": [{ "x": 29, "y": 3 }],
-      "objectivePoint": { "x": 17, "y": 3 },
+      "enemySpawns": [
+        {
+          "x": 29,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 17,
+        "y": 3
+      },
       "fixedAnchorXs": ["0", "11", "22", "33"],
       "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
       "requiredCapabilities": ["support", "rescue"],
@@ -319,26 +530,43 @@
       "hiddenObjectiveIds": ["hidden_double_reflection", "hidden_preserve_relic"],
       "variationSlots": ["height", "hazard", "weak_point"]
     },
-
     {
       "id": "map_corefall_rim",
       "regionId": "region_corefall",
       "nameKey": "map.map_corefall_rim.name",
-      "nodeTypes": ["battle", "engineering"],
+      "nodeTypes": ["battle"],
       "width": 30,
       "height": 15,
       "floorY": 2,
       "materialId": "terrain_energy_crystal",
       "playerSpawns": [
-        { "x": 2, "y": 3 },
-        { "x": 5, "y": 3 },
-        { "x": 8, "y": 3 }
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
       ],
       "enemySpawns": [
-        { "x": 23, "y": 3 },
-        { "x": 27, "y": 3 }
+        {
+          "x": 23,
+          "y": 3
+        },
+        {
+          "x": 27,
+          "y": 3
+        }
       ],
-      "objectivePoint": { "x": 15, "y": 3 },
+      "objectivePoint": {
+        "x": 15,
+        "y": 3
+      },
       "fixedAnchorXs": ["0", "10", "20", "29"],
       "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
       "requiredCapabilities": ["repair", "support"],
@@ -351,21 +579,39 @@
       "id": "map_corefall_archive",
       "regionId": "region_corefall",
       "nameKey": "map.map_corefall_archive.name",
-      "nodeTypes": ["battle", "elite"],
+      "nodeTypes": ["elite"],
       "width": 32,
       "height": 16,
       "floorY": 2,
       "materialId": "terrain_alloy_frame",
       "playerSpawns": [
-        { "x": 2, "y": 3 },
-        { "x": 5, "y": 3 },
-        { "x": 8, "y": 3 }
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
       ],
       "enemySpawns": [
-        { "x": 25, "y": 3 },
-        { "x": 29, "y": 3 }
+        {
+          "x": 25,
+          "y": 3
+        },
+        {
+          "x": 29,
+          "y": 3
+        }
       ],
-      "objectivePoint": { "x": 16, "y": 3 },
+      "objectivePoint": {
+        "x": 16,
+        "y": 3
+      },
       "fixedAnchorXs": ["0", "10", "21", "31"],
       "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
       "requiredCapabilities": ["carry", "reflect"],
@@ -378,21 +624,39 @@
       "id": "map_corefall_nexus",
       "regionId": "region_corefall",
       "nameKey": "map.map_corefall_nexus.name",
-      "nodeTypes": ["engineering", "elite"],
+      "nodeTypes": ["engineering"],
       "width": 34,
       "height": 16,
       "floorY": 2,
       "materialId": "terrain_cloud_soil",
       "playerSpawns": [
-        { "x": 2, "y": 3 },
-        { "x": 5, "y": 3 },
-        { "x": 8, "y": 3 }
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
       ],
       "enemySpawns": [
-        { "x": 27, "y": 3 },
-        { "x": 31, "y": 3 }
+        {
+          "x": 27,
+          "y": 3
+        },
+        {
+          "x": 31,
+          "y": 3
+        }
       ],
-      "objectivePoint": { "x": 17, "y": 3 },
+      "objectivePoint": {
+        "x": 17,
+        "y": 3
+      },
       "fixedAnchorXs": ["0", "11", "22", "33"],
       "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
       "requiredCapabilities": ["magnetic", "rescue"],
@@ -411,12 +675,29 @@
       "floorY": 2,
       "materialId": "terrain_alloy_frame",
       "playerSpawns": [
-        { "x": 2, "y": 3 },
-        { "x": 5, "y": 3 },
-        { "x": 8, "y": 3 }
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
       ],
-      "enemySpawns": [{ "x": 31, "y": 3 }],
-      "objectivePoint": { "x": 18, "y": 3 },
+      "enemySpawns": [
+        {
+          "x": 31,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 18,
+        "y": 3
+      },
       "fixedAnchorXs": ["0", "12", "24", "35"],
       "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
       "requiredCapabilities": ["repair", "support"],
@@ -424,6 +705,1462 @@
       "secondaryObjectiveIds": ["secondary_no_shutdown", "secondary_terrain_70"],
       "hiddenObjectiveIds": ["hidden_pipeline", "hidden_preserve_relic"],
       "variationSlots": ["material", "hazard", "device"]
+    },
+    {
+      "id": "map_cloudbreak_windward_steps",
+      "regionId": "region_cloudbreak",
+      "nameKey": "map.map_cloudbreak_windward_steps.name",
+      "nodeTypes": ["battle"],
+      "width": 25,
+      "height": 12,
+      "floorY": 2,
+      "materialId": "terrain_cloud_soil",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 18,
+          "y": 3
+        },
+        {
+          "x": 21,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 12,
+        "y": 3
+      },
+      "fixedAnchorXs": ["0", "12", "24"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_defeat_guard", "primary_hold_position"],
+      "secondaryObjectiveIds": ["secondary_no_shutdown", "secondary_round_limit"],
+      "hiddenObjectiveIds": ["hidden_magnetic_collision", "hidden_aux_only"],
+      "variationSlots": ["material", "weak_point", "device"]
+    },
+    {
+      "id": "map_cloudbreak_signal_garden",
+      "regionId": "region_cloudbreak",
+      "nameKey": "map.map_cloudbreak_signal_garden.name",
+      "nodeTypes": ["battle"],
+      "width": 26,
+      "height": 13,
+      "floorY": 3,
+      "materialId": "terrain_energy_crystal",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 19,
+          "y": 4
+        },
+        {
+          "x": 22,
+          "y": 4
+        }
+      ],
+      "objectivePoint": {
+        "x": 13,
+        "y": 4
+      },
+      "fixedAnchorXs": ["0", "13", "25"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_hold_position", "primary_close_pollution"],
+      "secondaryObjectiveIds": ["secondary_round_limit", "secondary_no_breach"],
+      "hiddenObjectiveIds": ["hidden_peaceful_rescue", "hidden_energy_reserve"],
+      "variationSlots": ["height", "hazard", "weak_point"]
+    },
+    {
+      "id": "map_cloudbreak_suspended_yard",
+      "regionId": "region_cloudbreak",
+      "nameKey": "map.map_cloudbreak_suspended_yard.name",
+      "nodeTypes": ["battle"],
+      "width": 27,
+      "height": 14,
+      "floorY": 2,
+      "materialId": "terrain_alloy_frame",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 20,
+          "y": 3
+        },
+        {
+          "x": 23,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 13,
+        "y": 3
+      },
+      "fixedAnchorXs": ["0", "13", "26"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_close_pollution", "primary_defeat_guard"],
+      "secondaryObjectiveIds": ["secondary_no_breach", "secondary_no_shutdown"],
+      "hiddenObjectiveIds": ["hidden_pipeline", "hidden_no_collapse"],
+      "variationSlots": ["material", "height", "hazard"]
+    },
+    {
+      "id": "map_cloudbreak_moss_cistern",
+      "regionId": "region_cloudbreak",
+      "nameKey": "map.map_cloudbreak_moss_cistern.name",
+      "nodeTypes": ["battle"],
+      "width": 28,
+      "height": 15,
+      "floorY": 3,
+      "materialId": "terrain_elastic_moss",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 21,
+          "y": 4
+        },
+        {
+          "x": 24,
+          "y": 4
+        }
+      ],
+      "objectivePoint": {
+        "x": 14,
+        "y": 4
+      },
+      "fixedAnchorXs": ["0", "14", "27"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_defeat_guard", "primary_hold_position"],
+      "secondaryObjectiveIds": ["secondary_no_shutdown", "secondary_round_limit"],
+      "hiddenObjectiveIds": ["hidden_double_reflection", "hidden_bridge_intact"],
+      "variationSlots": ["weak_point", "hazard", "device"]
+    },
+    {
+      "id": "map_cloudbreak_courier_crossing",
+      "regionId": "region_cloudbreak",
+      "nameKey": "map.map_cloudbreak_courier_crossing.name",
+      "nodeTypes": ["battle"],
+      "width": 29,
+      "height": 16,
+      "floorY": 2,
+      "materialId": "terrain_cloud_soil",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 22,
+          "y": 3
+        },
+        {
+          "x": 25,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 14,
+        "y": 3
+      },
+      "fixedAnchorXs": ["0", "14", "28"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_hold_position", "primary_close_pollution"],
+      "secondaryObjectiveIds": ["secondary_round_limit", "secondary_no_breach"],
+      "hiddenObjectiveIds": ["hidden_preserve_relic", "hidden_crystal_harvest"],
+      "variationSlots": ["material", "weak_point", "device"]
+    },
+    {
+      "id": "map_cloudbreak_anchor_lattice",
+      "regionId": "region_cloudbreak",
+      "nameKey": "map.map_cloudbreak_anchor_lattice.name",
+      "nodeTypes": ["engineering"],
+      "width": 30,
+      "height": 12,
+      "floorY": 3,
+      "materialId": "terrain_alloy_frame",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 23,
+          "y": 4
+        },
+        {
+          "x": 26,
+          "y": 4
+        }
+      ],
+      "objectivePoint": {
+        "x": 15,
+        "y": 4
+      },
+      "fixedAnchorXs": ["0", "15", "29"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": ["repair"],
+      "primaryObjectiveIds": ["primary_rescue_units", "primary_repair_tower"],
+      "secondaryObjectiveIds": ["secondary_clear_pollution", "secondary_terrain_70"],
+      "hiddenObjectiveIds": ["hidden_chain_magnet", "hidden_wind_redirect"],
+      "variationSlots": ["height", "hazard", "weak_point"]
+    },
+    {
+      "id": "map_cloudbreak_cloudwell_repair",
+      "regionId": "region_cloudbreak",
+      "nameKey": "map.map_cloudbreak_cloudwell_repair.name",
+      "nodeTypes": ["engineering"],
+      "width": 31,
+      "height": 13,
+      "floorY": 2,
+      "materialId": "terrain_cloud_soil",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 24,
+          "y": 3
+        },
+        {
+          "x": 27,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 15,
+        "y": 3
+      },
+      "fixedAnchorXs": ["0", "15", "30"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": ["repair"],
+      "primaryObjectiveIds": ["primary_repair_tower", "primary_deliver_core"],
+      "secondaryObjectiveIds": ["secondary_terrain_70", "secondary_extra_rescue"],
+      "hiddenObjectiveIds": ["hidden_full_rescue", "hidden_gravity_return"],
+      "variationSlots": ["material", "height", "hazard"]
+    },
+    {
+      "id": "map_cloudbreak_storm_cradle",
+      "regionId": "region_cloudbreak",
+      "nameKey": "map.map_cloudbreak_storm_cradle.name",
+      "nodeTypes": ["elite"],
+      "width": 32,
+      "height": 14,
+      "floorY": 3,
+      "materialId": "terrain_elastic_moss",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 25,
+          "y": 4
+        },
+        {
+          "x": 28,
+          "y": 4
+        },
+        {
+          "x": 22,
+          "y": 4
+        }
+      ],
+      "objectivePoint": {
+        "x": 16,
+        "y": 4
+      },
+      "fixedAnchorXs": ["0", "16", "31"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": ["support"],
+      "primaryObjectiveIds": ["primary_defeat_guard", "primary_hold_position"],
+      "secondaryObjectiveIds": ["secondary_terrain_70", "secondary_round_limit"],
+      "hiddenObjectiveIds": ["hidden_aux_only", "hidden_carrier_intercept"],
+      "variationSlots": ["weak_point", "hazard", "device"]
+    },
+    {
+      "id": "map_polar_coil_gallery",
+      "regionId": "region_polar_foundry",
+      "nameKey": "map.map_polar_coil_gallery.name",
+      "nodeTypes": ["battle"],
+      "width": 33,
+      "height": 15,
+      "floorY": 2,
+      "materialId": "terrain_alloy_frame",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 26,
+          "y": 3
+        },
+        {
+          "x": 29,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 16,
+        "y": 3
+      },
+      "fixedAnchorXs": ["0", "16", "32"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_close_pollution", "primary_defeat_guard"],
+      "secondaryObjectiveIds": ["secondary_no_breach", "secondary_no_shutdown"],
+      "hiddenObjectiveIds": ["hidden_energy_reserve", "hidden_repair_combo"],
+      "variationSlots": ["material", "weak_point", "device"]
+    },
+    {
+      "id": "map_polar_north_crane",
+      "regionId": "region_polar_foundry",
+      "nameKey": "map.map_polar_north_crane.name",
+      "nodeTypes": ["battle"],
+      "width": 34,
+      "height": 16,
+      "floorY": 3,
+      "materialId": "terrain_energy_crystal",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 27,
+          "y": 4
+        },
+        {
+          "x": 30,
+          "y": 4
+        }
+      ],
+      "objectivePoint": {
+        "x": 17,
+        "y": 4
+      },
+      "fixedAnchorXs": ["0", "17", "33"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_defeat_guard", "primary_hold_position"],
+      "secondaryObjectiveIds": ["secondary_no_shutdown", "secondary_round_limit"],
+      "hiddenObjectiveIds": ["hidden_no_collapse", "hidden_zero_fall"],
+      "variationSlots": ["height", "hazard", "weak_point"]
+    },
+    {
+      "id": "map_polar_flux_quarry",
+      "regionId": "region_polar_foundry",
+      "nameKey": "map.map_polar_flux_quarry.name",
+      "nodeTypes": ["battle"],
+      "width": 35,
+      "height": 12,
+      "floorY": 2,
+      "materialId": "terrain_cloud_soil",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 28,
+          "y": 3
+        },
+        {
+          "x": 31,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 17,
+        "y": 3
+      },
+      "fixedAnchorXs": ["0", "17", "34"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_hold_position", "primary_close_pollution"],
+      "secondaryObjectiveIds": ["secondary_round_limit", "secondary_no_breach"],
+      "hiddenObjectiveIds": ["hidden_bridge_intact", "hidden_support_network"],
+      "variationSlots": ["material", "height", "hazard"]
+    },
+    {
+      "id": "map_polar_cold_arc",
+      "regionId": "region_polar_foundry",
+      "nameKey": "map.map_polar_cold_arc.name",
+      "nodeTypes": ["battle"],
+      "width": 36,
+      "height": 13,
+      "floorY": 3,
+      "materialId": "terrain_alloy_frame",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 29,
+          "y": 4
+        },
+        {
+          "x": 32,
+          "y": 4
+        }
+      ],
+      "objectivePoint": {
+        "x": 18,
+        "y": 4
+      },
+      "fixedAnchorXs": ["0", "18", "35"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_close_pollution", "primary_defeat_guard"],
+      "secondaryObjectiveIds": ["secondary_no_breach", "secondary_no_shutdown"],
+      "hiddenObjectiveIds": ["hidden_crystal_harvest", "hidden_module_rotation"],
+      "variationSlots": ["weak_point", "hazard", "device"]
+    },
+    {
+      "id": "map_polar_magnet_lane",
+      "regionId": "region_polar_foundry",
+      "nameKey": "map.map_polar_magnet_lane.name",
+      "nodeTypes": ["battle"],
+      "width": 37,
+      "height": 14,
+      "floorY": 2,
+      "materialId": "terrain_energy_crystal",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 30,
+          "y": 3
+        },
+        {
+          "x": 33,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 18,
+        "y": 3
+      },
+      "fixedAnchorXs": ["0", "18", "36"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_defeat_guard", "primary_hold_position"],
+      "secondaryObjectiveIds": ["secondary_no_shutdown", "secondary_round_limit"],
+      "hiddenObjectiveIds": ["hidden_wind_redirect", "hidden_fast_stabilize"],
+      "variationSlots": ["material", "weak_point", "device"]
+    },
+    {
+      "id": "map_polar_crystal_bypass",
+      "regionId": "region_polar_foundry",
+      "nameKey": "map.map_polar_crystal_bypass.name",
+      "nodeTypes": ["engineering"],
+      "width": 38,
+      "height": 15,
+      "floorY": 3,
+      "materialId": "terrain_energy_crystal",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 31,
+          "y": 4
+        },
+        {
+          "x": 34,
+          "y": 4
+        }
+      ],
+      "objectivePoint": {
+        "x": 19,
+        "y": 4
+      },
+      "fixedAnchorXs": ["0", "19", "37"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": ["repair"],
+      "primaryObjectiveIds": ["primary_deliver_core", "primary_rescue_units"],
+      "secondaryObjectiveIds": ["secondary_extra_rescue", "secondary_clear_pollution"],
+      "hiddenObjectiveIds": ["hidden_gravity_return", "hidden_magnetic_collision"],
+      "variationSlots": ["height", "hazard", "weak_point"]
+    },
+    {
+      "id": "map_polar_pole_bridge",
+      "regionId": "region_polar_foundry",
+      "nameKey": "map.map_polar_pole_bridge.name",
+      "nodeTypes": ["engineering"],
+      "width": 25,
+      "height": 16,
+      "floorY": 2,
+      "materialId": "terrain_alloy_frame",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 18,
+          "y": 3
+        },
+        {
+          "x": 21,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 12,
+        "y": 3
+      },
+      "fixedAnchorXs": ["0", "12", "24"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": ["repair"],
+      "primaryObjectiveIds": ["primary_rescue_units", "primary_repair_tower"],
+      "secondaryObjectiveIds": ["secondary_clear_pollution", "secondary_terrain_70"],
+      "hiddenObjectiveIds": ["hidden_carrier_intercept", "hidden_peaceful_rescue"],
+      "variationSlots": ["material", "height", "hazard"]
+    },
+    {
+      "id": "map_polar_overload_vault",
+      "regionId": "region_polar_foundry",
+      "nameKey": "map.map_polar_overload_vault.name",
+      "nodeTypes": ["elite"],
+      "width": 26,
+      "height": 12,
+      "floorY": 3,
+      "materialId": "terrain_energy_crystal",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 19,
+          "y": 4
+        },
+        {
+          "x": 22,
+          "y": 4
+        },
+        {
+          "x": 16,
+          "y": 4
+        }
+      ],
+      "objectivePoint": {
+        "x": 13,
+        "y": 4
+      },
+      "fixedAnchorXs": ["0", "13", "25"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": ["support"],
+      "primaryObjectiveIds": ["primary_preserve_island", "primary_defeat_guard"],
+      "secondaryObjectiveIds": ["secondary_no_shutdown", "secondary_terrain_70"],
+      "hiddenObjectiveIds": ["hidden_repair_combo", "hidden_pipeline"],
+      "variationSlots": ["weak_point", "hazard", "device"]
+    },
+    {
+      "id": "map_verdant_canopy_market",
+      "regionId": "region_verdant_updraft",
+      "nameKey": "map.map_verdant_canopy_market.name",
+      "nodeTypes": ["battle"],
+      "width": 27,
+      "height": 13,
+      "floorY": 2,
+      "materialId": "terrain_elastic_moss",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 20,
+          "y": 3
+        },
+        {
+          "x": 23,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 13,
+        "y": 3
+      },
+      "fixedAnchorXs": ["0", "13", "26"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_hold_position", "primary_close_pollution"],
+      "secondaryObjectiveIds": ["secondary_round_limit", "secondary_no_breach"],
+      "hiddenObjectiveIds": ["hidden_zero_fall", "hidden_double_reflection"],
+      "variationSlots": ["material", "weak_point", "device"]
+    },
+    {
+      "id": "map_verdant_root_turbine",
+      "regionId": "region_verdant_updraft",
+      "nameKey": "map.map_verdant_root_turbine.name",
+      "nodeTypes": ["battle"],
+      "width": 28,
+      "height": 14,
+      "floorY": 3,
+      "materialId": "terrain_cloud_soil",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 21,
+          "y": 4
+        },
+        {
+          "x": 24,
+          "y": 4
+        }
+      ],
+      "objectivePoint": {
+        "x": 14,
+        "y": 4
+      },
+      "fixedAnchorXs": ["0", "14", "27"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_close_pollution", "primary_defeat_guard"],
+      "secondaryObjectiveIds": ["secondary_no_breach", "secondary_no_shutdown"],
+      "hiddenObjectiveIds": ["hidden_support_network", "hidden_preserve_relic"],
+      "variationSlots": ["height", "hazard", "weak_point"]
+    },
+    {
+      "id": "map_verdant_seedlift",
+      "regionId": "region_verdant_updraft",
+      "nameKey": "map.map_verdant_seedlift.name",
+      "nodeTypes": ["battle"],
+      "width": 29,
+      "height": 15,
+      "floorY": 2,
+      "materialId": "terrain_energy_crystal",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 22,
+          "y": 3
+        },
+        {
+          "x": 25,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 14,
+        "y": 3
+      },
+      "fixedAnchorXs": ["0", "14", "28"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_defeat_guard", "primary_hold_position"],
+      "secondaryObjectiveIds": ["secondary_no_shutdown", "secondary_round_limit"],
+      "hiddenObjectiveIds": ["hidden_module_rotation", "hidden_chain_magnet"],
+      "variationSlots": ["material", "height", "hazard"]
+    },
+    {
+      "id": "map_verdant_moss_fan",
+      "regionId": "region_verdant_updraft",
+      "nameKey": "map.map_verdant_moss_fan.name",
+      "nodeTypes": ["battle"],
+      "width": 30,
+      "height": 16,
+      "floorY": 3,
+      "materialId": "terrain_elastic_moss",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 23,
+          "y": 4
+        },
+        {
+          "x": 26,
+          "y": 4
+        }
+      ],
+      "objectivePoint": {
+        "x": 15,
+        "y": 4
+      },
+      "fixedAnchorXs": ["0", "15", "29"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_hold_position", "primary_close_pollution"],
+      "secondaryObjectiveIds": ["secondary_round_limit", "secondary_no_breach"],
+      "hiddenObjectiveIds": ["hidden_fast_stabilize", "hidden_full_rescue"],
+      "variationSlots": ["weak_point", "hazard", "device"]
+    },
+    {
+      "id": "map_verdant_dew_bridge",
+      "regionId": "region_verdant_updraft",
+      "nameKey": "map.map_verdant_dew_bridge.name",
+      "nodeTypes": ["battle"],
+      "width": 31,
+      "height": 12,
+      "floorY": 2,
+      "materialId": "terrain_alloy_frame",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 24,
+          "y": 3
+        },
+        {
+          "x": 27,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 15,
+        "y": 3
+      },
+      "fixedAnchorXs": ["0", "15", "30"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_close_pollution", "primary_defeat_guard"],
+      "secondaryObjectiveIds": ["secondary_no_breach", "secondary_no_shutdown"],
+      "hiddenObjectiveIds": ["hidden_magnetic_collision", "hidden_aux_only"],
+      "variationSlots": ["material", "weak_point", "device"]
+    },
+    {
+      "id": "map_verdant_nursery_pumps",
+      "regionId": "region_verdant_updraft",
+      "nameKey": "map.map_verdant_nursery_pumps.name",
+      "nodeTypes": ["engineering"],
+      "width": 32,
+      "height": 13,
+      "floorY": 3,
+      "materialId": "terrain_cloud_soil",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 25,
+          "y": 4
+        },
+        {
+          "x": 28,
+          "y": 4
+        }
+      ],
+      "objectivePoint": {
+        "x": 16,
+        "y": 4
+      },
+      "fixedAnchorXs": ["0", "16", "31"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": ["repair"],
+      "primaryObjectiveIds": ["primary_repair_tower", "primary_deliver_core"],
+      "secondaryObjectiveIds": ["secondary_terrain_70", "secondary_extra_rescue"],
+      "hiddenObjectiveIds": ["hidden_peaceful_rescue", "hidden_energy_reserve"],
+      "variationSlots": ["height", "hazard", "weak_point"]
+    },
+    {
+      "id": "map_verdant_vine_anchor",
+      "regionId": "region_verdant_updraft",
+      "nameKey": "map.map_verdant_vine_anchor.name",
+      "nodeTypes": ["engineering"],
+      "width": 33,
+      "height": 14,
+      "floorY": 2,
+      "materialId": "terrain_elastic_moss",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 26,
+          "y": 3
+        },
+        {
+          "x": 29,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 16,
+        "y": 3
+      },
+      "fixedAnchorXs": ["0", "16", "32"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": ["repair"],
+      "primaryObjectiveIds": ["primary_deliver_core", "primary_rescue_units"],
+      "secondaryObjectiveIds": ["secondary_extra_rescue", "secondary_clear_pollution"],
+      "hiddenObjectiveIds": ["hidden_pipeline", "hidden_no_collapse"],
+      "variationSlots": ["material", "height", "hazard"]
+    },
+    {
+      "id": "map_verdant_storm_bloom",
+      "regionId": "region_verdant_updraft",
+      "nameKey": "map.map_verdant_storm_bloom.name",
+      "nodeTypes": ["elite"],
+      "width": 34,
+      "height": 15,
+      "floorY": 3,
+      "materialId": "terrain_energy_crystal",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 27,
+          "y": 4
+        },
+        {
+          "x": 30,
+          "y": 4
+        },
+        {
+          "x": 24,
+          "y": 4
+        }
+      ],
+      "objectivePoint": {
+        "x": 17,
+        "y": 4
+      },
+      "fixedAnchorXs": ["0", "17", "33"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": ["support"],
+      "primaryObjectiveIds": ["primary_hold_position", "primary_preserve_island"],
+      "secondaryObjectiveIds": ["secondary_round_limit", "secondary_no_shutdown"],
+      "hiddenObjectiveIds": ["hidden_double_reflection", "hidden_bridge_intact"],
+      "variationSlots": ["weak_point", "hazard", "device"]
+    },
+    {
+      "id": "map_corefall_memory_trench",
+      "regionId": "region_corefall",
+      "nameKey": "map.map_corefall_memory_trench.name",
+      "nodeTypes": ["battle"],
+      "width": 35,
+      "height": 16,
+      "floorY": 2,
+      "materialId": "terrain_alloy_frame",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 28,
+          "y": 3
+        },
+        {
+          "x": 31,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 17,
+        "y": 3
+      },
+      "fixedAnchorXs": ["0", "17", "34"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_defeat_guard", "primary_hold_position"],
+      "secondaryObjectiveIds": ["secondary_no_shutdown", "secondary_round_limit"],
+      "hiddenObjectiveIds": ["hidden_preserve_relic", "hidden_crystal_harvest"],
+      "variationSlots": ["material", "weak_point", "device"]
+    },
+    {
+      "id": "map_corefall_relay_crypt",
+      "regionId": "region_corefall",
+      "nameKey": "map.map_corefall_relay_crypt.name",
+      "nodeTypes": ["battle"],
+      "width": 36,
+      "height": 12,
+      "floorY": 3,
+      "materialId": "terrain_energy_crystal",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 29,
+          "y": 4
+        },
+        {
+          "x": 32,
+          "y": 4
+        }
+      ],
+      "objectivePoint": {
+        "x": 18,
+        "y": 4
+      },
+      "fixedAnchorXs": ["0", "18", "35"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_hold_position", "primary_close_pollution"],
+      "secondaryObjectiveIds": ["secondary_round_limit", "secondary_no_breach"],
+      "hiddenObjectiveIds": ["hidden_chain_magnet", "hidden_wind_redirect"],
+      "variationSlots": ["height", "hazard", "weak_point"]
+    },
+    {
+      "id": "map_corefall_fracture_hub",
+      "regionId": "region_corefall",
+      "nameKey": "map.map_corefall_fracture_hub.name",
+      "nodeTypes": ["battle"],
+      "width": 37,
+      "height": 13,
+      "floorY": 2,
+      "materialId": "terrain_cloud_soil",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 30,
+          "y": 3
+        },
+        {
+          "x": 33,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 18,
+        "y": 3
+      },
+      "fixedAnchorXs": ["0", "18", "36"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_close_pollution", "primary_defeat_guard"],
+      "secondaryObjectiveIds": ["secondary_no_breach", "secondary_no_shutdown"],
+      "hiddenObjectiveIds": ["hidden_full_rescue", "hidden_gravity_return"],
+      "variationSlots": ["material", "height", "hazard"]
+    },
+    {
+      "id": "map_corefall_archive_spine",
+      "regionId": "region_corefall",
+      "nameKey": "map.map_corefall_archive_spine.name",
+      "nodeTypes": ["battle"],
+      "width": 38,
+      "height": 14,
+      "floorY": 3,
+      "materialId": "terrain_alloy_frame",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 31,
+          "y": 4
+        },
+        {
+          "x": 34,
+          "y": 4
+        }
+      ],
+      "objectivePoint": {
+        "x": 19,
+        "y": 4
+      },
+      "fixedAnchorXs": ["0", "19", "37"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_defeat_guard", "primary_hold_position"],
+      "secondaryObjectiveIds": ["secondary_no_shutdown", "secondary_round_limit"],
+      "hiddenObjectiveIds": ["hidden_aux_only", "hidden_carrier_intercept"],
+      "variationSlots": ["weak_point", "hazard", "device"]
+    },
+    {
+      "id": "map_corefall_core_orbit",
+      "regionId": "region_corefall",
+      "nameKey": "map.map_corefall_core_orbit.name",
+      "nodeTypes": ["battle"],
+      "width": 25,
+      "height": 15,
+      "floorY": 2,
+      "materialId": "terrain_energy_crystal",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 18,
+          "y": 3
+        },
+        {
+          "x": 21,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 12,
+        "y": 3
+      },
+      "fixedAnchorXs": ["0", "12", "24"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": [],
+      "primaryObjectiveIds": ["primary_hold_position", "primary_close_pollution"],
+      "secondaryObjectiveIds": ["secondary_round_limit", "secondary_no_breach"],
+      "hiddenObjectiveIds": ["hidden_energy_reserve", "hidden_repair_combo"],
+      "variationSlots": ["material", "weak_point", "device"]
+    },
+    {
+      "id": "map_corefall_coolant_ring",
+      "regionId": "region_corefall",
+      "nameKey": "map.map_corefall_coolant_ring.name",
+      "nodeTypes": ["engineering"],
+      "width": 26,
+      "height": 16,
+      "floorY": 3,
+      "materialId": "terrain_elastic_moss",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 19,
+          "y": 4
+        },
+        {
+          "x": 22,
+          "y": 4
+        }
+      ],
+      "objectivePoint": {
+        "x": 13,
+        "y": 4
+      },
+      "fixedAnchorXs": ["0", "13", "25"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": ["repair"],
+      "primaryObjectiveIds": ["primary_rescue_units", "primary_repair_tower"],
+      "secondaryObjectiveIds": ["secondary_clear_pollution", "secondary_terrain_70"],
+      "hiddenObjectiveIds": ["hidden_no_collapse", "hidden_zero_fall"],
+      "variationSlots": ["height", "hazard", "weak_point"]
+    },
+    {
+      "id": "map_corefall_signal_repair",
+      "regionId": "region_corefall",
+      "nameKey": "map.map_corefall_signal_repair.name",
+      "nodeTypes": ["engineering"],
+      "width": 27,
+      "height": 12,
+      "floorY": 2,
+      "materialId": "terrain_alloy_frame",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 3
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 20,
+          "y": 3
+        },
+        {
+          "x": 23,
+          "y": 3
+        }
+      ],
+      "objectivePoint": {
+        "x": 13,
+        "y": 3
+      },
+      "fixedAnchorXs": ["0", "13", "26"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": ["repair"],
+      "primaryObjectiveIds": ["primary_repair_tower", "primary_deliver_core"],
+      "secondaryObjectiveIds": ["secondary_terrain_70", "secondary_extra_rescue"],
+      "hiddenObjectiveIds": ["hidden_bridge_intact", "hidden_support_network"],
+      "variationSlots": ["material", "height", "hazard"]
+    },
+    {
+      "id": "map_corefall_zero_foundry",
+      "regionId": "region_corefall",
+      "nameKey": "map.map_corefall_zero_foundry.name",
+      "nodeTypes": ["elite"],
+      "width": 28,
+      "height": 13,
+      "floorY": 3,
+      "materialId": "terrain_energy_crystal",
+      "playerSpawns": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "enemySpawns": [
+        {
+          "x": 21,
+          "y": 4
+        },
+        {
+          "x": 24,
+          "y": 4
+        },
+        {
+          "x": 18,
+          "y": 4
+        }
+      ],
+      "objectivePoint": {
+        "x": 14,
+        "y": 4
+      },
+      "fixedAnchorXs": ["0", "14", "27"],
+      "providedCapabilities": ["repair", "support", "magnetic", "rescue", "reflect", "carry"],
+      "requiredCapabilities": ["support"],
+      "primaryObjectiveIds": ["primary_defeat_guard", "primary_hold_position"],
+      "secondaryObjectiveIds": ["secondary_terrain_70", "secondary_round_limit"],
+      "hiddenObjectiveIds": ["hidden_crystal_harvest", "hidden_module_rotation"],
+      "variationSlots": ["weak_point", "hazard", "device"]
     }
   ]
 }

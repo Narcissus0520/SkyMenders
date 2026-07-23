@@ -3,10 +3,10 @@
 ## Snapshot
 
 - Date: 2026-07-23
-- Current phase: Phase 10 - release preparation and operations
-- Phase state: local implementation and gates complete; PR and required CI pending
-- Branch: `codex/phase-10-release-preparation`
-- Baseline: Phase 9 squash commit `e4820770979b4ef218df10d2a9cf856a1ab5ca6f` on `main`
+- Current phase: Phase 11 - V1 release-candidate engineering
+- Phase state: local implementation and full regression complete; PR #12 passed all required CI checks
+- Branch: `codex/phase-11-v1-release-candidate`
+- Baseline: Phase 10 squash commit `57366dd308a8d2e2c3fc3656462ccf87c9a8ce7e` on `main`
 - Phase 0 delivery: PR #1 merged after all required checks passed
 - Phase 1 delivery: PR #2 merged after all required checks passed
 - Phase 2 delivery: PR #3 merged after all required checks passed
@@ -17,7 +17,9 @@
 - Phase 7 delivery: PR #8 merged after all required checks, including PostgreSQL integration, passed
 - Phase 8 delivery: PR #9 merged after all required checks, including PostgreSQL/Redis integration, passed
 - Phase 9 delivery: PR #10 merged after all required checks, including PostgreSQL/Redis integration and Web E2E, passed
-- Next phase: Phase 11 - release candidate, regression, freeze and recovery drills
+- Phase 10 delivery: PR #11 merged after all required checks, including the PostgreSQL 17 restore drill, passed
+- Phase 11 delivery: PR #12 passed all required checks and was approved for squash merge
+- Next phase: V1 external evidence closure; Phase 12 PvP remains blocked by the V1 gate
 
 ## Version matrix
 
@@ -25,36 +27,37 @@
 | ------------------- | ------- |
 | clientVersion       | 0.5.0   |
 | serverVersion       | 0.4.0   |
-| rulesVersion        | 0.5.0   |
-| contentVersion      | 0.1.0   |
+| rulesVersion        | 0.6.0   |
+| contentVersion      | 0.2.0   |
 | saveSchemaVersion   | 0.1.0   |
 | replaySchemaVersion | 0.2.0   |
 | protocolVersion     | 0.5.0   |
 | aiSchemaVersion     | 0.1.0   |
 
-## Phase 10 implementation
+## Phase 11 implementation
 
-- Added release asset provenance v2 with hash, source, license, reviewer, AI-process and originality enforcement.
-- Added source/compiled package partition analysis, internal budgets and a current-official-evidence boundary.
-- Added separate engineering readiness and strict release-candidate gates over a versioned evidence manifest.
-- Added formal music/SFX requirements, privacy/legal/SDK documents and offline legal/privacy menu routes.
-- Added structured request logs, request/trace correlation, Prometheus metrics and production alert/runbook contracts.
-- Added a guarded PostgreSQL backup/isolated-restore verifier and mandatory Server Integration CI drill.
+- Corrected the authored content inventory to the root V1 minimums and made those counts executable schema gates: 24 battle, 12 engineering and 8 elite maps; 30 events; 8 workshop services; 8 environment mechanics; 20 hidden objectives; and 12 cosmetics.
+- Restricted deterministic expedition selection to node-compatible dedicated maps and advanced content/rules to `0.2.0` / `0.6.0`.
+- Added a checked-in content freeze lock, immutable publication rollback drill and guards against stale or self-referential rollback.
+- Added a serialized legacy-save corpus and migration/resume drill that preserves the prior `0.1.0` content / `0.5.0` rules pair while unknown pairs fail closed.
+- Bound the strict release workflow to an RC semantic version and exact commit, and added submission-material, migration, rollback and content-freeze evidence gates.
+- Added the V1 Definition of Done audit, recovery-drill record and WeChat submission draft without declaring an actual candidate.
 
 ## Verification
 
 Current local evidence on Node.js 24 and pnpm 10:
 
-- Full repository tests: 388 passed; two real PostgreSQL adapter tests skipped locally because Docker is unavailable and remain mandatory with the Redis and restore-drill paths in Server Integration CI.
-- All package coverage thresholds passed. New controls: asset auditor 98.78% statements / 95.16% branches / 100% functions / 100% lines; package budget 97.56% / 96.36% / 100% / 98.64%; release preflight 92.53% / 91.48% / 100% / 96.72%; database restore logic 98.27% / 93.10% / 100% / 100%; request telemetry 100% statements/functions/lines and 92.30% branches.
-- Game client coverage: 95.12% statements / 86.66% branches / 91.75% functions / 96.68% lines. Game server: 89.36% / 77.77% / 88.46% / 90.32%.
-- Determinism gates passed for runtime, terrain, battle, AI, expedition, challenge, save migration and golden replay.
-- Performance passed: terrain p95 32.76 ms, AI p95 348.23 ms, 10,000 presentation events in 45.97 ms, 500 daily definitions in 2,429.30 ms and trusted replay verification p95 9.83 ms.
-- Three Playwright control-plane journeys passed.
-- Format, workspace/infrastructure policy, lint, strict TypeScript, build, content/AI validation, static Cocos validation across 37 files, asset audit, source package budget, release readiness, secret scan, dependency audit and 497-component SBOM passed.
-- The strict release candidate gate failed closed as designed because the compiled WeChat package and current official platform evidence are absent.
+- Full repository tests pass: 395 passed; two real PostgreSQL adapter tests are skipped locally because Docker is unavailable and remain mandatory with Redis and restore verification in Server Integration CI.
+- All package coverage thresholds pass. New/changed controls: save migration 94.38% statements / 90.16% branches / 100% functions / 95.06% lines; release preflight 92.95% / 92.98% / 100% / 96.92%; content schema 93.07% / 85.31% / 100% / 92.52%.
+- Determinism gates pass for runtime, terrain, battle, AI, expedition, challenge, save migration and golden replay.
+- Performance passes: terrain p95 36.61 ms, AI p95 647.66 ms, 10,000 presentation events in 43.79 ms, 5,000 expedition plans in 468.88 ms, 500 daily definitions in 3,530.49 ms and trusted replay verification p95 14.73 ms.
+- Three Playwright control-plane journeys pass.
+- `pnpm content:validate` reports exactly 48 maps split 24/12/8, 30 events, 20 hidden objectives, 8 workshop services, 8 environment mechanics and 12 cosmetics.
+- Content freeze, save migration and content rollback drills pass. `pnpm release:check` reports six engineering gates passed and nine external gates blocked.
+- `pnpm release:gate` fails closed at the release-asset audit as designed; no candidate version or commit has been asserted.
+- Format, workspace/infrastructure policy, lint, strict TypeScript, build, static Cocos validation across 37 files, asset audit, source package budget, secret scan, dependency audit and 497-component SBOM pass.
 
-Required GitHub checks, including the PostgreSQL 17 restore drill, must pass before Phase 10 is merged. Neither engineering readiness nor CI is a production-readiness claim.
+All required GitHub checks, including the PostgreSQL 17 restore drill, passed on PR #12. Neither engineering readiness nor CI is a production-readiness claim.
 
 ## Known limits
 

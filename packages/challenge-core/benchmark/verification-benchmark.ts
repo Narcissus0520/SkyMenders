@@ -20,8 +20,8 @@ const challenge = createDailyChallenge(content, {
   instant: new Date("2026-07-22T08:00:00.000Z"),
   timeZone: "Asia/Shanghai",
   seedSecret: "verification-benchmark-secret-with-thirty-two-bytes",
-  rulesVersion: "0.5.0",
-  contentVersion: "0.1.0",
+  rulesVersion: "0.6.0",
+  contentVersion: "0.2.0",
 });
 const submission = makeSubmission();
 const durations: number[] = [];

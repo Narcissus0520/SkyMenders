@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "contentVersion": "0.1.0",
+  "contentVersion": "0.2.0",
   "route": {
     "actualNodesPerRegion": 3,
     "candidateNodesPerRegion": [4, 6],
@@ -352,7 +352,10 @@
       "nameKey": "reward.reward_mod_light_frame.name",
       "tags": ["movement"],
       "rarity": "common",
-      "temporaryEffect": { "kind": "movement_efficiency_permille", "amount": 150 }
+      "temporaryEffect": {
+        "kind": "movement_efficiency_permille",
+        "amount": 150
+      }
     },
     {
       "id": "reward_mod_reserve_cell",
@@ -362,7 +365,10 @@
       "nameKey": "reward.reward_mod_reserve_cell.name",
       "tags": ["energy"],
       "rarity": "common",
-      "temporaryEffect": { "kind": "energy_maximum_bonus", "amount": 2 }
+      "temporaryEffect": {
+        "kind": "energy_maximum_bonus",
+        "amount": 2
+      }
     },
     {
       "id": "reward_mod_soft_landing",
@@ -372,7 +378,10 @@
       "nameKey": "reward.reward_mod_soft_landing.name",
       "tags": ["defense"],
       "rarity": "uncommon",
-      "temporaryEffect": { "kind": "fall_damage_reduction_permille", "amount": 250 }
+      "temporaryEffect": {
+        "kind": "fall_damage_reduction_permille",
+        "amount": 250
+      }
     },
     {
       "id": "reward_mod_salvage_loop",
@@ -382,7 +391,10 @@
       "nameKey": "reward.reward_mod_salvage_loop.name",
       "tags": ["repair"],
       "rarity": "uncommon",
-      "temporaryEffect": { "kind": "repair_efficiency_permille", "amount": 200 }
+      "temporaryEffect": {
+        "kind": "repair_efficiency_permille",
+        "amount": 200
+      }
     },
     {
       "id": "reward_consumable_patch",
@@ -445,28 +457,64 @@
       "nameKey": "workshop.workshop_field_repair.name",
       "cost": 3,
       "kind": "repair_hp",
-      "amount": 25
+      "amount": 25,
+      "scope": "target"
     },
     {
       "id": "workshop_structural_alignment",
       "nameKey": "workshop.workshop_structural_alignment.name",
       "cost": 4,
       "kind": "repair_structure",
-      "amount": 30
+      "amount": 30,
+      "scope": "target"
     },
     {
       "id": "workshop_install_module",
       "nameKey": "workshop.workshop_install_module.name",
       "cost": 5,
       "kind": "install_module",
-      "amount": 1
+      "amount": 1,
+      "scope": "target"
     },
     {
       "id": "workshop_route_calibration",
       "nameKey": "workshop.workshop_route_calibration.name",
       "cost": 6,
       "kind": "upgrade_module",
-      "amount": 1
+      "amount": 1,
+      "scope": "target"
+    },
+    {
+      "id": "workshop_squad_patch",
+      "nameKey": "workshop.workshop_squad_patch.name",
+      "cost": 7,
+      "kind": "repair_hp",
+      "amount": 12,
+      "scope": "squad"
+    },
+    {
+      "id": "workshop_squad_alignment",
+      "nameKey": "workshop.workshop_squad_alignment.name",
+      "cost": 8,
+      "kind": "repair_structure",
+      "amount": 10,
+      "scope": "squad"
+    },
+    {
+      "id": "workshop_precision_install",
+      "nameKey": "workshop.workshop_precision_install.name",
+      "cost": 6,
+      "kind": "install_module",
+      "amount": 1,
+      "scope": "target"
+    },
+    {
+      "id": "workshop_prototype_route",
+      "nameKey": "workshop.workshop_prototype_route.name",
+      "cost": 7,
+      "kind": "upgrade_module",
+      "amount": 1,
+      "scope": "target"
     }
   ]
 }

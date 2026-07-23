@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "contentVersion": "0.1.0",
+  "contentVersion": "0.2.0",
   "events": [
     {
       "id": "event_drifting_toolbox",
@@ -11,12 +11,22 @@
         {
           "id": "secure_tools",
           "labelKey": "event.choice.secure_tools",
-          "effects": [{ "kind": "grant_consumable", "amount": 2 }]
+          "effects": [
+            {
+              "kind": "grant_consumable",
+              "amount": 2
+            }
+          ]
         },
         {
           "id": "catalog_parts",
           "labelKey": "event.choice.catalog_parts",
-          "effects": [{ "kind": "research", "amount": 3 }]
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 3
+            }
+          ]
         }
       ]
     },
@@ -29,12 +39,22 @@
         {
           "id": "repair_crossing",
           "labelKey": "event.choice.repair_crossing",
-          "effects": [{ "kind": "repair_structure", "amount": 8 }]
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 8
+            }
+          ]
         },
         {
           "id": "salvage_span",
           "labelKey": "event.choice.salvage_span",
-          "effects": [{ "kind": "energy_supply", "amount": 2 }]
+          "effects": [
+            {
+              "kind": "energy_supply",
+              "amount": 2
+            }
+          ]
         }
       ]
     },
@@ -48,14 +68,25 @@
           "id": "restart_relay",
           "labelKey": "event.choice.restart_relay",
           "effects": [
-            { "kind": "reveal_route", "amount": 1 },
-            { "kind": "research", "amount": 1 }
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            },
+            {
+              "kind": "research",
+              "amount": 1
+            }
           ]
         },
         {
           "id": "leave_marker",
           "labelKey": "event.choice.leave_marker",
-          "effects": [{ "kind": "repair_hp", "amount": 8 }]
+          "effects": [
+            {
+              "kind": "repair_hp",
+              "amount": 8
+            }
+          ]
         }
       ]
     },
@@ -68,12 +99,22 @@
         {
           "id": "align_branches",
           "labelKey": "event.choice.align_branches",
-          "effects": [{ "kind": "research", "amount": 4 }]
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 4
+            }
+          ]
         },
         {
           "id": "collect_filings",
           "labelKey": "event.choice.collect_filings",
-          "effects": [{ "kind": "grant_consumable", "amount": 2 }]
+          "effects": [
+            {
+              "kind": "grant_consumable",
+              "amount": 2
+            }
+          ]
         }
       ]
     },
@@ -86,14 +127,25 @@
         {
           "id": "bleed_charge",
           "labelKey": "event.choice.bleed_charge",
-          "effects": [{ "kind": "energy_supply", "amount": 3 }]
+          "effects": [
+            {
+              "kind": "energy_supply",
+              "amount": 3
+            }
+          ]
         },
         {
           "id": "study_resonance",
           "labelKey": "event.choice.study_resonance",
           "effects": [
-            { "kind": "research", "amount": 5 },
-            { "kind": "repair_hp", "amount": -4 }
+            {
+              "kind": "research",
+              "amount": 5
+            },
+            {
+              "kind": "repair_hp",
+              "amount": -4
+            }
           ]
         }
       ]
@@ -107,12 +159,22 @@
         {
           "id": "answer_bell",
           "labelKey": "event.choice.answer_bell",
-          "effects": [{ "kind": "repair_hp", "amount": 10 }]
+          "effects": [
+            {
+              "kind": "repair_hp",
+              "amount": 10
+            }
+          ]
         },
         {
           "id": "inspect_clock",
           "labelKey": "event.choice.inspect_clock",
-          "effects": [{ "kind": "research", "amount": 3 }]
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 3
+            }
+          ]
         }
       ]
     },
@@ -125,12 +187,22 @@
         {
           "id": "reinforce_nursery",
           "labelKey": "event.choice.reinforce_nursery",
-          "effects": [{ "kind": "repair_structure", "amount": 12 }]
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 12
+            }
+          ]
         },
         {
           "id": "take_cuttings",
           "labelKey": "event.choice.take_cuttings",
-          "effects": [{ "kind": "grant_consumable", "amount": 3 }]
+          "effects": [
+            {
+              "kind": "grant_consumable",
+              "amount": 3
+            }
+          ]
         }
       ]
     },
@@ -144,16 +216,28 @@
           "id": "escort_courier",
           "labelKey": "event.choice.escort_courier",
           "effects": [
-            { "kind": "research", "amount": 4 },
-            { "kind": "reveal_route", "amount": 1 }
+            {
+              "kind": "research",
+              "amount": 4
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
           ]
         },
         {
           "id": "share_supplies",
           "labelKey": "event.choice.share_supplies",
           "effects": [
-            { "kind": "energy_supply", "amount": -1 },
-            { "kind": "repair_hp", "amount": 12 }
+            {
+              "kind": "energy_supply",
+              "amount": -1
+            },
+            {
+              "kind": "repair_hp",
+              "amount": 12
+            }
           ]
         }
       ]
@@ -167,12 +251,22 @@
         {
           "id": "anchor_team",
           "labelKey": "event.choice.anchor_team",
-          "effects": [{ "kind": "repair_structure", "amount": 6 }]
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 6
+            }
+          ]
         },
         {
           "id": "ride_current",
           "labelKey": "event.choice.ride_current",
-          "effects": [{ "kind": "reveal_route", "amount": 2 }]
+          "effects": [
+            {
+              "kind": "reveal_route",
+              "amount": 2
+            }
+          ]
         }
       ]
     },
@@ -185,12 +279,22 @@
         {
           "id": "restore_record",
           "labelKey": "event.choice.restore_record",
-          "effects": [{ "kind": "research", "amount": 6 }]
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 6
+            }
+          ]
         },
         {
           "id": "strip_power_cell",
           "labelKey": "event.choice.strip_power_cell",
-          "effects": [{ "kind": "energy_supply", "amount": 4 }]
+          "effects": [
+            {
+              "kind": "energy_supply",
+              "amount": 4
+            }
+          ]
         }
       ]
     },
@@ -203,14 +307,25 @@
         {
           "id": "quarantine_fragment",
           "labelKey": "event.choice.quarantine_fragment",
-          "effects": [{ "kind": "repair_structure", "amount": 10 }]
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 10
+            }
+          ]
         },
         {
           "id": "decode_fragment",
           "labelKey": "event.choice.decode_fragment",
           "effects": [
-            { "kind": "research", "amount": 7 },
-            { "kind": "repair_structure", "amount": -5 }
+            {
+              "kind": "research",
+              "amount": 7
+            },
+            {
+              "kind": "repair_structure",
+              "amount": -5
+            }
           ]
         }
       ]
@@ -229,14 +344,673 @@
         {
           "id": "answer_beacon",
           "labelKey": "event.choice.answer_beacon",
-          "effects": [{ "kind": "repair_hp", "amount": 15 }]
+          "effects": [
+            {
+              "kind": "repair_hp",
+              "amount": 15
+            }
+          ]
         },
         {
           "id": "relay_beacon",
           "labelKey": "event.choice.relay_beacon",
           "effects": [
-            { "kind": "research", "amount": 2 },
-            { "kind": "reveal_route", "amount": 1 }
+            {
+              "kind": "research",
+              "amount": 2
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_singing_girder",
+      "titleKey": "event.event_singing_girder.title",
+      "bodyKey": "event.event_singing_girder.body",
+      "regionIds": ["region_cloudbreak"],
+      "choices": [
+        {
+          "id": "singing_girder_repair",
+          "labelKey": "event.choice.singing_girder_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 8
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "singing_girder_study",
+          "labelKey": "event.choice.singing_girder_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 3
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_balloon_ferry",
+      "titleKey": "event.event_balloon_ferry.title",
+      "bodyKey": "event.event_balloon_ferry.body",
+      "regionIds": ["region_cloudbreak"],
+      "choices": [
+        {
+          "id": "balloon_ferry_repair",
+          "labelKey": "event.choice.balloon_ferry_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 9
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "balloon_ferry_study",
+          "labelKey": "event.choice.balloon_ferry_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 4
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_rain_collector",
+      "titleKey": "event.event_rain_collector.title",
+      "bodyKey": "event.event_rain_collector.body",
+      "regionIds": ["region_cloudbreak"],
+      "choices": [
+        {
+          "id": "rain_collector_repair",
+          "labelKey": "event.choice.rain_collector_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 10
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "rain_collector_study",
+          "labelKey": "event.choice.rain_collector_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 5
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_kite_probe",
+      "titleKey": "event.event_kite_probe.title",
+      "bodyKey": "event.event_kite_probe.body",
+      "regionIds": ["region_cloudbreak"],
+      "choices": [
+        {
+          "id": "kite_probe_repair",
+          "labelKey": "event.choice.kite_probe_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 6
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "kite_probe_study",
+          "labelKey": "event.choice.kite_probe_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 6
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_forgotten_scaffold",
+      "titleKey": "event.event_forgotten_scaffold.title",
+      "bodyKey": "event.event_forgotten_scaffold.body",
+      "regionIds": ["region_cloudbreak"],
+      "choices": [
+        {
+          "id": "forgotten_scaffold_repair",
+          "labelKey": "event.choice.forgotten_scaffold_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 7
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "forgotten_scaffold_study",
+          "labelKey": "event.choice.forgotten_scaffold_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 3
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_polarity_choir",
+      "titleKey": "event.event_polarity_choir.title",
+      "bodyKey": "event.event_polarity_choir.body",
+      "regionIds": ["region_polar_foundry"],
+      "choices": [
+        {
+          "id": "polarity_choir_repair",
+          "labelKey": "event.choice.polarity_choir_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 8
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "polarity_choir_study",
+          "labelKey": "event.choice.polarity_choir_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 4
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_frozen_capacitor",
+      "titleKey": "event.event_frozen_capacitor.title",
+      "bodyKey": "event.event_frozen_capacitor.body",
+      "regionIds": ["region_polar_foundry"],
+      "choices": [
+        {
+          "id": "frozen_capacitor_repair",
+          "labelKey": "event.choice.frozen_capacitor_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 9
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "frozen_capacitor_study",
+          "labelKey": "event.choice.frozen_capacitor_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 5
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_magnet_sculpture",
+      "titleKey": "event.event_magnet_sculpture.title",
+      "bodyKey": "event.event_magnet_sculpture.body",
+      "regionIds": ["region_polar_foundry"],
+      "choices": [
+        {
+          "id": "magnet_sculpture_repair",
+          "labelKey": "event.choice.magnet_sculpture_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 10
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "magnet_sculpture_study",
+          "labelKey": "event.choice.magnet_sculpture_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 6
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_shifted_compass",
+      "titleKey": "event.event_shifted_compass.title",
+      "bodyKey": "event.event_shifted_compass.body",
+      "regionIds": ["region_polar_foundry"],
+      "choices": [
+        {
+          "id": "shifted_compass_repair",
+          "labelKey": "event.choice.shifted_compass_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 6
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "shifted_compass_study",
+          "labelKey": "event.choice.shifted_compass_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 3
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_arc_shelter",
+      "titleKey": "event.event_arc_shelter.title",
+      "bodyKey": "event.event_arc_shelter.body",
+      "regionIds": ["region_polar_foundry"],
+      "choices": [
+        {
+          "id": "arc_shelter_repair",
+          "labelKey": "event.choice.arc_shelter_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 7
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "arc_shelter_study",
+          "labelKey": "event.choice.arc_shelter_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 4
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_seed_library",
+      "titleKey": "event.event_seed_library.title",
+      "bodyKey": "event.event_seed_library.body",
+      "regionIds": ["region_verdant_updraft"],
+      "choices": [
+        {
+          "id": "seed_library_repair",
+          "labelKey": "event.choice.seed_library_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 8
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "seed_library_study",
+          "labelKey": "event.choice.seed_library_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 5
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_moss_lullaby",
+      "titleKey": "event.event_moss_lullaby.title",
+      "bodyKey": "event.event_moss_lullaby.body",
+      "regionIds": ["region_verdant_updraft"],
+      "choices": [
+        {
+          "id": "moss_lullaby_repair",
+          "labelKey": "event.choice.moss_lullaby_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 9
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "moss_lullaby_study",
+          "labelKey": "event.choice.moss_lullaby_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 6
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_pollinator_drone",
+      "titleKey": "event.event_pollinator_drone.title",
+      "bodyKey": "event.event_pollinator_drone.body",
+      "regionIds": ["region_verdant_updraft"],
+      "choices": [
+        {
+          "id": "pollinator_drone_repair",
+          "labelKey": "event.choice.pollinator_drone_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 10
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "pollinator_drone_study",
+          "labelKey": "event.choice.pollinator_drone_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 3
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_dew_condenser",
+      "titleKey": "event.event_dew_condenser.title",
+      "bodyKey": "event.event_dew_condenser.body",
+      "regionIds": ["region_verdant_updraft"],
+      "choices": [
+        {
+          "id": "dew_condenser_repair",
+          "labelKey": "event.choice.dew_condenser_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 6
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "dew_condenser_study",
+          "labelKey": "event.choice.dew_condenser_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 4
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_root_terminal",
+      "titleKey": "event.event_root_terminal.title",
+      "bodyKey": "event.event_root_terminal.body",
+      "regionIds": ["region_verdant_updraft"],
+      "choices": [
+        {
+          "id": "root_terminal_repair",
+          "labelKey": "event.choice.root_terminal_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 7
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "root_terminal_study",
+          "labelKey": "event.choice.root_terminal_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 5
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_checksum_shrine",
+      "titleKey": "event.event_checksum_shrine.title",
+      "bodyKey": "event.event_checksum_shrine.body",
+      "regionIds": ["region_corefall"],
+      "choices": [
+        {
+          "id": "checksum_shrine_repair",
+          "labelKey": "event.choice.checksum_shrine_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 8
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "checksum_shrine_study",
+          "labelKey": "event.choice.checksum_shrine_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 6
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_orbiting_toolkit",
+      "titleKey": "event.event_orbiting_toolkit.title",
+      "bodyKey": "event.event_orbiting_toolkit.body",
+      "regionIds": ["region_corefall"],
+      "choices": [
+        {
+          "id": "orbiting_toolkit_repair",
+          "labelKey": "event.choice.orbiting_toolkit_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 9
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "orbiting_toolkit_study",
+          "labelKey": "event.choice.orbiting_toolkit_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 3
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "event_last_maintenance_note",
+      "titleKey": "event.event_last_maintenance_note.title",
+      "bodyKey": "event.event_last_maintenance_note.body",
+      "regionIds": ["region_corefall"],
+      "choices": [
+        {
+          "id": "last_maintenance_note_repair",
+          "labelKey": "event.choice.last_maintenance_note_repair",
+          "effects": [
+            {
+              "kind": "repair_structure",
+              "amount": 10
+            },
+            {
+              "kind": "energy_supply",
+              "amount": 1
+            }
+          ]
+        },
+        {
+          "id": "last_maintenance_note_study",
+          "labelKey": "event.choice.last_maintenance_note_study",
+          "effects": [
+            {
+              "kind": "research",
+              "amount": 4
+            },
+            {
+              "kind": "reveal_route",
+              "amount": 1
+            }
           ]
         }
       ]

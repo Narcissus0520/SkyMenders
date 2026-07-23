@@ -20,7 +20,9 @@ flowchart LR
   I --> K["Rolled back"]
 ```
 
-`ContentWorkspace` limits reads and writes to the declared catalog allow-list. The loopback HTTP boundary applies a global rate limit before routes are registered. Catalog saves use a revision hash and atomic replacement. Drafts and publication metadata live outside the authored `content/` tree and are ignored by Git. A freeze rejects further source and artifact writes.
+`ContentWorkspace` limits reads and writes to the declared catalog allow-list. The loopback HTTP boundary applies a global rate limit before routes are registered. Catalog saves use a revision hash and atomic replacement. Drafts and publication metadata live outside the authored `content/` tree and are ignored by Git. A freeze rejects further source and artifact writes. Rollback can target only the currently active publication record, cannot target itself, verifies the immutable source artifact, and is exercised by `pnpm content:rollback:drill` before the workspace is frozen.
+
+Phase 11 adds `config/release/content-freeze.json`, which binds content `0.2.0`, rules `0.6.0`, the exact allow-listed JSON paths and their raw SHA-256 hashes. `pnpm content:freeze:check` rejects missing, unexpected, duplicated, modified or version-inconsistent catalogs.
 
 `Content Studio` exposes structured fields rather than a raw JSON editor. Its six modules cover maps/objectives/regions, routes/rewards/progression, robots/modules and their deterministic runtime authority, enemies/AI/bosses, events/tutorial/localization, and daily fixed-content review. Undo/redo, dirty state, delayed draft autosave, import/export, diff retrieval, field errors, validation, packaging, and staging are integrated.
 

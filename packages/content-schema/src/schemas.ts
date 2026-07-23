@@ -1,7 +1,18 @@
 import { z } from "zod";
 
 export const CONTENT_SCHEMA_VERSION = "1.0.0";
-export const PVE_CONTENT_VERSION = "0.1.0";
+export const PVE_CONTENT_VERSION = "0.2.0";
+
+export const RELEASE_CONTENT_MINIMUMS = Object.freeze({
+  battleMaps: 24,
+  engineeringMaps: 12,
+  eliteMaps: 8,
+  events: 30,
+  workshopServices: 8,
+  environmentMechanics: 8,
+  hiddenObjectives: 20,
+  cosmetics: 12,
+});
 
 const id = z
   .string()
@@ -98,6 +109,21 @@ export const objectiveTriggerSchema = z.enum([
   "hidden_pipeline_repaired",
   "reflected_hit",
   "relic_preserved",
+  "multi_magnetic_collision",
+  "all_rescues_completed",
+  "primary_modules_avoided",
+  "energy_reserve_maintained",
+  "collapse_avoided",
+  "bridge_preserved",
+  "crystal_energy_collected",
+  "wind_redirected",
+  "gravity_restored",
+  "carrier_intercepted",
+  "repair_chain_completed",
+  "fall_damage_avoided",
+  "support_network_completed",
+  "distinct_modules_used",
+  "stabilized_early",
 ]);
 
 const catalogHeader = z.object({
@@ -224,7 +250,7 @@ export const mapCatalogSchema = catalogHeader
             id,
             regionId: id,
             nameKey: key,
-            nodeTypes: uniqueStrings(nodeTypeSchema).min(1),
+            nodeTypes: uniqueStrings(nodeTypeSchema).length(1),
             width: z.number().int().min(16).max(64),
             height: z.number().int().min(8).max(32),
             floorY: z.number().int().min(1).max(15),
@@ -249,7 +275,25 @@ export const mapCatalogSchema = catalogHeader
           })
           .strict(),
       )
-      .min(16),
+      .min(48),
+  })
+  .strict();
+
+const environmentMechanicSchema = z
+  .object({
+    id,
+    kind: z.enum([
+      "wind_shift",
+      "gravity_pulse",
+      "magnetic_surge",
+      "crystal_overload",
+      "elastic_rebound",
+      "support_fatigue",
+      "repair_current",
+      "pollution_spread",
+    ]),
+    intensityPermille: z.number().int().min(50).max(1_000),
+    periodRounds: z.number().int().min(1).max(8),
   })
   .strict();
 
@@ -264,11 +308,12 @@ export const regionCatalogSchema = catalogHeader
             nameKey: key,
             environmentKey: key,
             bossId: bossIdSchema,
-            mapIds: uniqueStrings(id).min(4),
+            mapIds: uniqueStrings(id).min(12),
             enemyPool: uniqueStrings(enemyIdSchema).min(4),
             nodePool: uniqueStrings(nodeTypeSchema).min(5),
             windPermille: z.number().int().min(-1000).max(1000),
             gravityPermille: z.number().int().min(500).max(1500),
+            environmentMechanics: z.array(environmentMechanicSchema).length(2),
           })
           .strict(),
       )
@@ -312,7 +357,7 @@ export const eventCatalogSchema = catalogHeader
           })
           .strict(),
       )
-      .min(12),
+      .min(30),
   })
   .strict();
 
@@ -380,10 +425,22 @@ export const routeCatalogSchema = catalogHeader
             cost: positiveInt.max(100),
             kind: z.enum(["repair_hp", "repair_structure", "install_module", "upgrade_module"]),
             amount: positiveInt.max(100),
+            scope: z.enum(["target", "squad"]),
           })
-          .strict(),
+          .strict()
+          .superRefine((service, context) => {
+            if (
+              service.scope === "squad" &&
+              service.kind !== "repair_hp" &&
+              service.kind !== "repair_structure"
+            )
+              context.addIssue({
+                code: "custom",
+                message: "squad workshop services must repair hp or structure",
+              });
+          }),
       )
-      .min(4),
+      .min(8),
   })
   .strict();
 
@@ -438,6 +495,19 @@ export const progressionCatalogSchema = catalogHeader
     initialRobotIds: z.tuple([robotIdSchema, robotIdSchema, robotIdSchema]),
     initialModuleIds: uniqueStrings(moduleIdSchema).min(6),
     initialRegionIds: z.tuple([id]),
+    cosmetics: z
+      .array(
+        z
+          .object({
+            id,
+            robotId: robotIdSchema,
+            nameKey: key,
+            palette: z.enum(["sky", "forge", "moss", "crystal", "storm", "archive"]),
+            pattern: z.enum(["solid", "stripe", "riveted", "circuit", "cloud", "chevron"]),
+          })
+          .strict(),
+      )
+      .length(12),
     unlocks: z.array(
       z
         .object({

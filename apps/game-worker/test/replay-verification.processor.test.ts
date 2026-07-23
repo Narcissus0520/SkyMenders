@@ -64,8 +64,8 @@ describe("ReplayVerificationProcessor", () => {
       instant: now,
       timeZone: "Asia/Shanghai",
       seedSecret: "worker-test-daily-secret-with-thirty-two-bytes",
-      rulesVersion: "0.5.0",
-      contentVersion: "0.1.0",
+      rulesVersion: "0.6.0",
+      contentVersion: "0.2.0",
     });
   });
 
