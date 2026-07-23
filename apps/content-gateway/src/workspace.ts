@@ -232,6 +232,9 @@ export class ContentWorkspace {
   ): Promise<PublicationRecord> {
     if (confirmation !== `${id}:${targetId}`)
       throw new GatewayError("CONFIRMATION_REQUIRED", 400, []);
+    if (id === targetId) throw new GatewayError("ROLLBACK_TARGET_INVALID", 409, []);
+    const active = await this.currentPublicationId();
+    if (active !== id) throw new GatewayError("ROLLBACK_SOURCE_NOT_ACTIVE", 409, []);
     const [current, target] = await Promise.all([
       this.readPublication(id),
       this.readPublication(targetId),
@@ -250,6 +253,18 @@ export class ContentWorkspace {
     );
     await this.audit(actor, "publication.rolled_back", id, { targetId });
     return record;
+  }
+
+  public async currentPublicationId(): Promise<string | null> {
+    try {
+      const value = JSON.parse(
+        await readFile(resolve(this.stateDirectory, "current.json"), "utf8"),
+      ) as { readonly publicationId?: unknown };
+      return typeof value.publicationId === "string" ? value.publicationId : null;
+    } catch (error) {
+      if (isMissing(error)) return null;
+      throw error;
+    }
   }
 
   public async freeze(

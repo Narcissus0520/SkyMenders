@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "contentVersion": "0.2.0",
+  "rulesVersion": "0.6.0",
+  "catalogs": [
+    {
+      "path": "content/bosses/catalog.json",
+      "sha256": "a618cd76d0f861cbb31d47134d6e3d4f505908c8b733d136672fb8f3866bb984"
+    },
+    {
+      "path": "content/enemies/catalog.json",
+      "sha256": "0132e7a6a72d2b066a525e1dc872eb5bfa2b5288e8ea8a4fcfed84e6b1fdb43f"
+    },
+    {
+      "path": "content/events/catalog.json",
+      "sha256": "2677a3449a4b54d832cee26fb9fcc0e7ed91f93e475015be053de3ec211cd659"
+    },
+    {
+      "path": "content/localization/zh-CN.json",
+      "sha256": "230ae6e45a330c021c1578802178cdb8654f828d330b828440fc7efd83f861a3"
+    },
+    {
+      "path": "content/manifests/content-manifest.json",
+      "sha256": "ef5ae73051757b14a89ccf3278df91b96010438793d9936a506360778b205c73"
+    },
+    {
+      "path": "content/maps/catalog.json",
+      "sha256": "950d1841c249ff08a815b4cb9097fc70133ea1c98fde12f7a696930bd332fdd1"
+    },
+    {
+      "path": "content/modules/catalog.json",
+      "sha256": "10e8c295527b44a18eac6a21719b7ab89557842dd02e729285f0cfbf8343d62a"
+    },
+    {
+      "path": "content/objectives/catalog.json",
+      "sha256": "c364c0dab0fda2fa72f5bb80fd1eb7bd0159d959d83415f6175e3bfcf3e5c324"
+    },
+    {
+      "path": "content/progression/catalog.json",
+      "sha256": "3d7ff41b642d26f9b5f212bf265a0df2443ce1b5b8679811f73723fa0cffb7f0"
+    },
+    {
+      "path": "content/regions/catalog.json",
+      "sha256": "20eb12444683a630673a84310728b3792976a118f946459a8acc8f3c460b9a55"
+    },
+    {
+      "path": "content/robots/catalog.json",
+      "sha256": "7a0f0fb2d2982ba67c9211f34324a987244a2312066d2c523d05163efe4cfd2b"
+    },
+    {
+      "path": "content/routes/catalog.json",
+      "sha256": "370777154a8682686b72061bdb51eb4fa75d673b721a167e7886dbf65ae6d69c"
+    },
+    {
+      "path": "content/tutorials/catalog.json",
+      "sha256": "dd0a674e683bf7edee26de94f8e52a2e09175954479269ff009453417ca55f83"
+    }
+  ]
+}

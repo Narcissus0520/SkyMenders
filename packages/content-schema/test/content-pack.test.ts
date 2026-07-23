@@ -43,7 +43,23 @@ describe("PvE content schema", () => {
     const report = validateContentPack(pack);
     expect(report).toMatchObject({
       valid: true,
-      counts: { robots: 6, modules: 18, enemies: 8, bosses: 4, regions: 4, maps: 16, tutorials: 6 },
+      counts: {
+        robots: 6,
+        modules: 18,
+        enemies: 8,
+        bosses: 4,
+        regions: 4,
+        maps: 48,
+        battleMaps: 24,
+        engineeringMaps: 12,
+        eliteMaps: 8,
+        events: 30,
+        hiddenObjectives: 20,
+        workshopServices: 8,
+        environmentMechanics: 8,
+        cosmetics: 12,
+        tutorials: 6,
+      },
     });
     expect(report.issues).toEqual([]);
     expect(parseCatalog("robots", read("robots/catalog.json"))).toEqual(pack.robots);

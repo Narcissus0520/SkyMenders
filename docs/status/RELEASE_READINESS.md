@@ -1,12 +1,15 @@
 # Release Readiness
 
-Last reviewed for Phase 10 on 2026-07-23.
+Last reviewed for Phase 11 on 2026-07-23.
 
 `pnpm release:check` is the engineering readiness gate and is mandatory in Build CI. `pnpm release:gate` is the fail-closed release-candidate gate. The source of truth is `config/release/release-evidence.json`; prose cannot override it.
 
 | Gate                                           | Automated control                                                   | Current state                                                          |
 | ---------------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Full regression and deterministic performance  | Repository quality, integration and E2E workflows                   | Local gates passed; Phase 10 PR/CI pending                             |
+| Full regression and deterministic performance  | Repository quality, integration and E2E workflows                   | Passed locally; Phase 11 PR/CI pending                                 |
+| Frozen V1 content                              | Catalog SHA-256 lock and strict V1 count validation                 | Passed locally for content `0.2.0` / rules `0.6.0`                     |
+| Save migration and content rollback            | Serialized legacy corpus and isolated rollback/freeze drills        | Passed locally                                                         |
+| Candidate identity and submission materials    | RC version/commit binding plus checked-in submission draft          | Engineering control passed; no actual candidate declared               |
 | No open P0/P1                                  | Release preflight parses `KNOWN_ISSUES.md`                          | Passed                                                                 |
 | Original/licensed assets and fonts             | Registry v2 plus `assets:audit`                                     | Blocked: `EXT-005`; release directory contains no final media          |
 | Complete music/SFX and accessible alternatives | Audio catalog plus runtime critical-cue validation                  | Blocked: `EXT-005`; required cue slots intentionally have no asset IDs |

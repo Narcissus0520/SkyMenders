@@ -5,6 +5,10 @@ import { z } from "zod";
 export const requiredGateIds = [
   "automated-regression",
   "severity-zero",
+  "content-freeze",
+  "save-migration",
+  "content-rollback",
+  "submission-materials",
   "approved-assets",
   "complete-audio",
   "wechat-package",
@@ -39,7 +43,10 @@ const gateSchema = z.discriminatedUnion("status", [
 const evidenceSchema = z
   .object({
     schemaVersion: z.literal("1.0.0"),
-    candidateVersion: z.string().nullable(),
+    candidateVersion: z
+      .string()
+      .regex(/^\d+\.\d+\.\d+-rc\.\d+$/)
+      .nullable(),
     candidateCommit: z
       .string()
       .regex(/^[a-f0-9]{40}$/)
@@ -85,6 +92,7 @@ export function runPreflight(
   knownIssuesPath: string,
   externalBlockersPath: string,
   strict: boolean,
+  expectedCandidate?: { readonly version: string; readonly commit: string },
 ): PreflightResult {
   let evidence: z.infer<typeof evidenceSchema>;
   try {
@@ -137,6 +145,15 @@ export function runPreflight(
   if (strict && (evidence.candidateVersion === null || evidence.candidateCommit === null)) {
     errors.push("Strict release gate requires an immutable candidate version and commit");
   }
+  if (strict && expectedCandidate === undefined)
+    errors.push("Strict release gate requires the workflow candidate version and commit");
+  if (
+    strict &&
+    expectedCandidate !== undefined &&
+    (evidence.candidateVersion !== expectedCandidate.version ||
+      evidence.candidateCommit !== expectedCandidate.commit)
+  )
+    errors.push("Release evidence candidate identity does not match the workflow ref");
   return { errors, passed, blocked };
 }
 

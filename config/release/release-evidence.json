@@ -16,6 +16,36 @@
       "evidence": ["docs/status/KNOWN_ISSUES.md"]
     },
     {
+      "id": "content-freeze",
+      "status": "passed",
+      "owner": "release engineering",
+      "evidence": ["config/release/content-freeze.json"]
+    },
+    {
+      "id": "save-migration",
+      "status": "passed",
+      "owner": "engineering",
+      "evidence": [
+        "packages/save-migration/fixtures/legacy-expedition-0.0.1.json",
+        "docs/operations/PHASE_11_RECOVERY_DRILLS.md"
+      ]
+    },
+    {
+      "id": "content-rollback",
+      "status": "passed",
+      "owner": "release engineering",
+      "evidence": [
+        "apps/content-gateway/src/rollback-drill.ts",
+        "docs/operations/PHASE_11_RECOVERY_DRILLS.md"
+      ]
+    },
+    {
+      "id": "submission-materials",
+      "status": "passed",
+      "owner": "product / release engineering",
+      "evidence": ["docs/publishing/WECHAT_SUBMISSION_DRAFT.md"]
+    },
+    {
       "id": "approved-assets",
       "status": "blocked",
       "owner": "art/audio owner",

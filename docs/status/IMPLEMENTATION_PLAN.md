@@ -14,8 +14,8 @@ This plan follows the mandatory phase order in `AGENTS.md`. A phase is complete 
 | 7     | Auth adapter, accounts, local/cloud saves, recovery, restart, migration | Complete; PR #8 merged  | Weak-network recovery and deletion flow                         |
 | 8     | Daily challenge, attempts, replay worker, anonymous leaderboard         | Complete; PR #9 merged  | Tamper rejection and server-date enforcement                    |
 | 9     | Content Studio, gateway, Admin Console, publication and audit           | Complete; PR #10 merged | UI-authored valid content and traceable admin writes            |
-| 10    | Approved assets, performance, package budget, operations, legal prep    | In progress             | No placeholders/unlicensed assets or P0/P1 issues               |
-| 11    | V1 release candidate, regression, freeze, recovery drills               | Planned                 | Full V1 Definition of Done, except explicit external gates      |
+| 10    | Approved assets, performance, package budget, operations, legal prep    | Complete; PR #11 merged | Engineering gates pass; external release evidence fails closed  |
+| 11    | V1 release candidate, regression, freeze, recovery drills               | In progress             | Full V1 engineering DoD; explicit external gates remain blocked |
 | 12+   | Server-authoritative real-time PvP                                      | Blocked by V1 gate      | PvP gates without breaking V1 replay compatibility              |
 
 ## Phase 0 acceptance
@@ -47,16 +47,17 @@ Phase 8 met its automated conditions and was squash-merged through PR #9 as `598
 
 Phase 9 met its automated conditions and was squash-merged through PR #10 as `e4820770979b4ef218df10d2a9cf856a1ab5ca6f` after content/admin E2E, PostgreSQL/Redis integration, static analysis and all other required checks passed.
 
-## Current Phase 10 acceptance
+Phase 10 met its engineering conditions and was squash-merged through PR #11 as `57366dd308a8d2e2c3fc3656462ccf87c9a8ce7e` after all required checks passed. Approved final media, current official package evidence, production rehearsal, qualified legal approval, public-name clearance and device evidence remain fail-closed external gates.
 
-- Release media must have complete provenance, commercial rights, evidence, content hash and approval; placeholders and unsafe provenance are rejected.
-- A real compiled package must meet internal and dated current official limits without development files.
-- Engineering CI validates blocker ownership; the strict candidate gate rejects every blocked external item.
-- Privacy/legal/SDK inventories and visible client entries exist without claiming qualified approval.
-- API health, request correlation, structured logs, metrics, alert ownership and recovery procedures are defined and tested.
-- PostgreSQL backup must restore and validate in isolation in CI; production rehearsal remains an external release gate.
-- Full local gates and required GitHub checks must pass before merge.
+## Current Phase 11 acceptance
+
+- The root V1 content minimums are exact executable validations rather than prose-only claims.
+- Content `0.2.0` is frozen by catalog path and SHA-256; edits require an intentional lock update and review.
+- Content publication rollback targets only the active immutable artifact, then freeze rejects later writes.
+- A checked-in legacy save migrates, verifies and resumes without changing played progress or its compatibility dimensions.
+- The release workflow rejects an unbound candidate and requires an `x.y.z-rc.n` version plus exact 40-character commit.
+- Full local gates and required GitHub checks must pass before merge; no tag or RC may be created while strict external gates remain blocked.
 
 ## Compatibility discipline
 
-Rules, content, save, replay, protocol, client, and server versions remain independent. Phase 1 established `rulesVersion`, `replaySchemaVersion`, and `protocolVersion` at `0.1.0`. Phase 2 advanced only `rulesVersion` to `0.2.0`. Phase 3 advanced `rulesVersion` to `0.3.0` and `protocolVersion` to `0.2.0`. Phase 4 advanced only `rulesVersion` to `0.4.0` and started AI schema `0.1.0`. Phase 5 advanced only `clientVersion` to `0.1.0`. Phase 6 advanced content to `0.1.0`, expedition rules to `0.5.0`, and the PvE client flow to `0.2.0`. Phase 7 advanced client and protocol to `0.3.0` and started save and server schemas at `0.1.0`. Phase 8 advanced client and protocol to `0.4.0`, server to `0.2.0`, and replay schema to `0.2.0`. Phase 9 advanced only protocol to `0.5.0` and server to `0.3.0`. Phase 10 advances client to `0.5.0` for release/legal navigation and server to `0.4.0` for observability; content, rules, protocol, save, replay and AI versions remain unchanged. Later incompatible changes must increment only affected dimensions and include migrations or compatibility evidence.
+Rules, content, save, replay, protocol, client, and server versions remain independent. Phase 1 established `rulesVersion`, `replaySchemaVersion`, and `protocolVersion` at `0.1.0`. Phase 2 advanced only `rulesVersion` to `0.2.0`. Phase 3 advanced `rulesVersion` to `0.3.0` and `protocolVersion` to `0.2.0`. Phase 4 advanced only `rulesVersion` to `0.4.0` and started AI schema `0.1.0`. Phase 5 advanced only `clientVersion` to `0.1.0`. Phase 6 advanced content to `0.1.0`, expedition rules to `0.5.0`, and the PvE client flow to `0.2.0`. Phase 7 advanced client and protocol to `0.3.0` and started save and server schemas at `0.1.0`. Phase 8 advanced client and protocol to `0.4.0`, server to `0.2.0`, and replay schema to `0.2.0`. Phase 9 advanced only protocol to `0.5.0` and server to `0.3.0`. Phase 10 advanced client to `0.5.0` for release/legal navigation and server to `0.4.0` for observability. Phase 11 advances content to `0.2.0` and expedition rules to `0.6.0`; the retained `0.1.0` / `0.5.0` save pair is exercised by an explicit migration corpus and allow-list. Later incompatible changes must increment only affected dimensions and include migrations or compatibility evidence.

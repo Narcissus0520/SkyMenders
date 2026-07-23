@@ -82,6 +82,7 @@ describe("release preflight", () => {
         "Release gate device-matrix cites an unknown blocker: EXT-999",
         "Release gate is not passed: device-matrix (EXT-999)",
         "Strict release gate requires an immutable candidate version and commit",
+        "Strict release gate requires the workflow candidate version and commit",
       ]),
     );
   });
@@ -101,12 +102,15 @@ describe("release preflight", () => {
         owner: "owner",
         evidence: [id === "complete-audio" ? "audio-catalog.json" : "evidence.txt"],
       })),
-      "1.0.0",
+      "1.0.0-rc.1",
       "a".repeat(40),
     );
     writeFileSync(fixture.issues, "## Open\n| BUG-1 | P0 | server | broken | fix |\n## Closed\n");
     expect(
-      runPreflight(fixture.root, fixture.evidence, fixture.issues, fixture.blockers, true).errors,
+      runPreflight(fixture.root, fixture.evidence, fixture.issues, fixture.blockers, true, {
+        version: "1.0.0-rc.1",
+        commit: "a".repeat(40),
+      }).errors,
     ).toEqual(["Open P0 or P1 issue blocks the release"]);
   });
 
@@ -186,13 +190,19 @@ describe("release audio evidence", () => {
           owner: "owner",
           evidence: [id === "complete-audio" ? "audio-catalog.json" : "evidence.txt"],
         })),
-        "1.0.0",
+        "1.0.0-rc.1",
         "a".repeat(40),
       );
-      expect(runPreflight(root, evidence, issues, blockers, true).errors).toEqual(
+      expect(
+        runPreflight(root, evidence, issues, blockers, true, {
+          version: "1.0.0-rc.1",
+          commit: "b".repeat(40),
+        }).errors,
+      ).toEqual(
         expect.arrayContaining([
           "Passed complete-audio gate requires a ready catalog",
           expect.stringContaining("Release audio cues are missing approved asset IDs"),
+          "Release evidence candidate identity does not match the workflow ref",
         ]),
       );
     } finally {

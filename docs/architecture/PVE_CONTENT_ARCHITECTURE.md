@@ -10,9 +10,11 @@ Each fixed seed creates four ordered regions. A region contains two layers with 
 
 The map and event streams are independent. Adding an event draw cannot perturb map selection. Failed generation should be retried only for its own stream and variation slot; the base catalog never falls back to an unvalidated arbitrary map.
 
-## Map templates
+## V1 content inventory and map templates
 
-The 16 first-version templates declare dimensions, material, fixed anchors, spawn points, objectives, capability requirements, and approved variation slots. Validation materializes each template into a `TerrainMapDefinition` and runs the same checks used before battle: stable starting terrain, non-overlapping standable spawns, task access, AI reachability, capability availability, and camera coverage.
+Content `0.2.0` contains 48 dedicated templates: 24 ordinary battles, 12 engineering missions, 8 elite missions, and 4 Boss arenas. Each ordinary template declares exactly one compatible node type, so deterministic route generation cannot silently reuse an engineering or elite template for a different encounter class. Every region owns six battle, three engineering, two elite and one Boss template.
+
+Templates declare dimensions, material, fixed anchors, spawn points, objectives, capability requirements, and approved variation slots. Validation materializes each template into a `TerrainMapDefinition` and runs the same checks used before battle: stable starting terrain, non-overlapping standable spawns, task access, AI reachability, capability availability, and camera coverage. The V1 scale gate also requires 30 events, 8 workshop services, 8 region environment mechanics, 20 hidden objectives and 12 cosmetics.
 
 ## Rewards and progression
 

@@ -1,6 +1,6 @@
 # External Blockers
 
-Last reviewed for Phase 10 on 2026-07-23. Engineering release controls, account/save/daily/content/admin surfaces and an isolated CI restore drill are implemented, but real WeChat credentials, deployed infrastructure, final licensed assets, legal approval and device evidence remain unsatisfied strict release gates.
+Last reviewed for Phase 11 on 2026-07-23. Engineering release controls, content freeze/rollback, save migration, account/save/daily/content/admin surfaces and an isolated CI restore drill are implemented, but real WeChat credentials, deployed infrastructure, final licensed assets, legal approval and device evidence remain unsatisfied strict release gates.
 
 These inputs cannot be fabricated or bypassed. Interfaces, local substitutes, validation, and integration documentation will be implemented in the relevant phase, but the external capability will not be reported as complete until verified.
 

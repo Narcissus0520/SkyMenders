@@ -11,12 +11,12 @@ import {
 describe("daily challenge protocol", () => {
   it("accepts a frozen server-owned definition", () => {
     const challenge = dailyChallengeDefinitionSchema.parse({
-      challengeId: "2026-07-22:0.5.0:0.1.0:42",
+      challengeId: "2026-07-22:0.6.0:0.2.0:42",
       businessDate: "2026-07-22",
       resetsAt: "2026-07-22T16:00:00.000Z",
       seed: 42,
-      rulesVersion: "0.5.0",
-      contentVersion: "0.1.0",
+      rulesVersion: "0.6.0",
+      contentVersion: "0.2.0",
       replaySchemaVersion: DAILY_REPLAY_SCHEMA_VERSION,
       difficulty: "hard",
       initialEnergy: 12,
@@ -55,10 +55,10 @@ describe("daily challenge protocol", () => {
     expect(() =>
       finishDailyAttemptRequestSchema.parse({
         submissionId: "019f89fe-cbbf-7f56-a9e7-77633e9b5dc8",
-        challengeId: "2026-07-22:0.5.0:0.1.0:42",
+        challengeId: "2026-07-22:0.6.0:0.2.0:42",
         seed: 42,
-        rulesVersion: "0.5.0",
-        contentVersion: "0.1.0",
+        rulesVersion: "0.6.0",
+        contentVersion: "0.2.0",
         replaySchemaVersion: DAILY_REPLAY_SCHEMA_VERSION,
         clientVersion: "0.5.0",
         claimedScore: 0,

@@ -140,6 +140,8 @@ describe("rewards, progression, workshop, events, and tutorials", () => {
       "robot_rivet",
     );
     expect(expedition.robots[0]?.structuralDamage).toBe(30);
+    expedition = buyWorkshopService(pack, expedition, "workshop_squad_patch", "robot_rivet");
+    expect(expedition.robots.map((robot) => robot.hp)).toEqual([87, 100, 100]);
     expect(() =>
       buyWorkshopService(pack, expedition, "workshop_install_module", "robot_rivet"),
     ).toThrow("target");
@@ -163,7 +165,7 @@ describe("rewards, progression, workshop, events, and tutorials", () => {
     expect(() =>
       buyWorkshopService(
         pack,
-        expedition,
+        { ...expedition, supplies: 100 },
         "workshop_route_calibration",
         "robot_rivet",
         "jammer_silence",
@@ -171,7 +173,7 @@ describe("rewards, progression, workshop, events, and tutorials", () => {
     ).toThrow("requires");
     expedition = buyWorkshopService(
       pack,
-      expedition,
+      { ...expedition, supplies: 100 },
       "workshop_route_calibration",
       "robot_rivet",
       "reflector_prismatic",
@@ -217,7 +219,7 @@ describe("rewards, progression, workshop, events, and tutorials", () => {
     ).toBe(22);
     expect(
       applyEventChoice(pack, expedition, "event_rescue_beacon", "answer_beacon").robots[0]?.hp,
-    ).toBe(90);
+    ).toBe(100);
     expect(
       applyEventChoice(pack, expedition, "event_drifting_toolbox", "secure_tools").inventory
         .consumables,

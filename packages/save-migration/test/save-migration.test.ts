@@ -1,25 +1,51 @@
+import { resolve } from "node:path";
+
 import { createRngState, createSnapshot } from "@skymenders/deterministic-runtime";
 import { runtimeSnapshotSchema } from "@skymenders/protocol";
 import type { ExpeditionSaveDocument, ExpeditionStateDocument } from "@skymenders/protocol";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import {
   consumeNodeRestart,
   mergeAccountProgress,
   migrateExpeditionSave,
   recoverExpeditionSave,
+  runSaveMigrationDrill,
   resolveExpeditionConflict,
   sealExpeditionSave,
   verifyExpeditionSave,
 } from "../src/index.js";
 
-const compatibility = {
+const saveVersions = {
   rulesVersion: "0.5.0",
   contentVersion: "0.1.0",
   replaySchemaVersion: "0.1.0",
 };
 
+const compatibility = {
+  rulesVersion: "0.6.0",
+  contentVersion: "0.2.0",
+  replaySchemaVersion: "0.1.0",
+  supportedVersionPairs: [{ rulesVersion: "0.5.0", contentVersion: "0.1.0" }],
+};
+
 describe("expedition save lifecycle", () => {
+  it("runs the migration drill command entrypoint", async () => {
+    const log = vi.spyOn(console, "log").mockImplementation(() => undefined);
+    await import("../src/migration-drill-cli.js");
+    expect(log).toHaveBeenCalledWith(expect.stringContaining("save migration drill: passed"));
+    log.mockRestore();
+  });
+
+  it("runs the serialized legacy migration corpus without changing progress", async () => {
+    const results = await runSaveMigrationDrill([
+      resolve(import.meta.dirname, "../fixtures/legacy-expedition-0.0.1.json"),
+    ]);
+    expect(results).toHaveLength(1);
+    expect(results[0]).toMatchObject({ sourceSchemaVersion: "0.0.1" });
+    expect(results[0]?.resultIntegrityHash).toMatch(/^[a-f0-9]{16}$/);
+  });
+
   it("seals and verifies the authoritative version dimensions and summary", () => {
     const document = makeSave();
     expect(verifyExpeditionSave(document)).toEqual(document);
@@ -103,8 +129,31 @@ describe("expedition save lifecycle", () => {
       recoveredState: null,
     });
     expect(() =>
-      recoverExpeditionSave(document, { ...compatibility, rulesVersion: "9.9.9" }),
+      recoverExpeditionSave(document, {
+        ...compatibility,
+        rulesVersion: "9.9.9",
+        supportedVersionPairs: [],
+      }),
     ).toThrow("unavailable rules or content");
+    const unverifiedMixedPair = sealExpeditionSave({
+      ...unsigned(document),
+      contentVersion: "0.2.0",
+      expedition: {
+        ...document.expedition,
+        plan: { ...document.expedition.plan, contentVersion: "0.2.0" },
+      },
+      nodeStartSnapshot:
+        document.nodeStartSnapshot === null
+          ? null
+          : { ...document.nodeStartSnapshot, contentVersion: "0.2.0" },
+      battleTurnSnapshot:
+        document.battleTurnSnapshot === null
+          ? null
+          : { ...document.battleTurnSnapshot, contentVersion: "0.2.0" },
+    });
+    expect(() => recoverExpeditionSave(unverifiedMixedPair, compatibility)).toThrow(
+      "unavailable rules or content",
+    );
   });
 
   it("records the one restart allowance in the sealed save", () => {
@@ -178,12 +227,12 @@ function makeSave(
     logicalClock: overrides.logicalClock ?? 0,
     deviceKind: overrides.deviceKind ?? "wechat",
     updatedAt: "2026-07-22T08:00:00.000Z",
-    contentVersion: compatibility.contentVersion,
-    rulesVersion: compatibility.rulesVersion,
+    contentVersion: saveVersions.contentVersion,
+    rulesVersion: saveVersions.rulesVersion,
     expedition,
     nodeStartSnapshot: runtimeSnapshotSchema.parse(
       createSnapshot({
-        ...compatibility,
+        ...saveVersions,
         turnIndex: 0,
         commandIndex: 0,
         rngStates: { map: createRngState(11) },
@@ -192,7 +241,7 @@ function makeSave(
     ),
     battleTurnSnapshot: runtimeSnapshotSchema.parse(
       createSnapshot({
-        ...compatibility,
+        ...saveVersions,
         turnIndex: 2,
         commandIndex: 6,
         rngStates: { map: createRngState(11), ai: createRngState(22) },
@@ -212,8 +261,8 @@ function makeExpedition(): ExpeditionStateDocument {
   return {
     plan: {
       schemaVersion: "0.1.0",
-      contentVersion: compatibility.contentVersion,
-      rulesVersion: compatibility.rulesVersion,
+      contentVersion: saveVersions.contentVersion,
+      rulesVersion: saveVersions.rulesVersion,
       seed: 42,
       regions: [1, 2, 3, 4].map((regionIndex) => ({
         id: `region_${regionIndex}`,

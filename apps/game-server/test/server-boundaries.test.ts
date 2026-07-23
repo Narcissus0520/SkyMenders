@@ -85,8 +85,8 @@ describe("daily definition persistence boundary", () => {
     const common = {
       instant,
       timeZone: "Asia/Shanghai",
-      rulesVersion: "0.5.0",
-      contentVersion: "0.1.0",
+      rulesVersion: "0.6.0",
+      contentVersion: "0.2.0",
     };
     const first = createDailyChallenge(content, {
       ...common,

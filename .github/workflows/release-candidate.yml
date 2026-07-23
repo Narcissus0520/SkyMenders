@@ -2,6 +2,11 @@ name: Release Candidate
 
 on:
   workflow_dispatch:
+    inputs:
+      candidate_version:
+        description: Candidate version in 1.0.0-rc.1 form
+        required: true
+        type: string
   push:
     tags: ["v*-rc.*"]
 
@@ -35,3 +40,6 @@ jobs:
       - run: pnpm build
       - run: pnpm cocos:check
       - run: pnpm release:gate
+        env:
+          RELEASE_CANDIDATE_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.candidate_version || github.ref_name }}
+          RELEASE_CANDIDATE_COMMIT: ${{ github.sha }}

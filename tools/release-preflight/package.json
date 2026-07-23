@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "check": "tsx src/cli.ts",
+    "freeze:check": "tsx src/content-freeze-cli.ts",
+    "freeze:write": "tsx src/content-freeze-cli.ts --write",
     "gate": "tsx src/cli.ts --strict",
     "build": "tsc -p tsconfig.build.json",
     "lint": "eslint src test",

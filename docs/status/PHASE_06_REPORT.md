@@ -1,5 +1,7 @@
 # Phase 6 Report: Complete PvE Expedition and Authored Content
 
+> Historical note: Phase 11 found that the Phase 6 inventory did not meet the root V1 scale minimums despite this report's earlier “complete” wording. Content `0.2.0` corrects that gap with 48 dedicated maps, 30 events, 20 hidden goals, 8 workshop services, 8 environment mechanics and 12 cosmetics; ADR 0012 records the compatibility decision. The counts below remain the exact Phase 6 delivery record.
+
 ## Delivered
 
 - Strict versioned schemas and cross-catalog validation for the complete PvE pack.

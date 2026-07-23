@@ -6,6 +6,7 @@ import {
   enemyIdSchema,
   localizationCatalogSchema,
   moduleIdSchema,
+  RELEASE_CONTENT_MINIMUMS,
   robotIdSchema,
 } from "./schemas.js";
 import type { CatalogName, PveContentPack } from "./schemas.js";
@@ -80,12 +81,12 @@ export function validateContentPack(pack: PveContentPack): ContentPackReport {
   uniqueById(issues, "rewardPool", pack.routes.rewardPool);
   uniqueById(issues, "tutorials", pack.tutorials.tutorials);
   uniqueById(issues, "unlocks", pack.progression.unlocks);
+  uniqueById(issues, "cosmetics", pack.progression.cosmetics);
   uniqueById(issues, "achievements", pack.progression.achievements);
   uniqueById(issues, "compendiumEntries", pack.progression.compendiumEntries);
 
   const objectiveIds = new Set(pack.objectives.objectives.map((entry) => entry.id));
   const objectivesById = new Map(pack.objectives.objectives.map((entry) => [entry.id, entry]));
-  const mapIds = new Set(pack.maps.maps.map((entry) => entry.id));
   const regionIds = new Set(pack.regions.regions.map((entry) => entry.id));
   const moduleById = new Map(pack.modules.modules.map((entry) => [entry.id, entry]));
   const routeOwners = new Map(
@@ -183,13 +184,27 @@ export function validateContentPack(pack: PveContentPack): ContentPackReport {
   }
   pack.regions.regions.forEach((region, regionIndex) => {
     region.mapIds.forEach((mapId, mapIndex) => {
-      if (!mapIds.has(mapId))
+      const map = pack.maps.maps.find((candidate) => candidate.id === mapId);
+      if (map === undefined)
         add(issues, "MAP_REFERENCE_MISSING", `regions[${regionIndex}].mapIds[${mapIndex}]`, mapId);
+      else if (map.regionId !== region.id)
+        add(issues, "REGION_MAP_MISMATCH", `regions[${regionIndex}].mapIds[${mapIndex}]`, mapId);
     });
     const boss = pack.bosses.bosses.find((candidate) => candidate.id === region.bossId);
     if (boss?.regionIndex !== region.index || !region.mapIds.includes(boss.mapId))
       add(issues, "REGION_BOSS_MISMATCH", `regions[${regionIndex}].bossId`, region.bossId);
   });
+  const environmentMechanics = pack.regions.regions.flatMap(
+    (region) => region.environmentMechanics,
+  );
+  uniqueById(issues, "environmentMechanics", environmentMechanics);
+  if (environmentMechanics.length < RELEASE_CONTENT_MINIMUMS.environmentMechanics)
+    add(
+      issues,
+      "CONTENT_SCALE_BELOW_MINIMUM",
+      "regions.environmentMechanics",
+      `requires ${RELEASE_CONTENT_MINIMUMS.environmentMechanics} environment mechanics`,
+    );
   const ordinaryDurations = pack.routes.route.nodeDurationMinutes;
   const shortestRouteMinutes =
     pack.regions.regions.reduce((total, region) => {
@@ -230,6 +245,12 @@ export function validateContentPack(pack: PveContentPack): ContentPackReport {
     ...pack.progression.unlocks.map((unlock) => unlock.targetId),
   ]);
   pack.progression.unlocks.forEach((unlock, unlockIndex) => {
+    const targetExists =
+      unlock.kind === "cosmetic"
+        ? pack.progression.cosmetics.some((cosmetic) => cosmetic.id === unlock.targetId)
+        : unlockTargets.has(unlock.targetId);
+    if (!targetExists)
+      add(issues, "UNLOCK_TARGET_MISSING", `unlocks[${unlockIndex}].targetId`, unlock.targetId);
     unlock.prerequisites.forEach((prerequisite, prerequisiteIndex) => {
       if (!unlockTargets.has(prerequisite))
         add(
@@ -257,12 +278,56 @@ export function validateContentPack(pack: PveContentPack): ContentPackReport {
     (entry) => entry.role === "secondary",
   ).length;
   const hiddenCount = pack.objectives.objectives.filter((entry) => entry.role === "hidden").length;
-  if (primaryCount < 7 || secondaryCount < 6 || hiddenCount < 5)
+  if (
+    primaryCount < 7 ||
+    secondaryCount < 6 ||
+    hiddenCount < RELEASE_CONTENT_MINIMUMS.hiddenObjectives
+  )
     add(
       issues,
       "OBJECTIVE_VARIETY_LOW",
       "objectives",
-      "requires 7 primary, 6 secondary, and 5 hidden objective definitions",
+      `requires 7 primary, 6 secondary, and ${RELEASE_CONTENT_MINIMUMS.hiddenObjectives} hidden objective definitions`,
+    );
+  const mapCounts = Object.fromEntries(
+    ["battle", "engineering", "elite", "boss"].map((type) => [
+      type,
+      pack.maps.maps.filter((map) => map.nodeTypes[0] === type).length,
+    ]),
+  );
+  for (const [type, minimum] of [
+    ["battle", RELEASE_CONTENT_MINIMUMS.battleMaps],
+    ["engineering", RELEASE_CONTENT_MINIMUMS.engineeringMaps],
+    ["elite", RELEASE_CONTENT_MINIMUMS.eliteMaps],
+  ] as const) {
+    if ((mapCounts[type] ?? 0) < minimum)
+      add(
+        issues,
+        "CONTENT_SCALE_BELOW_MINIMUM",
+        `maps.${type}`,
+        `requires ${minimum} dedicated ${type} map templates`,
+      );
+  }
+  if (pack.events.events.length < RELEASE_CONTENT_MINIMUMS.events)
+    add(
+      issues,
+      "CONTENT_SCALE_BELOW_MINIMUM",
+      "events",
+      `requires ${RELEASE_CONTENT_MINIMUMS.events} events`,
+    );
+  if (pack.routes.workshopServices.length < RELEASE_CONTENT_MINIMUMS.workshopServices)
+    add(
+      issues,
+      "CONTENT_SCALE_BELOW_MINIMUM",
+      "workshopServices",
+      `requires ${RELEASE_CONTENT_MINIMUMS.workshopServices} workshop services`,
+    );
+  if (pack.progression.cosmetics.length < RELEASE_CONTENT_MINIMUMS.cosmetics)
+    add(
+      issues,
+      "CONTENT_SCALE_BELOW_MINIMUM",
+      "cosmetics",
+      `requires ${RELEASE_CONTENT_MINIMUMS.cosmetics} cosmetics`,
     );
 
   issues.sort(
@@ -277,6 +342,12 @@ export function validateContentPack(pack: PveContentPack): ContentPackReport {
       compendium: pack.progression.compendiumEntries.length,
       enemies: pack.enemies.enemies.length,
       events: pack.events.events.length,
+      cosmetics: pack.progression.cosmetics.length,
+      environmentMechanics: environmentMechanics.length,
+      battleMaps: mapCounts.battle ?? 0,
+      engineeringMaps: mapCounts.engineering ?? 0,
+      eliteMaps: mapCounts.elite ?? 0,
+      hiddenObjectives: hiddenCount,
       maps: pack.maps.maps.length,
       modules: pack.modules.modules.length,
       objectives: pack.objectives.objectives.length,
@@ -284,6 +355,7 @@ export function validateContentPack(pack: PveContentPack): ContentPackReport {
       rewards: pack.routes.rewardPool.length,
       robots: pack.robots.robots.length,
       tutorials: pack.tutorials.tutorials.length,
+      workshopServices: pack.routes.workshopServices.length,
     },
   };
 }

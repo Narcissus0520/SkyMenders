@@ -27,8 +27,8 @@ describe.runIf(redisUrl !== undefined)("BullMQ replay verification", () => {
       instant: now,
       timeZone: "Asia/Shanghai",
       seedSecret: "redis-integration-secret-with-thirty-two-bytes",
-      rulesVersion: "0.5.0",
-      contentVersion: "0.1.0",
+      rulesVersion: "0.6.0",
+      contentVersion: "0.2.0",
     });
     const account = await repository.findOrCreateAccount("wechat", crypto.randomUUID(), now);
     await repository.ensureDailyChallenge({

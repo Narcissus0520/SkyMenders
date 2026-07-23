@@ -13,6 +13,7 @@ import {
   PHASE_8_PRODUCT_VERSIONS,
   PHASE_9_PRODUCT_VERSIONS,
   PHASE_10_PRODUCT_VERSIONS,
+  PHASE_11_PRODUCT_VERSIONS,
   RELEASE_CHANNELS,
   isProductVersions,
 } from "../src/index.js";
@@ -124,7 +125,16 @@ describe("product version contract", () => {
       clientVersion: "0.5.0",
       serverVersion: "0.4.0",
     });
-    expect(CURRENT_PRODUCT_VERSIONS).toBe(PHASE_10_PRODUCT_VERSIONS);
+    expect(isProductVersions(PHASE_10_PRODUCT_VERSIONS)).toBe(true);
+  });
+
+  it("versions the corrected V1 content scale and map selection rules for Phase 11", () => {
+    expect(PHASE_11_PRODUCT_VERSIONS).toEqual({
+      ...PHASE_10_PRODUCT_VERSIONS,
+      contentVersion: "0.2.0",
+      rulesVersion: "0.6.0",
+    });
+    expect(CURRENT_PRODUCT_VERSIONS).toBe(PHASE_11_PRODUCT_VERSIONS);
     expect(isProductVersions(CURRENT_PRODUCT_VERSIONS)).toBe(true);
   });
 

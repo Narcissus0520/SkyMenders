@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "contentVersion": "0.1.0",
+  "contentVersion": "0.2.0",
   "regions": [
     {
       "id": "region_cloudbreak",
@@ -12,12 +12,34 @@
         "map_cloudbreak_relay",
         "map_cloudbreak_span",
         "map_cloudbreak_rescue",
-        "map_boss_rift_drill"
+        "map_boss_rift_drill",
+        "map_cloudbreak_windward_steps",
+        "map_cloudbreak_signal_garden",
+        "map_cloudbreak_suspended_yard",
+        "map_cloudbreak_moss_cistern",
+        "map_cloudbreak_courier_crossing",
+        "map_cloudbreak_anchor_lattice",
+        "map_cloudbreak_cloudwell_repair",
+        "map_cloudbreak_storm_cradle"
       ],
       "enemyPool": ["enemy_scout", "enemy_guard", "enemy_artillery", "enemy_driller"],
       "nodePool": ["battle", "engineering", "elite", "event", "workshop", "supply"],
       "windPermille": 120,
-      "gravityPermille": 1000
+      "gravityPermille": 1000,
+      "environmentMechanics": [
+        {
+          "id": "environment_cloudbreak_wind_shift",
+          "kind": "wind_shift",
+          "intensityPermille": 320,
+          "periodRounds": 2
+        },
+        {
+          "id": "environment_cloudbreak_support_fatigue",
+          "kind": "support_fatigue",
+          "intensityPermille": 180,
+          "periodRounds": 3
+        }
+      ]
     },
     {
       "id": "region_polar_foundry",
@@ -29,7 +51,15 @@
         "map_polar_foundry",
         "map_polar_switchyard",
         "map_polar_conduits",
-        "map_boss_magnetic_tower"
+        "map_boss_magnetic_tower",
+        "map_polar_coil_gallery",
+        "map_polar_north_crane",
+        "map_polar_flux_quarry",
+        "map_polar_cold_arc",
+        "map_polar_magnet_lane",
+        "map_polar_crystal_bypass",
+        "map_polar_pole_bridge",
+        "map_polar_overload_vault"
       ],
       "enemyPool": [
         "enemy_guard",
@@ -40,7 +70,21 @@
       ],
       "nodePool": ["battle", "engineering", "elite", "event", "workshop", "supply"],
       "windPermille": -80,
-      "gravityPermille": 1080
+      "gravityPermille": 1080,
+      "environmentMechanics": [
+        {
+          "id": "environment_polar_magnetic_surge",
+          "kind": "magnetic_surge",
+          "intensityPermille": 420,
+          "periodRounds": 2
+        },
+        {
+          "id": "environment_polar_crystal_overload",
+          "kind": "crystal_overload",
+          "intensityPermille": 260,
+          "periodRounds": 3
+        }
+      ]
     },
     {
       "id": "region_verdant_updraft",
@@ -52,12 +96,34 @@
         "map_verdant_updraft",
         "map_verdant_canopy",
         "map_verdant_lifeline",
-        "map_boss_inverted_controller"
+        "map_boss_inverted_controller",
+        "map_verdant_canopy_market",
+        "map_verdant_root_turbine",
+        "map_verdant_seedlift",
+        "map_verdant_moss_fan",
+        "map_verdant_dew_bridge",
+        "map_verdant_nursery_pumps",
+        "map_verdant_vine_anchor",
+        "map_verdant_storm_bloom"
       ],
       "enemyPool": ["enemy_scout", "enemy_wind", "enemy_carrier", "enemy_repairer", "enemy_magnet"],
       "nodePool": ["battle", "engineering", "elite", "event", "workshop", "supply"],
       "windPermille": 360,
-      "gravityPermille": 820
+      "gravityPermille": 820,
+      "environmentMechanics": [
+        {
+          "id": "environment_verdant_elastic_rebound",
+          "kind": "elastic_rebound",
+          "intensityPermille": 360,
+          "periodRounds": 2
+        },
+        {
+          "id": "environment_verdant_repair_current",
+          "kind": "repair_current",
+          "intensityPermille": 160,
+          "periodRounds": 3
+        }
+      ]
     },
     {
       "id": "region_corefall",
@@ -69,7 +135,15 @@
         "map_corefall_rim",
         "map_corefall_archive",
         "map_corefall_nexus",
-        "map_boss_island_mainframe"
+        "map_boss_island_mainframe",
+        "map_corefall_memory_trench",
+        "map_corefall_relay_crypt",
+        "map_corefall_fracture_hub",
+        "map_corefall_archive_spine",
+        "map_corefall_core_orbit",
+        "map_corefall_coolant_ring",
+        "map_corefall_signal_repair",
+        "map_corefall_zero_foundry"
       ],
       "enemyPool": [
         "enemy_artillery",
@@ -81,7 +155,21 @@
       ],
       "nodePool": ["battle", "engineering", "elite", "event", "workshop", "supply"],
       "windPermille": -240,
-      "gravityPermille": 1160
+      "gravityPermille": 1160,
+      "environmentMechanics": [
+        {
+          "id": "environment_corefall_gravity_pulse",
+          "kind": "gravity_pulse",
+          "intensityPermille": 480,
+          "periodRounds": 2
+        },
+        {
+          "id": "environment_corefall_pollution_spread",
+          "kind": "pollution_spread",
+          "intensityPermille": 300,
+          "periodRounds": 3
+        }
+      ]
     }
   ]
 }

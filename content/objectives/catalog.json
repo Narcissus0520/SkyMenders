@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "contentVersion": "0.1.0",
+  "contentVersion": "0.2.0",
   "objectives": [
     {
       "id": "primary_repair_tower",
@@ -196,6 +196,171 @@
       "nameKey": "objective.hidden_preserve_relic.name",
       "descriptionKey": "objective.hidden_preserve_relic.description",
       "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "support",
+      "rewardResearch": 5
+    },
+    {
+      "id": "hidden_chain_magnet",
+      "role": "hidden",
+      "trigger": "multi_magnetic_collision",
+      "nameKey": "objective.hidden_chain_magnet.name",
+      "descriptionKey": "objective.hidden_chain_magnet.description",
+      "required": 2,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "magnetic",
+      "rewardResearch": 5
+    },
+    {
+      "id": "hidden_full_rescue",
+      "role": "hidden",
+      "trigger": "all_rescues_completed",
+      "nameKey": "objective.hidden_full_rescue.name",
+      "descriptionKey": "objective.hidden_full_rescue.description",
+      "required": 3,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "rescue",
+      "rewardResearch": 5
+    },
+    {
+      "id": "hidden_aux_only",
+      "role": "hidden",
+      "trigger": "primary_modules_avoided",
+      "nameKey": "objective.hidden_aux_only.name",
+      "descriptionKey": "objective.hidden_aux_only.description",
+      "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": null,
+      "rewardResearch": 5
+    },
+    {
+      "id": "hidden_energy_reserve",
+      "role": "hidden",
+      "trigger": "energy_reserve_maintained",
+      "nameKey": "objective.hidden_energy_reserve.name",
+      "descriptionKey": "objective.hidden_energy_reserve.description",
+      "required": 6,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": null,
+      "rewardResearch": 6
+    },
+    {
+      "id": "hidden_no_collapse",
+      "role": "hidden",
+      "trigger": "collapse_avoided",
+      "nameKey": "objective.hidden_no_collapse.name",
+      "descriptionKey": "objective.hidden_no_collapse.description",
+      "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "support",
+      "rewardResearch": 5
+    },
+    {
+      "id": "hidden_bridge_intact",
+      "role": "hidden",
+      "trigger": "bridge_preserved",
+      "nameKey": "objective.hidden_bridge_intact.name",
+      "descriptionKey": "objective.hidden_bridge_intact.description",
+      "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "support",
+      "rewardResearch": 5
+    },
+    {
+      "id": "hidden_crystal_harvest",
+      "role": "hidden",
+      "trigger": "crystal_energy_collected",
+      "nameKey": "objective.hidden_crystal_harvest.name",
+      "descriptionKey": "objective.hidden_crystal_harvest.description",
+      "required": 3,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "repair",
+      "rewardResearch": 5
+    },
+    {
+      "id": "hidden_wind_redirect",
+      "role": "hidden",
+      "trigger": "wind_redirected",
+      "nameKey": "objective.hidden_wind_redirect.name",
+      "descriptionKey": "objective.hidden_wind_redirect.description",
+      "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "reflect",
+      "rewardResearch": 5
+    },
+    {
+      "id": "hidden_gravity_return",
+      "role": "hidden",
+      "trigger": "gravity_restored",
+      "nameKey": "objective.hidden_gravity_return.name",
+      "descriptionKey": "objective.hidden_gravity_return.description",
+      "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "repair",
+      "rewardResearch": 5
+    },
+    {
+      "id": "hidden_carrier_intercept",
+      "role": "hidden",
+      "trigger": "carrier_intercepted",
+      "nameKey": "objective.hidden_carrier_intercept.name",
+      "descriptionKey": "objective.hidden_carrier_intercept.description",
+      "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "carry",
+      "rewardResearch": 5
+    },
+    {
+      "id": "hidden_repair_combo",
+      "role": "hidden",
+      "trigger": "repair_chain_completed",
+      "nameKey": "objective.hidden_repair_combo.name",
+      "descriptionKey": "objective.hidden_repair_combo.description",
+      "required": 3,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "repair",
+      "rewardResearch": 5
+    },
+    {
+      "id": "hidden_zero_fall",
+      "role": "hidden",
+      "trigger": "fall_damage_avoided",
+      "nameKey": "objective.hidden_zero_fall.name",
+      "descriptionKey": "objective.hidden_zero_fall.description",
+      "required": 1,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "support",
+      "rewardResearch": 5
+    },
+    {
+      "id": "hidden_support_network",
+      "role": "hidden",
+      "trigger": "support_network_completed",
+      "nameKey": "objective.hidden_support_network.name",
+      "descriptionKey": "objective.hidden_support_network.description",
+      "required": 3,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": "support",
+      "rewardResearch": 5
+    },
+    {
+      "id": "hidden_module_rotation",
+      "role": "hidden",
+      "trigger": "distinct_modules_used",
+      "nameKey": "objective.hidden_module_rotation.name",
+      "descriptionKey": "objective.hidden_module_rotation.description",
+      "required": 4,
+      "criticalInteractionEnergyCost": 0,
+      "requiredCapability": null,
+      "rewardResearch": 6
+    },
+    {
+      "id": "hidden_fast_stabilize",
+      "role": "hidden",
+      "trigger": "stabilized_early",
+      "nameKey": "objective.hidden_fast_stabilize.name",
+      "descriptionKey": "objective.hidden_fast_stabilize.description",
+      "required": 3,
       "criticalInteractionEnergyCost": 0,
       "requiredCapability": "support",
       "rewardResearch": 5

@@ -26,12 +26,12 @@ class ScriptedTransport implements JsonTransport {
 const attemptId = "018f0f40-7b1a-7000-8000-000000000011";
 const submissionId = "018f0f40-7b1a-7000-8000-000000000012";
 const challenge: DailyChallengeDefinition = {
-  challengeId: "2026-07-22:0.5.0:0.1.0:42",
+  challengeId: "2026-07-22:0.6.0:0.2.0:42",
   businessDate: "2026-07-22",
   resetsAt: "2026-07-22T16:00:00.000Z",
   seed: 42,
-  rulesVersion: "0.5.0",
-  contentVersion: "0.1.0",
+  rulesVersion: "0.6.0",
+  contentVersion: "0.2.0",
   replaySchemaVersion: DAILY_REPLAY_SCHEMA_VERSION,
   difficulty: "hard",
   initialEnergy: 12,

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "contentVersion": "0.1.0",
+  "contentVersion": "0.2.0",
   "initialRobotIds": ["robot_rivet", "robot_anchor", "robot_gale"],
   "initialModuleIds": [
     "main_fold_bridge",
@@ -151,6 +151,90 @@
       "targetId": "region_corefall",
       "researchCost": 0,
       "prerequisites": ["region_verdant_updraft"]
+    },
+    {
+      "id": "unlock_cosmetic_rivet_sky",
+      "kind": "cosmetic",
+      "targetId": "cosmetic_rivet_sky",
+      "researchCost": 8,
+      "prerequisites": ["robot_rivet"]
+    },
+    {
+      "id": "unlock_cosmetic_rivet_forge",
+      "kind": "cosmetic",
+      "targetId": "cosmetic_rivet_forge",
+      "researchCost": 10,
+      "prerequisites": ["robot_rivet"]
+    },
+    {
+      "id": "unlock_cosmetic_anchor_storm",
+      "kind": "cosmetic",
+      "targetId": "cosmetic_anchor_storm",
+      "researchCost": 12,
+      "prerequisites": ["robot_anchor"]
+    },
+    {
+      "id": "unlock_cosmetic_anchor_archive",
+      "kind": "cosmetic",
+      "targetId": "cosmetic_anchor_archive",
+      "researchCost": 14,
+      "prerequisites": ["robot_anchor"]
+    },
+    {
+      "id": "unlock_cosmetic_gale_moss",
+      "kind": "cosmetic",
+      "targetId": "cosmetic_gale_moss",
+      "researchCost": 16,
+      "prerequisites": ["robot_gale"]
+    },
+    {
+      "id": "unlock_cosmetic_gale_sky",
+      "kind": "cosmetic",
+      "targetId": "cosmetic_gale_sky",
+      "researchCost": 8,
+      "prerequisites": ["robot_gale"]
+    },
+    {
+      "id": "unlock_cosmetic_prism_crystal",
+      "kind": "cosmetic",
+      "targetId": "cosmetic_prism_crystal",
+      "researchCost": 10,
+      "prerequisites": ["robot_prism"]
+    },
+    {
+      "id": "unlock_cosmetic_prism_archive",
+      "kind": "cosmetic",
+      "targetId": "cosmetic_prism_archive",
+      "researchCost": 12,
+      "prerequisites": ["robot_prism"]
+    },
+    {
+      "id": "unlock_cosmetic_forge_forge",
+      "kind": "cosmetic",
+      "targetId": "cosmetic_forge_forge",
+      "researchCost": 14,
+      "prerequisites": ["robot_forge"]
+    },
+    {
+      "id": "unlock_cosmetic_forge_storm",
+      "kind": "cosmetic",
+      "targetId": "cosmetic_forge_storm",
+      "researchCost": 16,
+      "prerequisites": ["robot_forge"]
+    },
+    {
+      "id": "unlock_cosmetic_echo_moss",
+      "kind": "cosmetic",
+      "targetId": "cosmetic_echo_moss",
+      "researchCost": 8,
+      "prerequisites": ["robot_echo"]
+    },
+    {
+      "id": "unlock_cosmetic_echo_crystal",
+      "kind": "cosmetic",
+      "targetId": "cosmetic_echo_crystal",
+      "researchCost": 10,
+      "prerequisites": ["robot_echo"]
     }
   ],
   "achievements": [
@@ -521,6 +605,92 @@
       "category": "region",
       "nameKey": "region.region_corefall.name",
       "bodyKey": "region.region_corefall.environment"
+    }
+  ],
+  "cosmetics": [
+    {
+      "id": "cosmetic_rivet_sky",
+      "robotId": "robot_rivet",
+      "nameKey": "cosmetic.cosmetic_rivet_sky.name",
+      "palette": "sky",
+      "pattern": "riveted"
+    },
+    {
+      "id": "cosmetic_rivet_forge",
+      "robotId": "robot_rivet",
+      "nameKey": "cosmetic.cosmetic_rivet_forge.name",
+      "palette": "forge",
+      "pattern": "stripe"
+    },
+    {
+      "id": "cosmetic_anchor_storm",
+      "robotId": "robot_anchor",
+      "nameKey": "cosmetic.cosmetic_anchor_storm.name",
+      "palette": "storm",
+      "pattern": "chevron"
+    },
+    {
+      "id": "cosmetic_anchor_archive",
+      "robotId": "robot_anchor",
+      "nameKey": "cosmetic.cosmetic_anchor_archive.name",
+      "palette": "archive",
+      "pattern": "circuit"
+    },
+    {
+      "id": "cosmetic_gale_moss",
+      "robotId": "robot_gale",
+      "nameKey": "cosmetic.cosmetic_gale_moss.name",
+      "palette": "moss",
+      "pattern": "cloud"
+    },
+    {
+      "id": "cosmetic_gale_sky",
+      "robotId": "robot_gale",
+      "nameKey": "cosmetic.cosmetic_gale_sky.name",
+      "palette": "sky",
+      "pattern": "stripe"
+    },
+    {
+      "id": "cosmetic_prism_crystal",
+      "robotId": "robot_prism",
+      "nameKey": "cosmetic.cosmetic_prism_crystal.name",
+      "palette": "crystal",
+      "pattern": "circuit"
+    },
+    {
+      "id": "cosmetic_prism_archive",
+      "robotId": "robot_prism",
+      "nameKey": "cosmetic.cosmetic_prism_archive.name",
+      "palette": "archive",
+      "pattern": "solid"
+    },
+    {
+      "id": "cosmetic_forge_forge",
+      "robotId": "robot_forge",
+      "nameKey": "cosmetic.cosmetic_forge_forge.name",
+      "palette": "forge",
+      "pattern": "chevron"
+    },
+    {
+      "id": "cosmetic_forge_storm",
+      "robotId": "robot_forge",
+      "nameKey": "cosmetic.cosmetic_forge_storm.name",
+      "palette": "storm",
+      "pattern": "riveted"
+    },
+    {
+      "id": "cosmetic_echo_moss",
+      "robotId": "robot_echo",
+      "nameKey": "cosmetic.cosmetic_echo_moss.name",
+      "palette": "moss",
+      "pattern": "cloud"
+    },
+    {
+      "id": "cosmetic_echo_crystal",
+      "robotId": "robot_echo",
+      "nameKey": "cosmetic.cosmetic_echo_crystal.name",
+      "palette": "crystal",
+      "pattern": "circuit"
     }
   ]
 }

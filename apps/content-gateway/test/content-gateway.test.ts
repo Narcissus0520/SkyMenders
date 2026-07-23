@@ -55,7 +55,7 @@ describe("content gateway", () => {
     const { root, workspace } = await fixture();
     const record = await workspace.buildPublication({
       actor: "author.one",
-      rulesVersion: "0.5.0",
+      rulesVersion: "0.6.0",
       commitSha: "abcdef0",
     });
     expect(record.state).toBe("validated");
@@ -77,6 +77,60 @@ describe("content gateway", () => {
     expect(await readFile(resolve(root, ".content-publications/current.json"), "utf8")).toContain(
       record.id,
     );
+
+    const localized = await workspace.readCatalog("localization");
+    const changedLocalization = {
+      ...(localized.data as Record<string, string>),
+      "ui.phase11.rollback_probe": "回滚演练",
+    };
+    await workspace.saveCatalog(
+      "localization",
+      localized.revision,
+      changedLocalization,
+      "author.one",
+    );
+    const replacement = await workspace.buildPublication({
+      actor: "author.one",
+      rulesVersion: "0.6.0",
+      commitSha: "abcdef1",
+    });
+    await workspace.stagePublication(replacement.id, "author.one");
+    await workspace.approvePublication(replacement.id, "reviewer.two");
+    await workspace.signPublication(
+      replacement.id,
+      "release.bot",
+      "a-signing-secret-that-is-longer-than-thirty-two",
+    );
+    await workspace.publish(replacement.id, "release.manager", replacement.id);
+    await expect(
+      workspace.rollback(
+        record.id,
+        replacement.id,
+        "release.manager",
+        `${record.id}:${replacement.id}`,
+      ),
+    ).rejects.toMatchObject({ code: "ROLLBACK_SOURCE_NOT_ACTIVE" });
+    await expect(
+      workspace.rollback(
+        replacement.id,
+        replacement.id,
+        "release.manager",
+        `${replacement.id}:${replacement.id}`,
+      ),
+    ).rejects.toMatchObject({ code: "ROLLBACK_TARGET_INVALID" });
+    const rolledBack = await workspace.rollback(
+      replacement.id,
+      record.id,
+      "release.manager",
+      `${replacement.id}:${record.id}`,
+    );
+    expect(rolledBack).toMatchObject({ state: "rolled_back", rollbackTargetId: record.id });
+    expect(await workspace.currentPublicationId()).toBe(record.id);
+
+    await workspace.freeze("0.2.0", "Phase 11 content freeze rehearsal", "release.manager");
+    await expect(
+      workspace.saveCatalog("localization", localized.revision, changedLocalization, "author.one"),
+    ).rejects.toMatchObject({ code: "CONTENT_FROZEN" });
   });
 
   it("protects writes with a per-process session and exposes field errors", async () => {

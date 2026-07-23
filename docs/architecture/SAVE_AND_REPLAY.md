@@ -43,7 +43,7 @@ Local expedition persistence uses two journal slots. A complete sealed payload i
 
 Cloud writes carry the last observed base revision. PostgreSQL compares and replaces that revision atomically and archives the replaced/rejected branch for seven days in the same transaction. Conflicts return only bounded summaries. One restart per node is stored in the sealed expedition ledger, so clearing client cache or switching devices does not restore the allowance after synchronization.
 
-Save schema `0.1.0` supports a tested migration from the internal `0.0.1` shape. Unknown schemas and unavailable rules/content versions fail closed. The original record is never silently deleted.
+Save schema `0.1.0` supports a tested migration from the internal `0.0.1` shape. The serialized migration corpus proves that the save ID, played expedition state, summary and the retained content `0.1.0` / rules `0.5.0` compatibility dimensions remain unchanged and that its snapshots are verified against their stored pair. Current saves use content `0.2.0` / rules `0.6.0`; only explicitly allow-listed older pairs can resume. Unknown schemas and unavailable rules/content versions fail closed. The original record is never silently deleted.
 
 ## Security properties
 

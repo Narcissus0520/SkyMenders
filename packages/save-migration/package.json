@@ -11,6 +11,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "drill:migration": "tsx src/migration-drill-cli.ts",
     "lint": "eslint src test",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
@@ -26,6 +27,7 @@
     "@types/node": "catalog:",
     "@vitest/coverage-v8": "catalog:",
     "eslint": "catalog:",
+    "tsx": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   }

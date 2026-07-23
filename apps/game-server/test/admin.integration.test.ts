@@ -61,10 +61,10 @@ describe("admin and content HTTP control plane", () => {
     const manifest = await server.inject({ method: "GET", url: "/v1/content/manifest" });
     expect(manifest.statusCode).toBe(200);
     const manifestBody = responseJson<{ artifactHash: string }>(manifest.body);
-    expect(manifest.body).toContain('"contentVersion":"0.1.0"');
-    expect(manifest.body).toContain('"rulesVersion":"0.5.0"');
+    expect(manifest.body).toContain('"contentVersion":"0.2.0"');
+    expect(manifest.body).toContain('"rulesVersion":"0.6.0"');
     expect(manifestBody.artifactHash).toMatch(/^[a-f0-9]{64}$/);
-    const content = await server.inject({ method: "GET", url: "/v1/content/versions/0.1.0" });
+    const content = await server.inject({ method: "GET", url: "/v1/content/versions/0.2.0" });
     expect(content.statusCode).toBe(200);
     const contentBody = responseJson<{ content: { robots: { robots: unknown[] } } }>(content.body);
     expect(contentBody.content.robots.robots).toHaveLength(6);

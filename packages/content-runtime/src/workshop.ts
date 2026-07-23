@@ -21,13 +21,13 @@ export function buyWorkshopService(
   let inventory = state.inventory;
   if (service.kind === "repair_hp") {
     robots = state.robots.map((candidate) =>
-      candidate.robotId === robotId
+      service.scope === "squad" || candidate.robotId === robotId
         ? applyRepair(candidate, "repair_hp", service.amount)
         : candidate,
     );
   } else if (service.kind === "repair_structure") {
     robots = state.robots.map((candidate) =>
-      candidate.robotId === robotId
+      service.scope === "squad" || candidate.robotId === robotId
         ? applyRepair(candidate, "repair_structure", service.amount)
         : candidate,
     );
