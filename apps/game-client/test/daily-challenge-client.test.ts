@@ -180,7 +180,7 @@ function submission(): FinishDailyAttemptRequest {
     rulesVersion: challenge.rulesVersion,
     contentVersion: challenge.contentVersion,
     replaySchemaVersion: DAILY_REPLAY_SCHEMA_VERSION,
-    clientVersion: "0.4.0",
+    clientVersion: "0.5.0",
     claimedScore: 0,
     completionMs: 1,
     recoveryCount: 0,

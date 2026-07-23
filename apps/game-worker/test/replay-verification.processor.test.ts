@@ -216,7 +216,7 @@ function makeWinningSubmission(challenge: DailyChallengeDefinition): FinishDaily
     rulesVersion: challenge.rulesVersion,
     contentVersion: challenge.contentVersion,
     replaySchemaVersion: DAILY_REPLAY_SCHEMA_VERSION,
-    clientVersion: "0.4.0",
+    clientVersion: "0.5.0",
     claimedScore: scoreDailyResult(finalStates),
     completionMs: 180_000,
     recoveryCount: 0,

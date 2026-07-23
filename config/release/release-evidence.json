@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0.0",
+  "candidateVersion": null,
+  "candidateCommit": null,
+  "gates": [
+    {
+      "id": "automated-regression",
+      "status": "passed",
+      "owner": "engineering",
+      "evidence": ["docs/status/PROJECT_STATUS.md", "docs/testing/PERFORMANCE_BUDGET.md"]
+    },
+    {
+      "id": "severity-zero",
+      "status": "passed",
+      "owner": "engineering",
+      "evidence": ["docs/status/KNOWN_ISSUES.md"]
+    },
+    {
+      "id": "approved-assets",
+      "status": "blocked",
+      "owner": "art/audio owner",
+      "blockerIds": ["EXT-005"],
+      "evidence": ["assets/provenance/asset-registry.json"]
+    },
+    {
+      "id": "complete-audio",
+      "status": "blocked",
+      "owner": "art/audio owner",
+      "blockerIds": ["EXT-005"],
+      "evidence": ["config/release/audio-catalog.json"]
+    },
+    {
+      "id": "wechat-package",
+      "status": "blocked",
+      "owner": "release engineering / QA",
+      "blockerIds": ["EXT-001", "EXT-006"],
+      "evidence": ["config/release/package-budget.json"]
+    },
+    {
+      "id": "device-matrix",
+      "status": "blocked",
+      "owner": "QA owner",
+      "blockerIds": ["EXT-006"],
+      "evidence": ["docs/testing/DEVICE_MATRIX.md"]
+    },
+    {
+      "id": "privacy-and-legal",
+      "status": "blocked",
+      "owner": "qualified legal/publishing team",
+      "blockerIds": ["EXT-003"],
+      "evidence": ["docs/legal/RELEASE_LEGAL_CHECKLIST.md", "docs/legal/PRIVACY_DATA_INVENTORY.md"]
+    },
+    {
+      "id": "backup-and-restore",
+      "status": "blocked",
+      "owner": "infrastructure owner",
+      "blockerIds": ["EXT-002"],
+      "evidence": ["docs/operations/BACKUP_AND_RECOVERY.md"]
+    },
+    {
+      "id": "production-operations",
+      "status": "blocked",
+      "owner": "infrastructure owner",
+      "blockerIds": ["EXT-002"],
+      "evidence": ["docs/operations/PRODUCTION_RUNBOOK.md", "docs/operations/ALERT_MATRIX.md"]
+    },
+    {
+      "id": "public-name",
+      "status": "blocked",
+      "owner": "qualified trademark counsel",
+      "blockerIds": ["EXT-004"],
+      "evidence": ["docs/legal/RELEASE_LEGAL_CHECKLIST.md"]
+    },
+    {
+      "id": "wechat-identity",
+      "status": "blocked",
+      "owner": "product owner",
+      "blockerIds": ["EXT-001"],
+      "evidence": ["docs/status/EXTERNAL_BLOCKERS.md"]
+    }
+  ]
+}

@@ -280,6 +280,17 @@ describe("audio, localization, and async screens", () => {
         )
       ).status,
     ).toBe("error");
+    expect(
+      (await menu.navigate("privacy", { connected: false, type: "none" }, () => Promise.resolve()))
+        .status,
+    ).toBe("ready");
+    expect(
+      (
+        await menu.navigate("user_agreement", { connected: false, type: "none" }, () =>
+          Promise.resolve(),
+        )
+      ).status,
+    ).toBe("ready");
     expect(menu.state().systemCodename).toBe("系统-001");
   });
 });

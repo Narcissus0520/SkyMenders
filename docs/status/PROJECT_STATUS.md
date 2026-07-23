@@ -3,10 +3,10 @@
 ## Snapshot
 
 - Date: 2026-07-23
-- Current phase: Phase 9 - content and administrative control plane
-- Phase state: local implementation complete; PR and required CI pending
-- Branch: `codex/phase-09-content-tools`
-- Baseline: Phase 8 squash commit `598c8aacd4264ded186e33a8c699738df0a28687` on `main`
+- Current phase: Phase 10 - release preparation and operations
+- Phase state: local implementation and gates complete; PR and required CI pending
+- Branch: `codex/phase-10-release-preparation`
+- Baseline: Phase 9 squash commit `e4820770979b4ef218df10d2a9cf856a1ab5ca6f` on `main`
 - Phase 0 delivery: PR #1 merged after all required checks passed
 - Phase 1 delivery: PR #2 merged after all required checks passed
 - Phase 2 delivery: PR #3 merged after all required checks passed
@@ -16,14 +16,15 @@
 - Phase 6 delivery: PR #7 merged after all required checks passed
 - Phase 7 delivery: PR #8 merged after all required checks, including PostgreSQL integration, passed
 - Phase 8 delivery: PR #9 merged after all required checks, including PostgreSQL/Redis integration, passed
-- Next phase: Phase 10 - assets, performance, package budget, operations, and legal preparation
+- Phase 9 delivery: PR #10 merged after all required checks, including PostgreSQL/Redis integration and Web E2E, passed
+- Next phase: Phase 11 - release candidate, regression, freeze and recovery drills
 
 ## Version matrix
 
 | Dimension           | Version |
 | ------------------- | ------- |
-| clientVersion       | 0.4.0   |
-| serverVersion       | 0.3.0   |
+| clientVersion       | 0.5.0   |
+| serverVersion       | 0.4.0   |
 | rulesVersion        | 0.5.0   |
 | contentVersion      | 0.1.0   |
 | saveSchemaVersion   | 0.1.0   |
@@ -31,47 +32,36 @@
 | protocolVersion     | 0.5.0   |
 | aiSchemaVersion     | 0.1.0   |
 
-## Phase 9 implementation
+## Phase 10 implementation
 
-- Added deterministic content parsing, reference/localization/map validation, fixed-seed simulation, hashing, diff, packaging, state transitions and signing.
-- Added a loopback-only Content Gateway with allow-listed paths, revision-safe atomic writes, draft autosave, two-person approval, staging, signing, freeze and rollback.
-- Added a structured Content Studio for maps, routes, actors/modules, enemy AI, events/tutorials and daily challenge review, including shared deterministic authority inspection.
-- Added immutable content manifest/version delivery endpoints.
-- Added isolated administrator authentication and a memory-only browser token.
-- Added content lifecycle, daily preview, anomaly quarantine, system-code reset request, deletion processing, health, compatibility, audit, announcement and risk-switch control surfaces.
-- Added PostgreSQL persistence for admin users/sessions, content versions, announcements, risk switches, operational actions and linked audit hashes.
-- Added Playwright E2E for valid authoring/staging, admin confirmation/audit and invalid-content publication blocking.
+- Added release asset provenance v2 with hash, source, license, reviewer, AI-process and originality enforcement.
+- Added source/compiled package partition analysis, internal budgets and a current-official-evidence boundary.
+- Added separate engineering readiness and strict release-candidate gates over a versioned evidence manifest.
+- Added formal music/SFX requirements, privacy/legal/SDK documents and offline legal/privacy menu routes.
+- Added structured request logs, request/trace correlation, Prometheus metrics and production alert/runbook contracts.
+- Added a guarded PostgreSQL backup/isolated-restore verifier and mandatory Server Integration CI drill.
 
 ## Verification
 
 Current local evidence on Node.js 24 and pnpm 10:
 
-- Full repository tests: 368 passed; two real PostgreSQL adapter tests skipped locally because Docker is unavailable and remain mandatory with the Redis queue test in Server Integration CI.
-- Protocol coverage: 99.09% statements / 87.50% branches / 100% functions / 99.09% lines.
-- Content pipeline coverage: 90.19% statements / 83.87% branches / 100% functions / 93.33% lines.
-- Content Gateway coverage: 65.88% statements / 69.23% branches / 61.66% functions / 68.36% lines; browser E2E additionally covers the authoring, staging and invalid-content boundaries.
-- Content Studio history coverage: 78.57% statements / 57.14% branches / 100% functions / 100% lines; browser E2E covers structured editing and publication interaction.
-- Admin Console session-vault coverage: 100% statements / branches / functions / lines; browser E2E covers isolated login and confirmed privileged writes.
-- Challenge authority coverage: 92.37% statements / 80% branches / 100% functions / 96.23% lines.
-- Save migration coverage: 100% statements / 95.65% branches / 100% functions / 100% lines.
-- Security coverage: 94.44% statements / 92.59% branches / 100% functions / 94.11% lines.
-- Game client coverage: 94.93% statements / 86.33% branches / 91.20% functions / 96.55% lines.
-- Game server coverage, excluding generated Prisma output and the CI-integration-tested infrastructure adapters: 88.78% statements / 77.25% branches / 88.20% functions / 89.81% lines.
-- Worker coverage, excluding the CI-integration-tested Redis adapter: 94% statements / 94.44% branches / 93.33% functions / 95.45% lines.
-- Concurrent save writes from one base revision yield exactly one success and one `SAVE_CONFLICT`; no expedition body is returned in conflict details.
-- Formal-slot concurrency, server-date isolation, attempt recovery, queue idempotency, score/hash/AI tampering, anonymous pagination/cache, and account-deletion cascades passed automated tests.
-- Five hundred challenge definitions completed in 2,274.70 ms; trusted replay verification recorded p95 9.68 ms against a 100 ms gate.
-- Three Playwright control-plane journeys passed against real local HTTP services: authoring/staging, isolated administrator confirmation/audit, and invalid-content blocking.
-- Format, workspace/infrastructure policy, lint, strict TypeScript, unit/in-memory integration tests, build, coverage, determinism, performance, content/catalog validation, asset provenance, secret policy, dependency audit, and SBOM all passed.
-- Static Cocos check passed across 37 project files. Real Creator and device evidence remains external.
+- Full repository tests: 388 passed; two real PostgreSQL adapter tests skipped locally because Docker is unavailable and remain mandatory with the Redis and restore-drill paths in Server Integration CI.
+- All package coverage thresholds passed. New controls: asset auditor 98.78% statements / 95.16% branches / 100% functions / 100% lines; package budget 97.56% / 96.36% / 100% / 98.64%; release preflight 92.53% / 91.48% / 100% / 96.72%; database restore logic 98.27% / 93.10% / 100% / 100%; request telemetry 100% statements/functions/lines and 92.30% branches.
+- Game client coverage: 95.12% statements / 86.66% branches / 91.75% functions / 96.68% lines. Game server: 89.36% / 77.77% / 88.46% / 90.32%.
+- Determinism gates passed for runtime, terrain, battle, AI, expedition, challenge, save migration and golden replay.
+- Performance passed: terrain p95 32.76 ms, AI p95 348.23 ms, 10,000 presentation events in 45.97 ms, 500 daily definitions in 2,429.30 ms and trusted replay verification p95 9.83 ms.
+- Three Playwright control-plane journeys passed.
+- Format, workspace/infrastructure policy, lint, strict TypeScript, build, content/AI validation, static Cocos validation across 37 files, asset audit, source package budget, release readiness, secret scan, dependency audit and 497-component SBOM passed.
+- The strict release candidate gate failed closed as designed because the compiled WeChat package and current official platform evidence are absent.
 
-Required GitHub checks, including Web E2E and the PostgreSQL/Redis integration job, must pass before Phase 9 is merged. The evidence above is not a production-readiness claim.
+Required GitHub checks, including the PostgreSQL 17 restore drill, must pass before Phase 10 is merged. Neither engineering readiness nor CI is a production-readiness claim.
 
 ## Known limits
 
-- `EXT-001` and `EXT-002` block real WeChat login and deployed cloud-save evidence; local and CI substitutes do not satisfy these external gates.
-- `EXT-006` and `DEV-002` block real-device weak-network and resume evidence.
-- Docker remains unavailable locally; Server Integration CI owns the real PostgreSQL migration, Redis queue, and adapter tests.
-- Production queue sizing, retry/dead-letter monitoring, backup, and recovery evidence remain later release gates.
-- Production operations, package budgets, approved final assets, legal approval and release-candidate drills remain later phases.
-- No final public name, production backend, platform approval, device result, or public-release claim is complete.
+- `EXT-001` and `EXT-002` block real WeChat login, deployed cloud-save, routed monitoring and production backup/recovery evidence.
+- `EXT-003` and `EXT-004` block qualified legal/publishing approval and a final public name.
+- `EXT-005` blocks approved final art, fonts, music and SFX; the empty release directory is not a completion claim.
+- `EXT-006` and `DEV-002` block a compiled WeChat package, current platform-limit evidence and real-device results.
+- Docker remains unavailable locally; Server Integration CI owns the real PostgreSQL migration, Redis queue/adapters and isolated restore drill.
+- Internal package budgets are automated; official current limits must be captured from an authoritative source for each immutable candidate.
+- No production backend, platform approval, legal sign-off, device result or public-release claim is complete.

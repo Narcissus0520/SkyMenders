@@ -21,15 +21,17 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: Require explicit release-candidate readiness
-        run: "grep -Fq 'Current conclusion: **ready for release candidate**' docs/status/RELEASE_READINESS.md"
       - run: pnpm workspace:check
       - run: pnpm format:check
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test:coverage
       - run: pnpm test:determinism
+      - run: pnpm test:performance
+      - run: pnpm test:e2e
       - run: pnpm content:validate
-      - run: pnpm assets:audit
       - run: pnpm security:secrets
+      - run: pnpm security:audit
       - run: pnpm build
+      - run: pnpm cocos:check
+      - run: pnpm release:gate

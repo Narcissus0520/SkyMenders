@@ -90,6 +90,11 @@ describe("game server HTTP contract", () => {
     const openApi = await json(server, { method: "GET", url: "/openapi.json" });
     expect(openApi.statusCode).toBe(200);
     expect(openApi.body).toMatchObject({ info: { title: "SkyMenders Game API" } });
+    const metrics = await server.inject({ method: "GET", url: "/metrics" });
+    expect(metrics.statusCode).toBe(200);
+    expect(metrics.headers["content-type"]).toContain("text/plain");
+    expect(metrics.body).toContain("skymenders_http_requests_total");
+    expect(metrics.headers["x-request-id"]).toBeTypeOf("string");
     const paths = (openApi.body as { paths: Record<string, Record<string, unknown>> }).paths;
     const loginOperation = paths["/v1/auth/wechat"]?.post as { requestBody?: unknown } | undefined;
     const saveOperation = paths["/v1/saves/expedition"]?.put as
@@ -461,7 +466,7 @@ describe("game server HTTP contract", () => {
         rulesVersion: formalBody.challenge.rulesVersion,
         contentVersion: formalBody.challenge.contentVersion,
         replaySchemaVersion: DAILY_REPLAY_SCHEMA_VERSION,
-        clientVersion: "0.4.0",
+        clientVersion: "0.5.0",
         claimedScore: 999_999,
         completionMs: 1,
         recoveryCount: 0,
@@ -525,7 +530,7 @@ describe("game server HTTP contract", () => {
         rulesVersion: challenge.rulesVersion,
         contentVersion: challenge.contentVersion,
         replaySchemaVersion: DAILY_REPLAY_SCHEMA_VERSION,
-        clientVersion: "0.4.0",
+        clientVersion: "0.5.0",
         claimedScore: 90_000,
         completionMs: 180_000,
         recoveryCount: 0,

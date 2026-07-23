@@ -61,7 +61,7 @@ describe.runIf(redisUrl !== undefined)("BullMQ replay verification", () => {
         rulesVersion: challenge.rulesVersion,
         contentVersion: challenge.contentVersion,
         replaySchemaVersion: DAILY_REPLAY_SCHEMA_VERSION,
-        clientVersion: "0.4.0",
+        clientVersion: "0.5.0",
         claimedScore: 1_000_000,
         completionMs: 1,
         recoveryCount: 0,

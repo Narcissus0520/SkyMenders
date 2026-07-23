@@ -6,6 +6,8 @@ export const ZH_HANS: TranslationDictionary = {
   "menu.daily": "每日挑战",
   "menu.collection": "图鉴",
   "menu.settings": "设置",
+  "menu.privacy": "隐私政策",
+  "menu.user_agreement": "用户协议",
   "menu.offline": "当前离线，联网功能暂不可用",
   "screen.loading": "正在装配…",
   "screen.retry": "重试",
