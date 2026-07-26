@@ -2,8 +2,9 @@ import { executeAiEnemyPhase } from "@skymenders/ai-core";
 import type { AiAuthorityState } from "@skymenders/ai-core";
 import { reduceBattleCommand } from "@skymenders/battle-core";
 import type { BattleState } from "@skymenders/battle-core";
-import { parseBattleCommand } from "@skymenders/protocol";
-import type { BattleCommand, BattleEvent } from "@skymenders/protocol";
+import { parseBattleCommand } from "@skymenders/protocol/battle-command";
+import type { BattleCommand } from "@skymenders/protocol/battle-command";
+import type { BattleEvent } from "@skymenders/protocol/battle-event";
 import { BattlePresentationStore } from "./presentation/BattlePresentationStore";
 
 export class BattleSession {

@@ -119,6 +119,20 @@ describe("Cocos project validation", () => {
       ),
     ).toBe(true);
   });
+
+  it("rejects engine module and splash configuration drift", () => {
+    const root = copyProject();
+    const path = join(root, "build-config", "wechatgame.json");
+    const config = JSON.parse(readFileSync(path, "utf8")) as Record<string, unknown>;
+    config.includeModules = ["2d", "3d"];
+    config.useSplashScreen = true;
+    writeFileSync(path, JSON.stringify(config), "utf8");
+    expect(
+      validateCocosProject(root).issues.some(
+        (issue) => issue.code === "COCOS_WECHAT_ENGINE_INVALID",
+      ),
+    ).toBe(true);
+  });
 });
 
 function copyProject(): string {

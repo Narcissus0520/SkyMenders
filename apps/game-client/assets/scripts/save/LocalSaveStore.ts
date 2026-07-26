@@ -1,6 +1,9 @@
 import { hashUtf8 } from "@skymenders/deterministic-runtime";
-import type { AccountProgressSave, ExpeditionSaveDocument } from "@skymenders/protocol";
-import { accountProgressSaveSchema } from "@skymenders/protocol";
+import type {
+  AccountProgressSave,
+  ExpeditionSaveDocument,
+} from "@skymenders/protocol/account-save";
+import { accountProgressSaveSchema } from "@skymenders/protocol/account-save";
 import { migrateExpeditionSave, verifyExpeditionSave } from "@skymenders/save-migration/runtime";
 
 import type { PlatformAdapter } from "../platform/platform-adapter";

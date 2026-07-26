@@ -8,6 +8,15 @@ export const BOOTSTRAP_COMPONENT = "assets/scripts/cocos/CocosAppRoot.ts";
 export const BUILDER_SETTINGS = "settings/v2/packages/builder.json";
 export const FEATURE_BUNDLE_META = "assets/bundles/feature-collection.meta";
 export const PVE_FEATURE_BUNDLE_META = "assets/bundles/feature-pve.meta";
+export const REQUIRED_WECHAT_ENGINE_MODULES = [
+  "2d",
+  "graphics",
+  "base",
+  "gfx-webgl",
+  "intersection-2d",
+  "ui",
+  "legacy-pipeline",
+] as const;
 
 const FEATURE_BUNDLES = [
   { metaPath: FEATURE_BUNDLE_META, name: "feature-collection", configId: "auto_featureCollection" },
@@ -119,12 +128,30 @@ export function validateCocosProject(
   const wechatPackage = objectAt(objectAt(build, "packages"), "wechatgame");
   const packageOrientation = wechatPackage?.orientation;
   const packageSeparateEngine = wechatPackage?.separateEngine;
-  if (packageOrientation !== "landscape" || packageSeparateEngine !== false) {
+  if (packageOrientation !== "landscape" || packageSeparateEngine !== true) {
     issue(
       issues,
       "COCOS_WECHAT_PACKAGE_INVALID",
       WECHAT_BUILD_CONFIG,
-      "WeChat build must be landscape and keep the unverified engine plugin disabled",
+      "WeChat build must be landscape and keep the Cocos engine plugin enabled",
+    );
+  }
+  const includeModules = Array.isArray(build?.includeModules) ? build.includeModules : [];
+  const engineModulesConfigKey = build?.engineModulesConfigKey;
+  const inlineEnum = build?.inlineEnum;
+  const useSplashScreen = build?.useSplashScreen;
+  if (
+    engineModulesConfigKey !== "skymenders2d" ||
+    inlineEnum !== true ||
+    useSplashScreen !== false ||
+    includeModules.length !== REQUIRED_WECHAT_ENGINE_MODULES.length ||
+    !REQUIRED_WECHAT_ENGINE_MODULES.every((moduleId, index) => includeModules[index] === moduleId)
+  ) {
+    issue(
+      issues,
+      "COCOS_WECHAT_ENGINE_INVALID",
+      WECHAT_BUILD_CONFIG,
+      "WeChat build must use the pinned 2D engine module set and omit the default splash assets",
     );
   }
   if (wechatPackage?.appid !== "") {

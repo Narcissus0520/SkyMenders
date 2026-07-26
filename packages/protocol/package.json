@@ -7,6 +7,22 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./account-save": {
+      "types": "./dist/account-save.d.ts",
+      "default": "./dist/account-save.js"
+    },
+    "./battle-command": {
+      "types": "./dist/battle-command.d.ts",
+      "default": "./dist/battle-command.js"
+    },
+    "./battle-event": {
+      "types": "./dist/battle-event.d.ts",
+      "default": "./dist/battle-event.js"
+    },
+    "./daily-challenge": {
+      "types": "./dist/daily-challenge.d.ts",
+      "default": "./dist/daily-challenge.js"
     }
   },
   "scripts": {

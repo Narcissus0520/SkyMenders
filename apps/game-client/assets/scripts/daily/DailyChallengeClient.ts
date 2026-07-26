@@ -8,7 +8,7 @@ import {
   dailyLeaderboardMeSchema,
   dailyLeaderboardPageSchema,
   finishDailyAttemptRequestSchema,
-} from "@skymenders/protocol";
+} from "@skymenders/protocol/daily-challenge";
 import type {
   DailyAttemptCheckpointRequest,
   DailyAttemptCheckpointResponse,
@@ -18,7 +18,7 @@ import type {
   DailyLeaderboardMe,
   DailyLeaderboardPage,
   FinishDailyAttemptRequest,
-} from "@skymenders/protocol";
+} from "@skymenders/protocol/daily-challenge";
 import type { ZodType } from "zod/v3";
 
 import type { AuthSessionManager, JsonRequest } from "../account/AuthSessionManager";

@@ -1,3 +1,58 @@
 {
-  "__version__": "1.0.12"
+  "__version__": "1.0.12",
+  "modules": {
+    "configs": {
+      "skymenders2d": {
+        "name": "SkyMenders 2D",
+        "cache": {
+          "base": {
+            "_value": true
+          },
+          "gfx-webgl": {
+            "_value": true
+          },
+          "gfx-webgl2": {
+            "_value": false
+          },
+          "2d": {
+            "_value": true
+          },
+          "graphics": {
+            "_value": true
+          },
+          "intersection-2d": {
+            "_value": true
+          },
+          "ui": {
+            "_value": true
+          },
+          "render-pipeline": {
+            "_value": true,
+            "_option": "legacy-pipeline"
+          },
+          "custom-pipeline": {
+            "_value": false
+          },
+          "legacy-pipeline": {
+            "_value": true
+          }
+        },
+        "includeModules": [
+          "2d",
+          "graphics",
+          "base",
+          "gfx-webgl",
+          "intersection-2d",
+          "ui",
+          "legacy-pipeline"
+        ],
+        "noDeprecatedFeatures": {
+          "value": true,
+          "version": "3.8.0"
+        },
+        "flags": {}
+      }
+    },
+    "globalConfigKey": "skymenders2d"
+  }
 }

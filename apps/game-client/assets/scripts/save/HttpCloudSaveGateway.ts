@@ -1,7 +1,7 @@
 import { z } from "zod/v3";
 
-import { expeditionSaveDocumentSchema } from "@skymenders/protocol";
-import type { ExpeditionSaveDocument } from "@skymenders/protocol";
+import { expeditionSaveDocumentSchema } from "@skymenders/protocol/account-save";
+import type { ExpeditionSaveDocument } from "@skymenders/protocol/account-save";
 
 import type { AuthSessionManager } from "../account/AuthSessionManager";
 import type { CloudSaveConflict, CloudSaveGateway, SaveSummary } from "./CloudSaveCoordinator";

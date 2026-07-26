@@ -1,5 +1,5 @@
-import { sessionResponseSchema } from "@skymenders/protocol";
-import type { SessionResponse } from "@skymenders/protocol";
+import { sessionResponseSchema } from "@skymenders/protocol/account-save";
+import type { SessionResponse } from "@skymenders/protocol/account-save";
 
 import type { PlatformAdapter } from "../platform/platform-adapter";
 

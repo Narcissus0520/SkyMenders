@@ -8,6 +8,7 @@ import {
   CocosBuildBlockedError,
   createWechatProjectConfig,
   createNodeWechatBuildDependencies,
+  disableDefaultSplashAssets,
   injectWechatAppId,
   resolveCocosEditor,
 } from "../src/wechat-build.js";
@@ -53,6 +54,41 @@ describe("WeChat Cocos build wrapper", () => {
       setting: { urlCheck: false },
     });
     expect(JSON.parse(JSON.stringify(config))).toEqual(config);
+  });
+
+  it("disables and removes Creator default splash assets deterministically", () => {
+    const writes: { readonly path: string; readonly content: string }[] = [];
+    const removals: string[] = [];
+    disableDefaultSplashAssets("C:/build/wechatgame", {
+      readText: () => "before\nlet useLogo = true;\nafter\n",
+      removeFile: (path) => {
+        removals.push(path);
+      },
+      writeText: (path, content) => {
+        writes.push({ path, content });
+      },
+    });
+    expect(writes).toHaveLength(1);
+    expect(writes[0]?.path).toContain("first-screen.js");
+    expect(writes[0]?.content).toBe("before\nlet useLogo = false;\nafter\n");
+    expect(removals).toEqual([
+      expect.stringContaining("logo.png"),
+      expect.stringContaining("slogan.png"),
+    ]);
+  });
+
+  it("rejects an unexpected Creator first-screen template", () => {
+    expect(() => {
+      disableDefaultSplashAssets("C:/build/wechatgame", {
+        readText: () => "const useLogo = true;",
+        removeFile: () => {
+          throw new Error("remove should not run");
+        },
+        writeText: () => {
+          throw new Error("write should not run");
+        },
+      });
+    }).toThrow(/marker drifted/);
   });
 
   it("reports a missing runtime AppID as an explicit external blocker", () => {
@@ -125,6 +161,9 @@ function fakeDependencies(
         : JSON.stringify({ deviceOrientation: options.orientation ?? "landscape" }),
     removeDirectory: () => {
       calls.push("remove");
+    },
+    removeFile: () => {
+      calls.push("remove-file");
     },
     run: (_executable, arguments_) => {
       calls.push("run");

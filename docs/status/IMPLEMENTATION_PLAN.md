@@ -91,8 +91,18 @@ Phase 11 met these engineering conditions and was squash-merged through PR #12 a
   visually distinct fire/end/back actions and settings-aware light/medium
   vibration. Restored the Developer Tools simulator from a forced 30% floating
   preview to a detached 100% 844x390 window for direct interaction.
-- Next: address `PKG-001` and complete a signed physical-device matrix before
-  any upload or release-candidate work.
+- Enabled the WeChat engine plugin with a pinned minimal 2D module set, narrowed
+  client-shipped protocol entry points and removed the disabled Creator default
+  splash assets after each build. The real compiled package now contains 27
+  files and totals 1,876,241 bytes, so `PKG-001` is closed without increasing
+  the 1,887,436-byte internal budget.
+- The earlier self-contained package remains the latest successful Developer
+  Tools runtime smoke. Cocos requires a developer-opened AppID to exercise
+  engine separation, so the optimized plugin runtime remains fail-closed under
+  `EXT-001`.
+- Next: complete a signed physical-device matrix and capture current
+  authoritative platform-limit evidence before any upload or release-candidate
+  work.
 
 ## Compatibility discipline
 

@@ -23,6 +23,7 @@ export interface WechatBuildDependencies {
   readonly makeTemporaryDirectory: () => string;
   readonly readText: (path: string) => string;
   readonly removeDirectory: (path: string) => void;
+  readonly removeFile: (path: string) => void;
   readonly run: (
     executable: string,
     arguments_: readonly string[],
@@ -38,6 +39,9 @@ export function createNodeWechatBuildDependencies(): WechatBuildDependencies {
     readText: (path) => readFileSync(path, "utf8"),
     removeDirectory: (path) => {
       rmSync(path, { force: true, recursive: true });
+    },
+    removeFile: (path) => {
+      rmSync(path, { force: true });
     },
     run: (executable, arguments_, workingDirectory) => {
       const result = spawnSync(executable, [...arguments_], {
@@ -105,6 +109,9 @@ export function buildWechatMiniGame(
     if (runtimeConfig.deviceOrientation !== "landscape") {
       throw new Error("built WeChat game is not configured for landscape orientation");
     }
+    if (baseConfig.useSplashScreen === false) {
+      disableDefaultSplashAssets(outputDirectory, dependencies);
+    }
     const projectName =
       typeof baseConfig.name === "string" && baseConfig.name.trim() !== ""
         ? baseConfig.name
@@ -117,6 +124,24 @@ export function buildWechatMiniGame(
   } finally {
     dependencies.removeDirectory(temporaryDirectory);
   }
+}
+
+export function disableDefaultSplashAssets(
+  outputDirectory: string,
+  dependencies: Pick<WechatBuildDependencies, "readText" | "removeFile" | "writeText">,
+): void {
+  const firstScreenPath = join(outputDirectory, "first-screen.js");
+  const source = dependencies.readText(firstScreenPath);
+  const marker = "let useLogo = true;";
+  const occurrences = source.split(marker).length - 1;
+  if (occurrences !== 1) {
+    throw new Error(
+      `Cocos first-screen splash marker drifted: expected one occurrence, found ${occurrences}`,
+    );
+  }
+  dependencies.writeText(firstScreenPath, source.replace(marker, "let useLogo = false;"));
+  dependencies.removeFile(join(outputDirectory, "logo.png"));
+  dependencies.removeFile(join(outputDirectory, "slogan.png"));
 }
 
 export function resolveCocosEditor(

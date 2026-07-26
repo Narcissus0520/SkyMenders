@@ -1,5 +1,5 @@
-import { parseBattleCommand } from "@skymenders/protocol";
-import type { UseModuleCommand } from "@skymenders/protocol";
+import { parseBattleCommand } from "@skymenders/protocol/battle-command";
+import type { UseModuleCommand } from "@skymenders/protocol/battle-command";
 
 export interface AimEnvelope {
   readonly commandId: string;

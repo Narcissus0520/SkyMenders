@@ -2,7 +2,7 @@
 
 ## Snapshot
 
-- Date: 2026-07-25
+- Date: 2026-07-26
 - Current phase: V1 external-evidence closure before the Phase 12 PvP gate
 - Phase state: Phases 0-11 are merged; engineering gates pass and strict external release gates remain blocked
 - Branch: `main`
@@ -63,8 +63,8 @@ Additional workstation evidence captured on 2026-07-25:
   healthy; all three database migrations apply and the available server
   integration suite passes.
 - Cocos Creator 3.8.8 produces a real landscape WeChat Mini Game package using
-  a non-production test AppID. The package has 38 files and totals 6,102,124
-  bytes.
+  a non-production test AppID. The optimized engine-plugin build has 27 files
+  and totals 1,876,241 bytes in the generated directory.
 - The Cocos build exposed and now verifies three client portability boundaries:
   asset-local TypeScript uses bundler-compatible imports, client-shipped
   validation uses the Zod v3 compatibility surface, and the client imports the
@@ -73,8 +73,9 @@ Additional workstation evidence captured on 2026-07-25:
   compatibility changes: 94 passed and two server integration cases skipped in
   the unit invocation.
 - WeChat Developer Tools login and service access are confirmed. A sandbox test
-  project imports the generated directory, compiles it, and displays the
-  landscape client in the simulator with no runtime errors. Physical desktop
+  project imported the earlier self-contained 6,102,124-byte directory,
+  compiled it, and displayed the landscape client in the simulator with no
+  runtime errors. Physical desktop
   clicks were verified against the simulator: the Settings entry opens a visible
   route state, the Back control restores the main menu, and Standard Expedition
   now opens a playable deterministic local battle rather than a text-only route
@@ -100,9 +101,20 @@ Additional workstation evidence captured on 2026-07-25:
   template, and battle draw-order conflicts between the background and terrain.
   The build wrapper now emits a deterministic valid local project configuration
   after every build.
+- The WeChat build now uses the Cocos engine plugin with a pinned minimal 2D
+  module set, exact client protocol entry points and deterministic removal of
+  disabled default splash assets. Static validation rejects module, plugin or
+  splash drift.
+- The optimized engine-plugin directory builds and passes the raw compiled-file
+  budget, but the sandbox AppID cannot load the public Cocos plugin in Developer
+  Tools. Cocos' 3.8 instructions require an AppID opened by the developer to test
+  engine separation, so optimized runtime evidence remains blocked by
+  `EXT-001`; the prior self-contained build remains the latest simulator runtime
+  evidence.
 - No preview, upload, submission, review, or production credential was used.
-- `pnpm package:budget` now measures the compiled result and correctly fails:
-  the 6,102,124-byte main package exceeds the 1,887,436-byte internal budget.
+- `pnpm package:budget` measures the compiled result and passes: the
+  1,876,241-byte main package is 11,195 bytes below the 1,887,436-byte internal
+  budget.
 
 All required GitHub checks, including the PostgreSQL 17 restore drill, passed on PR #12. Neither engineering readiness nor CI is a production-readiness claim.
 
@@ -120,8 +132,7 @@ All required GitHub checks, including the PostgreSQL 17 restore drill, passed on
   complete.
 - Local Docker and the state services are available. Production infrastructure
   and recovery evidence remain blocked by `EXT-002`.
-- `PKG-001` blocks release readiness until the compiled main package is brought
-  below the internal budget or an intentional, evidence-backed budget change is
-  approved.
+- `PKG-001` is closed with generated files below the unchanged internal budget.
+  Official plugin-inclusive platform accounting remains under `EXT-006`.
 - Internal package budgets are automated; official current limits must be captured from an authoritative source for each immutable candidate.
 - No production backend, platform approval, legal sign-off, device result or public-release claim is complete.
