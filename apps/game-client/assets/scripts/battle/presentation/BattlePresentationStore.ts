@@ -1,5 +1,5 @@
-import { parseBattleEvent } from "@skymenders/protocol";
-import type { BattleEvent } from "@skymenders/protocol";
+import { parseBattleEvent } from "@skymenders/protocol/battle-event";
+import type { BattleEvent } from "@skymenders/protocol/battle-event";
 
 export interface VisualCue {
   readonly id: string;

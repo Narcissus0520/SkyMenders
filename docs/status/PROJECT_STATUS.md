@@ -2,7 +2,7 @@
 
 ## Snapshot
 
-- Date: 2026-07-23
+- Date: 2026-07-26
 - Current phase: V1 external-evidence closure before the Phase 12 PvP gate
 - Phase state: Phases 0-11 are merged; engineering gates pass and strict external release gates remain blocked
 - Branch: `main`
@@ -55,7 +55,66 @@ Current local evidence on Node.js 24 and pnpm 10:
 - `pnpm content:validate` reports exactly 48 maps split 24/12/8, 30 events, 20 hidden objectives, 8 workshop services, 8 environment mechanics and 12 cosmetics.
 - Content freeze, save migration and content rollback drills pass. `pnpm release:check` reports six engineering gates passed and nine external gates blocked.
 - `pnpm release:gate` fails closed at the release-asset audit as designed; no candidate version or commit has been asserted.
-- Format, workspace/infrastructure policy, lint, strict TypeScript, build, static Cocos validation across 37 files, asset audit, source package budget, secret scan, dependency audit and 497-component SBOM pass.
+- Format, workspace/infrastructure policy, lint, strict TypeScript, build, static Cocos validation across 39 files, asset audit, source package budget, secret scan, dependency audit and 497-component SBOM pass.
+
+Additional workstation evidence captured on 2026-07-25:
+
+- Docker Desktop is installed and PostgreSQL 17.5, Redis 8.0.2 and MinIO start
+  healthy; all three database migrations apply and the available server
+  integration suite passes.
+- Cocos Creator 3.8.8 produces a real landscape WeChat Mini Game package using
+  a non-production test AppID. The optimized engine-plugin build has 27 files
+  and totals 1,876,241 bytes in the generated directory.
+- The Cocos build exposed and now verifies three client portability boundaries:
+  asset-local TypeScript uses bundler-compatible imports, client-shipped
+  validation uses the Zod v3 compatibility surface, and the client imports the
+  browser-safe save-migration subpath rather than Node-only drill code.
+- Protocol, save migration, client and server regression tests pass after the
+  compatibility changes: 94 passed and two server integration cases skipped in
+  the unit invocation.
+- WeChat Developer Tools login and service access are confirmed. A sandbox test
+  project imported the earlier self-contained 6,102,124-byte directory,
+  compiled it, and displayed the landscape client in the simulator with no
+  runtime errors. Physical desktop
+  clicks were verified against the simulator: the Settings entry opens a visible
+  route state, the Back control restores the main menu, and Standard Expedition
+  now opens a playable deterministic local battle rather than a text-only route
+  shell.
+- The local battle renders procedural terrain, three player robots, two
+  command-driven enemies, an objective, aiming feedback, shared-energy HUD and
+  touch controls. A real Developer Tools game-context smoke test consumed energy
+  from 12 to 8, advanced terrain revision from 0 to 4, resolved enemy and
+  environment phases, and reached `battle_complete` with
+  `primary_completed` after the third defended round.
+- The private battle touch pass now exposes explicit angle and power decrement
+  and increment actions, 66-pixel touch targets around 56-pixel controls,
+  immediate press-scale feedback, semantic primary/secondary button colors and
+  vibration routed through the existing user setting. The detached 100% scale
+  simulator keeps the entire control row clickable at its native 844x390 game
+  viewport.
+- The battle smoke exposed Cocos' incompatible lowering of array spread over
+  `Set`, `Map` and other iterables. Client-shipped core paths now use
+  `Array.from`, their 210 focused regression tests pass, and the rebuilt WeChat
+  artifact contains no known `concat(new Set(...))` lowering.
+- The simulator pass corrected invalid bootstrap scene globals, dynamic UI layer
+  assignment, malformed `project.config.json` output from the installed Creator
+  template, and battle draw-order conflicts between the background and terrain.
+  The build wrapper now emits a deterministic valid local project configuration
+  after every build.
+- The WeChat build now uses the Cocos engine plugin with a pinned minimal 2D
+  module set, exact client protocol entry points and deterministic removal of
+  disabled default splash assets. Static validation rejects module, plugin or
+  splash drift.
+- The optimized engine-plugin directory builds and passes the raw compiled-file
+  budget, but the sandbox AppID cannot load the public Cocos plugin in Developer
+  Tools. Cocos' 3.8 instructions require an AppID opened by the developer to test
+  engine separation, so optimized runtime evidence remains blocked by
+  `EXT-001`; the prior self-contained build remains the latest simulator runtime
+  evidence.
+- No preview, upload, submission, review, or production credential was used.
+- `pnpm package:budget` measures the compiled result and passes: the
+  1,876,241-byte main package is 11,195 bytes below the 1,887,436-byte internal
+  budget.
 
 All required GitHub checks, including the PostgreSQL 17 restore drill, passed on PR #12. Neither engineering readiness nor CI is a production-readiness claim.
 
@@ -64,7 +123,16 @@ All required GitHub checks, including the PostgreSQL 17 restore drill, passed on
 - `EXT-001` and `EXT-002` block real WeChat login, deployed cloud-save, routed monitoring and production backup/recovery evidence.
 - `EXT-003` and `EXT-004` block qualified legal/publishing approval and a final public name.
 - `EXT-005` blocks approved final art, fonts, music and SFX; the empty release directory is not a completion claim.
-- `EXT-006` and `DEV-002` block a compiled WeChat package, current platform-limit evidence and real-device results.
-- Docker remains unavailable locally; Server Integration CI owns the real PostgreSQL migration, Redis queue/adapters and isolated restore drill.
+- `EXT-006` still blocks current platform-limit evidence and real-device
+  results; the local compiled package is now available but does not close the
+  signed device matrix.
+- The playable battle is a private development vertical slice with procedural
+  placeholder presentation. It is not evidence that the full V1 client,
+  release-quality assets, physical-device coverage or publishing gates are
+  complete.
+- Local Docker and the state services are available. Production infrastructure
+  and recovery evidence remain blocked by `EXT-002`.
+- `PKG-001` is closed with generated files below the unchanged internal budget.
+  Official plugin-inclusive platform accounting remains under `EXT-006`.
 - Internal package budgets are automated; official current limits must be captured from an authoritative source for each immutable candidate.
 - No production backend, platform approval, legal sign-off, device result or public-release claim is complete.

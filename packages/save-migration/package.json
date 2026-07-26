@@ -7,6 +7,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./runtime": {
+      "types": "./dist/save-migration.d.ts",
+      "default": "./dist/save-migration.js"
     }
   },
   "scripts": {

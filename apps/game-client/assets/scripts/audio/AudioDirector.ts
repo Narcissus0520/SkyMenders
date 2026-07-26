@@ -1,4 +1,4 @@
-import type { ClientSettings } from "../settings/settings.js";
+import type { ClientSettings } from "../settings/settings";
 
 export type AudioBus = "music" | "ambient" | "battle" | "ui";
 
@@ -54,7 +54,7 @@ export class AudioDirector {
     this.paused = false;
   }
   activeVoices(): readonly PlayingAudio[] {
-    return [...this.playing.values()].sort((a, b) => a.slot - b.slot);
+    return Array.from(this.playing.values()).sort((a, b) => a.slot - b.slot);
   }
 }
 

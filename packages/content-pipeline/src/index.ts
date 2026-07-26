@@ -247,7 +247,7 @@ const DEFAULT_SIMULATION_SEEDS = [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144] as 
 function simulateRoutes(pack: PveContentPack, seeds: readonly number[]): SimulationReport {
   const durations: number[] = [];
   const failedSeeds: number[] = [];
-  for (const seed of [...new Set(seeds)].sort((left, right) => left - right)) {
+  for (const seed of Array.from(new Set(seeds)).sort((left, right) => left - right)) {
     if (!Number.isInteger(seed) || seed < 0 || seed > 0xffff_ffff) {
       failedSeeds.push(seed);
       continue;
@@ -290,7 +290,7 @@ function collectDifferences(
     return;
   }
   if (isRecord(before) && isRecord(after)) {
-    const keys = [...new Set([...Object.keys(before), ...Object.keys(after)])].sort();
+    const keys = Array.from(new Set([...Object.keys(before), ...Object.keys(after)])).sort();
     for (const key of keys) {
       if (output.length >= limit) break;
       collectDifferences(before[key], after[key], `${path}.${key}`, output, limit);

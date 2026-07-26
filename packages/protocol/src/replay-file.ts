@@ -1,6 +1,5 @@
-import { z } from "zod";
-
 import { battleCommandSchema } from "./battle-command.js";
+import { jsonValueSchema, z } from "./zod-compat.js";
 
 const semanticVersionSchema = z.string().regex(/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/);
 const stateHashSchema = z.string().regex(/^[0-9a-f]{16}$/);
@@ -23,7 +22,7 @@ export const replayFileSchema = z
       .max(128)
       .regex(/^[A-Za-z0-9][A-Za-z0-9_.:-]*$/),
     rootSeed: z.number().int().min(0).max(0xffff_ffff),
-    initialState: z.json(),
+    initialState: jsonValueSchema,
     commands: z.array(battleCommandSchema).max(100_000),
     expectedCheckpoints: z.array(replayCheckpointSchema).max(100_000),
     expectedFinalHash: stateHashSchema,

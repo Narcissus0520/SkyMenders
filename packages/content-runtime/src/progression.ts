@@ -56,7 +56,7 @@ export function recordProgressMetric(
     if (achievement.metric === metric && (metrics[metric] ?? 0) >= achievement.threshold)
       completed.add(achievement.id);
   });
-  return { ...state, metrics, completedAchievementIds: [...completed].sort() };
+  return { ...state, metrics, completedAchievementIds: Array.from(completed).sort() };
 }
 
 export function discoverCompendiumEntry(

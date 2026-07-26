@@ -1,6 +1,17 @@
 {
   "buildPath": "project://build",
   "debug": false,
+  "engineModulesConfigKey": "skymenders2d",
+  "includeModules": [
+    "2d",
+    "graphics",
+    "base",
+    "gfx-webgl",
+    "intersection-2d",
+    "ui",
+    "legacy-pipeline"
+  ],
+  "inlineEnum": true,
   "mainBundleCompressionType": "merge_all_json",
   "mainBundleIsRemote": false,
   "md5Cache": true,
@@ -10,7 +21,7 @@
     "wechatgame": {
       "appid": "",
       "orientation": "landscape",
-      "separateEngine": false
+      "separateEngine": true
     }
   },
   "platform": "wechatgame",
@@ -22,5 +33,6 @@
     }
   ],
   "startScene": "2460c535-0ecb-4ff5-987d-3586f6c03d12",
-  "taskName": "wechatgame"
+  "taskName": "wechatgame",
+  "useSplashScreen": false
 }

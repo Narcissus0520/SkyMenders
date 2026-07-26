@@ -6,7 +6,9 @@ import { describe, expect, it } from "vitest";
 import {
   buildWechatMiniGame,
   CocosBuildBlockedError,
+  createWechatProjectConfig,
   createNodeWechatBuildDependencies,
+  disableDefaultSplashAssets,
   injectWechatAppId,
   resolveCocosEditor,
 } from "../src/wechat-build.js";
@@ -43,6 +45,52 @@ describe("WeChat Cocos build wrapper", () => {
     expect(injectWechatAppId({}, "wx1234567890123456")).toHaveProperty("packages.wechatgame.appid");
   });
 
+  it("creates a valid local WeChat project configuration", () => {
+    const config = createWechatProjectConfig("wx1234567890123456", "SkyMenders");
+    expect(config).toMatchObject({
+      appid: "wx1234567890123456",
+      compileType: "game",
+      projectname: "SkyMenders",
+      setting: { urlCheck: false },
+    });
+    expect(JSON.parse(JSON.stringify(config))).toEqual(config);
+  });
+
+  it("disables and removes Creator default splash assets deterministically", () => {
+    const writes: { readonly path: string; readonly content: string }[] = [];
+    const removals: string[] = [];
+    disableDefaultSplashAssets("C:/build/wechatgame", {
+      readText: () => "before\nlet useLogo = true;\nafter\n",
+      removeFile: (path) => {
+        removals.push(path);
+      },
+      writeText: (path, content) => {
+        writes.push({ path, content });
+      },
+    });
+    expect(writes).toHaveLength(1);
+    expect(writes[0]?.path).toContain("first-screen.js");
+    expect(writes[0]?.content).toBe("before\nlet useLogo = false;\nafter\n");
+    expect(removals).toEqual([
+      expect.stringContaining("logo.png"),
+      expect.stringContaining("slogan.png"),
+    ]);
+  });
+
+  it("rejects an unexpected Creator first-screen template", () => {
+    expect(() => {
+      disableDefaultSplashAssets("C:/build/wechatgame", {
+        readText: () => "const useLogo = true;",
+        removeFile: () => {
+          throw new Error("remove should not run");
+        },
+        writeText: () => {
+          throw new Error("write should not run");
+        },
+      });
+    }).toThrow(/marker drifted/);
+  });
+
   it("reports a missing runtime AppID as an explicit external blocker", () => {
     expect(() =>
       buildWechatMiniGame(
@@ -63,6 +111,7 @@ describe("WeChat Cocos build wrapper", () => {
     );
     expect(result).toMatchObject({ status: "built", editorFileName: "Creator.exe" });
     expect(calls).toEqual(expect.arrayContaining(["write", "run", "remove"]));
+    expect(calls.filter((call) => call === "write")).toHaveLength(2);
   });
 
   it("rejects failed builds, missing output, and portrait output while cleaning", () => {
@@ -112,6 +161,9 @@ function fakeDependencies(
         : JSON.stringify({ deviceOrientation: options.orientation ?? "landscape" }),
     removeDirectory: () => {
       calls.push("remove");
+    },
+    removeFile: () => {
+      calls.push("remove-file");
     },
     run: (_executable, arguments_) => {
       calls.push("run");

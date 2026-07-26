@@ -452,7 +452,7 @@ function markCellAndSeamsDirty(
 }
 
 function sortedChunks(chunks: Iterable<ChunkCoordinate>): ChunkCoordinate[] {
-  return [...chunks].sort(compareChunks);
+  return Array.from(chunks).sort(compareChunks);
 }
 
 function compareSupportRoots(left: TerrainSupportRoot, right: TerrainSupportRoot): number {

@@ -60,6 +60,50 @@ Phase 10 met its engineering conditions and was squash-merged through PR #11 as 
 
 Phase 11 met these engineering conditions and was squash-merged through PR #12 as `d0e8698cd77c12369cf98c5366d6b25980cbd7e8` after all required checks passed. Phase 12+ remains blocked by the V1 gate until the external evidence in `EXTERNAL_BLOCKERS.md` is verified.
 
+## 2026-07-25 private WeChat validation pass
+
+- Installed and verified Cocos Creator 3.8.8, WeChat Developer Tools and Docker
+  Desktop; started the local PostgreSQL, Redis and MinIO dependencies.
+- Applied all migrations and passed the available integration checks.
+- Corrected Cocos portability defects in asset imports, schema initialization
+  and the save-migration package boundary.
+- Produced a real landscape WeChat Mini Game directory with a non-production
+  test AppID.
+- Imported the generated directory into the logged-in Developer Tools with a
+  sandbox test project and completed the simulator startup smoke check. The
+  landscape main menu renders, Settings/Back physical clicks pass, and Standard
+  Expedition opens an actual local deterministic battle with terrain, actors,
+  aiming, energy, objectives and touch controls.
+- Exercised the battle inside the real Developer Tools game context: firing
+  consumed four energy and mutated terrain, enemy/environment phases resolved,
+  the hold objective progressed once per round, and the third defended round
+  produced a deterministic victory.
+- Replaced client-shipped array spreads over `Set`, `Map` and generic iterables
+  with Cocos-compatible `Array.from` conversions after the generated runtime
+  exposed invalid transpilation. Rebuilt successfully and passed 210 focused
+  tests across the client, battle, terrain, AI, expedition and save-migration
+  packages.
+- Separated Cocos `Graphics` into background, terrain and aim child layers so
+  the rendered battlefield remains visible instead of being covered by the
+  background.
+- Improved the private battle touch pass with explicit angle/power plus and
+  minus controls, larger invisible hit areas, immediate press scaling,
+  visually distinct fire/end/back actions and settings-aware light/medium
+  vibration. Restored the Developer Tools simulator from a forced 30% floating
+  preview to a detached 100% 844x390 window for direct interaction.
+- Enabled the WeChat engine plugin with a pinned minimal 2D module set, narrowed
+  client-shipped protocol entry points and removed the disabled Creator default
+  splash assets after each build. The real compiled package now contains 27
+  files and totals 1,876,241 bytes, so `PKG-001` is closed without increasing
+  the 1,887,436-byte internal budget.
+- The earlier self-contained package remains the latest successful Developer
+  Tools runtime smoke. Cocos requires a developer-opened AppID to exercise
+  engine separation, so the optimized plugin runtime remains fail-closed under
+  `EXT-001`.
+- Next: complete a signed physical-device matrix and capture current
+  authoritative platform-limit evidence before any upload or release-candidate
+  work.
+
 ## Compatibility discipline
 
 Rules, content, save, replay, protocol, client, and server versions remain independent. Phase 1 established `rulesVersion`, `replaySchemaVersion`, and `protocolVersion` at `0.1.0`. Phase 2 advanced only `rulesVersion` to `0.2.0`. Phase 3 advanced `rulesVersion` to `0.3.0` and `protocolVersion` to `0.2.0`. Phase 4 advanced only `rulesVersion` to `0.4.0` and started AI schema `0.1.0`. Phase 5 advanced only `clientVersion` to `0.1.0`. Phase 6 advanced content to `0.1.0`, expedition rules to `0.5.0`, and the PvE client flow to `0.2.0`. Phase 7 advanced client and protocol to `0.3.0` and started save and server schemas at `0.1.0`. Phase 8 advanced client and protocol to `0.4.0`, server to `0.2.0`, and replay schema to `0.2.0`. Phase 9 advanced only protocol to `0.5.0` and server to `0.3.0`. Phase 10 advanced client to `0.5.0` for release/legal navigation and server to `0.4.0` for observability. Phase 11 advances content to `0.2.0` and expedition rules to `0.6.0`; the retained `0.1.0` / `0.5.0` save pair is exercised by an explicit migration corpus and allow-list. Later incompatible changes must increment only affected dimensions and include migrations or compatibility evidence.

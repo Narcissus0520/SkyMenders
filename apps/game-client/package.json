@@ -36,5 +36,9 @@
     "tsx": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
-  }
+  },
+  "creator": {
+    "version": "3.8.8"
+  },
+  "uuid": "2096c947-af00-4cd6-a695-54b2117004e3"
 }

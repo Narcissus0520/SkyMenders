@@ -3,7 +3,7 @@ import type {
   PlatformAdapter,
   PlatformCapabilities,
   SafeArea,
-} from "../platform-adapter.js";
+} from "../platform-adapter";
 
 type Listener<T> = (value: T) => void;
 

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "./zod-compat.js";
 
 const identifierSchema = z
   .string()
@@ -105,7 +105,7 @@ export const useBasicActionCommandSchema = z
     }
   });
 
-export const battleCommandSchema = z.discriminatedUnion("kind", [
+export const battleCommandSchema = z.union([
   moveCommandSchema,
   useModuleCommandSchema,
   waitCommandSchema,

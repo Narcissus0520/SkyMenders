@@ -1,4 +1,4 @@
-import type { ClientSettings } from "../../settings/settings.js";
+import type { ClientSettings } from "../../settings/settings";
 
 export interface EffectRequest {
   readonly particles: number;

@@ -3,8 +3,8 @@ import type {
   PlatformAdapter,
   PlatformCapabilities,
   SafeArea,
-} from "../platform-adapter.js";
-import { MockPlatformAdapter } from "../mock/MockPlatformAdapter.js";
+} from "../platform-adapter";
+import { MockPlatformAdapter } from "../mock/MockPlatformAdapter";
 
 interface WechatSystemInfo {
   readonly screenWidth: number;

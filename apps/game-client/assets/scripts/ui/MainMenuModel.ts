@@ -1,4 +1,4 @@
-import type { NetworkState } from "../platform/platform-adapter.js";
+import type { NetworkState } from "../platform/platform-adapter";
 
 export type MainRoute =
   "expedition" | "daily" | "collection" | "settings" | "privacy" | "user_agreement";

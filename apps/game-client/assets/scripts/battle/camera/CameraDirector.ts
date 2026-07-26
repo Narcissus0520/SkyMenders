@@ -85,7 +85,7 @@ export class CameraDirector {
   request(request: CameraRequest, nowMs: number): boolean {
     this.requests.set(request.id, request);
     if (nowMs < this.manualUntilMs && request.mode !== "boss_mechanic_focus") return false;
-    const winner = [...this.requests.values()].sort(
+    const winner = Array.from(this.requests.values()).sort(
       (a, b) =>
         b.priority - a.priority || a.requestedAtMs - b.requestedAtMs || a.id.localeCompare(b.id),
     )[0];

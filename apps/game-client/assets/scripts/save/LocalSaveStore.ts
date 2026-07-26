@@ -1,9 +1,12 @@
 import { hashUtf8 } from "@skymenders/deterministic-runtime";
-import type { AccountProgressSave, ExpeditionSaveDocument } from "@skymenders/protocol";
-import { accountProgressSaveSchema } from "@skymenders/protocol";
-import { migrateExpeditionSave, verifyExpeditionSave } from "@skymenders/save-migration";
+import type {
+  AccountProgressSave,
+  ExpeditionSaveDocument,
+} from "@skymenders/protocol/account-save";
+import { accountProgressSaveSchema } from "@skymenders/protocol/account-save";
+import { migrateExpeditionSave, verifyExpeditionSave } from "@skymenders/save-migration/runtime";
 
-import type { PlatformAdapter } from "../platform/platform-adapter.js";
+import type { PlatformAdapter } from "../platform/platform-adapter";
 
 const SLOT_A = "skymenders.save.expedition.a.v1";
 const SLOT_B = "skymenders.save.expedition.b.v1";

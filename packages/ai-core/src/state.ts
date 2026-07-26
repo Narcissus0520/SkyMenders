@@ -212,7 +212,7 @@ function assertIdentifier(value: string, label: string): void {
 }
 
 function assertSortedUnique(values: readonly string[], label: string): void {
-  const normalized = [...new Set(values)].sort(compareText);
+  const normalized = Array.from(new Set(values)).sort(compareText);
   if (
     normalized.length !== values.length ||
     normalized.some((value, index) => value !== values[index])

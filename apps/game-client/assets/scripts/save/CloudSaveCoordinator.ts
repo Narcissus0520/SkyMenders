@@ -1,7 +1,7 @@
-import type { ExpeditionSaveDocument } from "@skymenders/protocol";
+import type { ExpeditionSaveDocument } from "@skymenders/protocol/account-save";
 
-import type { NetworkState } from "../platform/platform-adapter.js";
-import type { LocalSaveStore } from "./LocalSaveStore.js";
+import type { NetworkState } from "../platform/platform-adapter";
+import type { LocalSaveStore } from "./LocalSaveStore";
 
 export interface SaveSummary {
   readonly saveId: string;

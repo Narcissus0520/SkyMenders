@@ -67,6 +67,7 @@ export type {
   SessionResponse,
   WechatLoginRequest,
 } from "./account-save.js";
+export type { JsonValue } from "./zod-compat.js";
 export {
   DAILY_REPLAY_SCHEMA_VERSION,
   abandonDailyAttemptResponseSchema,

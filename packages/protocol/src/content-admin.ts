@@ -1,8 +1,8 @@
-import { z } from "zod";
+import { isoDateTimeSchema, z } from "./zod-compat.js";
 
 const id = z.string().min(1).max(160);
 const version = z.string().regex(/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/);
-const instant = z.iso.datetime({ offset: true });
+const instant = isoDateTimeSchema;
 const hash = z.string().regex(/^[a-f0-9]{64}$/);
 
 export const publishedContentManifestSchema = z
