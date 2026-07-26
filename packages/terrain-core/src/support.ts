@@ -90,7 +90,7 @@ function occupiedComponentsTouchingChunks(
   const queued = new Uint8Array(state.materials.length);
   const queue: number[] = [];
 
-  for (const chunk of [...chunks].sort(compareChunks)) {
+  for (const chunk of Array.from(chunks).sort(compareChunks)) {
     const minimumX = Math.max(0, chunk.x * TERRAIN_CHUNK_SIZE - 1);
     const maximumX = Math.min(state.width - 1, (chunk.x + 1) * TERRAIN_CHUNK_SIZE);
     const minimumY = Math.max(0, chunk.y * TERRAIN_CHUNK_SIZE - 1);
@@ -168,7 +168,7 @@ function chunksForMask(state: TerrainState, mask: Uint8Array): ChunkCoordinate[]
     };
     chunks.set(chunkKey(chunk), chunk);
   }
-  return [...chunks.values()].sort(compareChunks);
+  return Array.from(chunks.values()).sort(compareChunks);
 }
 
 function countMask(mask: Uint8Array): number {

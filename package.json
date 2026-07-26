@@ -15,7 +15,7 @@
     "assets:audit:release": "pnpm --filter @skymenders/asset-auditor run audit:release",
     "backup:drill": "pnpm --filter @skymenders/database-tools run backup:drill",
     "build": "turbo run build",
-    "cocos:build:wechat": "pnpm --filter @skymenders/cocos-build run build:wechat",
+    "cocos:build:wechat": "pnpm --filter @skymenders/game-client... build && pnpm --filter @skymenders/cocos-build run build:wechat",
     "cocos:check": "pnpm --filter @skymenders/cocos-build run check",
     "content:freeze:check": "pnpm --filter @skymenders/release-preflight run freeze:check",
     "content:freeze:write": "pnpm --filter @skymenders/release-preflight run freeze:write",

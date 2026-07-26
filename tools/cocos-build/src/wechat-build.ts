@@ -105,6 +105,14 @@ export function buildWechatMiniGame(
     if (runtimeConfig.deviceOrientation !== "landscape") {
       throw new Error("built WeChat game is not configured for landscape orientation");
     }
+    const projectName =
+      typeof baseConfig.name === "string" && baseConfig.name.trim() !== ""
+        ? baseConfig.name
+        : "SkyMenders";
+    dependencies.writeText(
+      join(outputDirectory, "project.config.json"),
+      `${JSON.stringify(createWechatProjectConfig(appId, projectName), null, 2)}\n`,
+    );
     return { outputDirectory, editorFileName: basename(editor), status: "built" };
   } finally {
     dependencies.removeDirectory(temporaryDirectory);
@@ -142,6 +150,34 @@ export function injectWechatAppId(
     packages: {
       ...packages,
       wechatgame: { ...wechatgame, appid: appId },
+    },
+  };
+}
+
+export function createWechatProjectConfig(
+  appId: string,
+  projectName: string,
+): Record<string, unknown> {
+  return {
+    description: "SkyMenders local test project",
+    miniprogramRoot: "./",
+    setting: {
+      urlCheck: false,
+      postcss: true,
+      minified: true,
+      newFeature: false,
+      enhance: true,
+      useIsolateContext: true,
+    },
+    compileType: "game",
+    libVersion: "widelyUsed",
+    appid: appId,
+    projectname: projectName,
+    condition: {
+      search: { current: -1, list: [] },
+      conversation: { current: -1, list: [] },
+      game: { currentL: -1, list: [], current: -1 },
+      miniprogram: { current: -1, list: [] },
     },
   };
 }

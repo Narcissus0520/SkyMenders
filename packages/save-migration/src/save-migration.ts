@@ -8,11 +8,10 @@ import {
 import type {
   AccountProgressSave,
   ExpeditionSaveDocument,
+  JsonValue,
   RuntimeSnapshotDocument,
 } from "@skymenders/protocol";
-import { z } from "zod";
-
-type JsonValue = z.infer<ReturnType<typeof z.json>>;
+import { z } from "zod/v3";
 
 export interface SaveCompatibility {
   readonly rulesVersion: string;
@@ -41,8 +40,8 @@ export interface ConflictResolution {
 const legacyExpeditionSaveV001Schema = z
   .object({
     saveSchemaVersion: z.literal("0.0.1"),
-    saveId: z.uuid(),
-    updatedAt: z.iso.datetime({ offset: true }),
+    saveId: z.string().uuid(),
+    updatedAt: z.string().datetime({ offset: true }),
     contentVersion: z.string(),
     rulesVersion: z.string(),
     expedition: expeditionSaveDocumentSchema.shape.expedition,
@@ -157,10 +156,7 @@ function restore(
 ): JsonValue | null {
   if (snapshot === null) return null;
   try {
-    return verifySnapshot(
-      snapshot as unknown as RuntimeSnapshot<CanonicalValue>,
-      compatibility,
-    ) as JsonValue;
+    return verifySnapshot(snapshot as unknown as RuntimeSnapshot<CanonicalValue>, compatibility);
   } catch (error) {
     warnings.push(`${label} snapshot rejected: ${errorMessage(error)}`);
     return null;
@@ -227,7 +223,7 @@ export function mergeAccountProgress(
     completedTutorialIds: union(local.completedTutorialIds, cloud.completedTutorialIds),
     settings: latest.settings,
     statistics: Object.fromEntries(
-      [...metricKeys]
+      Array.from(metricKeys)
         .sort()
         .map((key) => [key, Math.max(local.statistics[key] ?? 0, cloud.statistics[key] ?? 0)]),
     ),
@@ -241,7 +237,7 @@ function withoutIntegrity(document: ExpeditionSaveDocument): UnsealedSave {
 }
 
 function union(left: readonly string[], right: readonly string[]): string[] {
-  return [...new Set([...left, ...right])].sort();
+  return Array.from(new Set([...left, ...right])).sort();
 }
 
 function errorMessage(error: unknown): string {

@@ -540,7 +540,7 @@ function assertUniqueIds<T extends object>(
 }
 
 function assertSortedUniqueStrings(values: readonly string[], label: string): void {
-  const sorted = [...new Set(values)].sort(compareText);
+  const sorted = Array.from(new Set(values)).sort(compareText);
   if (sorted.length !== values.length || sorted.some((value, index) => value !== values[index])) {
     throw new Error(`${label} must be sorted and unique`);
   }

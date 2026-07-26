@@ -1,6 +1,6 @@
 import type { BattleState } from "@skymenders/battle-core";
-import { factionSemantic } from "../../accessibility/accessibility.js";
-import type { ClientSettings } from "../../settings/settings.js";
+import { factionSemantic } from "../../accessibility/accessibility";
+import type { ClientSettings } from "../../settings/settings";
 
 export function buildBattleHud(state: BattleState, settings: ClientSettings) {
   return {

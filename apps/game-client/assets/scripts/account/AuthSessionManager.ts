@@ -1,7 +1,7 @@
 import { sessionResponseSchema } from "@skymenders/protocol";
 import type { SessionResponse } from "@skymenders/protocol";
 
-import type { PlatformAdapter } from "../platform/platform-adapter.js";
+import type { PlatformAdapter } from "../platform/platform-adapter";
 
 const REFRESH_TOKEN_KEY = "skymenders.session.refresh.v1";
 

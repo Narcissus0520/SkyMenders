@@ -19,9 +19,9 @@ import type {
   DailyLeaderboardPage,
   FinishDailyAttemptRequest,
 } from "@skymenders/protocol";
-import type { ZodType } from "zod";
+import type { ZodType } from "zod/v3";
 
-import type { AuthSessionManager, JsonRequest } from "../account/AuthSessionManager.js";
+import type { AuthSessionManager, JsonRequest } from "../account/AuthSessionManager";
 
 export class DailyChallengeClient {
   public constructor(private readonly sessions: AuthSessionManager) {}

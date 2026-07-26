@@ -1,17 +1,17 @@
-import { z } from "zod";
+import { z } from "zod/v3";
 
 import { expeditionSaveDocumentSchema } from "@skymenders/protocol";
 import type { ExpeditionSaveDocument } from "@skymenders/protocol";
 
-import type { AuthSessionManager } from "../account/AuthSessionManager.js";
-import type { CloudSaveConflict, CloudSaveGateway, SaveSummary } from "./CloudSaveCoordinator.js";
+import type { AuthSessionManager } from "../account/AuthSessionManager";
+import type { CloudSaveConflict, CloudSaveGateway, SaveSummary } from "./CloudSaveCoordinator";
 
 const summarySchema = z
   .object({
-    saveId: z.uuid(),
+    saveId: z.string().uuid(),
     revision: z.number().int().nonnegative(),
     logicalClock: z.number().int().nonnegative(),
-    updatedAt: z.iso.datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
     contentVersion: z.string(),
     rulesVersion: z.string(),
     summary: expeditionSaveDocumentSchema.shape.summary,
@@ -25,9 +25,9 @@ const conflictSchema = z
         code: z.literal("SAVE_CONFLICT"),
         details: z.object({ local: summarySchema.nullable(), cloud: summarySchema.nullable() }),
       })
-      .loose(),
+      .passthrough(),
   })
-  .loose();
+  .passthrough();
 
 export class HttpCloudSaveGateway implements CloudSaveGateway {
   public constructor(private readonly sessions: AuthSessionManager) {}

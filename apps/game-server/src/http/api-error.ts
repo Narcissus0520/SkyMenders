@@ -1,7 +1,8 @@
 import type { ArgumentsHost, ExceptionFilter } from "@nestjs/common";
 import { Catch, HttpException, Logger } from "@nestjs/common";
 import type { FastifyReply } from "fastify";
-import { ZodError } from "zod";
+import { ZodError as ZodErrorV4 } from "zod";
+import { ZodError as ZodErrorV3 } from "zod/v3";
 
 export class ApiError extends Error {
   public constructor(
@@ -30,7 +31,7 @@ export class ApiExceptionFilter implements ExceptionFilter {
       });
       return;
     }
-    if (exception instanceof ZodError) {
+    if (exception instanceof ZodErrorV3 || exception instanceof ZodErrorV4) {
       void reply.status(400).send({
         error: {
           code: "INVALID_REQUEST",

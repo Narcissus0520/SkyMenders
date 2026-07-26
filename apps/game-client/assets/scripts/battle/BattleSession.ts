@@ -4,7 +4,7 @@ import { reduceBattleCommand } from "@skymenders/battle-core";
 import type { BattleState } from "@skymenders/battle-core";
 import { parseBattleCommand } from "@skymenders/protocol";
 import type { BattleCommand, BattleEvent } from "@skymenders/protocol";
-import { BattlePresentationStore } from "./presentation/BattlePresentationStore.js";
+import { BattlePresentationStore } from "./presentation/BattlePresentationStore";
 
 export class BattleSession {
   private battleValue: BattleState;

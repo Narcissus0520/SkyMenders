@@ -4,14 +4,21 @@ declare module "cc" {
   }
 
   export class Node {
-    static readonly EventType: { readonly TOUCH_END: string };
+    static readonly EventType: {
+      readonly TOUCH_START: string;
+      readonly TOUCH_END: string;
+      readonly TOUCH_CANCEL: string;
+    };
     constructor(name?: string);
     parent: Node | null;
     active: boolean;
+    layer: number;
+    destroy(): boolean;
     addComponent<T>(constructor: new () => T): T;
     getComponent<T>(constructor: new () => T): T | null;
     on(event: string, callback: () => void, target?: unknown): void;
     setPosition(x: number, y: number, z?: number): void;
+    setScale(x: number, y: number, z?: number): void;
   }
 
   export class UITransform {
@@ -19,10 +26,15 @@ declare module "cc" {
   }
 
   export class Label {
+    readonly node: Node;
     string: string;
     fontSize: number;
     lineHeight: number;
     color: Color;
+  }
+
+  export class Button {
+    interactable: boolean;
   }
 
   export class Graphics {
@@ -31,6 +43,9 @@ declare module "cc" {
     lineWidth: number;
     rect(x: number, y: number, width: number, height: number): void;
     roundRect(x: number, y: number, width: number, height: number, radius: number): void;
+    circle(x: number, y: number, radius: number): void;
+    moveTo(x: number, y: number): void;
+    lineTo(x: number, y: number): void;
     fill(): void;
     stroke(): void;
   }

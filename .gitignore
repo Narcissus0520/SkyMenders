@@ -16,6 +16,7 @@ test-results/
 .vscode/
 apps/game-client/library/
 apps/game-client/local/
+apps/game-client/profiles/
 apps/game-client/temp/
 apps/game-client/build/
 apps/game-server/src/generated/prisma/

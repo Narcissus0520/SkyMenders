@@ -1,7 +1,6 @@
-import { z } from "zod";
-
 import { battleCommandSchema } from "./battle-command.js";
 import { replayCheckpointSchema } from "./replay-file.js";
+import { isoDateTimeSchema, jsonValueSchema, uuidSchema, z } from "./zod-compat.js";
 
 export const DAILY_REPLAY_SCHEMA_VERSION = "0.2.0";
 
@@ -18,7 +17,7 @@ const identifier = z
   .regex(/^[A-Za-z0-9][A-Za-z0-9_.:-]*$/);
 const stateHash = z.string().regex(/^[0-9a-f]{16}$/);
 const isoDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
-const isoDateTime = z.iso.datetime({ offset: true });
+const isoDateTime = isoDateTimeSchema;
 const nonNegativeInteger = z.number().int().nonnegative();
 
 export const dailyChallengeNodeSchema = z
@@ -73,7 +72,7 @@ export const dailyAttemptCheckpointRequestSchema = z
     commandCount: nonNegativeInteger.max(1_000_000),
     stateHash,
     recoveryCount: nonNegativeInteger.max(100),
-    payload: z.json(),
+    payload: jsonValueSchema,
   })
   .strict();
 
@@ -82,10 +81,10 @@ export const dailyChallengeResponseSchema = z
     challenge: dailyChallengeDefinitionSchema,
     formalAttemptsRemaining: z.number().int().min(0).max(3),
     formalUnlocked: z.boolean(),
-    activeAttemptId: z.uuid().nullable(),
+    activeAttemptId: uuidSchema.nullable(),
     activeAttempt: z
       .object({
-        attemptId: z.uuid(),
+        attemptId: uuidSchema,
         mode: dailyAttemptModeSchema,
         checkpoint: dailyAttemptCheckpointRequestSchema.nullable(),
       })
@@ -96,7 +95,7 @@ export const dailyChallengeResponseSchema = z
 
 export const dailyAttemptStartResponseSchema = z
   .object({
-    attemptId: z.uuid(),
+    attemptId: uuidSchema,
     challenge: dailyChallengeDefinitionSchema,
     mode: dailyAttemptModeSchema,
     status: z.literal("active"),
@@ -107,7 +106,7 @@ export const dailyAttemptStartResponseSchema = z
 
 export const dailyAttemptCheckpointResponseSchema = z
   .object({
-    attemptId: z.uuid(),
+    attemptId: uuidSchema,
     checkpointIndex: nonNegativeInteger,
     acceptedAt: isoDateTime,
   })
@@ -125,7 +124,7 @@ export const dailyNodeReplaySchema = z
 
 export const finishDailyAttemptRequestSchema = z
   .object({
-    submissionId: z.uuid(),
+    submissionId: uuidSchema,
     challengeId,
     seed: z.number().int().min(0).max(0xffff_ffff),
     rulesVersion: semanticVersion,
@@ -143,28 +142,28 @@ export const finishDailyAttemptRequestSchema = z
 
 export const dailyAttemptSubmissionResponseSchema = z
   .object({
-    attemptId: z.uuid(),
-    submissionId: z.uuid(),
+    attemptId: uuidSchema,
+    submissionId: uuidSchema,
     status: z.enum(["queued", "verified", "rejected"]),
   })
   .strict();
 
 export const abandonDailyAttemptResponseSchema = z
   .object({
-    attemptId: z.uuid(),
+    attemptId: uuidSchema,
     status: z.literal("abandoned"),
   })
   .strict();
 
 export const replayVerificationJobSchema = z
   .object({
-    submissionId: z.uuid(),
+    submissionId: uuidSchema,
   })
   .strict();
 
 export const replayVerificationResultSchema = z
   .object({
-    submissionId: z.uuid(),
+    submissionId: uuidSchema,
     status: z.enum(["verified", "rejected"]),
     score: nonNegativeInteger.max(1_000_000).nullable(),
     totalTurns: nonNegativeInteger.nullable(),

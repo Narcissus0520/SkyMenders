@@ -31,4 +31,19 @@ The wrapper creates a temporary build config, injects the AppID, invokes Creator
 
 Import the generated package into WeChat Developer Tools, then run the matrix in `DEVICE_MATRIX.md`. Record screenshots/logs and the exact Creator, Developer Tools, base library, WeChat, OS, and device versions. Required evidence includes landscape startup, safe-area layout, touch priority, aim confirmation, camera suppression, background/resume, network loss/recovery, audio/vibration controls, all accessibility options, sustained frame pacing, memory peak, and package/subpackage results.
 
-As of 2026-07-22 this workstation has no Cocos Creator executable, authorized AppID, WeChat Developer Tools evidence, or physical-device report. `pnpm cocos:build:wechat` therefore exits with blocker code 2 and names `COCOS_CREATOR_PATH`; this is expected external evidence, not a successful device gate.
+As of 2026-07-25 this workstation has Cocos Creator 3.8.8 and WeChat Developer
+Tools installed. A local simulator package built successfully with Cocos Creator
+using a non-production test AppID: the output contains 38 files, requests
+landscape orientation, and totals 6,102,124 bytes. The generated project was
+imported into the logged-in Developer Tools, compiled, and exercised in a
+detached 100% scale 844x390 simulator. The standard-expedition entry opens a
+playable deterministic local battle; firing, terrain mutation, enemy and
+environment settlement, objective progress, victory, enlarged touch controls
+and settings-aware vibration routing were validated without a runtime exception.
+
+This evidence closes the local tool-install/build portion only. It does not
+satisfy `EXT-001` because no product-owned AppID or verified entity was used, and
+it does not satisfy `EXT-006` because no physical-device matrix has been run.
+The compiled main package also exceeds the repository's 1,887,436-byte internal
+budget; this is tracked as `PKG-001` and must be corrected before a release
+candidate.

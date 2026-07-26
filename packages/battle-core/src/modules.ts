@@ -651,14 +651,14 @@ function resolveRouteScanner(state: BattleState, command: UseModuleCommand): Bat
     state.intel.trajectoryPreviewPermille,
     route === "route_scanner_ballistic" ? 1_000 : 750,
   );
-  const hiddenTargetIds = [
-    ...new Set([
+  const hiddenTargetIds = Array.from(
+    new Set([
       ...state.intel.hiddenTargetIds,
       ...state.objectives
         .filter((objective) => objective.role === "hidden")
         .map((objective) => objective.id),
     ]),
-  ].sort(compareText);
+  ).sort(compareText);
   return {
     state: {
       ...state,

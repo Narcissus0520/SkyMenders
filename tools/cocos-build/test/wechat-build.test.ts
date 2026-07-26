@@ -6,6 +6,7 @@ import { describe, expect, it } from "vitest";
 import {
   buildWechatMiniGame,
   CocosBuildBlockedError,
+  createWechatProjectConfig,
   createNodeWechatBuildDependencies,
   injectWechatAppId,
   resolveCocosEditor,
@@ -43,6 +44,17 @@ describe("WeChat Cocos build wrapper", () => {
     expect(injectWechatAppId({}, "wx1234567890123456")).toHaveProperty("packages.wechatgame.appid");
   });
 
+  it("creates a valid local WeChat project configuration", () => {
+    const config = createWechatProjectConfig("wx1234567890123456", "SkyMenders");
+    expect(config).toMatchObject({
+      appid: "wx1234567890123456",
+      compileType: "game",
+      projectname: "SkyMenders",
+      setting: { urlCheck: false },
+    });
+    expect(JSON.parse(JSON.stringify(config))).toEqual(config);
+  });
+
   it("reports a missing runtime AppID as an explicit external blocker", () => {
     expect(() =>
       buildWechatMiniGame(
@@ -63,6 +75,7 @@ describe("WeChat Cocos build wrapper", () => {
     );
     expect(result).toMatchObject({ status: "built", editorFileName: "Creator.exe" });
     expect(calls).toEqual(expect.arrayContaining(["write", "run", "remove"]));
+    expect(calls.filter((call) => call === "write")).toHaveLength(2);
   });
 
   it("rejects failed builds, missing output, and portrait output while cleaning", () => {

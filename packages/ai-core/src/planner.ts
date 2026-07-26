@@ -385,7 +385,7 @@ function moduleTargets(
     const key = target.targetId ?? `${target.x}:${target.y}`;
     if (!unique.has(key)) unique.set(key, target);
   }
-  return [...unique.values()]
+  return Array.from(unique.values())
     .sort(
       (left, right) =>
         targetPriority(battle, actor, right) - targetPriority(battle, actor, left) ||
@@ -543,7 +543,7 @@ function pad(value: number): string {
 }
 
 function uniqueStrings<T extends string>(values: readonly T[]): readonly T[] {
-  return [...new Set(values)].sort(compareText);
+  return Array.from(new Set(values)).sort(compareText);
 }
 
 function compareCandidate(left: AiCandidateEvaluation, right: AiCandidateEvaluation): number {

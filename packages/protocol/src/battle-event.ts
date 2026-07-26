@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "./zod-compat.js";
 
 const identifierSchema = z
   .string()
@@ -139,7 +139,7 @@ export const battleEffectAppliedEventSchema = z
     }
   });
 
-export const battleEventSchema = z.discriminatedUnion("kind", [
+export const battleEventSchema = z.union([
   commandAcceptedEventSchema,
   actorMovedEventSchema,
   moduleResolvedEventSchema,

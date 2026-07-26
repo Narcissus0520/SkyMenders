@@ -1,4 +1,4 @@
-import type { PlatformAdapter } from "../platform/platform-adapter.js";
+import type { PlatformAdapter } from "../platform/platform-adapter";
 
 export const SETTINGS_STORAGE_KEY = "settings.v1";
 export const SETTINGS_SCHEMA_VERSION = "0.1.0";

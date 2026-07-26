@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { isoDateTimeSchema, jsonValueSchema, uuidSchema, z } from "./zod-compat.js";
 
 export const SAVE_SCHEMA_VERSION = "0.1.0";
 
@@ -40,7 +40,7 @@ export const accountProgressSaveSchema = z
   .object({
     saveSchemaVersion: z.literal(SAVE_SCHEMA_VERSION),
     logicalClock: nonNegative,
-    updatedAt: z.iso.datetime({ offset: true }),
+    updatedAt: isoDateTimeSchema,
     unlockIds: z.array(stableId).max(512),
     achievementIds: z.array(stableId).max(512),
     compendiumEntryIds: z.array(stableId).max(1_024),
@@ -153,7 +153,7 @@ export const runtimeSnapshotSchema = z
         hidden_objective: rngStateSchema.optional(),
       })
       .strict(),
-    state: z.json(),
+    state: jsonValueSchema,
     stateHash,
   })
   .strict();
@@ -161,11 +161,11 @@ export const runtimeSnapshotSchema = z
 export const expeditionSaveDocumentSchema = z
   .object({
     saveSchemaVersion: z.literal(SAVE_SCHEMA_VERSION),
-    saveId: z.uuid(),
+    saveId: uuidSchema,
     revision: nonNegative,
     logicalClock: nonNegative,
     deviceKind: deviceKindSchema,
-    updatedAt: z.iso.datetime({ offset: true }),
+    updatedAt: isoDateTimeSchema,
     contentVersion: semanticVersion,
     rulesVersion: semanticVersion,
     expedition: expeditionStateSchema,
@@ -194,10 +194,10 @@ export const logoutRequestSchema = refreshSessionRequestSchema;
 export const sessionResponseSchema = z
   .object({
     accessToken: z.string().min(32).max(4_096),
-    accessExpiresAt: z.iso.datetime({ offset: true }),
+    accessExpiresAt: isoDateTimeSchema,
     refreshToken: z.string().min(43).max(256),
-    refreshExpiresAt: z.iso.datetime({ offset: true }),
-    accountId: z.uuid(),
+    refreshExpiresAt: isoDateTimeSchema,
+    accountId: uuidSchema,
   })
   .strict();
 
@@ -223,11 +223,11 @@ export const privacyDeleteRequestSchema = z
 
 export const privacyRequestResponseSchema = z
   .object({
-    requestId: z.uuid(),
+    requestId: uuidSchema,
     kind: z.enum(["export", "delete"]),
     status: z.enum(["pending", "processing", "completed", "failed"]),
-    createdAt: z.iso.datetime({ offset: true }),
-    completedAt: z.iso.datetime({ offset: true }).nullable(),
+    createdAt: isoDateTimeSchema,
+    completedAt: isoDateTimeSchema.nullable(),
   })
   .strict();
 

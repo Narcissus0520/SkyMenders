@@ -127,7 +127,9 @@ function copyProject(): string {
   cpSync(projectRoot, root, {
     recursive: true,
     filter: (source) =>
-      !source.includes("node_modules") && !source.includes("coverage") && !source.includes("dist"),
+      !/[\\/](?:\.turbo|build|coverage|dist|library|node_modules|profiles|temp)(?:[\\/]|$)/.test(
+        source,
+      ),
   });
   return root;
 }

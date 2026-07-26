@@ -39,7 +39,7 @@ export function buyWorkshopService(
       throw new Error(`workshop module already installed: ${targetId}`);
     inventory = {
       ...inventory,
-      moduleIds: [...new Set([...inventory.moduleIds, targetId])].sort(),
+      moduleIds: Array.from(new Set([...inventory.moduleIds, targetId])).sort(),
     };
   } else {
     const route = pack.modules.modules
@@ -56,7 +56,7 @@ export function buyWorkshopService(
     rejectMutuallyExclusiveRoute(owner, inventory.upgradeRouteIds, route.id);
     inventory = {
       ...inventory,
-      upgradeRouteIds: [...new Set([...inventory.upgradeRouteIds, route.id])].sort(),
+      upgradeRouteIds: Array.from(new Set([...inventory.upgradeRouteIds, route.id])).sort(),
     };
   }
   return { ...state, robots, inventory, supplies: state.supplies - service.cost };
@@ -131,7 +131,7 @@ export function claimReward(
       ...state,
       inventory: {
         ...inventory,
-        moduleIds: [...new Set([...inventory.moduleIds, reward.moduleId])].sort(),
+        moduleIds: Array.from(new Set([...inventory.moduleIds, reward.moduleId])).sort(),
       },
     };
   }
@@ -146,7 +146,7 @@ export function claimReward(
       ...state,
       inventory: {
         ...inventory,
-        upgradeRouteIds: [...new Set([...inventory.upgradeRouteIds, reward.routeId])].sort(),
+        upgradeRouteIds: Array.from(new Set([...inventory.upgradeRouteIds, reward.routeId])).sort(),
       },
     };
   }
@@ -155,7 +155,7 @@ export function claimReward(
       ...state,
       inventory: {
         ...inventory,
-        temporaryModIds: [...new Set([...inventory.temporaryModIds, reward.id])].sort(),
+        temporaryModIds: Array.from(new Set([...inventory.temporaryModIds, reward.id])).sort(),
       },
     };
   if (reward.kind === "consumable")

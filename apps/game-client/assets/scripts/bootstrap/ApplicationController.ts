@@ -1,8 +1,8 @@
-import { AudioDirector } from "../audio/AudioDirector.js";
-import { Localizer } from "../localization/Localizer.js";
-import type { NetworkState, PlatformAdapter } from "../platform/platform-adapter.js";
-import { SettingsStore } from "../settings/settings.js";
-import { MainMenuModel } from "../ui/MainMenuModel.js";
+import { AudioDirector } from "../audio/AudioDirector";
+import { Localizer } from "../localization/Localizer";
+import type { NetworkState, PlatformAdapter } from "../platform/platform-adapter";
+import { SettingsStore } from "../settings/settings";
+import { MainMenuModel } from "../ui/MainMenuModel";
 
 export interface ApplicationState {
   readonly status: "starting" | "ready" | "blocked_orientation" | "stopped";

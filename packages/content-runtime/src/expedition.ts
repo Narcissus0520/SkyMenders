@@ -201,7 +201,7 @@ export function createExpeditionState(
     supplies: 0,
     routeRevealDepth: 1,
     inventory: {
-      moduleIds: [...new Set(initialModuleIds)].sort(),
+      moduleIds: Array.from(new Set(initialModuleIds)).sort(),
       upgradeRouteIds: [],
       temporaryModIds: [],
       consumables: 0,
